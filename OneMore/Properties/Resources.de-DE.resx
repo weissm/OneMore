@@ -3570,4 +3570,8 @@ OneNote-Datei (*.one)</value>
     <value>... Sprache prüfen</value>
     <comment>context menu option</comment>
   </data>
+  <data name="ShowMyDialog.Text" xml:space="preserve">
+    <value>OneMore My</value>
+    <comment>dialog title</comment>
+  </data>  
 </root>

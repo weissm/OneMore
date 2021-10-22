@@ -3624,4 +3624,16 @@ ISO-code then comma then language name</comment>
     <value>... Proofing Language</value>
     <comment>context menu option</comment>
   </data>
+  <data name="ShowMyDialog.Text" xml:space="preserve">
+    <value>OneMore My</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ribShowMyButton_Label" xml:space="preserve">
+    <value>My anzeigen</value>
+    <comment>Ribbon OneMore menu item</comment>
+  </data>
+  <data name="ribShowMyButton_Screentip" xml:space="preserve">
+    <value>MY der Hierarchie und der aktuellen Seite anzeigen (Strg + Umschalt + Alt + X)</value>
+    <comment>tip</comment>
+  </data>
 </root>

@@ -449,6 +449,7 @@
     <Compile Include="Models\Paragraph.cs" />
     <Compile Include="Models\SelectionRange.cs" />
     <Compile Include="Models\SelectionScope.cs" />
+    <Compile Include="ShowMyCommand.cs" />
     <Compile Include="Styles\StyleProperties.cs" />
     <Compile Include="Styles\Theme.cs" />
     <Compile Include="Styles\ThemeProvider.cs" />
@@ -1167,7 +1168,12 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\OneNote2X\OneNote2X.Forms\OneNote2X.Forms.csproj">
+      <Project>{fead8c22-8f28-4c89-9aab-d55709360e3f}</Project>
+      <Name>OneNote2X.Forms</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>taskkill /fi "pid gt 0" /im ONENOTE.exe</PreBuildEvent>
