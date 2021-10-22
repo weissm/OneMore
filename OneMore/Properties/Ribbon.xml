@@ -646,6 +646,12 @@
               getScreentip="GetRibbonScreentip"
               onAction="ShowXmlCmd"/>
             <button
+              id="ribShowMyButton"
+              imageMso="MySource"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="ShowMyCmd"/>
+            <button
               id="ribSettingsButton"
               imageMso="ReadingViewToolsMenu"
               getLabel="GetRibbonLabel"
