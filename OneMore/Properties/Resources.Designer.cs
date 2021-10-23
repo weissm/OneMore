@@ -5784,7 +5784,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die My anzeigen ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate MoMs ähnelt.
         /// </summary>
         internal static string ribShowMyButton_Label {
             get {
@@ -5793,7 +5793,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die MY der Hierarchie und der aktuellen Seite anzeigen (Strg + Umschalt + Alt + X) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate minutes and manage associated data (Strg + Umschalt + Alt + C) ähnelt.
         /// </summary>
         internal static string ribShowMyButton_Screentip {
             get {
@@ -6708,7 +6708,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die OneMore My ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate MoM ähnelt.
         /// </summary>
         internal static string ShowMyDialog_Text {
             get {

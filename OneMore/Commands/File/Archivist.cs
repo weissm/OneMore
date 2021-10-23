@@ -9,7 +9,8 @@ namespace River.OneMoreAddIn.Commands
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using System.Text;
+    using System.Net;
+    using System.Text;
 	using System.Text.RegularExpressions;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -173,7 +174,7 @@ namespace River.OneMoreAddIn.Commands
 							name = name.ToXmlWrapper().Value;
 						}
 
-						name = HttpUtility.UrlDecode(PathFactory.CleanFileName(name));
+						name = WebUtility.UrlDecode(PathFactory.CleanFileName(name));
 						var item = map[id];
 
 						//logger.WriteLine();
@@ -183,7 +184,7 @@ namespace River.OneMoreAddIn.Commands
 						var absolute = new Uri(Path.Combine(home, Path.Combine(fpath, $"{name}.htm")));
 						//logger.WriteLine($"absolute {absolute}");
 
-						var relative = HttpUtility.UrlDecode(pageUri.MakeRelativeUri(absolute).ToString());
+						var relative = WebUtility.UrlDecode(pageUri.MakeRelativeUri(absolute).ToString());
 						//logger.WriteLine($"relative {relative}");
 
 						builder.Append(text.Substring(index, uri.Index - index));

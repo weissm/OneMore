@@ -647,7 +647,7 @@
               onAction="ShowXmlCmd"/>
             <button
               id="ribShowMyButton"
-              imageMso="MySource"
+              imageMso="AppointmentColor3"
               getLabel="GetRibbonLabel"
               getScreentip="GetRibbonScreentip"
               onAction="ShowMyCmd"/>

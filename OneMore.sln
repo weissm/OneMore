@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNote2x.Core", "..\OneNot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNote2X.OfficeTools", "..\OneNote2X\OneNote2X.OfficeTools\OneNote2X.OfficeTools.csproj", "{A6F32A97-0296-4139-BE5D-D7E9578C9C21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNote2X.WebTools", "..\OneNote2X\OneNote2X.WebTools\OneNote2X.WebTools.csproj", "{8A34F95C-4FBC-4672-ABEB-D37A39329768}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,24 @@ Global
 		{A6F32A97-0296-4139-BE5D-D7E9578C9C21}.Release|x64.Build.0 = Release|Any CPU
 		{A6F32A97-0296-4139-BE5D-D7E9578C9C21}.Release|x86.ActiveCfg = Release|Any CPU
 		{A6F32A97-0296-4139-BE5D-D7E9578C9C21}.Release|x86.Build.0 = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|x64.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|Any CPU.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|x64.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|x64.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|x86.ActiveCfg = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.LocalDebug|x86.Build.0 = Debug|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|x64.ActiveCfg = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|x64.Build.0 = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A34F95C-4FBC-4672-ABEB-D37A39329768}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

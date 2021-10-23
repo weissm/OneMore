@@ -587,7 +587,7 @@
     <comment>the version of the add-in</comment>
   </data>
   <data name="ChangePageColorDialog_cancelButton.Text" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Abbrechen</value>
     <comment>cancel button</comment>
   </data>
   <data name="ChangePageColorDialog_introLabel.Text" xml:space="preserve">
@@ -3571,7 +3571,15 @@ OneNote-Datei (*.one)</value>
     <comment>context menu option</comment>
   </data>
   <data name="ShowMyDialog.Text" xml:space="preserve">
-    <value>OneMore My</value>
+    <value>Erstelle MoMs</value>
     <comment>dialog title</comment>
-  </data>  
+  </data>
+  <data name="ribShowMyButton_Label" xml:space="preserve">
+    <value>Erstelle MoMs</value>
+    <comment>Ribbon OneMore menu item</comment>
+  </data>
+  <data name="ribShowMyButton_Screentip" xml:space="preserve">
+    <value>Erstelle MoMs and verwalte entsprechende Daten (Strg + Umschalt + Alt + C)</value>
+    <comment>tip</comment>
+  </data>
 </root>
