@@ -3600,4 +3600,16 @@ Deferred</value>
     <value>Total words selected: {0}</value>
     <comment>message box</comment>
   </data>
+  <data name="ShowMyDialog.Text" xml:space="preserve">
+    <value>Generate MoM</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ribShowMyButton_Label" xml:space="preserve">
+    <value>Generate MoMs</value>
+    <comment>Ribbon OneMore menu item</comment>
+  </data>
+  <data name="ribShowMyButton_Screentip" xml:space="preserve">
+    <value>Generate minutes and manage associated data (Strg + Umschalt + Alt + C)</value>
+    <comment>tip</comment>
+  </data>
 </root>

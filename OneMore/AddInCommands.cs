@@ -339,6 +339,8 @@ namespace River.OneMoreAddIn
 
 		public async Task ShowXmlCmd(IRibbonControl control)
 			=> await factory.Run<ShowXmlCommand>();
+		public async Task ShowMyCmd(IRibbonControl control)
+			=> await factory.Run<ShowMyCommand>();
 
 		public async Task SortCmd(IRibbonControl control)
 			=> await factory.Run<SortCommand>();
