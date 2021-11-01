@@ -667,17 +667,17 @@
               getLabel="GetRibbonLabel"
               onAction="RunPluginCmd"/>
             <button
+              id="ribShowMyButton"
+              imageMso="AppointmentColor3"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="ShowMyCmd"/>
+            <button
               id="ribShowXmlButton"
               imageMso="XmlSource"
               getLabel="GetRibbonLabel"
               getScreentip="GetRibbonScreentip"
               onAction="ShowXmlCmd"/>
-            <button
-              id="ribShowMyButton"
-              imageMso="AppointmentColor3"
-              getLabel="GetRibbonLabel"
-              getScreentip="GetRibbonScreentip"
-              onAction="ShowMyCmd"/>            
             <button
               id="ribSettingsButton"
               imageMso="ReadingViewToolsMenu"

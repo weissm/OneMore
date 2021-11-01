@@ -3084,6 +3084,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Network connection is not available ähnelt.
+        /// </summary>
+        internal static string NetwordConnectionUnavailable {
+            get {
+                return ResourceManager.GetString("NetwordConnectionUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap NewStyle {
@@ -3870,6 +3879,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Click Yes to update this existing report, No to create a new report, or Cancel ähnelt.
+        /// </summary>
+        internal static string RemindCommand_Reuse {
+            get {
+                return ResourceManager.GetString("RemindCommand_Reuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Completed ähnelt.
         /// </summary>
         internal static string RemindDialog_completedLabel_Text {
@@ -4077,7 +4095,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die These are reminders not yet completed or deferred and ordered by priority and due date ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die These are reminders not yet completed or deferred and ordered by due date year, week of year, and priority ähnelt.
         /// </summary>
         internal static string ReminderReport_ActiveSummary {
             get {
@@ -4145,6 +4163,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ReminderReport_Title {
             get {
                 return ResourceManager.GetString("ReminderReport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Week {0} ähnelt.
+        /// </summary>
+        internal static string ReminderReport_WeekOfYear {
+            get {
+                return ResourceManager.GetString("ReminderReport_WeekOfYear", resourceCulture);
             }
         }
         
@@ -5809,7 +5836,29 @@ namespace River.OneMoreAddIn.Properties {
                 return ResourceManager.GetString("ribSelectImagesButton_Label", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate MoMs ähnelt.
+        /// </summary>
+        internal static string ribShowMyButton_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("ribShowMyButton_Label", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generate minutes and manage associated data (Strg + Umschalt + Alt + C) ähnelt.
+        /// </summary>
+        internal static string ribShowMyButton_Screentip
+        {
+            get
+            {
+                return ResourceManager.GetString("ribShowMyButton_Screentip", resourceCulture);
+            }
+        }
+
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Select text with similar formatting ähnelt.
         /// </summary>
@@ -5825,24 +5874,6 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribSettingsButton_Label {
             get {
                 return ResourceManager.GetString("ribSettingsButton_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Generate MoMs ähnelt.
-        /// </summary>
-        internal static string ribShowMyButton_Label {
-            get {
-                return ResourceManager.GetString("ribShowMyButton_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Generate minutes and manage associated data (Strg + Umschalt + Alt + C) ähnelt.
-        /// </summary>
-        internal static string ribShowMyButton_Screentip {
-            get {
-                return ResourceManager.GetString("ribShowMyButton_Screentip", resourceCulture);
             }
         }
         
