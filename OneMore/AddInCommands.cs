@@ -277,6 +277,9 @@ namespace River.OneMoreAddIn
 		public async Task RemoveFootnoteCmd(IRibbonControl control)
 			=> await factory.Run<RemoveFootnoteCommand>();
 
+		public async Task RemoveInkCmd(IRibbonControl control)
+			=> await factory.Run<RemoveInkCommand>();
+
 		public async Task RemovePageNumbersCmd(IRibbonControl control)
 			=> await factory.Run<RemovePageNumbersCommand>();
 
@@ -336,11 +339,11 @@ namespace River.OneMoreAddIn
 
 		public async Task ShowKeyboardShortcutsCmd(IRibbonControl control)
 			=> await factory.Run<ShowKeyboardShortcutsCommand>();
+		public async Task ShowMyCmd(IRibbonControl control)
+			=> await factory.Run<ShowMyCommand>();
 
 		public async Task ShowXmlCmd(IRibbonControl control)
 			=> await factory.Run<ShowXmlCommand>();
-		public async Task ShowMyCmd(IRibbonControl control)
-			=> await factory.Run<ShowMyCommand>();
 
 		public async Task SortCmd(IRibbonControl control)
 			=> await factory.Run<SortCommand>();
