@@ -8,7 +8,7 @@ namespace River.OneMoreAddIn.Commands
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
-using System.Xml.Linq;
+    using System.Xml.Linq;
     using OneNote = Microsoft.Office.Interop.OneNote;
 
     internal class TemplateCommand : Command
