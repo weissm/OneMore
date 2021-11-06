@@ -29,6 +29,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public ShowXmlDialog()
 		{
+			System.Diagnostics.Debugger.Launch();
 			InitializeComponent();
 
 			if (DesignMode)

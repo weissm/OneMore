@@ -16,10 +16,10 @@ using OneNote2X.Forms;
 	{
 		public ShowMyCommand ()
 		{
-		}
+        }
 
 
-		public override async Task Execute(params object[] args)
+        public override async Task Execute(params object[] args)
 		{
             // This is a work around for a blocking behaviour in the genmoms
             var _onenoteApp = new OneNote.Application();
@@ -29,7 +29,6 @@ using OneNote2X.Forms;
             _onenoteApp.OpenHierarchy(inputFile, null, out mysectionId, OneNote.CreateFileType.cftNone);
             _onenoteApp.SyncHierarchy(mysectionId);
             await Task.Yield();
-
             using (var dialog = new GenMoMs())
 			{
 				dialog.ShowDialog(owner);
