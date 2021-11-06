@@ -141,7 +141,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 				// find all H1 headings
 				headers = page.GetHeadings(one)
-					.Where(h => h.Level == 0)
+					.Where(h => h.Level == 1)
 					.Select(h => new Heading
 					{
 						Root = h.Root,

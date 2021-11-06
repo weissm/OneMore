@@ -121,6 +121,9 @@ namespace River.OneMoreAddIn
 		public async Task FinishBiLinkCmd(IRibbonControl control)
 			=> await factory.Run<BiLinkCommand>("link");
 
+		public async Task FitGridToTextCmd(IRibbonControl control)
+			=> await factory.Run<FitGridToTextCommand>();
+
 		public async Task GetImagesCmd(IRibbonControl control)
 			=> await factory.Run<GetImagesCommand>(true);
 
@@ -289,6 +292,9 @@ namespace River.OneMoreAddIn
 		public async Task RemoveSpacingCmd(IRibbonControl control)
 			=> await factory.Run<RemoveSpacingCommand>();
 
+		public async Task RemoveTagsCmd(IRibbonControl control)
+			=> await factory.Run<RemoveTagsCommand>();
+
 		public async Task ReplayCmd(IRibbonControl control)
 			=> await factory.ReplayLastAction();
 
@@ -337,10 +343,16 @@ namespace River.OneMoreAddIn
 		public async Task SettingsCmd(IRibbonControl control)
 			=> await factory.Run<SettingsCommand>(ribbon);
 
-		public async Task ShowKeyboardShortcutsCmd(IRibbonControl control)
-			=> await factory.Run<ShowKeyboardShortcutsCommand>();
+#if OneMore2X
+		public async Task TemplateCmd(IRibbonControl control)
+			=> await factory.Run<TemplateCommand>(ribbon);
+
 		public async Task ShowMyCmd(IRibbonControl control)
 			=> await factory.Run<ShowMyCommand>();
+#endif 
+
+		public async Task ShowKeyboardShortcutsCmd(IRibbonControl control)
+			=> await factory.Run<ShowKeyboardShortcutsCommand>();
 
 		public async Task ShowXmlCmd(IRibbonControl control)
 			=> await factory.Run<ShowXmlCommand>();

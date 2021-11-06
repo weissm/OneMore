@@ -1561,6 +1561,24 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diagnostics written to.
+        /// </summary>
+        internal static string DiagnosticsDialog_introLabel_Text {
+            get {
+                return ResourceManager.GetString("DiagnosticsDialog_introLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OneMore Diagnostics.
+        /// </summary>
+        internal static string DiagnosticsDialog_Text {
+            get {
+                return ResourceManager.GetString("DiagnosticsDialog_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset Settings.
         /// </summary>
         internal static string DialogResetSettings_Text {
@@ -2108,6 +2126,69 @@ namespace River.OneMoreAddIn.Properties {
             get {
                 object obj = ResourceManager.GetObject("Financial", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable grid lines before using this command.
+        /// </summary>
+        internal static string FitGridToTextCommand_noGrid {
+            get {
+                return ResourceManager.GetString("FitGridToTextCommand_noGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page contains no regular paragraph text.
+        /// </summary>
+        internal static string FitGridToTextCommand_noText {
+            get {
+                return ResourceManager.GetString("FitGridToTextCommand_noText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically adjust grid to most common font size.
+        /// </summary>
+        internal static string FitGridToTextDialog_autoButton_Text {
+            get {
+                return ResourceManager.GetString("FitGridToTextDialog_autoButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customize grid size.
+        /// </summary>
+        internal static string FitGridToTextDialog_customButton_Text {
+            get {
+                return ResourceManager.GetString("FitGridToTextDialog_customButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommended size for {0}pt font is {1}.
+        /// </summary>
+        internal static string FitGridToTextDialog_recommendation {
+            get {
+                return ResourceManager.GetString("FitGridToTextDialog_recommendation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Size.
+        /// </summary>
+        internal static string FitGridToTextDialog_sizeLabel_Text {
+            get {
+                return ResourceManager.GetString("FitGridToTextDialog_sizeLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fit Grid to Text.
+        /// </summary>
+        internal static string FitGridToTextDialog_Text {
+            get {
+                return ResourceManager.GetString("FitGridToTextDialog_Text", resourceCulture);
             }
         }
         
@@ -5010,6 +5091,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fit Grid to Text.
+        /// </summary>
+        internal static string ribFitGridButton_Label {
+            get {
+                return ResourceManager.GetString("ribFitGridButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Icon to Page Title.
         /// </summary>
         internal static string ribFlagTitleButton_Label {
@@ -5708,6 +5798,24 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribRemoveSpacingButton_Screentip {
             get {
                 return ResourceManager.GetString("ribRemoveSpacingButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Tags.
+        /// </summary>
+        internal static string ribRemoveTagsButton_Label {
+            get {
+                return ResourceManager.GetString("ribRemoveTagsButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove tags not associated with reminders.
+        /// </summary>
+        internal static string ribRemoveTagsButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribRemoveTagsButton_Screentip", resourceCulture);
             }
         }
         

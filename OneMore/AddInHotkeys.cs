@@ -102,6 +102,11 @@ namespace River.OneMoreAddIn
 			HotkeyManager.RegisterHotKey(async () => await ShowXmlCmd(null),
 				Keys.X, Hotmods.ControlAltShift);
 
+#if OneMore2X
+			HotkeyManager.RegisterHotKey(async () => await ShowMyCmd(null),
+				Keys.C, Hotmods.ControlAltShift);
+#endif				
+
 			HotkeyManager.RegisterHotKey(async () => await factory.Run<DiagnosticsCommand>(),
 				Keys.F8, Hotmods.Shift);
 

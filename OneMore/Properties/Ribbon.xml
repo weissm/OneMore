@@ -99,6 +99,12 @@
                 getScreentip="GetRibbonScreentip"
                 onAction="RemoveSpacingCmd"/>
               <button
+                id="ribRemoveTagsButton"
+                imageMso="AdpOutputOperationsTableRemove"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="RemoveTagsCmd"/>
+              <button
                 id="ribToggleDttmButton"
                 imageMso="MessageHeaderToggle"
                 getLabel="GetRibbonLabel"
@@ -282,6 +288,11 @@
                 imageMso="OutlineShowDetail"
                 getLabel="GetRibbonLabel"
                 onAction="RestoreCollapsedCmd"/>
+              <button
+                id="ribFitGridButton"
+                imageMso="SizeToGridOutlook"
+                getLabel="GetRibbonLabel"
+                onAction="FitGridToTextCmd"/>
               <button
                 id="ribMergeButton"
                 imageMso="CompareAndCombine"
@@ -677,6 +688,12 @@
               getLabel="GetRibbonLabel"
               getScreentip="GetRibbonScreentip"
               onAction="ShowMyCmd"/>
+            <button
+              id="ribTemplateButton"
+              imageMso="AppointmentColor4"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="ShowKeyboardShortcutsCmd"/>
             <button
               id="ribShowXmlButton"
               imageMso="XmlSource"

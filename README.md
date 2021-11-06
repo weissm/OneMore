@@ -18,16 +18,18 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 ![screenshot](../../wiki/images/Screenshot.png)
 
 <a name="features"></a>
-## Features (137)
+## Features (139)
 
-[Clean commands](../../wiki/Clean-Commands) (9)
+[Clean commands](../../wiki/Clean-Commands) (11)
 
 * Change spacing between sentences to one or two spaces
 * Clear background color and reset text color of selected text
 * Remove author/citation information from paragraphs
 * Remove pasted screen clipping and URL citation lines from page
 * Remove empty headers and "extra" empty lines between paragraphs
+* Remove ink annotations from the current page
 * Remove spacing between paragraphs and headings
+* Remove tags from the current page, those not associated with reminders
 * Show/Hide the page date and time stamps under the title on page or all pages in section
 * Trim leading whitespace from selected text
 * Trim trailing whitespace from selected text
@@ -238,6 +240,18 @@ Tested recently with:
    - If OneNote is installed for _all users_ then you must install OneMore for _all users_ as well
 5. Run OneNote and enjoy
 
+
+### How to Upgrade OneMore
+
+The OneMore installer is built such that it can be installed on top of an older version and will
+effectively perform an _upgrade_. This is the preferred method and can be done in one of two ways:
+
+1. Open the OneMore About dialog and click Check for updates. If there is a new version available,
+you will be given the option of upgrading. OneNote will be shut down to perform the upgrade.
+2. Or, download the OneMore installer and run it. There is no need to uninstall the previous version;
+the new installer will simply overwrite the old files and _upgrade_ OneMore. Note that when you
+download the installer, you will need to unblock it by opening its Properties dialog and clicking
+the _Unblock_ checkbox.
 
 ### How to Install OneNote
 

@@ -3616,4 +3616,43 @@ Deferred</value>
     <value>Remove Ink</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribRemoveTagsButton_Label" xml:space="preserve">
+    <value>Remove Tags</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribRemoveTagsButton_Screentip" xml:space="preserve">
+    <value>Remove tags not associated with reminders</value>
+  </data>
+  <data name="DiagnosticsDialog_introLabel.Text" xml:space="preserve">
+    <value>Diagnostics written to</value>
+    <comment>label</comment>
+  </data>
+  <data name="DiagnosticsDialog_Text" xml:space="preserve">
+    <value>OneMore Diagnostics</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ShowMyDialog.Text" xml:space="preserve">
+    <value>Generate MoM</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ribShowMyButton_Label" xml:space="preserve">
+    <value>Generate MoMs</value>
+    <comment>Ribbon OneMore menu item</comment>
+  </data>
+  <data name="ribShowMyButton_Screentip" xml:space="preserve">
+    <value>Generate minutes and manage associated data (Strg + Umschalt + Alt + C)</value>
+    <comment>tip</comment>
+  </data>
+  <data name="TemplateDialog.Text" xml:space="preserve">
+    <value>Generate template</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ribTemplateButton_Label" xml:space="preserve">
+    <value>Generate template</value>
+    <comment>Ribbon OneMore menu item</comment>
+  </data>
+  <data name="ribTemplateButton_Screentip" xml:space="preserve">
+    <value>Generate template and manage associated data (Strg + Umschalt + Alt + C)</value>
+    <comment>tip</comment>
+  </data>
 </root>
