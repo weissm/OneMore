@@ -14,10 +14,11 @@ namespace River.OneMoreAddIn.Commands
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-	using System.Xml.Linq;
+    using System.Text;
+    using System.Xml.Linq;
 
 
-	internal class MarkdownWriter
+	public class MarkdownWriter
 	{
 		private class Context
 		{
@@ -29,7 +30,8 @@ namespace River.OneMoreAddIn.Commands
 		// no good way to indent text; closest alternative is to use a string of nbsp but that
 		// conflicts with other directives like headings and list numbering. so substitute
 		// indentations (OEChildren) with the blockquote directive instead
-		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+//		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+		private const string Indent = "  "; //&nbsp;&nbsp;&nbsp;&nbsp;";
 
 		private readonly Page page;
 		private readonly XNamespace ns;
@@ -73,20 +75,59 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+		public string Save()
+		{
+			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			MemoryStream mem = new MemoryStream();
+			StreamWriter sw = new StreamWriter(mem);
+			string retString = "";
+			using (writer = sw)
+			{
+				writer.WriteLine($"# {page.Title}");
+
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => Write(e));
+
+				writer.WriteLine();
+				sw.Flush();
+				mem.Position = 0;
+				StreamReader sr = new StreamReader(mem);
+				retString = sr.ReadToEnd();
+			}
+			return retString;
+			//			return System.Text.Encoding.UTF8.GetString(mem.ToArray(), 0, (int)mem.Length);
+			//			return mem.ToString();
+			//			return System.Text.Encoding.UTF8.GetBytes(mem.te, 0, (int)mem.Length);
+		}
+
 
 		private void Write(XElement element,
 			string prefix = "",
 			bool startpara = false,
 			bool contained = false)
 		{
+			// first check if collapsed and ignore associated text lines
+			{
+				XElement parentNode = element.Parent;
+				while (parentNode != null)
+				{
+					if (parentNode.Attribute("collapsed") != null)
+					{
+						return;
+					}
+					parentNode = parentNode.Parent;
+				}
+			}
+
 			bool pushed = false;
 			bool dive = true;
-
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
 					pushed = DetectQuickStyle(element);
-					writer.WriteLine("  ");
+					writer.WriteLine("");
 					prefix = $"{Indent}{prefix}";
 					break;
 
@@ -134,7 +175,7 @@ namespace River.OneMoreAddIn.Commands
 				foreach (var child in element.Elements())
 				{
 					Write(child, prefix, startpara);
-					startpara = false;
+//					startpara = false;
 				}
 			}
 
@@ -150,7 +191,7 @@ namespace River.OneMoreAddIn.Commands
 				// or in a cell and this OE is followed by another OE
 				if (!contained ||(element.NextNode != null))
 				{
-					writer.WriteLine("  ");
+					writer.WriteLine("");
 				}
 			}
 		}
@@ -239,19 +280,20 @@ namespace River.OneMoreAddIn.Commands
 				case 131: writer.Write(":secret: "); break;			// password
 				case 133: writer.Write(":movie_camera: "); break;   // movie to see
 				case 132: writer.Write(":book: "); break;           // book to read
-				case 140: writer.Write(":zap: "); break;			// lightning bolt
-				default: writer.Write(":o: "); break;
+				case 140: writer.Write(":zap: "); break;            // lightning bolt																	
+				default:break;                                      //               default: writer.Write(":o: "); break;
 			}
 		}
 
 
 		private void WriteText(XCData cdata, bool startParagraph)
 		{
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
-				.Replace("<br>", "  ") // usually followed by NL so leave it there
-				.Replace("[", "\\[")   // escape to prevent confusion with md links
+				.Replace("<br>", "") // usually followed by NL so leave it there
+//				.Replace("<br>", "  ") // usually followed by NL so leave it there
+//				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
-
 			var wrapper = cdata.GetWrapper();
 			foreach (var span in wrapper.Descendants("span").ToList())
 			{

@@ -16,7 +16,7 @@ namespace River.OneMoreAddIn.UI
 
 
 
-	internal class LocalizableForm : Form, IOneMoreWindow
+	public class LocalizableForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 
