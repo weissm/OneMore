@@ -9,8 +9,9 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
 	using System;
-	using System.Collections.Generic;
-	using System.Drawing;
+    using System.Collections;
+    using System.Collections.Generic;
+using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
@@ -69,7 +70,7 @@ namespace River.OneMoreAddIn.Commands
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
-					.ForEach(e => Write(e));
+					.ForEach(e => { var prefix = ""; var indents = ""; Write(e, ref prefix, ref indents); });
 
 				writer.WriteLine();
 			}
@@ -78,9 +79,11 @@ namespace River.OneMoreAddIn.Commands
 		public string Save()
 		{
 			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			path = @"c:\tmp";
 			MemoryStream mem = new MemoryStream();
 			StreamWriter sw = new StreamWriter(mem);
 			string retString = "";
+
 			using (writer = sw)
 			{
 				writer.WriteLine($"# {page.Title}");
@@ -88,7 +91,7 @@ namespace River.OneMoreAddIn.Commands
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
-					.ForEach(e => Write(e));
+					.ForEach(e => { var prefix = ""; var indents = ""; Write(e, ref prefix, ref indents); });
 
 				writer.WriteLine();
 				sw.Flush();
@@ -102,33 +105,29 @@ namespace River.OneMoreAddIn.Commands
 			//			return System.Text.Encoding.UTF8.GetBytes(mem.te, 0, (int)mem.Length);
 		}
 
-
 		private void Write(XElement element,
-			string prefix = "",
+			ref string prefix,
+			ref string indents,
 			bool startpara = false,
 			bool contained = false)
 		{
-			// first check if collapsed and ignore associated text lines
-			{
-				XElement parentNode = element.Parent;
-				while (parentNode != null)
-				{
-					if (parentNode.Attribute("collapsed") != null)
-					{
-						return;
-					}
-					parentNode = parentNode.Parent;
-				}
-			}
 
 			bool pushed = false;
 			bool dive = true;
+			var keepindents = indents;
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
 					pushed = DetectQuickStyle(element);
-					writer.WriteLine("");
-					prefix = $"{Indent}{prefix}";
+					if (contained)
+                    {
+						writer.Write("<br>");
+                    }
+					else
+                    {
+						writer.WriteLine("");
+					}
+					indents = $"{Indent}{indents}";
 					break;
 
 				case "OE":
@@ -137,21 +136,28 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Tag":
-					WriteTag(element);
+					prefix += WriteTag(element, contained);
 					break;
 
 				case "T":
+					if (element.GetCData().Value.Trim().IsNullOrEmpty())
+                    {
+						break;
+                    }
 					pushed = DetectQuickStyle(element);
-					if (startpara) Stylize(prefix);
-					WriteText(element.GetCData(), startpara);
+					if (startpara) { Stylize(indents + prefix); prefix = ""; }
+					WriteText(element.GetCData(), startpara, contained);
 					break;
 
 				case "Bullet":
-					writer.Write($"{prefix}- ");
+					// writer.Write($"{prefix}- ");
+					prefix += "- ";
 					break;
 
 				case "Number":
-					writer.Write($"{prefix}1. ");
+					//					writer.Write($"{prefix}1. ");
+					prefix += "1. ";
+
 					break;
 
 				case "Image":
@@ -165,7 +171,7 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Table":
-					WriteTable(element);
+					WriteTable(element, indents);
 					dive = false;
 					break;
 			}
@@ -174,7 +180,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 				foreach (var child in element.Elements())
 				{
-					Write(child, prefix, startpara);
+					Write(child, ref prefix, ref indents, startpara, contained);
 //					startpara = false;
 				}
 			}
@@ -189,10 +195,14 @@ namespace River.OneMoreAddIn.Commands
 
 				// if not in a table cell
 				// or in a cell and this OE is followed by another OE
-				if (!contained ||(element.NextNode != null))
+				if (!contained && (element.NextNode != null))
 				{
 					writer.WriteLine("");
-				}
+				} else if (contained)
+                {
+					writer.Write("<br>");
+                }
+				indents = keepindents;
 			}
 		}
 
@@ -245,12 +255,13 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteTag(XElement element)
+		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
 				.Where(e => e.Attribute("index").Value == element.Attribute("index").Value)
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
+			var retValue = " ";
 
 			switch (symbol)
 			{
@@ -262,31 +273,39 @@ namespace River.OneMoreAddIn.Commands
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
-					writer.Write($"- [{check}] ");
+					if (contained)
+					{
+						retValue = @"<input type=""checkbox"" disabled " + (check == "x" ? "checked":"unchecked") + @" />";
+					} else
+                    {
+						retValue = ($"- [{check}] ");
+					}
+
 					break;
 
-				case 6: writer.Write(":question: "); break;         // question
-				case 13: writer.Write(":star: "); break;            // important
-				case 17: writer.Write(":exclamation: "); break;     // critical
-				case 18: writer.Write(":phone: "); break;           // phone
-				case 21: writer.Write(":bulb: "); break;            // idea
-				case 23: writer.Write(":house: "); break;           // address
-				case 33: writer.Write(":three: "); break;           // three
-				case 39: writer.Write(":zero: "); break;            // zero
-				case 51: writer.Write(":two: "); break;				// two
-				case 70: writer.Write(":one: "); break;				// one
-				case 118: writer.Write(":mailbox: "); break;        // contact
-				case 121: writer.Write(":musical_note: "); break;   // music to listen to
-				case 131: writer.Write(":secret: "); break;			// password
-				case 133: writer.Write(":movie_camera: "); break;   // movie to see
-				case 132: writer.Write(":book: "); break;           // book to read
-				case 140: writer.Write(":zap: "); break;            // lightning bolt																	
-				default:break;                                      //               default: writer.Write(":o: "); break;
+				case 6: retValue = (":question: "); break;         // question
+				case 13: retValue = (":star: "); break;            // important
+				case 17: retValue = (":exclamation: "); break;     // critical
+				case 18: retValue = (":phone: "); break;           // phone
+				case 21: retValue = (":bulb: "); break;            // idea
+				case 23: retValue = (":house: "); break;           // address
+				case 33: retValue = (":three: "); break;           // three
+				case 39: retValue = (":zero: "); break;            // zero
+				case 51: retValue = (":two: "); break;				// two
+				case 70: retValue = (":one: "); break;				// one
+				case 118: retValue = (":mailbox: "); break;        // contact
+				case 121: retValue = (":musical_note: "); break;   // music to listen to
+				case 131: retValue = (":secret: "); break;			// password
+				case 133: retValue = (":movie_camera: "); break;   // movie to see
+				case 132: retValue = (":book: "); break;           // book to read
+				case 140: retValue = (":zap: "); break;            // lightning bolt																	
+				default: break;									   // retValue = (":o: "); break;
 			}
+			return retValue;
 		}
 
 
-		private void WriteText(XCData cdata, bool startParagraph)
+		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
@@ -294,6 +313,7 @@ namespace River.OneMoreAddIn.Commands
 //				.Replace("<br>", "  ") // usually followed by NL so leave it there
 //				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
+
 			var wrapper = cdata.GetWrapper();
 			foreach (var span in wrapper.Descendants("span").ToList())
 			{
@@ -332,6 +352,14 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
+			if (raw.Trim().IsNullOrEmpty())
+			{
+				return;
+			}
+			if (contained)
+            {
+				raw = raw.Replace("\n", "<br>");
+            }
 			if (startParagraph && raw.Length > 0 && raw.StartsWith("#"))
 			{
 				writer.Write("\\");
@@ -412,7 +440,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteTable(XElement element)
+		private void WriteTable(XElement element, string indents)
 		{
 			var table = new Table(element);
 
@@ -420,7 +448,7 @@ namespace River.OneMoreAddIn.Commands
 			writer.WriteLine();
 
 			// header
-			writer.Write("|");
+			writer.Write(indents + "|");
 			for (int i = 0; i < table.ColumnCount; i++)
 			{
 				writer.Write($" {TableCell.IndexToLetters(i + 1)} |");
@@ -444,7 +472,7 @@ namespace River.OneMoreAddIn.Commands
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => Write(e, contained: true));
+						.ForEach(e => { var prefix = ""; var indent_local = ""; Write(e, ref prefix, ref indent_local, contained: true); });
 
 					writer.Write(" | ");
 				}
