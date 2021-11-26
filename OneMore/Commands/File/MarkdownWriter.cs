@@ -70,7 +70,7 @@ using System.Drawing;
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
-					.ForEach(e => { var prefix = ""; var indents = ""; Write(e, ref prefix, ref indents); });
+					.ForEach(e => { PrefixClass prefix = new PrefixClass() ; Write(e, ref prefix); });
 
 				writer.WriteLine();
 			}
@@ -91,7 +91,7 @@ using System.Drawing;
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
-					.ForEach(e => { var prefix = ""; var indents = ""; Write(e, ref prefix, ref indents); });
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
 				writer.WriteLine();
 				sw.Flush();
@@ -100,21 +100,24 @@ using System.Drawing;
 				retString = sr.ReadToEnd();
 			}
 			return retString;
-			//			return System.Text.Encoding.UTF8.GetString(mem.ToArray(), 0, (int)mem.Length);
-			//			return mem.ToString();
-			//			return System.Text.Encoding.UTF8.GetBytes(mem.te, 0, (int)mem.Length);
+		}
+
+		public class PrefixClass
+		{
+			public string indent = "";
+			public string tags = "";
+			public string bullets = "";
 		}
 
 		private void Write(XElement element,
-			ref string prefix,
-			ref string indents,
+			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
 		{
 
 			bool pushed = false;
 			bool dive = true;
-			var keepindents = indents;
+			var keepindents = prefix.indent;
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
@@ -127,7 +130,7 @@ using System.Drawing;
                     {
 						writer.WriteLine("");
 					}
-					indents = $"{Indent}{indents}";
+					prefix.indent = $"{Indent}{prefix.indent}";
 					break;
 
 				case "OE":
@@ -136,7 +139,7 @@ using System.Drawing;
 					break;
 
 				case "Tag":
-					prefix += WriteTag(element, contained);
+					prefix.tags += WriteTag(element, contained);
 					break;
 
 				case "T":
@@ -145,18 +148,18 @@ using System.Drawing;
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					if (startpara) { Stylize(indents + prefix); prefix = ""; }
+					if (startpara) { Stylize(prefix); prefix.tags = ""; prefix.bullets = ""; }
 					WriteText(element.GetCData(), startpara, contained);
 					break;
 
 				case "Bullet":
-					// writer.Write($"{prefix}- ");
-					prefix += "- ";
+					// in md dash needs to be first in line
+					prefix.bullets = "- " + prefix.bullets;
 					break;
 
 				case "Number":
-					//					writer.Write($"{prefix}1. ");
-					prefix += "1. ";
+					// in md number needs to be first in line
+					prefix.bullets = "1. " + prefix.bullets;
 
 					break;
 
@@ -171,7 +174,7 @@ using System.Drawing;
 					break;
 
 				case "Table":
-					WriteTable(element, indents);
+					WriteTable(element, prefix.indent);
 					dive = false;
 					break;
 			}
@@ -180,8 +183,7 @@ using System.Drawing;
 			{
 				foreach (var child in element.Elements())
 				{
-					Write(child, ref prefix, ref indents, startpara, contained);
-//					startpara = false;
+					Write(child, ref prefix, startpara, contained);
 				}
 			}
 
@@ -202,7 +204,7 @@ using System.Drawing;
                 {
 					writer.Write("<br>");
                 }
-				indents = keepindents;
+				prefix.indent = keepindents;
 			}
 		}
 
@@ -231,27 +233,28 @@ using System.Drawing;
 		}
 
 
-		private void Stylize(string prefix)
+		private void Stylize(PrefixClass prefix)
 		{
-			writer.Write(prefix);
+			var styleprefix = "";
 			if (contexts.Count == 0) return;
 			var context = contexts.Peek();
 			var quick = quickStyles.First(q => q.Index == context.QuickStyleIndex);
 			switch (quick.Name)
 			{
-				case "PageTitle": writer.Write("# "); break;
-				case "h1": writer.Write("# "); break;
-				case "h2": writer.Write("## "); break;
-				case "h3": writer.Write("### "); break;
-				case "h4": writer.Write("#### "); break;
-				case "h5": writer.Write("##### "); break;
-				case "h6": writer.Write("###### "); break;
-				case "blockquote": writer.Write("> "); break;
+				case "PageTitle": styleprefix = ("# "); break;
+				case "h1": styleprefix = ("# "); break;
+				case "h2": styleprefix = ("## "); break;
+				case "h3": styleprefix = ("### "); break;
+				case "h4": styleprefix = ("#### "); break;
+				case "h5": styleprefix = ("##### "); break;
+				case "h6": styleprefix = ("###### "); break;
+				case "blockquote": styleprefix = ("> "); break;
 				// cite and code are both block-scope style, on the OE
-				case "cite": writer.Write("*"); break;
-				case "code": writer.Write("`"); break;
-				//case "p": logger.Write(Environment.NewLine); break;
+				case "cite": styleprefix = ("*"); break;
+				case "code": styleprefix = ("`"); break;
+					//case "p": logger.Write(Environment.NewLine); break;
 			}
+			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
 
@@ -261,7 +264,7 @@ using System.Drawing;
 				.Where(e => e.Attribute("index").Value == element.Attribute("index").Value)
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
-			var retValue = " ";
+			var retValue = "";
 
 			switch (symbol)
 			{
@@ -273,13 +276,9 @@ using System.Drawing;
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
-					if (contained)
-					{
-						retValue = @"<input type=""checkbox"" disabled " + (check == "x" ? "checked":"unchecked") + @" />";
-					} else
-                    {
-						retValue = ($"- [{check}] ");
-					}
+					retValue = contained
+					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
+					  : ($"- [{check}] ");
 
 					break;
 
@@ -291,7 +290,9 @@ using System.Drawing;
 				case 23: retValue = (":house: "); break;           // address
 				case 33: retValue = (":three: "); break;           // three
 				case 39: retValue = (":zero: "); break;            // zero
-				case 51: retValue = (":two: "); break;				// two
+				case 51: retValue = (":two: "); break;              // two
+				case 59: retValue = (":arrow_right: "); break;                // agenda
+				case 64: retValue = (":star: "); break;             // custom 1
 				case 70: retValue = (":one: "); break;				// one
 				case 118: retValue = (":mailbox: "); break;        // contact
 				case 121: retValue = (":musical_note: "); break;   // music to listen to
@@ -472,7 +473,7 @@ using System.Drawing;
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => { var prefix = ""; var indent_local = ""; Write(e, ref prefix, ref indent_local, contained: true); });
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(); prefix.indent = indents;  Write(e, ref prefix, contained: true); });
 
 					writer.Write(" | ");
 				}
