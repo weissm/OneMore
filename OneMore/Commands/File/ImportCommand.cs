@@ -16,8 +16,11 @@ namespace River.OneMoreAddIn.Commands
 	using System.Xml.Linq;
 	using Win = System.Windows;
 	using System.Text;
+	using Markdig;
+	using MarkdownDeep = MarkdownDeep;
+	using MarkdownDig = Markdig.Markdown;
 
-	internal class ImportCommand : Command
+    internal class ImportCommand : Command
 	{
 		private const int MaxWait = 15;
 		private UI.ProgressDialog progressDialog;
@@ -320,14 +323,21 @@ namespace River.OneMoreAddIn.Commands
 			try
 			{
 				var text = File.ReadAllText(filepath);
-				var deep = new Markdown
+				var deep = new MarkdownDeep.Markdown
 				{
 					MaxImageWidth = 800,
 					ExtraMode = true,
 					UrlBaseLocation = Path.GetDirectoryName(filepath)
 				};
 
-				var body = deep.Transform(text);
+				var body2 = deep.Transform(text);
+
+			    MarkdownPipeline pipline;
+				pipline = new Markdig.MarkdownPipelineBuilder()
+				  .Build();
+
+				var body = MarkdownDig.ToHtml(text, pipline); // <h1>Header 1</h1>
+
 				if (!string.IsNullOrEmpty(body))
 				{
 					var builder = new StringBuilder();
@@ -338,6 +348,7 @@ namespace River.OneMoreAddIn.Commands
 					builder.AppendLine("<!--EndFragment-->");
 					builder.AppendLine("</body>");
 					builder.AppendLine("</html>");
+
 					var html = PasteRtfCommand.AddHtmlPreamble(builder.ToString());
 
 					// paste HTML

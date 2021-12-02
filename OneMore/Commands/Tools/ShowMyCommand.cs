@@ -21,7 +21,7 @@ using OneNote2X.Forms;
 
         public override async Task Execute(params object[] args)
 		{
-            // System.Diagnostics.Debugger.Launch();
+            System.Diagnostics.Debugger.Launch();
             // This is a work around for a blocking behaviour in the genmoms
             var _onenoteApp = new OneNote.Application();
             string mysectionId;

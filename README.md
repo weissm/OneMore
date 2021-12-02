@@ -198,8 +198,9 @@ appreciation that I humbly request that you consider a small donation to support
 of OneMore. In exchange, I pledge to continue listening with an open mind and to respond to your
 questions and tips in a timely manner.
 
-_Click here, click now, click often! >>_  
->  [![Donate](../../wiki/images/Donate.png)](https://paypal.me/stevenmcohn?locale.x=en_US)
+Please consider a sponsorship or one-time donation, click here:
+
+   [![Sponsor](../../wiki/images/Sponsor.png)](https://github.com/sponsors/stevencohn)
 
 
 ### Minimum Prerequisites for Development
@@ -227,8 +228,14 @@ Tested recently with:
 #### Dependencies
 
 * [HtmlAgilityPack](https://www.nuget.org/packages/HtmlAgilityPack) - nuget, MIT license
+   * Normalizes HTML and non-conformant XML to well-formed XML that can be consumed by XElement.Parse
+* [InputSimulator](https://github.com/michaelnoonan/inputsimulator) - nuget, MIT license
+   * Replaces the use of SendKeys.Send, adding support for multilingual keyboards
 * [MarkdownDeep](https://github.com/toptensoftware/markdowndeep) - DLL in external folder
+   * Transforms markdown to HTML when importing md files
 * [PuppeteerSharp](https://www.nuget.org/packages/PuppeteerSharp/) - nuget, MIT license
+   * Automates the import of Web pages and conversion to PDF
+   * Note that this bloats the installer and the installed footprint since it includes Chromium; eventually switching to WebView2 or similar is possible when WebView2 is more capable of supporting both headless and export to PDF
 
 
 ### How to Install OneMore

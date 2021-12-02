@@ -46,7 +46,21 @@ using System.Drawing;
 		private StreamWriter writer;
 		private string path;
 #endif
+		// helper class to pass parameter
+		public class PrefixClass
+		{
+			public string indent = "";
+			public string tags = "";
+			public string bullets = "";
 
+			public PrefixClass(string set_indent = "", string set_tags = "", string set_bullets = "")
+			{
+				indent = set_indent;
+				tags = set_tags;
+				bullets = set_bullets;
+			}
+
+		}
 
 		public MarkdownWriter(Page page, bool withAttachments)
 		{
@@ -100,13 +114,6 @@ using System.Drawing;
 				retString = sr.ReadToEnd();
 			}
 			return retString;
-		}
-
-		public class PrefixClass
-		{
-			public string indent = "";
-			public string tags = "";
-			public string bullets = "";
 		}
 
 		private void Write(XElement element,
@@ -256,7 +263,6 @@ using System.Drawing;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
-
 
 		private string WriteTag(XElement element, bool contained)
 		{
@@ -473,7 +479,7 @@ using System.Drawing;
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => { PrefixClass prefix = new PrefixClass(); prefix.indent = indents;  Write(e, ref prefix, contained: true); });
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
 
 					writer.Write(" | ");
 				}
