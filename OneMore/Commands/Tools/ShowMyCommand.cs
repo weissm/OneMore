@@ -11,6 +11,7 @@ using OneNote2X.Forms;
     using System.IO;
     using System.Reflection;
     using System.Linq;
+using System;
 
     internal class ShowMyCommand : Command
 	{
@@ -30,12 +31,20 @@ using OneNote2X.Forms;
             _onenoteApp.OpenHierarchy(inputFile, null, out mysectionId, OneNote.CreateFileType.cftNone);
             _onenoteApp.SyncHierarchy(mysectionId);
             await Task.Yield();
-            using (var dialog = new GenMoMs())
-			{
-				dialog.ShowDialog(owner);
-			}
+            try
+            {
+                using (var dialog = new GenMoMs())
+                {
+                    dialog.ShowDialog(owner);
+                }
 
-			await Task.Yield();
-		}
+                await Task.Yield();
+            }
+            catch (Exception exc)
+            {
+                logger.WriteLine("Issue in my cmd ", exc);
+            }
+
+        }
 	}
 }
