@@ -3691,4 +3691,103 @@ Deferred</value>
     <value>Generate template and manage associated data (Strg + Umschalt + Alt + C)</value>
     <comment>tip</comment>
   </data>
+  <data name="FolderClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\folderclose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FolderOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\folderopen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Task" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\task.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MapDialog_synopsisBox.Text" xml:space="preserve">
+    <value>Include a synopsis of each page</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog.Text" xml:space="preserve">
+    <value>Import Tasks from Outlook</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_introBox.Text" xml:space="preserve">
+    <value>Choose an entire folder or individual tasks to import from Outlook into OneNote. Disabled items indicate tasks already linked to OneNote</value>
+    <comment>text box</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_warningBox.Text" xml:space="preserve">
+    <value>Note that OneNote does not bind completely to task that are not in the Outlook Tasks folder. Tasks from sub-folders are shown in red to indicate that their status flags will not update automatically after importing.</value>
+    <comment>rich text box</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_listButton.Text" xml:space="preserve">
+    <value>Generate task list</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_tableButton.Text" xml:space="preserve">
+    <value>Generate task detail table</value>
+    <comment>radio</comment>
+  </data>
+  <data name="OutlookTaskReport_DateDue" xml:space="preserve">
+    <value>Due/Completed</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_DateStarted" xml:space="preserve">
+    <value>Start Date</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Importance" xml:space="preserve">
+    <value>Importance</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_importances" xml:space="preserve">
+    <value>Low
+Medium
+High</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Percent" xml:space="preserve">
+    <value>% Complete</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Status" xml:space="preserve">
+    <value>Status</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_statuses" xml:space="preserve">
+    <value>Not Started
+In Progress
+Completed
+Waiting
+Deferred</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Task" xml:space="preserve">
+    <value>Task</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Week" xml:space="preserve">
+    <value>Week {0}</value>
+    <comment>report</comment>
+  </data>
+  <data name="OutlookTaskReport_Title" xml:space="preserve">
+    <value>Outlook Tasks</value>
+    <comment>report</comment>
+  </data>
+  <data name="LinkDialog_unindexedBox.Text" xml:space="preserve">
+    <value>Include unindexed pages in query</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="LinkDialog_unindexedBox.Tooltip" xml:space="preserve">
+    <value>Enable to search newer text that has not yet been indexed by OneNote. This may be slower.</value>
+    <comment>tooltip on checkbox</comment>
+  </data>
+  <data name="LinkReferencesCommand_noref" xml:space="preserve">
+    <value>No references found. Consider enabling the option to include unindexed pages</value>
+    <comment>message</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_noorphans" xml:space="preserve">
+    <value>No orphaned tasks were found</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ImportOutlookTasksDialog_reset" xml:space="preserve">
+    <value>Reset {0} orphaned task(s)</value>
+    <comment>message box</comment>
+  </data>
 </root>
