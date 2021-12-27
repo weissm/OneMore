@@ -33,9 +33,17 @@ namespace OneMoreSetupActions
 			logger.WriteLine();
 			logger.WriteLine("EdgeWebViewDeployment.Install ---");
 
+			var key = Registry.LocalMachine.OpenSubKey($"{ClientKey}\\{RuntimeId}");
+			if (key != null)
+			{
+				logger.WriteLine("WebView2 Runtime is already installed");
+				CleanupChromium();
+				return true;
+			}
+
 			var bootstrap = Path.Combine(
-				Path.GetTempPath(),
-				Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".exe");
+			Path.GetTempPath(),
+			Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".exe");
 
 			if (!DownloadBootstrap(bootstrap))
 			{
@@ -68,6 +76,9 @@ namespace OneMoreSetupActions
 				logger.WriteLine("error deleting bootstrap");
 				logger.WriteLine(exc);
 			}
+
+			// deprecate
+			CleanupChromium();
 
 			return true;
 		}
@@ -132,7 +143,43 @@ namespace OneMoreSetupActions
 				logger.WriteLine("WebView client key not found in Registry");
 			}
 
+			// deprecate
+			CleanupChromium();
+
 			return false;
+		}
+
+
+		/// <summary>
+		/// Temporary action to clean up the chromium folder under AppData\Roaming\OneMore.
+		/// This method can be removed after a few release cycles.
+		/// </summary>
+		private void CleanupChromium()
+		{
+			var path = Path.Combine(Environment.GetEnvironmentVariable("APPDATA"), "OneMore");
+			if (!Directory.Exists(path))
+			{
+				return;
+			}
+
+			var chrome = Directory.GetFiles(path, "chrome.exe", SearchOption.AllDirectories).FirstOrDefault();
+			if (chrome == null)
+			{
+				return;
+			}
+
+			try
+			{
+				var parent = Path.GetDirectoryName(Path.GetDirectoryName(chrome));
+				logger.WriteLine($"cleaning up chromium {parent}");
+
+				Directory.Delete(parent, true);
+			}
+			catch (Exception exc)
+			{
+				logger.WriteLine("error cleaning up chromium");
+				logger.WriteLine(exc);
+			}
 		}
 	}
 }

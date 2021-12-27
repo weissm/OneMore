@@ -4,23 +4,22 @@
 
 namespace River.OneMoreAddIn.Commands
 {
+	using MarkdownDeep;
 	using River.OneMoreAddIn.Helpers.Office;
 	using River.OneMoreAddIn.Models;
-	using MarkdownDeep;
 	using System;
 	using System.Drawing;
 	using System.IO;
+	using System.Text;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Windows.Forms;
 	using System.Xml.Linq;
+	using WindowsInput;
+	using WindowsInput.Native;
 	using Win = System.Windows;
-	using System.Text;
-	using Markdig;
-	using MarkdownDeep = MarkdownDeep;
-	using MarkdownDig = Markdig.Markdown;
 
-    internal class ImportCommand : Command
+	internal class ImportCommand : Command
 	{
 		private const int MaxWait = 15;
 		private UI.ProgressDialog progressDialog;
@@ -71,7 +70,7 @@ namespace River.OneMoreAddIn.Commands
 
 		private void ImportWord(string filepath, bool append)
 		{
-			if (!Office.IsWordInstalled())
+			if (!Office.IsInstalled("Word"))
 			{
 				UIHelper.ShowMessage("Word is not installed");
 			}
@@ -134,7 +133,7 @@ namespace River.OneMoreAddIn.Commands
 
 		private void ImportPowerPoint(string filepath, bool append, bool split)
 		{
-			if (!Office.IsPowerPointInstalled())
+			if (!Office.IsInstalled("Powerpoint"))
 			{
 				UIHelper.ShowMessage("PowerPoint is not installed");
 			}
@@ -323,21 +322,14 @@ namespace River.OneMoreAddIn.Commands
 			try
 			{
 				var text = File.ReadAllText(filepath);
-				var deep = new MarkdownDeep.Markdown
+				var deep = new Markdown
 				{
 					MaxImageWidth = 800,
 					ExtraMode = true,
 					UrlBaseLocation = Path.GetDirectoryName(filepath)
 				};
 
-				var body2 = deep.Transform(text);
-
-			    MarkdownPipeline pipline;
-				pipline = new Markdig.MarkdownPipelineBuilder()
-				  .Build();
-
-				var body = MarkdownDig.ToHtml(text, pipline); // <h1>Header 1</h1>
-
+				var body = deep.Transform(text);
 				if (!string.IsNullOrEmpty(body))
 				{
 					var builder = new StringBuilder();
@@ -348,7 +340,6 @@ namespace River.OneMoreAddIn.Commands
 					builder.AppendLine("<!--EndFragment-->");
 					builder.AppendLine("</body>");
 					builder.AppendLine("</html>");
-
 					var html = PasteRtfCommand.AddHtmlPreamble(builder.ToString());
 
 					// paste HTML
@@ -360,7 +351,9 @@ namespace River.OneMoreAddIn.Commands
 					// both SetText and SendWait are very unpredictable so wait a little
 					await Task.Delay(200);
 
-					SendKeys.SendWait("^(v)");
+					//SendKeys.SendWait("^(v)");
+					new InputSimulator().Keyboard
+						.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
 				}
 			}
 			catch (Exception exc)

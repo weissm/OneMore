@@ -3,6 +3,8 @@
 //************************************************************************************************
 // based on https://www.codeproject.com/articles/27748/marching-ants
 
+#pragma warning disable S3267 // Loops should be simplified with "LINQ" expressions
+
 #define xLogging
 
 namespace River.OneMoreAddIn.Commands
@@ -42,7 +44,7 @@ namespace River.OneMoreAddIn.Commands
 
 
 		// hover boundary around each resize handle (larger than handle glyph itself)
-		private class SelectionHandle
+		private sealed class SelectionHandle
 		{
 			public SizingHandle Position;
 			public RectangleF Bounds;
