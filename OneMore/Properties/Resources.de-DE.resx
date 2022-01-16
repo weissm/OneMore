@@ -2536,7 +2536,7 @@ ISO-code then comma then language name</comment>
     <comment>ribbon button</comment>
   </data>
   <data name="ribSettingsButton_Label" xml:space="preserve">
-    <value>die Einstellungen</value>
+    <value>Einstellungen</value>
     <comment>ribbon button</comment>
   </data>
   <data name="InsertCalendarDialog_indentBox.Text" xml:space="preserve">
@@ -3008,8 +3008,9 @@ OneNote-Datei (*.one)</value>
     <comment>ribbon item</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    Verweise auf diese Seite zuordnen
-  <comment>ribbon button</comment></data>
+    <value>Verweise auf diese Seite zuordnen</value>
+    <comment>ribbon button</comment>
+  </data>
   <data name="BiLinkCommand_Marked" xml:space="preserve">
     <value>Als Anker markiert "{0}". </value>
     <comment>message box</comment>
