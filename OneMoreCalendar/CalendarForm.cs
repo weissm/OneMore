@@ -45,6 +45,10 @@ namespace OneMoreCalendar
 		{
 			base.OnLoad(e);
 
+			// autoscale must be set prior to setting minsize otherwise it isn't applied
+			AutoScaleMode = AutoScaleMode.Font;
+			MinimumSize = new System.Drawing.Size(935, 625);
+
 			monthView = new MonthView
 			{
 				Dock = DockStyle.Fill,
@@ -392,6 +396,16 @@ namespace OneMoreCalendar
 				settingsButton.Checked = false;
 				ClosedSettings(sender, null);
 			}
+		}
+
+		private void ResizeTopPanel(object sender, EventArgs e)
+		{
+			prevButton.Invalidate();
+			nextButton.Invalidate();
+			todayButton.Invalidate();
+			monthButton.Invalidate();
+			dayButton.Invalidate();
+			settingsButton.Invalidate();
 		}
 	}
 }

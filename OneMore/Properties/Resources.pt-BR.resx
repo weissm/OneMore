@@ -746,9 +746,10 @@ Notas rápidas para baixo</value>
     <comment>checkbox</comment>
   </data>
   <data name="SortDialog_scopeBox.Items" xml:space="preserve">
-    <value>Páginas nesta seção
+    <value>Filhos da página atual
+Páginas nesta seção
 Seções neste caderno
-Notebooks</value>
+Cadernos</value>
     <comment>scope dropdown, one per line</comment>
   </data>
   <data name="SortDialog_scopeLabel.Text" xml:space="preserve">
@@ -3729,5 +3730,37 @@ Diferido</value>
   <data name="ribInsertCalendarButton_Label" xml:space="preserve">
     <value>Calendário</value>
     <comment>ribbon button</comment>
+  </data>
+  <data name="GeneralSheet_langLabel.Text" xml:space="preserve">
+    <value>Idioma de exibição (deve reiniciar o OneNote)</value>
+    <comment>label</comment>
+  </data>
+  <data name="CropImageDialog_printout" xml:space="preserve">
+    <value>Esta imagem é de uma impressão. Se for cortado, não será mais associado a esse arquivo original. Deseja continuar cortando?</value>
+    <comment>message box, question</comment>
+  </data>
+  <data name="ribImportOutlookTasksButton_Label" xml:space="preserve">
+    <value>Importar tarefas do Outlook</value>
+    <comment>ribbon Reminders item</comment>
+  </data>
+  <data name="ribSortNotebooksButton_Label" xml:space="preserve">
+    <value>Classificar cadernos</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortNotebookSectionsButton_Label" xml:space="preserve">
+    <value>Classificar seções no bloco de anotações</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortPageButton_Label" xml:space="preserve">
+    <value>Classificar páginas filhas</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortPagesButton_Label" xml:space="preserve">
+    <value>Classificar páginas na seção</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortSectionPagesButton_Label" xml:space="preserve">
+    <value>Classificar páginas na seção</value>
+    <comment>ribbon/context menu</comment>
   </data>
 </root>

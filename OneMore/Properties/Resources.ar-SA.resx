@@ -741,7 +741,8 @@
     <comment>checkbox</comment>
   </data>
   <data name="SortDialog_scopeBox.Items" xml:space="preserve">
-    <value>صفحات في هذا القسم
+    <value>أطفال الصفحة الحالية
+صفحات في هذا القسم
 أقسام في هذا دفتر الملاحظات
 دفاتر الملاحظات</value>
     <comment>scope dropdown, one per line</comment>
@@ -3022,8 +3023,9 @@ ISO-code then comma then language name</comment>
     <comment>ribbon item</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    مراجع الخريطة لهذه الصفحة
-  <comment>ribbon button</comment></data>
+    <value>مراجع الخريطة لهذه الصفحة</value>
+    <comment>ribbon button</comment>
+  </data>
   <data name="BiLinkCommand_Marked" xml:space="preserve">
     <value>تم وضع علامة "{0}" على أنها نقطة الارتساء. </value>
     <comment>message box</comment>
@@ -3728,5 +3730,37 @@ ISO-code then comma then language name</comment>
   <data name="ribInsertCalendarButton_Label" xml:space="preserve">
     <value>تقويم</value>
     <comment>ribbon button</comment>
+  </data>
+  <data name="GeneralSheet_langLabel.Text" xml:space="preserve">
+    <value>لغة العرض (يجب إعادة تشغيل OneNote)</value>
+    <comment>label</comment>
+  </data>
+  <data name="CropImageDialog_printout" xml:space="preserve">
+    <value>This image is from a printout. If it is cropped, it will no longer be associated with that original file. Do you want to continue cropping?</value>
+    <comment>message box, question</comment>
+  </data>
+  <data name="ribImportOutlookTasksButton_Label" xml:space="preserve">
+    <value>استيراد المهام من Outlook</value>
+    <comment>ribbon Reminders item</comment>
+  </data>
+  <data name="ribSortNotebooksButton_Label" xml:space="preserve">
+    <value>فرز دفاتر الملاحظات</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortNotebookSectionsButton_Label" xml:space="preserve">
+    <value>فرز الأقسام في Notebook</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortPageButton_Label" xml:space="preserve">
+    <value>فرز الصفحات الفرعية</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortPagesButton_Label" xml:space="preserve">
+    <value>فرز الصفحات في المقطع</value>
+    <comment>ribbon/context menu</comment>
+  </data>
+  <data name="ribSortSectionPagesButton_Label" xml:space="preserve">
+    <value>فرز الصفحات في المقطع</value>
+    <comment>ribbon/context menu</comment>
   </data>
 </root>

@@ -61,6 +61,7 @@
 			this.topPanel.Name = "topPanel";
 			this.topPanel.Size = new System.Drawing.Size(978, 92);
 			this.topPanel.TabIndex = 0;
+			this.topPanel.Resize += new System.EventHandler(this.ResizeTopPanel);
 			// 
 			// dayButton
 			// 
@@ -221,7 +222,7 @@
 			this.Controls.Add(this.topPanel);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
-			this.MinimumSize = new System.Drawing.Size(700, 500);
+			this.MinimumSize = new System.Drawing.Size(935, 625);
 			this.Name = "CalendarForm";
 			this.Text = "OneMore Calendar";
 			this.topPanel.ResumeLayout(false);

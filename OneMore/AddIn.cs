@@ -56,11 +56,12 @@ namespace River.OneMoreAddIn
 			UIHelper.PrepareUI();
 
 			var thread = System.Threading.Thread.CurrentThread;
-			Culture = thread.CurrentUICulture;
 
-			//Culture = CultureInfo.GetCultureInfo("en-GB");
-			//thread.CurrentCulture = Culture;
-			//thread.CurrentUICulture = Culture;
+			var settings = new SettingsProvider().GetCollection("GeneralSheet");
+			var lang = settings.Get("language", thread.CurrentUICulture.Name);
+			Culture = CultureInfo.GetCultureInfo(lang);
+			thread.CurrentCulture = Culture;
+			thread.CurrentUICulture = Culture;
 
 			GetCurrentClockSpeed();
 

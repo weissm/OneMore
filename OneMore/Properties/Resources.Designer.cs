@@ -1383,6 +1383,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This image is from a printout. If it is cropped, it will no longer be associated with that original file. Do you want to continue cropping?.
+        /// </summary>
+        internal static string CropImageDialog_printout {
+            get {
+                return ResourceManager.GetString("CropImageDialog_printout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select All.
         /// </summary>
         internal static string CropImageDialog_selectButton_Text {
@@ -2409,6 +2418,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string GeneralSheet_introBox_Text {
             get {
                 return ResourceManager.GetString("GeneralSheet_introBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display language (must restart OneNote).
+        /// </summary>
+        internal static string GeneralSheet_langLabel_Text {
+            get {
+                return ResourceManager.GetString("GeneralSheet_langLabel.Text", resourceCulture);
             }
         }
         
@@ -5459,6 +5477,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import Tasks from Outlook.
+        /// </summary>
+        internal static string ribImportOutlookTasksButton_Label {
+            get {
+                return ResourceManager.GetString("ribImportOutlookTasksButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import Web Page.
         /// </summary>
         internal static string ribImportWebButton_Label {
@@ -6265,6 +6292,51 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribSortListButton_Label {
             get {
                 return ResourceManager.GetString("ribSortListButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Notebooks.
+        /// </summary>
+        internal static string ribSortNotebooksButton_Label {
+            get {
+                return ResourceManager.GetString("ribSortNotebooksButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Sections in Notebook.
+        /// </summary>
+        internal static string ribSortNotebookSectionsButton_Label {
+            get {
+                return ResourceManager.GetString("ribSortNotebookSectionsButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Child Pages.
+        /// </summary>
+        internal static string ribSortPageButton_Label {
+            get {
+                return ResourceManager.GetString("ribSortPageButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Pages in Section.
+        /// </summary>
+        internal static string ribSortPagesButton_Label {
+            get {
+                return ResourceManager.GetString("ribSortPagesButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Pages in Section.
+        /// </summary>
+        internal static string ribSortSectionPagesButton_Label {
+            get {
+                return ResourceManager.GetString("ribSortSectionPagesButton_Label", resourceCulture);
             }
         }
         
@@ -7322,7 +7394,8 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pages in this section
+        ///   Looks up a localized string similar to Children of Current Page
+        ///Pages in this section
         ///Sections in this notebook
         ///Notebooks.
         /// </summary>
