@@ -4,10 +4,10 @@
 
 namespace River.OneMoreAddIn.Commands
 {
-	using River.OneMoreAddIn.Models;
-	using System;
-	using System.Diagnostics;
-	using System.IO;
+using River.OneMoreAddIn.Models;
+using System;
+using System.Diagnostics;
+using System.IO;
 	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -33,6 +33,98 @@ namespace River.OneMoreAddIn.Commands
 
 		public override async Task Execute(params object[] args)
 		{
+			//			System.Diagnostics.Debugger.Launch();
+
+			string ProgramName = @"c:\Users\mweiss\source\shared\work\OneNote2X\OneNote2X.Cmd\bin\Debug\OneNote2X.Cmd.exe";
+			{
+				Process p = Process.Start(ProgramName);
+				p.WaitForExit();
+			}
+			{
+				Process process = new Process();
+
+				// Stop the process from opening a new window
+				process.StartInfo.RedirectStandardOutput = true;
+				process.StartInfo.UseShellExecute = false;
+				process.StartInfo.CreateNoWindow = true;
+				process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+
+				// Setup executable and parameters
+				process.StartInfo.FileName = ProgramName;
+				// Go
+				process.Start();
+				process.WaitForExit();
+			}
+			{
+				ProcessStartInfo startInfo = new ProcessStartInfo();
+				startInfo.CreateNoWindow = true;
+				startInfo.UseShellExecute = false;
+				startInfo.RedirectStandardOutput = true;
+				startInfo.RedirectStandardError = true;
+				startInfo.FileName = ProgramName;
+				startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+			    //Launch the process.
+				var process = Process.Start(startInfo);
+				process.WaitForExit();
+			}
+			{
+				ProcessStartInfo info = new ProcessStartInfo(ProgramName);
+
+				info.WindowStyle = ProcessWindowStyle.Minimized;
+				info.UseShellExecute = false;
+				info.CreateNoWindow = true;
+
+				Process proc = Process.Start(info);
+				proc.WaitForExit();
+			}
+			{
+				Process process = null;
+
+				try
+				{
+					process = new Process
+					{
+						StartInfo = new ProcessStartInfo
+						{
+							FileName = ProgramName,
+							CreateNoWindow = true,
+							UseShellExecute = false,
+							RedirectStandardOutput = true,
+							RedirectStandardError = true,
+							WindowStyle = ProcessWindowStyle.Minimized
+
+						},
+
+						EnableRaisingEvents = true
+					};
+
+					process.Exited += Process_Exited;
+					process.OutputDataReceived += Process_OutputDataReceived;
+					process.ErrorDataReceived += Process_ErrorDataReceived;
+
+					process.Start();
+					process.BeginOutputReadLine();
+					process.BeginErrorReadLine();
+
+					logger.WriteLine($"plugin process started PID:{process.Id}");
+					logger.StartClock();
+					process.WaitForExit();
+
+				}
+				catch (Exception exc)
+				{
+					logger.WriteLine("error running RunPlugin(string)", exc);
+
+					if (process != null)
+					{
+						process.Dispose();
+						process = null;
+					}
+				}
+
+
+			}
+
 			using (var one = new OneNote(out var page, out _, OneNote.PageDetail.All))
 			{
 				if (args != null && args.Length > 0)
@@ -193,6 +285,7 @@ namespace River.OneMoreAddIn.Commands
 							return false;
 						}
 					}
+
 					catch (Exception exc)
 					{
 						logger.WriteLine("error running Execute(string)", exc);
@@ -218,6 +311,8 @@ namespace River.OneMoreAddIn.Commands
 
 			Process process = null;
 
+			string arg = plugin.Arguments.IsNullOrEmpty() ? "" : $"{plugin.Arguments} \"{path}\"";
+
 			try
 			{
 				process = new Process
@@ -225,12 +320,13 @@ namespace River.OneMoreAddIn.Commands
 					StartInfo = new ProcessStartInfo
 					{
 						FileName = plugin.Command,
-						Arguments = $"{plugin.Arguments} \"{path}\"",
+						Arguments = arg,
 						CreateNoWindow = true,
 						UseShellExecute = false,
 						RedirectStandardOutput = true,
-						RedirectStandardError = true
-					},
+						RedirectStandardError = true,
+						WindowStyle = ProcessWindowStyle.Minimized
+			},
 
 					EnableRaisingEvents = true
 				};
