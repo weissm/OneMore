@@ -241,6 +241,9 @@
     </Compile>
     <Compile Include="Commands\Reminders\ReminderSerializer.cs" />
     <Compile Include="Commands\Reminders\ReportRemindersCommand.cs" />
+    <Compile Include="Commands\Settings\KeyboardGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Commands\Settings\LinesSheet.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -252,6 +255,12 @@
     </Compile>
     <Compile Include="Commands\Settings\GeneralSheet.Designer.cs">
       <DependentUpon>GeneralSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Settings\KeyboardSheet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Commands\Settings\KeyboardSheet.Designer.cs">
+      <DependentUpon>KeyboardSheet.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\Snippets\InsertBreadcrumbCommand.cs" />
     <Compile Include="Commands\References\EmbedSubpageCommand.cs" />
@@ -390,12 +399,15 @@
     <Compile Include="Helpers\ApplicationFactory.cs" />
     <Compile Include="Helpers\ErrorCodes.cs" />
     <Compile Include="Helpers\Extensions\ByteExtensions.cs" />
+    <Compile Include="Helpers\Extensions\ColorMatrixExtensions.cs" />
     <Compile Include="Helpers\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Helpers\Extensions\ImageExtensions.cs" />
     <Compile Include="Helpers\Extensions\ProcessExtensions.cs" />
+    <Compile Include="Commands\CommandAttribute.cs" />
     <Compile Include="Helpers\HttpClientFactory.cs" />
     <Compile Include="Helpers\ImageDetector.cs" />
     <Compile Include="Helpers\Loggable.cs" />
+    <Compile Include="Helpers\MagicScaling.cs" />
     <Compile Include="Helpers\Office\Models\OutlookEnums.cs" />
     <Compile Include="Helpers\Office\Models\OutlookTaskFolders.cs" />
     <Compile Include="Helpers\Office\Models\OutlookTasks.cs" />
@@ -630,7 +642,7 @@
     <Compile Include="Helpers\Hotkeys\Hotkey.cs" />
     <Compile Include="Helpers\Hotkeys\HotkeyEventArgs.cs" />
     <Compile Include="Helpers\Hotkeys\HotkeyManager.cs" />
-    <Compile Include="Helpers\Hotkeys\Hotmods.cs" />
+    <Compile Include="Helpers\Hotkeys\HotModifier.cs" />
     <Compile Include="Helpers\Extensions\IntExtensions.cs" />
     <Compile Include="Helpers\ILogger.cs" />
     <Compile Include="Helpers\Native.cs" />
@@ -868,6 +880,7 @@
     <None Include="Properties\Images\Exit.png" />
     <Content Include="Properties\Images\FolderClose.png" />
     <Content Include="Properties\Images\FolderOpen.png" />
+    <None Include="Properties\Images\Grid40.png" />
     <Content Include="Properties\Images\Label.png" />
     <Content Include="Properties\Images\LabelSearch.png" />
     <Content Include="Properties\Emoji\Pencil.png" />
@@ -892,6 +905,7 @@
     <Content Include="Properties\Images\HighlightFaded.png" />
     <Content Include="Properties\Images\HighlightNormal.png" />
     <Content Include="Properties\Images\Italic.png" />
+    <None Include="Properties\Images\Locked.png" />
     <Content Include="Properties\Images\Logo.ico" />
     <Content Include="Properties\Images\NewStyle.png" />
     <Content Include="Properties\Images\NotebookMask.png" />
@@ -913,6 +927,8 @@
     <Content Include="Properties\Images\Subscript.png" />
     <Content Include="Properties\Images\Superscript.png" />
     <Content Include="Properties\Images\Task.png" />
+    <Content Include="Properties\Images\Unlocked.png" />
+    <Content Include="Properties\Resources-zh-CN-hints.xml" />
     <Content Include="UI\TagMap.png" />
     <Content Include="Properties\Images\TextHighlightColorPicker.png" />
     <Content Include="Properties\Images\Underline.png" />
@@ -965,6 +981,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Commands\Settings\GeneralSheet.resx">
       <DependentUpon>GeneralSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Settings\KeyboardSheet.resx">
+      <DependentUpon>KeyboardSheet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Commands\Tables\InsertCellsDialog.resx">
       <DependentUpon>InsertCellsDialog.cs</DependentUpon>

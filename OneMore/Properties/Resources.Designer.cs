@@ -394,6 +394,87 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply Style 1.
+        /// </summary>
+        internal static string ApplyStyle1Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle1Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 2.
+        /// </summary>
+        internal static string ApplyStyle2Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle2Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 3.
+        /// </summary>
+        internal static string ApplyStyle3Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle3Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 4.
+        /// </summary>
+        internal static string ApplyStyle4Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle4Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 5.
+        /// </summary>
+        internal static string ApplyStyle5Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle5Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 6.
+        /// </summary>
+        internal static string ApplyStyle6Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle6Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 7.
+        /// </summary>
+        internal static string ApplyStyle7Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle7Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 8.
+        /// </summary>
+        internal static string ApplyStyle8Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle8Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 9.
+        /// </summary>
+        internal static string ApplyStyle9Command {
+            get {
+                return ResourceManager.GetString("ApplyStyle9Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Architecture {
@@ -856,6 +937,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ClearLog_Title {
             get {
                 return ResourceManager.GetString("ClearLog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Log File.
+        /// </summary>
+        internal static string ClearLogCommand {
+            get {
+                return ResourceManager.GetString("ClearLogCommand", resourceCulture);
             }
         }
         
@@ -1566,6 +1656,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string DeleteReminderCommand_deleteTag {
             get {
                 return ResourceManager.GetString("DeleteReminderCommand_deleteTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dump Diagnostics to Log.
+        /// </summary>
+        internal static string DiagnosticsCommand {
+            get {
+                return ResourceManager.GetString("DiagnosticsCommand", resourceCulture);
             }
         }
         
@@ -2451,6 +2550,16 @@ namespace River.OneMoreAddIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Grid40 {
+            get {
+                object obj = ResourceManager.GetObject("Grid40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Hammer {
             get {
                 object obj = ResourceManager.GetObject("Hammer", resourceCulture);
@@ -3091,6 +3200,69 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string KeyboardSheet_clearButton_Text {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_clearButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command.
+        /// </summary>
+        internal static string KeyboardSheet_cmdColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_cmdColumn.HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage my custom keyboard shortcuts. Select a command and press a key sequence..
+        /// </summary>
+        internal static string KeyboardSheet_introLabel_Text {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_introLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key Sequence.
+        /// </summary>
+        internal static string KeyboardSheet_keyColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_keyColumn.HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset all.
+        /// </summary>
+        internal static string KeyboardSheet_resetAllButton_Text {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_resetAllButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string KeyboardSheet_resetButton_Text {
+            get {
+                return ResourceManager.GetString("KeyboardSheet_resetButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keyboard.
+        /// </summary>
+        internal static string KeyboardSheet_Text {
+            get {
+                return ResourceManager.GetString("KeyboardSheet.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Label {
@@ -3242,6 +3414,16 @@ namespace River.OneMoreAddIn.Properties {
         internal static string LinkReferencesCommand_noref {
             get {
                 return ResourceManager.GetString("LinkReferencesCommand_noref", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Locked {
+            get {
+                object obj = ResourceManager.GetObject("Locked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -4608,33 +4790,6 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Storage: {0}.
-        /// </summary>
-        internal static string ResizeImageDialog_qualBox_Size {
-            get {
-                return ResourceManager.GetString("ResizeImageDialog_qualBox_Size", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage.
-        /// </summary>
-        internal static string ResizeImageDialog_qualBox_Text {
-            get {
-                return ResourceManager.GetString("ResizeImageDialog_qualBox.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}% quality.
-        /// </summary>
-        internal static string ResizeImageDialog_qualLabel_Text {
-            get {
-                return ResourceManager.GetString("ResizeImageDialog_qualLabel.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Absolute.
         /// </summary>
         internal static string ResizeImagesDialog_absRadio_Text {
@@ -4644,7 +4799,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to all images on page.
+        ///   Looks up a localized string similar to all images on this page.
         /// </summary>
         internal static string ResizeImagesDialog_allLabel_Text {
             get {
@@ -4653,29 +4808,11 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maintain aspect ratio.
+        ///   Looks up a localized string similar to Applies to.
         /// </summary>
-        internal static string ResizeImagesDialog_aspectBox_Text {
+        internal static string ResizeImagesDialog_appliesTo {
             get {
-                return ResourceManager.GetString("ResizeImagesDialog_aspectBox.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply to.
-        /// </summary>
-        internal static string ResizeImagesDialog_currentLabel_Text {
-            get {
-                return ResourceManager.GetString("ResizeImagesDialog_currentLabel.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current size.
-        /// </summary>
-        internal static string ResizeImagesDialog_currentLabelSize_Text {
-            get {
-                return ResourceManager.GetString("ResizeImagesDialog_currentLabelSize.Text", resourceCulture);
+                return ResourceManager.GetString("ResizeImagesDialog_appliesTo", resourceCulture);
             }
         }
         
@@ -4689,29 +4826,20 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Original size.
+        ///   Looks up a localized string similar to Image size.
         /// </summary>
-        internal static string ResizeImagesDialog_origLabel_Text {
+        internal static string ResizeImagesDialog_imageSizeLabel_Text {
             get {
-                return ResourceManager.GetString("ResizeImagesDialog_origLabel.Text", resourceCulture);
+                return ResourceManager.GetString("ResizeImagesDialog_imageSizeLabel.Text", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} x {1}.
+        ///   Looks up a localized string similar to No images were found on this page.
         /// </summary>
-        internal static string ResizeImagesDialog_origSizeLink_Text {
+        internal static string ResizeImagesDialog_noImages {
             get {
-                return ResourceManager.GetString("ResizeImagesDialog_origSizeLink.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to %.
-        /// </summary>
-        internal static string ResizeImagesDialog_pctLabel_Text {
-            get {
-                return ResourceManager.GetString("ResizeImagesDialog_pctLabel.Text", resourceCulture);
+                return ResourceManager.GetString("ResizeImagesDialog_noImages", resourceCulture);
             }
         }
         
@@ -4725,11 +4853,11 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Width.
+        ///   Looks up a localized string similar to Preserve storage size.
         /// </summary>
-        internal static string ResizeImagesDialog_presetLabel_Text {
+        internal static string ResizeImagesDialog_preserveBox_Text {
             get {
-                return ResourceManager.GetString("ResizeImagesDialog_presetLabel.Text", resourceCulture);
+                return ResourceManager.GetString("ResizeImagesDialog_preserveBox.Text", resourceCulture);
             }
         }
         
@@ -4743,6 +4871,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quality.
+        /// </summary>
+        internal static string ResizeImagesDialog_qualityLabel_Text {
+            get {
+                return ResourceManager.GetString("ResizeImagesDialog_qualityLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} x {1}.
         /// </summary>
         internal static string ResizeImagesDialog_sizeLink_Text {
@@ -4752,7 +4889,19 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resize Image.
+        ///   Looks up a localized string similar to Original
+        ///Gray scale
+        ///Sepia
+        ///Polaroid.
+        /// </summary>
+        internal static string ResizeImagesDialog_styleBox_Text {
+            get {
+                return ResourceManager.GetString("ResizeImagesDialog_styleBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resize and Adjust Image.
         /// </summary>
         internal static string ResizeImagesDialog_Text {
             get {
@@ -4761,11 +4910,11 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Width.
+        ///   Looks up a localized string similar to View size.
         /// </summary>
-        internal static string ResizeImagesDialog_widthLabel_Text {
+        internal static string ResizeImagesDialog_viewSizeLabel_Text {
             get {
-                return ResourceManager.GetString("ResizeImagesDialog_widthLabel.Text", resourceCulture);
+                return ResourceManager.GetString("ResizeImagesDialog_viewSizeLabel.Text", resourceCulture);
             }
         }
         
@@ -7057,6 +7206,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keyboard.
+        /// </summary>
+        internal static string SettingsDialog_keyboardNode_Text {
+            get {
+                return ResourceManager.GetString("SettingsDialog_keyboardNode.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Horizontal Lines.
         /// </summary>
         internal static string SettingsDialog_linesNode_Text {
@@ -7945,6 +8103,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string sw {
+            get {
+                return ResourceManager.GetString("sw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check all pages.
         /// </summary>
         internal static string TaggedDialog_checkAllLabel_Text {
@@ -8296,6 +8463,16 @@ namespace River.OneMoreAddIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Unlocked {
+            get {
+                object obj = ResourceManager.GetObject("Unlocked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap UpArrow {
             get {
                 object obj = ResourceManager.GetObject("UpArrow", resourceCulture);
@@ -8440,6 +8617,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brightness.
+        /// </summary>
+        internal static string word_Brightness {
+            get {
+                return ResourceManager.GetString("word_Brightness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string word_Cancel {
@@ -8458,11 +8644,29 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contrast.
+        /// </summary>
+        internal static string word_Contrast {
+            get {
+                return ResourceManager.GetString("word_Contrast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Due.
         /// </summary>
         internal static string word_Due {
             get {
                 return ResourceManager.GetString("word_Due", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grayscale.
+        /// </summary>
+        internal static string word_Grayscale {
+            get {
+                return ResourceManager.GetString("word_Grayscale", resourceCulture);
             }
         }
         
@@ -8476,6 +8680,24 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opacity.
+        /// </summary>
+        internal static string word_Opacity {
+            get {
+                return ResourceManager.GetString("word_Opacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to %.
+        /// </summary>
+        internal static string word_PercentSymbol {
+            get {
+                return ResourceManager.GetString("word_PercentSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Planned.
         /// </summary>
         internal static string word_Planned {
@@ -8485,11 +8707,38 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        internal static string word_Preview {
+            get {
+                return ResourceManager.GetString("word_Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality.
+        /// </summary>
+        internal static string word_Quality {
+            get {
+                return ResourceManager.GetString("word_Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refresh.
         /// </summary>
         internal static string word_Refresh {
             get {
                 return ResourceManager.GetString("word_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saturation.
+        /// </summary>
+        internal static string word_Saturation {
+            get {
+                return ResourceManager.GetString("word_Saturation", resourceCulture);
             }
         }
         
@@ -8517,6 +8766,33 @@ namespace River.OneMoreAddIn.Properties {
         internal static string word_Started {
             get {
                 return ResourceManager.GetString("word_Started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage.
+        /// </summary>
+        internal static string word_Storage {
+            get {
+                return ResourceManager.GetString("word_Storage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stylize.
+        /// </summary>
+        internal static string word_Stylize {
+            get {
+                return ResourceManager.GetString("word_Stylize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string word_Width {
+            get {
+                return ResourceManager.GetString("word_Width", resourceCulture);
             }
         }
         

@@ -634,7 +634,7 @@ OneNote 将自动关闭</value>
     <comment>instructions</comment>
   </data>
   <data name="ResizeImagesDialog.Text" xml:space="preserve">
-    <value>调整图像大小</value>
+    <value>调整和调整图像</value>
     <comment>dialog title</comment>
   </data>
   <data name="ResizeImagesDialog_absRadio.Text" xml:space="preserve">
@@ -642,44 +642,16 @@ OneNote 将自动关闭</value>
     <comment>radio button</comment>
   </data>
   <data name="ResizeImagesDialog_allLabel.Text" xml:space="preserve">
-    <value>页面上的所有图像</value>
+    <value>此页面上的所有图像</value>
     <comment>info label</comment>
-  </data>
-  <data name="ResizeImagesDialog_aspectBox.Text" xml:space="preserve">
-    <value>保持纵横比</value>
-    <comment>checkbox</comment>
-  </data>
-  <data name="ResizeImagesDialog_currentLabel.Text" xml:space="preserve">
-    <value>适用于</value>
-    <comment>label</comment>
-  </data>
-  <data name="ResizeImagesDialog_currentLabelSize.Text" xml:space="preserve">
-    <value>目前的规模</value>
-    <comment>label</comment>
   </data>
   <data name="ResizeImagesDialog_heightLabel.Text" xml:space="preserve">
     <value>高度</value>
     <comment>label</comment>
   </data>
-  <data name="ResizeImagesDialog_origLabel.Text" xml:space="preserve">
-    <value>原始尺寸</value>
-    <comment>label</comment>
-  </data>
-  <data name="ResizeImagesDialog_origSizeLink.Text" xml:space="preserve">
-    <value>{0} x {1}</value>
-    <comment>width x height</comment>
-  </data>
-  <data name="ResizeImagesDialog_pctLabel.Text" xml:space="preserve">
-    <value>%</value>
-    <comment>percent sign</comment>
-  </data>
   <data name="ResizeImagesDialog_pctRadio.Text" xml:space="preserve">
     <value>百分比</value>
     <comment>radio</comment>
-  </data>
-  <data name="ResizeImagesDialog_presetLabel.Text" xml:space="preserve">
-    <value>宽度</value>
-    <comment>label</comment>
   </data>
   <data name="ResizeImagesDialog_presetRadio.Text" xml:space="preserve">
     <value>预设值</value>
@@ -688,10 +660,6 @@ OneNote 将自动关闭</value>
   <data name="ResizeImagesDialog_sizeLink.Text" xml:space="preserve">
     <value>{0} x {1}</value>
     <comment>width x height</comment>
-  </data>
-  <data name="ResizeImagesDialog_widthLabel.Text" xml:space="preserve">
-    <value>宽度</value>
-    <comment>label</comment>
   </data>
   <data name="SearchAndReplaceDialog_matchBox.Text" xml:space="preserve">
     <value>相符</value>
@@ -2446,18 +2414,6 @@ ISO-code then comma then language name</comment>
     <value>（新）</value>
     <comment>combobox item</comment>
   </data>
-  <data name="ResizeImageDialog_qualBox.Text" xml:space="preserve">
-    <value>存储</value>
-    <comment>group box</comment>
-  </data>
-  <data name="ResizeImageDialog_qualBox_Size" xml:space="preserve">
-    <value>储存空间：{0}</value>
-    <comment>group box</comment>
-  </data>
-  <data name="ResizeImageDialog_qualLabel.Text" xml:space="preserve">
-    <value>{0}％的质量</value>
-    <comment>label</comment>
-  </data>
   <data name="PluginDialog_pluginsLabel.Text" xml:space="preserve">
     <value>插件</value>
     <comment>label</comment>
@@ -3754,5 +3710,137 @@ OneNote 文件 (*.one)</value>
   <data name="ribSortSectionPagesButton_Label" xml:space="preserve">
     <value>对部分中的页面进行排序</value>
     <comment>ribbon/context menu</comment>
+  </data>
+  <data name="KeyboardSheet_cmdColumn.HeaderText" xml:space="preserve">
+    <value>命令</value>
+    <comment>gridview column</comment>
+  </data>
+  <data name="KeyboardSheet_introLabel.Text" xml:space="preserve">
+    <value>管理我的自定义键盘快捷键。选择一个命令并按下一个按键序列。</value>
+    <comment>label</comment>
+  </data>
+  <data name="KeyboardSheet_keyColumn.HeaderText" xml:space="preserve">
+    <value>键序列</value>
+    <comment>gridview column</comment>
+  </data>
+  <data name="ClearLogCommand" xml:space="preserve">
+    <value>清除日志文件</value>
+  </data>
+  <data name="DiagnosticsCommand" xml:space="preserve">
+    <value>将诊断转储到日志</value>
+  </data>
+  <data name="ApplyStyle1Command" xml:space="preserve">
+    <value>应用样式 1</value>
+  </data>
+  <data name="ApplyStyle2Command" xml:space="preserve">
+    <value>应用样式 2</value>
+  </data>
+  <data name="ApplyStyle3Command" xml:space="preserve">
+    <value>应用样式 3</value>
+  </data>
+  <data name="ApplyStyle4Command" xml:space="preserve">
+    <value>应用样式 4</value>
+  </data>
+  <data name="ApplyStyle5Command" xml:space="preserve">
+    <value>应用样式 5</value>
+  </data>
+  <data name="ApplyStyle6Command" xml:space="preserve">
+    <value>应用样式 6</value>
+  </data>
+  <data name="ApplyStyle7Command" xml:space="preserve">
+    <value>应用样式 7</value>
+  </data>
+  <data name="ApplyStyle8Command" xml:space="preserve">
+    <value>应用样式 8</value>
+  </data>
+  <data name="ApplyStyle9Command" xml:space="preserve">
+    <value>应用样式 9</value>
+  </data>
+  <data name="KeyboardSheet_clearButton.Text" xml:space="preserve">
+    <value>清除</value>
+    <comment>toolstrip button</comment>
+  </data>
+  <data name="KeyboardSheet_resetAllButton.Text" xml:space="preserve">
+    <value>重置所有</value>
+    <comment>toolstrip button</comment>
+  </data>
+  <data name="KeyboardSheet_resetButton.Text" xml:space="preserve">
+    <value>重启</value>
+    <comment>toolstrip button</comment>
+  </data>
+  <data name="SettingsDialog_keyboardNode.Text" xml:space="preserve">
+    <value>键盘</value>
+    <comment>treenode</comment>
+  </data>
+  <data name="KeyboardSheet.Text" xml:space="preserve">
+    <value>键盘</value>
+    <comment>sheet</comment>
+  </data>
+  <data name="ResizeImagesDialog_preserveBox.Text" xml:space="preserve">
+    <value>保留存储大小</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="word_Preview" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="word_Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="word_PercentSymbol" xml:space="preserve">
+    <value>％</value>
+  </data>
+  <data name="word_Brightness" xml:space="preserve">
+    <value>亮度</value>
+  </data>
+  <data name="word_Contrast" xml:space="preserve">
+    <value>对比</value>
+  </data>
+  <data name="word_Width" xml:space="preserve">
+    <value>宽度</value>
+  </data>
+  <data name="word_Grayscale" xml:space="preserve">
+    <value>灰度</value>
+  </data>
+  <data name="ResizeImagesDialog_noImages" xml:space="preserve">
+    <value>此页面上没有发现图像</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ResizeImagesDialog_viewSizeLabel.Text" xml:space="preserve">
+    <value>查看尺寸</value>
+    <comment>label</comment>
+  </data>
+  <data name="ResizeImagesDialog_imageSizeLabel.Text" xml:space="preserve">
+    <value>图片大小</value>
+    <comment>label</comment>
+  </data>
+  <data name="ResizeImagesDialog_qualityLabel.Text" xml:space="preserve">
+    <value>质量</value>
+    <comment>label</comment>
+  </data>
+  <data name="word_Quality" xml:space="preserve">
+    <value>质量</value>
+  </data>
+  <data name="word_Stylize" xml:space="preserve">
+    <value>程式化</value>
+  </data>
+  <data name="ResizeImagesDialog_appliesTo" xml:space="preserve">
+    <value>适用于</value>
+    <comment>label override</comment>
+  </data>
+  <data name="ResizeImagesDialog_styleBox.Text" xml:space="preserve">
+    <value>原来的
+灰色刻度
+乌贼
+宝丽来</value>
+    <comment>combobox</comment>
+  </data>
+  <data name="word_Storage" xml:space="preserve">
+    <value>贮存</value>
+  </data>
+  <data name="sw" xml:space="preserve">
+    <value />
+  </data>
+  <data name="word_Saturation" xml:space="preserve">
+    <value>饱和</value>
   </data>
 </root>

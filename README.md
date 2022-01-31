@@ -21,7 +21,7 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 ![Calendar](../../wiki/images/Calendar.png)
 
 <a name="features"></a>
-## Features (143)
+## Features (144)
 
 [Clean commands](../../wiki/Clean-Commands) (11)
 
@@ -76,9 +76,10 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 * Quick access to user-defined plugins
 * Add a link to a special page containing all OneNote and OneMore keyboard shortcuts
 
-[Image commands](../../wiki/Image-Commands) (4)
+[Image commands](../../wiki/Image-Commands) (5)
 
 * Add caption to a selected images
+* Apply a variety of adjustment to an image including brightness, contrast, opacity, saturation, and stylizations like grayscale, sepia, and Polaroid
 * Precisely crop a selected image
 * Resize a selected image or all images on the page
 * Rotate an image to any angle
@@ -271,11 +272,12 @@ the _Unblock_ checkbox.
 Microsoft has been pushing people to use the OneNote app and OneNote online, which suck in my opinion, and have removed OneNote from the Office 2019 installer. But you can still install it after installing Office or even install it standalone!
 
 1. Optionally install Office - do not run the Setup.exe; instead, run Office\Setup64.exe
-1. Download OfficeSetup.exe [from here](https://support.microsoft.com/en-us/office/install-or-reinstall-onenote-for-windows-c08068d8-b517-4464-9ff2-132cb9c45c08)
-   1. If run standalone, it will install 32-bit OneNote
-   1. If run after installing Office, it will install 32 or 64 bit based on the bitness of Office
-   1. The 64-bit installer is [here](http://www.onenote.com/download/win32/x64/en-US)
-   1. The 32-bit installer is [here](http://www.onenote.com/download/win32/x86/en-US)
+   - Download OfficeSetup.exe [from here](https://support.microsoft.com/en-us/office/install-or-reinstall-onenote-for-windows-c08068d8-b517-4464-9ff2-132cb9c45c08)
+   - If run standalone, it will install 32-bit OneNote
+   - If run after installing Office, it will install 32 or 64 bit based on the bitness of Office
+1. Download the standalone OneNote installer (does not require Office or can be installed ontop of Office)
+   - The standalone OneNote 64-bit installer is [here](http://www.onenote.com/download/win32/x64/en-US)
+   - The standalone OneNote 32-bit installer is [here](http://www.onenote.com/download/win32/x86/en-US)
 
 ---
 
