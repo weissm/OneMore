@@ -910,7 +910,7 @@ Notizbücher</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ribCleanMenu_Label" xml:space="preserve">
-    <value>Sauber</value>
+    <value>Säubern</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ribRemoveAuthorsButton_Label" xml:space="preserve">
@@ -966,7 +966,7 @@ Notizbücher</value>
     <comment>progress status dialog</comment>
   </data>
   <data name="ribStrikeoutTasksButton_Label" xml:space="preserve">
-    <value>Durchgestrichen abgeschlossen, um Tags zu tun</value>
+    <value>Text durchstreichen für abgeschlossenene ToDos</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ribStrikeoutTasksButton_Screentip" xml:space="preserve">
@@ -1074,7 +1074,7 @@ Notizbücher</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ctxCleanMenu_Label" xml:space="preserve">
-    <value>Sauber...</value>
+    <value>Säubern ...</value>
     <comment>Context menu</comment>
   </data>
   <data name="ctxLowercaseButton_Label" xml:space="preserve">
