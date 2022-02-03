@@ -499,7 +499,7 @@
     <comment>Ribbon OneMore menu item, search and replace</comment>
   </data>
   <data name="ribResizeImagesButton_Label" xml:space="preserve">
-    <value>تغيير الحجم</value>
+    <value>تغيير حجم وتعديل</value>
     <comment>Ribbon OneMore menu item, Resize selected image(s)</comment>
   </data>
   <data name="ribSnippetsMenu_Label" xml:space="preserve">
@@ -3850,5 +3850,20 @@ ISO-code then comma then language name</comment>
   </data>
   <data name="word_Saturation" xml:space="preserve">
     <value>التشبع</value>
+  </data>
+  <data name="word_Name" xml:space="preserve">
+    <value>اسم</value>
+  </data>
+  <data name="AddStyleDialog.Text" xml:space="preserve">
+    <value>أسلوب جديد</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="AddStyleDialog_nameLabel.Text" xml:space="preserve">
+    <value>اسم النمط</value>
+    <comment>label</comment>
+  </data>
+  <data name="AddStyleDialog_errorLabel.Text" xml:space="preserve">
+    <value>الاسم موجود. اختر اسمًا مختلفًا.</value>
+    <comment>label</comment>
   </data>
 </root>

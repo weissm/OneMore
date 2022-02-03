@@ -500,7 +500,7 @@
     <comment>Ribbon OneMore menu item, search and replace</comment>
   </data>
   <data name="ribResizeImagesButton_Label" xml:space="preserve">
-    <value>Redimensionar</value>
+    <value>Redimensionar e ajustar</value>
     <comment>Ribbon OneMore menu item, Resize selected image(s)</comment>
   </data>
   <data name="ribSnippetsMenu_Label" xml:space="preserve">
@@ -3850,5 +3850,20 @@ Polaroid.</value>
   </data>
   <data name="word_Saturation" xml:space="preserve">
     <value>Saturação</value>
+  </data>
+  <data name="word_Name" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="AddStyleDialog.Text" xml:space="preserve">
+    <value>Novo estilo</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="AddStyleDialog_nameLabel.Text" xml:space="preserve">
+    <value>Nome do estilo</value>
+    <comment>label</comment>
+  </data>
+  <data name="AddStyleDialog_errorLabel.Text" xml:space="preserve">
+    <value>Nome existe. Escolha um nome diferente.</value>
+    <comment>label</comment>
   </data>
 </root>
