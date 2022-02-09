@@ -3862,4 +3862,45 @@ Polaroid</value>
     <value>Umbenennen</value>
     <comment>toolstrip button</comment>
   </data>
+  <data name="Error_NoAttachments" xml:space="preserve">
+    <value>Keine Anhänge auf der Seite gefunden</value>
+  </data>
+  <data name="ribCaptionAttachmentsButton_Label" xml:space="preserve">
+    <value>Beschriftungsanhänge</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="InsertTocDialog_previewBox.Text" xml:space="preserve">
+    <value>Fügen Sie die Textvorschau der jeder Seite ein</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="TaggingDialog.Text" xml:space="preserve">
+    <value>Seite Tags</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="TaggingDialog_clearLabel.Text" xml:space="preserve">
+    <value>Alles entfernen</value>
+    <comment>linklabel</comment>
+  </data>
+  <data name="TaggingDialog_commonGroup.Text" xml:space="preserve">
+    <value>Häufige Wörter auf dieser Seite</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="TaggingDialog_introLabel.Text" xml:space="preserve">
+    <value>Separate Tags mit Kommas</value>
+    <comment>intro label</comment>
+  </data>
+  <data name="TaggingDialog_recentGroup.Text" xml:space="preserve">
+    <value>Kürzlich benutzt</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="TaggingDialog_tagLabel.Text" xml:space="preserve">
+    <value>Seite Tags</value>
+    <comment>header label</comment>
+  </data>
+  <data name="word_Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="word_Suggestions" xml:space="preserve">
+    <value>Anregungen</value>
+  </data>
 </root>

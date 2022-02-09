@@ -3931,4 +3931,45 @@ Polaroid</value>
     <value>Rename</value>
     <comment>toolstrip button</comment>
   </data>
+  <data name="Error_NoAttachments" xml:space="preserve">
+    <value>No attachments found on page</value>
+  </data>
+  <data name="ribCaptionAttachmentsButton_Label" xml:space="preserve">
+    <value>Caption Attachments</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="InsertTocDialog_previewBox.Text" xml:space="preserve">
+    <value>Include text preview of each page</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="TaggingDialog.Text" xml:space="preserve">
+    <value>Page Tags</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="TaggingDialog_clearLabel.Text" xml:space="preserve">
+    <value>Remove all</value>
+    <comment>linklabel</comment>
+  </data>
+  <data name="TaggingDialog_commonGroup.Text" xml:space="preserve">
+    <value>Common words on this page</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="TaggingDialog_introLabel.Text" xml:space="preserve">
+    <value>Separate tags with commas</value>
+    <comment>intro label</comment>
+  </data>
+  <data name="TaggingDialog_recentGroup.Text" xml:space="preserve">
+    <value>Recently used</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="TaggingDialog_tagLabel.Text" xml:space="preserve">
+    <value>Page Tags</value>
+    <comment>header label</comment>
+  </data>
+  <data name="word_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="word_Suggestions" xml:space="preserve">
+    <value>Suggestions</value>
+  </data>
 </root>

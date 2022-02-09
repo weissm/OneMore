@@ -2032,6 +2032,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No attachments found on page.
+        /// </summary>
+        internal static string Error_NoAttachments {
+            get {
+                return ResourceManager.GetString("Error_NoAttachments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select an image before invoking this command.
         /// </summary>
         internal static string Error_SelectImage {
@@ -3131,6 +3140,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string InsertTocDialog_pagesBox_Text {
             get {
                 return ResourceManager.GetString("InsertTocDialog_pagesBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include text preview of each page.
+        /// </summary>
+        internal static string InsertTocDialog_previewBox_Text {
+            get {
+                return ResourceManager.GetString("InsertTocDialog_previewBox.Text", resourceCulture);
             }
         }
         
@@ -5190,6 +5208,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribCalendarButton_Label {
             get {
                 return ResourceManager.GetString("ribCalendarButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Caption Attachments.
+        /// </summary>
+        internal static string ribCaptionAttachmentsButton_Label {
+            get {
+                return ResourceManager.GetString("ribCaptionAttachmentsButton_Label", resourceCulture);
             }
         }
         
@@ -8249,6 +8276,60 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove all.
+        /// </summary>
+        internal static string TaggingDialog_clearLabel_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog_clearLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Common words on this page.
+        /// </summary>
+        internal static string TaggingDialog_commonGroup_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog_commonGroup.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separate tags with commas.
+        /// </summary>
+        internal static string TaggingDialog_introLabel_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog_introLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recently used.
+        /// </summary>
+        internal static string TaggingDialog_recentGroup_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog_recentGroup.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page Tags.
+        /// </summary>
+        internal static string TaggingDialog_tagLabel_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog_tagLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page Tags.
+        /// </summary>
+        internal static string TaggingDialog_Text {
+            get {
+                return ResourceManager.GetString("TaggingDialog.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Task {
@@ -8662,6 +8743,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string word_Add {
+            get {
+                return ResourceManager.GetString("word_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brightness.
         /// </summary>
         internal static string word_Brightness {
@@ -8838,6 +8928,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string word_Stylize {
             get {
                 return ResourceManager.GetString("word_Stylize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestions.
+        /// </summary>
+        internal static string word_Suggestions {
+            get {
+                return ResourceManager.GetString("word_Suggestions", resourceCulture);
             }
         }
         
