@@ -299,7 +299,9 @@ namespace River.OneMoreAddIn.Commands
 				case 51: retValue = (":two: "); break;              // two
 				case 59: retValue = (":arrow_right: "); break;                // agenda
 				case 64: retValue = (":star: "); break;             // custom 1
-				case 70: retValue = (":one: "); break;				// one
+				case 70: retValue = (":one: "); break;              // one
+				case 116: retValue = (":busts_in_silhouette: "); break;            // busts_in_silhouette																	
+				case 117: retValue = (":notebook: "); break;            // notebook																	
 				case 118: retValue = (":mailbox: "); break;        // contact
 				case 121: retValue = (":musical_note: "); break;   // music to listen to
 				case 131: retValue = (":secret: "); break;			// password
