@@ -55,6 +55,9 @@ namespace River.OneMoreAddIn
 		public async Task BreakingCmd(IRibbonControl control)
 			=> await factory.Run<BreakingCommand>();
 
+		public async Task CalendarCmd(IRibbonControl control)
+			=> await factory.Run<CalendarCommand>();
+
 		public async Task ChangePageColorCmd(IRibbonControl control)
 			=> await factory.Run<ChangePageColorCommand>();
 
@@ -130,8 +133,8 @@ namespace River.OneMoreAddIn
 		public async Task GotoFavoriteCmd(IRibbonControl control)
 			=> await factory.Run<GotoFavoriteCommand>(control.Tag); //tag=pageid
 
-		public async Task ImportOutlookTasksCmd(IRibbonControl control)
-			=> await factory.Run<ImportOutlookTasksCommand>();
+//		public async Task ImportOutlookTasksCmd(IRibbonControl control)
+//			=> await factory.Run<ImportOutlookTasksCommand>();
 
 		public async Task IncreaseFontSizeCmd(IRibbonControl control)
 			=> await factory.Run<AlterSizeCommand>(1);

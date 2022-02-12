@@ -442,7 +442,7 @@ OneNote will close automatically</value>
   </data>
   <data name="ribCalendarButton_Label" xml:space="preserve">
     <value>Calendar</value>
-    <comment>Ribbon OneMore menu item, snippets</comment>
+    <comment>Ribbon OneMore-Calendar command</comment>
   </data>
   <data name="Calculator_ErrInvalidCellRange" xml:space="preserve">
     <value>Cell range must be within one column or within one row</value>
@@ -3667,30 +3667,6 @@ Deferred</value>
     <value>The required Office product is not installed</value>
     <comment>label</comment>
   </data>
-  <data name="ShowMyDialog.Text" xml:space="preserve">
-    <value>Generate MoM</value>
-    <comment>dialog title</comment>
-  </data>
-  <data name="ribShowMyButton_Label" xml:space="preserve">
-    <value>Generate MoMs</value>
-    <comment>Ribbon OneMore menu item</comment>
-  </data>
-  <data name="ribShowMyButton_Screentip" xml:space="preserve">
-    <value>Generate minutes and manage associated data (Strg + Umschalt + Alt + C)</value>
-    <comment>tip</comment>
-  </data>
-  <data name="TemplateDialog.Text" xml:space="preserve">
-    <value>Generate template</value>
-    <comment>dialog title</comment>
-  </data>
-  <data name="ribTemplateButton_Label" xml:space="preserve">
-    <value>Generate template</value>
-    <comment>Ribbon OneMore menu item</comment>
-  </data>
-  <data name="ribTemplateButton_Screentip" xml:space="preserve">
-    <value>Generate template and manage associated data (Strg + Umschalt + Alt + C)</value>
-    <comment>tip</comment>
-  </data>
   <data name="FolderClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\folderclose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -3789,5 +3765,17 @@ Deferred</value>
   <data name="ImportOutlookTasksDialog_reset" xml:space="preserve">
     <value>Reset {0} orphaned task(s)</value>
     <comment>message box</comment>
+  </data>
+  <data name="ExportDialog_underBox.Text" xml:space="preserve">
+    <value>Replace spaces in the file name with underscores</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ribFileMenu_Label" xml:space="preserve">
+    <value>File</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribInsertCalendarButton_Label" xml:space="preserve">
+    <value>Calendar</value>
+    <comment>ribbon button</comment>
   </data>
 </root>

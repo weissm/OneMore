@@ -13,7 +13,10 @@ run once on the machine to configure Registry settings:
 
 # CmdletBinding adds -Verbose functionality, SupportsShouldProcess adds -WhatIf
 [CmdletBinding(SupportsShouldProcess = $true)]
-param ([int] $configbits)
+param (
+    [int] $configbits = 64,
+    [switch] $both
+    )
 
 Begin
 {
@@ -22,6 +25,12 @@ Begin
 
     function FindVisualStudio
     {
+        if ((Get-Command devenv) -ne $null)
+        {
+            $script:devenv = (Get-Command devenv).Source
+            return $true
+        }
+
         $0 = 'C:\Program Files\Microsoft Visual Studio\2022'
         if (FindVS $0) { return $true }
 
@@ -143,21 +152,19 @@ Process
 {
     Push-Location OneMoreSetup
     $script:vdproj = Resolve-Path .\OneMoreSetup.vdproj
-
+    
     if (FindVisualStudio)
     {
         PreserveVdproj
 
-        if ($configbits)
-        {
-            Configure $configbits
-            Build $configbits
-        }
-        else
+        if ($configbits -eq 86 -or $both)
         {
             Configure 86
             Build 86
+        }
 
+        if ($configBits -eq 64 -or $both)
+        {
             Configure 64
             Build 64
         }
