@@ -190,7 +190,7 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				image = await DownloadImage(href);
+				image = await DownloadImage(href).ConfigureAwait(false);
 			}
 			catch (Exception exc)
 			{
@@ -259,18 +259,15 @@ namespace River.OneMoreAddIn.Commands
 			}
 
 			var client = HttpClientFactory.Create();
-
+				
 			try
 			{
-				using (var source = new CancellationTokenSource(TimeSpan.FromSeconds(10)))
-				{
-					using (var response = await client.GetAsync(new Uri(url, UriKind.Absolute), source.Token))
+					using (var response = await client.GetStreamAsync(new Uri(url, UriKind.Absolute)).ConfigureAwait(false))
 					{
-						if (response.IsSuccessStatusCode)
 						{
 							using (var stream = new MemoryStream())
 							{
-								await response.Content.CopyToAsync(stream);
+								await response.CopyToAsync(stream).ConfigureAwait(false);
 
 								var detector = new ImageDetector();
 								if (detector.GetSignature(stream) != ImageSignature.Unknown)
@@ -286,7 +283,6 @@ namespace River.OneMoreAddIn.Commands
 								}
 							}
 						}
-					}
 				}
 			}
 			catch (TaskCanceledException exc)
