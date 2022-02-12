@@ -83,7 +83,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
+		public XElement Root { get; set; }
 
 
 		/// <summary>
