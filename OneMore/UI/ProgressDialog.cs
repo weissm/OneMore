@@ -118,11 +118,11 @@ namespace River.OneMoreAddIn.UI
 
 			if (NeedsLocalizing())
 			{
-				Text = Resx.ProgressDialog_Text;
+				Text = Resx.ProgramName;
 
 				Localize(new string[]
 				{
-					"cancelButton"
+					"cancelButton=word_Cancel"
 				});
 			}
 		}

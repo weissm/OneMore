@@ -46,7 +46,7 @@ namespace River.OneMoreAddIn.Settings
 				Localize(new string[]
 				{
 					"introLabel",
-					"optionsBox",
+					"optionsBox=word_Options",
 					"shortcutsBox",
 					"sortButton",
 					"upButton",
@@ -55,7 +55,7 @@ namespace River.OneMoreAddIn.Settings
 					"deleteButton"
 				});
 
-				nameColumn.HeaderText = Resx.FavoritesSheet_nameColumn_HeaderText;
+				nameColumn.HeaderText = Resx.word_Name;
 				locationColumn.HeaderText = Resx.FavoritesSheet_locationColumn_HeaderText;
 			}
 
