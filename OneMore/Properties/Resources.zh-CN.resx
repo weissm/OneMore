@@ -701,10 +701,6 @@ OneNote 将自动关闭</value>
     <value>修改日期</value>
     <comment>radio</comment>
   </data>
-  <data name="SortDialog_nameButton.Text" xml:space="preserve">
-    <value>名称</value>
-    <comment>radio</comment>
-  </data>
   <data name="SortDialog_pinNotesBox.Text" xml:space="preserve">
     <value>将注释固定在顶部和
 底部快速注释</value>
@@ -1106,14 +1102,6 @@ OneNote 将自动关闭</value>
     <value>大写</value>
     <comment>Context menu</comment>
   </data>
-  <data name="ProgressDialog.Text" xml:space="preserve">
-    <value>OneMore</value>
-    <comment>dialog title</comment>
-  </data>
-  <data name="ProgressDialog_cancelButton.Text" xml:space="preserve">
-    <value>取消</value>
-    <comment>cancel button</comment>
-  </data>
   <data name="ribRemoveCitationsButton_Label" xml:space="preserve">
     <value>删除粘贴的引文</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -1181,14 +1169,6 @@ OneNote 将自动关闭</value>
   <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SearchEngineDialog_cancelButton.Text" xml:space="preserve">
-    <value>取消</value>
-    <comment>cancel button</comment>
-  </data>
-  <data name="SearchEngineDialog_deleteButton.Text" xml:space="preserve">
-    <value>删除</value>
-    <comment>delete button</comment>
-  </data>
   <data name="SearchEngineDialog_deleteLabel.Text" xml:space="preserve">
     <value>删除：</value>
     <comment>delete label</comment>
@@ -1208,14 +1188,6 @@ OneNote 将自动关闭</value>
   <data name="SearchEngineDialog_introLabel.Text" xml:space="preserve">
     <value>网址格式必须包含字符串替换令牌，例如＆q = {0}</value>
     <comment>intro label</comment>
-  </data>
-  <data name="SearchEngineDialog_nameColumn.HeaderText" xml:space="preserve">
-    <value>名称</value>
-    <comment>name col</comment>
-  </data>
-  <data name="SearchEngineDialog_okButton.Text" xml:space="preserve">
-    <value>好</value>
-    <comment>ok button</comment>
   </data>
   <data name="SearchEngineDialog_refreshButton.Text" xml:space="preserve">
     <value>刷新图标</value>
@@ -1367,10 +1339,6 @@ OneNote 将自动关闭</value>
     <value>无效</value>
     <comment>label</comment>
   </data>
-  <data name="FormulaDialog_status_OK" xml:space="preserve">
-    <value>好</value>
-    <comment>label</comment>
-  </data>
   <data name="Calculator_ErrClosingParenExpected" xml:space="preserve">
     <value>预计要加上圆括号</value>
     <comment>error</comment>
@@ -1519,10 +1487,6 @@ OneNote 将自动关闭</value>
     <value>小数位数：</value>
     <comment>label</comment>
   </data>
-  <data name="SearchDialog_copyButton.Text" xml:space="preserve">
-    <value>复制</value>
-    <comment>button</comment>
-  </data>
   <data name="SearchDialog_findLabel.Text" xml:space="preserve">
     <value>找：</value>
     <comment>label</comment>
@@ -1530,10 +1494,6 @@ OneNote 将自动关闭</value>
   <data name="SearchDialog_introLabel.Text" xml:space="preserve">
     <value>输入一个或多个关键字，“带引号的短语”，并使用大写的AND和OR</value>
     <comment>intro label</comment>
-  </data>
-  <data name="SearchDialog_moveButton.Text" xml:space="preserve">
-    <value>移动</value>
-    <comment>button</comment>
   </data>
   <data name="SearchDialog_Title" xml:space="preserve">
     <value>搜索和移动/复制</value>
@@ -1771,10 +1731,6 @@ OneNote 将自动关闭</value>
     <value>默认值（黑色）</value>
     <comment>menu item</comment>
   </data>
-  <data name="StyleDialog_deleteButton.Text" xml:space="preserve">
-    <value>删除</value>
-    <comment>button</comment>
-  </data>
   <data name="StyleDialog_FileMenu.Text" xml:space="preserve">
     <value>文件</value>
     <comment>menu item</comment>
@@ -1861,10 +1817,6 @@ OneNote 将自动关闭</value>
     <value>亮：</value>
     <comment>radio</comment>
   </data>
-  <data name="SearchEngineSheet_deleteButton.Text" xml:space="preserve">
-    <value>删除</value>
-    <comment>button</comment>
-  </data>
   <data name="SearchEngineSheet_deleteLabel.Text" xml:space="preserve">
     <value>删除：</value>
     <comment>label</comment>
@@ -1876,10 +1828,6 @@ OneNote 将自动关闭</value>
   <data name="SearchEngineSheet_introLabel.Text" xml:space="preserve">
     <value>网址格式必须包含字符串替换令牌，例如＆q={0}</value>
     <comment>label</comment>
-  </data>
-  <data name="SearchEngineSheet_refreshButton.Text" xml:space="preserve">
-    <value>刷新</value>
-    <comment>button</comment>
   </data>
   <data name="SearchEngineSheet_upButton.Text" xml:space="preserve">
     <value>提升</value>
@@ -1923,17 +1871,9 @@ OneNote 将自动关闭</value>
     <value>全部清除</value>
     <comment>clear tags link label</comment>
   </data>
-  <data name="TaggedDialog_copyButton.Text" xml:space="preserve">
-    <value>复制</value>
-    <comment>button</comment>
-  </data>
   <data name="TaggedDialog_indexButton.Text" xml:space="preserve">
     <value>指数</value>
     <comment>index button</comment>
-  </data>
-  <data name="TaggedDialog_moveButton.Text" xml:space="preserve">
-    <value>移动</value>
-    <comment>button</comment>
   </data>
   <data name="TaggedDialog_scopeBox.Items" xml:space="preserve">
     <value>在所有笔记本中
@@ -2070,12 +2010,8 @@ ISO-code then comma then language name</comment>
     <value>OneMore XML</value>
     <comment>dialog title</comment>
   </data>
-  <data name="ShowXmlDialog_currNotebookButton.Text" xml:space="preserve">
-    <value>当前笔记本</value>
-    <comment>hier button</comment>
-  </data>
   <data name="ShowXmlDialog_currSectionButton.Text" xml:space="preserve">
-    <value>当前部分</value>
+    <value>有页面的部分</value>
     <comment>hier button</comment>
   </data>
   <data name="ShowXmlDialog_hideBox.Text" xml:space="preserve">
@@ -2089,10 +2025,6 @@ ISO-code then comma then language name</comment>
   <data name="ShowXmlDialog_hierTab.Text" xml:space="preserve">
     <value>层次结构</value>
     <comment>tab</comment>
-  </data>
-  <data name="ShowXmlDialog_notebooksHierButton.Text" xml:space="preserve">
-    <value>笔记本电脑</value>
-    <comment>hier button</comment>
   </data>
   <data name="ShowXmlDialog_okButton.Text" xml:space="preserve">
     <value>更新页面</value>
@@ -2117,10 +2049,6 @@ ISO-code then comma then language name</comment>
   <data name="ShowXmlDialog_pageTab.Text" xml:space="preserve">
     <value>页</value>
     <comment>tab</comment>
-  </data>
-  <data name="ShowXmlDialog_sectionsHierButton.Text" xml:space="preserve">
-    <value>栏目</value>
-    <comment>hier button</comment>
   </data>
   <data name="ShowXmlDialog_selectButton.Text" xml:space="preserve">
     <value>全选</value>
@@ -2198,20 +2126,12 @@ ISO-code then comma then language name</comment>
     <value>位置</value>
     <comment>settings table column header</comment>
   </data>
-  <data name="FavoritesSheet_nameColumn.HeaderText" xml:space="preserve">
-    <value>名称</value>
-    <comment>settings table column header</comment>
-  </data>
   <data name="FavoritesSheet_Text" xml:space="preserve">
     <value>管理收藏夹</value>
     <comment>settings</comment>
   </data>
   <data name="SettingsDialog_favoritesNode.Text" xml:space="preserve">
     <value>收藏夹</value>
-    <comment>settings</comment>
-  </data>
-  <data name="FavoritesSheet_optionsBox.Text" xml:space="preserve">
-    <value>选件</value>
     <comment>settings</comment>
   </data>
   <data name="FavoritesSheet_shortcutsBox.Text" xml:space="preserve">
@@ -2374,41 +2294,17 @@ ISO-code then comma then language name</comment>
     <value>管理我的插件</value>
     <comment>sheet title</comment>
   </data>
-  <data name="PluginsSheet_cmdColumn.HeaderText" xml:space="preserve">
-    <value>命令</value>
-    <comment>plugins sheet columns</comment>
-  </data>
   <data name="PluginsSheet_ConfirmDelete" xml:space="preserve">
     <value>删除插件“ {0}”</value>
     <comment>question</comment>
-  </data>
-  <data name="PluginsSheet_nameColumn.HeaderText" xml:space="preserve">
-    <value>名称</value>
-    <comment>plugins sheet column</comment>
-  </data>
-  <data name="SnippetsSheet_nameColumn.HeaderText" xml:space="preserve">
-    <value>名称</value>
-    <comment>snippets sheet column</comment>
   </data>
   <data name="SettingsDialog_pluginsNode.Text" xml:space="preserve">
     <value>插件</value>
     <comment>tree node</comment>
   </data>
-  <data name="PluginsSheet_cancelButton.Text" xml:space="preserve">
-    <value>取消</value>
-    <comment>button</comment>
-  </data>
-  <data name="PluginsSheet_deleteLabel.Text" xml:space="preserve">
-    <value>删除</value>
-    <comment>toolstrip label</comment>
-  </data>
   <data name="PluginsSheet_introLabel.Text" xml:space="preserve">
     <value>管理我的插件</value>
     <comment>label</comment>
-  </data>
-  <data name="PluginsSheet_okButton.Text" xml:space="preserve">
-    <value>好</value>
-    <comment>button</comment>
   </data>
   <data name="PluginDialog_newItem" xml:space="preserve">
     <value>（新）</value>
@@ -2421,10 +2317,6 @@ ISO-code then comma then language name</comment>
   <data name="PluginDialog_editText" xml:space="preserve">
     <value>编辑插件</value>
     <comment>dialog title</comment>
-  </data>
-  <data name="PluginDialog_nameLabel.Text" xml:space="preserve">
-    <value>名称</value>
-    <comment>label</comment>
   </data>
   <data name="ribBreakingButton_Label" xml:space="preserve">
     <value>更改句子间距</value>
@@ -2873,22 +2765,6 @@ ISO-code then comma then language name</comment>
     <value>加载样式</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="ChangePageColorDialog_applyBox" xml:space="preserve">
-    <value>将样式主题应用到此页面</value>
-    <comment>checkbox</comment>
-  </data>
-  <data name="ChangePageColorDialog_currentLabel" xml:space="preserve">
-    <value>当前主题：</value>
-    <comment>label</comment>
-  </data>
-  <data name="ChangePageColorDialog_loadLink" xml:space="preserve">
-    <value>加载样式主题</value>
-    <comment>hyperlink</comment>
-  </data>
-  <data name="ChangePageColorDialog_themeIntroLabel" xml:space="preserve">
-    <value>或者，加载预定义的样式主题之一或自定义您自己的主题，以便所有内容都有足够的对比度可见。</value>
-    <comment>label</comment>
-  </data>
   <data name="StyleDialog_ThemeText" xml:space="preserve">
     <value>{0} 样式</value>
     <comment>dialog title</comment>
@@ -2916,10 +2792,6 @@ ISO-code then comma then language name</comment>
   <data name="ChangePageColorDialog.Text" xml:space="preserve">
     <value>更改页面主题</value>
     <comment>dialog title</comment>
-  </data>
-  <data name="PluginDialog_cmdLabel.Text" xml:space="preserve">
-    <value>命令</value>
-    <comment>label</comment>
   </data>
   <data name="ExportDialog_formatBox.Text" xml:space="preserve">
     <value>HTML 文件 (*.htm)
@@ -3114,21 +2986,9 @@ OneNote 文件 (*.one)</value>
     <value>此页面上没有标题</value>
     <comment>message</comment>
   </data>
-  <data name="InsertTocCommand_Refresh" xml:space="preserve">
-    <value>刷新</value>
-    <comment>refresh link</comment>
-  </data>
-  <data name="EmbedSubpageCommand_Refresh" xml:space="preserve">
-    <value>刷新</value>
-    <comment>link</comment>
-  </data>
   <data name="LinkedReferencesCommand_Title" xml:space="preserve">
     <value>链接参考</value>
     <comment>title text</comment>
-  </data>
-  <data name="AddFootnoteCommand_Refresh" xml:space="preserve">
-    <value>刷新</value>
-    <comment>refresh link</comment>
   </data>
   <data name="ribInsertTimerButton_Label" xml:space="preserve">
     <value>插入定时器</value>
@@ -3234,10 +3094,6 @@ OneNote 文件 (*.one)</value>
     <value>默认是对当前列表进行排序或仅对顶级项目符号列表进行排序</value>
     <comment>intro label</comment>
   </data>
-  <data name="SortListDialog_optionsBox.Text" xml:space="preserve">
-    <value>选项</value>
-    <comment>group box</comment>
-  </data>
   <data name="SortListDialog_thisListButton.Text" xml:space="preserve">
     <value>仅对当前列表排序</value>
     <comment>radio</comment>
@@ -3278,10 +3134,6 @@ OneNote 文件 (*.one)</value>
     <value>提醒</value>
     <comment>dialog title</comment>
   </data>
-  <data name="RemindDialog_completedLabel.Text" xml:space="preserve">
-    <value>完全的</value>
-    <comment>label</comment>
-  </data>
   <data name="RemindDialog_dueDateLabel.Text" xml:space="preserve">
     <value>到期日</value>
     <comment>label</comment>
@@ -3304,10 +3156,6 @@ OneNote 文件 (*.one)</value>
     <value>开始日期</value>
     <comment>label</comment>
   </data>
-  <data name="RemindDialog_startedLabel.Text" xml:space="preserve">
-    <value>开始</value>
-    <comment>label</comment>
-  </data>
   <data name="RemindDialog_statusBox.Text" xml:space="preserve">
     <value>没有开始
 进行中
@@ -3315,10 +3163,6 @@ OneNote 文件 (*.one)</value>
 等着别人
 延期</value>
     <comment>combobox</comment>
-  </data>
-  <data name="RemindDialog_statusLabel.Text" xml:space="preserve">
-    <value>地位</value>
-    <comment>label</comment>
   </data>
   <data name="RemindDialog_subjectLabel.Text" xml:space="preserve">
     <value>主题</value>
@@ -3478,10 +3322,6 @@ OneNote 文件 (*.one)</value>
     <value>延后至 {0}</value>
     <comment>report</comment>
   </data>
-  <data name="RemindDialog_optionsBox.Text" xml:space="preserve">
-    <value>选项</value>
-    <comment>group box</comment>
-  </data>
   <data name="RemindDialog_snoozeBox.Items" xml:space="preserve">
     <value>不要打盹
 5分钟
@@ -3615,10 +3455,6 @@ OneNote 文件 (*.one)</value>
     <value>％ 完全的</value>
     <comment>report</comment>
   </data>
-  <data name="OutlookTaskReport_Status" xml:space="preserve">
-    <value>地位</value>
-    <comment>report</comment>
-  </data>
   <data name="OutlookTaskReport_statuses" xml:space="preserve">
     <value>没有开始
 进行中
@@ -3710,10 +3546,6 @@ OneNote 文件 (*.one)</value>
   <data name="ribSortSectionPagesButton_Label" xml:space="preserve">
     <value>对部分中的页面进行排序</value>
     <comment>ribbon/context menu</comment>
-  </data>
-  <data name="KeyboardSheet_cmdColumn.HeaderText" xml:space="preserve">
-    <value>命令</value>
-    <comment>gridview column</comment>
   </data>
   <data name="KeyboardSheet_introLabel.Text" xml:space="preserve">
     <value>管理我的自定义键盘快捷键。选择一个命令并按下一个按键序列。</value>
@@ -3813,10 +3645,6 @@ OneNote 文件 (*.one)</value>
     <value>图片大小</value>
     <comment>label</comment>
   </data>
-  <data name="ResizeImagesDialog_qualityLabel.Text" xml:space="preserve">
-    <value>质量</value>
-    <comment>label</comment>
-  </data>
   <data name="word_Quality" xml:space="preserve">
     <value>质量</value>
   </data>
@@ -3836,9 +3664,6 @@ OneNote 文件 (*.one)</value>
   </data>
   <data name="word_Storage" xml:space="preserve">
     <value>贮存</value>
-  </data>
-  <data name="sw" xml:space="preserve">
-    <value />
   </data>
   <data name="word_Saturation" xml:space="preserve">
     <value>饱和</value>
@@ -3906,5 +3731,59 @@ OneNote 文件 (*.one)</value>
   </data>
   <data name="word_Suggestions" xml:space="preserve">
     <value>建议</value>
+  </data>
+  <data name="word_Command" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="word_Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="word_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="word_Move" xml:space="preserve">
+    <value>移动</value>
+  </data>
+  <data name="ChangePageColorDialog_themeIntroLabel.Text" xml:space="preserve">
+    <value>（可选），加载其中一个预定义的样式主题或自定义自己的主题，因此所有内容都有足够的对比度可见。</value>
+    <comment>label</comment>
+  </data>
+  <data name="ChangePageColorDialog_applyBox.Text" xml:space="preserve">
+    <value>将样式主题应用于此页面</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ChangePageColorDialog_currentLabel.Text" xml:space="preserve">
+    <value>当前主题：</value>
+    <comment>label</comment>
+  </data>
+  <data name="ChangePageColorDialog_loadLink.Text" xml:space="preserve">
+    <value>加载样式主题</value>
+    <comment>hyperlink</comment>
+  </data>
+  <data name="ChangePageColorDialog_customLink.Text" xml:space="preserve">
+    <value>选择了定制颜色</value>
+    <comment>linklabel</comment>
+  </data>
+  <data name="ShowXmlDialog_notebooksButton.Text" xml:space="preserve">
+    <value>笔记本</value>
+    <comment>hier button</comment>
+  </data>
+  <data name="ShowXmlDialog_sectionButton.Text" xml:space="preserve">
+    <value>有页面的笔记本</value>
+    <comment>hier button</comment>
+  </data>
+  <data name="ShowXmlDialog_notebookButton.Text" xml:space="preserve">
+    <value>有部分的笔记本</value>
+    <comment>hier button</comment>
+  </data>
+  <data name="ShowXmlDialog_manualLabel.Text" xml:space="preserve">
+    <value>手动对象</value>
+    <comment>label</comment>
+  </data>
+  <data name="word_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="word_Status" xml:space="preserve">
+    <value>地位</value>
   </data>
 </root>

@@ -2,6 +2,11 @@
 
 A OneNote add-in with powerful yet simple and effective features.
 
+## 💾 How do I Install OneMore?
+There are [full instructions here](#install). 
+
+## 💁 Everything You Wanted to Know...
+
 See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some pleasant reading material...
 
 * Integrated with the OneNote ribbon, [context menus](../../wiki#extended-context-menus), and [keyboard shortcuts](../../wiki#keys) for easy access
@@ -20,8 +25,11 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 ### The new Calendar app (BETA)
 ![Calendar](../../wiki/images/Calendar.png)
 
+## Languages
+OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, German, Polish, Portuguese, and Spanish*. Please let me know if you'd like it translated to another language. I use my [ResxTranslator](https://github.com/stevencohn/ResxTranslator) program to automate the translations but can also override inaccuracies of specific words and phrases. If you think a translation is not correct, again please let me know.
+
 <a name="features"></a>
-## Features (144)
+## Features (146)
 
 [Clean commands](../../wiki/Clean-Commands) (11)
 
@@ -92,8 +100,9 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 * Remove numbering from sections
 * Remove numbering from pages
 
-[Page Commands](../../wiki/Page-Commands) (10)
+[Page Commands](../../wiki/Page-Commands) (11)
 * Arrange containers vertically or in columns
+* Add caption to selected file attachments on the page
 * Add special icon to the page title, also appears in page hierarchy
 * Expand or Collapse indented outlines, save and restore outlining
 * Fit background grid spacing to most common text size
@@ -244,16 +253,39 @@ Tested recently with:
 * [MarkdownDeep](https://github.com/toptensoftware/markdowndeep) - DLL in external folder
    * Transforms markdown to HTML when importing md files
 
-
-### How to Install OneMore
+<a name="install"></a>
+## How to Install OneMore
 
 1. Close OneNote if it is currently running (See below if you need to install OneNote)
 2. Download the [latest installer from here](https://github.com/stevencohn/OneMore/releases/latest)
-3. Right-click the downloaded installer msi and choose Properties, then tick the Unblock box and click OK
-4. Run the installer
-   - If OneNote is installed for _all users_ then you must install OneMore for _all users_ as well
+   - Use the x86 installer only if you are running on a 32-bit Windows machine; it has nothing to do
+     with the bitness of Office itself.
+   - Use the x64 installer when running on a 64-bit Windows machine for either 32-bit or 64-bit Office.
+4. Right-click the downloaded installer msi and choose Properties, then tick the Unblock box and click OK
+5. Run the installer
+   - If you're currently logged in as a user with admin rights and this is the account with which you will 
+     use OneMore then you will be able to start OneNote immediately.
+   - Other users on the system will experience a slight delay the first time they log in after OneMore
+     is installed while settings are applied to their accounts. This only occurs once.
+   - If you're currently logged in as a user without admin rights, you can install OneMore if you have
+     the user name and password of an account with admin rights. See below for further instructions.
 5. Run OneNote and enjoy
 
+#### Install from a normal user account
+The OneMore installer requires admin rights to complete configuration and update the Windows Registry.
+If you have the user name and password of an account with admin rights, you can run the OneMore installer
+from your current account using this command entered from a console window:
+
+    runas /user:<username> "msiexec.exe /i <path-to-installer>"
+
+where &lt;username&gt; is the user name of an account with admin rights and
+&lt;path-to-installer&gt; is the full path to the OneMore installer .msi file
+
+You wil be prompted for the password of the admin user. The installation will continue.
+
+```diff
+- You must sign out and then sign in again before you will see OneMore in the OneNote ribbon.
+```
 
 ### How to Upgrade OneMore
 
@@ -267,9 +299,9 @@ the new installer will simply overwrite the old files and _upgrade_ OneMore. Not
 download the installer, you will need to unblock it by opening its Properties dialog and clicking
 the _Unblock_ checkbox.
 
-### How to Install OneNote
+## How to Install OneNote
 
-Microsoft has been pushing people to use the OneNote app and OneNote online, which suck in my opinion, and have removed OneNote from the Office 2019 installer. But you can still install it after installing Office or even install it standalone!
+OneNote can be installed after installing Office or even installed standalone without Office at all.
 
 1. Optionally install Office - do not run the Setup.exe; instead, run Office\Setup64.exe
    - Download OfficeSetup.exe [from here](https://support.microsoft.com/en-us/office/install-or-reinstall-onenote-for-windows-c08068d8-b517-4464-9ff2-132cb9c45c08)
@@ -279,9 +311,13 @@ Microsoft has been pushing people to use the OneNote app and OneNote online, whi
    - The standalone OneNote 64-bit installer is [here](http://www.onenote.com/download/win32/x64/en-US)
    - The standalone OneNote 32-bit installer is [here](http://www.onenote.com/download/win32/x86/en-US)
 
+Note that Microsoft has changed its OneNote strategy. Instead of promoting the OneNote for Windows 10 app,
+which sucks in my opinion, they are now working on combining the best features from that app into a new
+desktop edition, hopefully to be released in 2022.
+
 ---
 
-### Developing OneMore
+## Developing OneMore
 
 See the [Developer Notes](../../wiki/~-Developer-Notes) page in the Wiki where I keep a list of 
 technical references and information regarding developing and debugging this OneNote add-in.
