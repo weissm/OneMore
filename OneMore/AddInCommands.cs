@@ -141,6 +141,9 @@ namespace River.OneMoreAddIn
 		public async Task CopyDownCmd(IRibbonControl control)
 			=> await factory.Run<FillCellsCommand>(FillCells.CopyDown);
 
+		public async Task CrawlWebPageCmd(IRibbonControl control)
+			=> await factory.Run<CrawlWebPageCommand>();
+
 		public async Task CropImageCmd(IRibbonControl control)
 			=> await factory.Run<CropImageCommand>();
 
@@ -351,6 +354,11 @@ namespace River.OneMoreAddIn
 		[Command("ribPasteRtfButton_Label", Keys.Control | Keys.Alt | Keys.V)]
 		public async Task PasteRtfCmd(IRibbonControl control)
 			=> await factory.Run<PasteRtfCommand>();
+
+
+		[Command("ribPasteTextButton_Label", Keys.Control | Keys.Shift | Keys.V)]
+		public async Task PasteTextCmd(IRibbonControl control)
+			=> await factory.Run<PasteTextCommand>();
 
 
 		public async Task PronunciateCmd(IRibbonControl control)

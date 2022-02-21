@@ -1895,7 +1895,7 @@ Dans cette section</value>
     <comment>dialog title</comment>
   </data>
   <data name="ribSearchMenu_Label" xml:space="preserve">
-    <value>Chercher</value>
+    <value>Sauti et tag</value>
     <comment>ribbon menu item</comment>
   </data>
   <data name="ribTaggedButton_Label" xml:space="preserve">
@@ -2015,10 +2015,6 @@ ISO-code then comma then language name</comment>
     <value>OneMore XML</value>
     <comment>dialog title</comment>
   </data>
-  <data name="ShowXmlDialog_currSectionButton.Text" xml:space="preserve">
-    <value>Section avec pages</value>
-    <comment>hier button</comment>
-  </data>
   <data name="ShowXmlDialog_hideBox.Text" xml:space="preserve">
     <value>Masquer les attributs modifiés par (décocher pour modifier la page)</value>
     <comment>checkbox</comment>
@@ -2026,10 +2022,6 @@ ISO-code then comma then language name</comment>
   <data name="ShowXmlDialog_hideLFBox.Text" xml:space="preserve">
     <value>Supprimer LF de CDATA</value>
     <comment>checkbox</comment>
-  </data>
-  <data name="ShowXmlDialog_hierTab.Text" xml:space="preserve">
-    <value>Hiérarchie</value>
-    <comment>tab</comment>
   </data>
   <data name="ShowXmlDialog_okButton.Text" xml:space="preserve">
     <value>Mettre à jour la page</value>
@@ -2046,10 +2038,6 @@ ISO-code then comma then language name</comment>
   <data name="ShowXmlDialog_pagePathLabel.Text" xml:space="preserve">
     <value>Chemin:</value>
     <comment>label</comment>
-  </data>
-  <data name="ShowXmlDialog_pagesHierButton.Text" xml:space="preserve">
-    <value>Des pages</value>
-    <comment>hier button</comment>
   </data>
   <data name="ShowXmlDialog_pageTab.Text" xml:space="preserve">
     <value>Page</value>
@@ -3508,7 +3496,7 @@ Différé</value>
     <comment>message box</comment>
   </data>
   <data name="ExportDialog_underBox.Text" xml:space="preserve">
-    <value>Remplacer les espaces dans le nom du fichier par des traits de soulignement</value>
+    <value>Remplacez les caractères spéciaux dans le nom du fichier avec des traits de soulignement</value>
     <comment>checkbox</comment>
   </data>
   <data name="ribFileMenu_Label" xml:space="preserve">
@@ -3768,18 +3756,6 @@ Polaroïd</value>
     <value>A choisi une couleur personnalisée</value>
     <comment>linklabel</comment>
   </data>
-  <data name="ShowXmlDialog_notebooksButton.Text" xml:space="preserve">
-    <value>Des cahiers</value>
-    <comment>hier button</comment>
-  </data>
-  <data name="ShowXmlDialog_sectionButton.Text" xml:space="preserve">
-    <value>Notebook avec pages</value>
-    <comment>hier button</comment>
-  </data>
-  <data name="ShowXmlDialog_notebookButton.Text" xml:space="preserve">
-    <value>Cahier avec sections</value>
-    <comment>hier button</comment>
-  </data>
   <data name="ShowXmlDialog_manualLabel.Text" xml:space="preserve">
     <value>Objecteur manuel</value>
     <comment>label</comment>
@@ -3789,5 +3765,50 @@ Polaroïd</value>
   </data>
   <data name="word_Status" xml:space="preserve">
     <value>Statut</value>
+  </data>
+  <data name="ribCrawlWebPageButton_Label" xml:space="preserve">
+    <value>Hyperliens d'importation</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="CrawlWebPageDialog_introBox.Text" xml:space="preserve">
+    <value>Sélectionnez Liens pour importer en tant que sous-pages. Celles-ci seront reliées à partir de cette page.</value>
+    <comment>label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_Text" xml:space="preserve">
+    <value>Importer des sous-pages Web</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="CrawlWebCommand_NoHyperlinks" xml:space="preserve">
+    <value>Aucun lien hypertexte trouvé dans la plage</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ShowXmlDialog_sectionTab.Text" xml:space="preserve">
+    <value>Section</value>
+    <comment>tab</comment>
+  </data>
+  <data name="ShowXmlDialog_nbPagesTab.Text" xml:space="preserve">
+    <value>Notebook avec pages</value>
+    <comment>tab</comment>
+  </data>
+  <data name="ShowXmlDialog_manualTab.Text" xml:space="preserve">
+    <value>Recherche manuelle</value>
+    <comment>tab</comment>
+  </data>
+  <data name="ShowXmlDialog_nbSectionsTab.Text" xml:space="preserve">
+    <value>Cahier avec sections</value>
+    <comment>tab</comment>
+  </data>
+  <data name="ShowXmlDialog_hidePidBox.Text" xml:space="preserve">
+    <value>Cacher pid</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ShowXmlDialog_notebooksTab.Text" xml:space="preserve">
+    <value>Des cahiers</value>
+    <comment>tab EDIT</comment>
+  </data>
+  <data name="TaggedDialog_opBox.Items" xml:space="preserve">
+    <value>Tout
+Quelconque</value>
+    <comment>listbox</comment>
   </data>
 </root>

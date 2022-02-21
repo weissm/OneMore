@@ -140,6 +140,12 @@
                 getScreentip="GetRibbonScreentip"
                 onAction="PasteRtfCmd"/>
               <button
+                id="ribPasteTextButton"
+                imageMso="PasteAlternative"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="PasteTextCmd"/>
+              <button
                 id="ribSpellCheckButton"
                 imageMso="Spelling"
                 getLabel="GetRibbonLabel"
@@ -218,6 +224,11 @@
                 imageMso="ImportHtmlDocument"
                 getLabel="GetRibbonLabel"
                 onAction="ImportWebCmd"/>
+              <button
+                id="ribCrawlWebPageButton"
+                imageMso="FileNewWebPage"
+                getLabel="GetRibbonLabel"
+                onAction="CrawlWebPageCmd"/>
               <button
                 id="ribExportButton"
                 imageMso="FileSave"
@@ -717,6 +728,14 @@
     </tabs>
   </ribbon>
   <contextMenus>
+    <contextMenu idMso="ContextMenuFileAttachment">
+      <button
+        id="ctxCaptionAttachmentsButton"
+        imageMso="CaptionInsert"
+        getLabel="GetRibbonLabel"
+        onAction="CaptionAttachmentsCmd"
+        insertBeforeMso="FilePrintoutInsert"/>
+    </contextMenu>
     <contextMenu idMso="ContextMenuNotebook">
       <button
         id="ctxArchiveNotebookButton"
