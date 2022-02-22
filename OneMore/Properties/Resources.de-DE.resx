@@ -1114,7 +1114,7 @@ Notizbücher</value>
     <comment>radio button</comment>
   </data>
   <data name="PluginDialog_okButton.Text" xml:space="preserve">
-    <value>Lauf</value>
+    <value>Ausführen</value>
     <comment>ok button</comment>
   </data>
   <data name="PluginDialog_updateRadio.Text" xml:space="preserve">
