@@ -159,6 +159,15 @@
     <Compile Include="Commands\Clean\RemoveSpacingCommand.cs" />
     <Compile Include="Commands\Clean\BreakingCommand.cs" />
     <Compile Include="Commands\Edit\ColorizeCommand.cs" />
+    <Compile Include="Commands\Edit\PasteTextCommand.cs" />
+    <Compile Include="Commands\File\CrawlHyperlink.cs" />
+    <Compile Include="Commands\File\CrawlWebPageCommand.cs" />
+    <Compile Include="Commands\File\CrawlWebPageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\File\CrawlWebPageDialog.Designer.cs">
+      <DependentUpon>CrawlWebPageDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commands\File\EvernoteReader.cs" />
     <Compile Include="Commands\Page\ArrangeContainersCommand.cs" />
     <Compile Include="Commands\File\MarkdownWriter.cs" />
@@ -412,6 +421,7 @@
     <Compile Include="Helpers\Extensions\ImageExtensions.cs" />
     <Compile Include="Helpers\Extensions\ProcessExtensions.cs" />
     <Compile Include="Commands\CommandAttribute.cs" />
+    <Compile Include="Helpers\Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\HttpClientFactory.cs" />
     <Compile Include="Helpers\ImageDetector.cs" />
     <Compile Include="Helpers\Loggable.cs" />
@@ -568,6 +578,7 @@
       <DependentUpon>PluginDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RichTextBoxExtensions.cs" />
+    <Compile Include="UI\SortableBindingList.cs" />
     <Compile Include="UI\TagPickerDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -786,10 +797,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Colorizer\Languages\cpp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Colorizer\Languages\csharp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Colorizer\Languages\css.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Colorizer\Languages\golang.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Colorizer\Languages\html.png">
@@ -816,6 +833,9 @@
     <Content Include="Colorizer\Languages\vb.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Colorizer\Languages\wolfram.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Colorizer\Languages\xml.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -824,6 +844,12 @@
     </Content>
     <Content Include="Commands\Search\x.png" />
     <Content Include="Properties\Emoji\Architecture.png" />
+    <None Include="Colorizer\Languages\golang.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Colorizer\Languages\cpp.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Colorizer\Languages\csharp.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -837,6 +863,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Colorizer\Languages\javascript.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Colorizer\Languages\wolfram.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Colorizer\Languages\sql.json">
@@ -916,9 +945,11 @@
     <None Include="Properties\Images\Locked.png" />
     <Content Include="Properties\Images\Logo.ico" />
     <Content Include="Properties\Images\NewStyle.png" />
+    <Content Include="Properties\Images\Notebook.png" />
     <Content Include="Properties\Images\NotebookMask.png" />
     <Content Include="Properties\Images\Open.png" />
     <Content Include="Properties\Images\Page.png" />
+    <Content Include="Properties\Images\Pages.png" />
     <Content Include="Properties\Images\Refresh.png" />
     <Content Include="Properties\Images\Rename.png" />
     <Content Include="Properties\Images\RenameStyle.png" />
@@ -928,6 +959,7 @@
     <Content Include="Properties\Images\SaveAs.png" />
     <Content Include="Properties\Images\Search.png" />
     <Content Include="Properties\Images\SearchTag.png" />
+    <Content Include="Properties\Images\Section.png" />
     <Content Include="Properties\Images\SectionGroup.png" />
     <Content Include="Properties\Images\SectionMask.png" />
     <Content Include="Properties\Images\SelectAll.png" />
@@ -962,6 +994,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Commands\Extras\TimerWindow.resx">
       <DependentUpon>TimerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\File\CrawlWebPageDialog.resx">
+      <DependentUpon>CrawlWebPageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Commands\File\ImportWebDialog.resx">
       <DependentUpon>ImportWebDialog.cs</DependentUpon>
