@@ -1178,13 +1178,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.38</Version>
+      <Version>1.11.42</Version>
     </PackageReference>
     <PackageReference Include="InputSimulator">
       <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
-      <Version>0.27.0</Version>
+      <Version>0.18.3</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities">
       <Version>2.2.0</Version>
@@ -1196,13 +1196,10 @@
       <Version>2.2.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Web.WebView2">
-      <Version>1.0.1054.31</Version>
+      <Version>1.0.1108.44</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="NGitLab">
-      <Version>6.11.15</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Http">
       <Version>4.3.4</Version>
