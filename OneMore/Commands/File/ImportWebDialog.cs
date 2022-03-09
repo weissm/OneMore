@@ -56,6 +56,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public bool ImportImages => imagesBox.Checked;
 
+		public bool ImportMarkdown => ImportMD.Checked;
 
 		public ImportWebTarget Target
 		{
@@ -98,5 +99,10 @@ namespace River.OneMoreAddIn.Commands
         {
 			System.Diagnostics.Debugger.Launch();
 		}
-    }
+
+        private void ImportMD_CheckedChanged(object sender, EventArgs e)
+        {
+			okButton.Enabled = ImportMD.Checked;
+		}
+	}
 }

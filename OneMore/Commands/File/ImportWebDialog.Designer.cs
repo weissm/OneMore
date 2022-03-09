@@ -39,6 +39,7 @@ namespace River.OneMoreAddIn.Commands
             this.newChildButton = new System.Windows.Forms.RadioButton();
             this.imagesBox = new System.Windows.Forms.CheckBox();
             this.checkBox_EnableDebug = new System.Windows.Forms.CheckBox();
+            this.ImportMD = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // addressLabel
@@ -142,6 +143,18 @@ namespace River.OneMoreAddIn.Commands
             this.checkBox_EnableDebug.UseVisualStyleBackColor = true;
             this.checkBox_EnableDebug.CheckedChanged += new System.EventHandler(this.checkBox_EnableDebug_CheckedChanged);
             // 
+            // ImportMD
+            // 
+            this.ImportMD.AutoSize = true;
+            this.ImportMD.Location = new System.Drawing.Point(386, 90);
+            this.ImportMD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ImportMD.Name = "ImportMD";
+            this.ImportMD.Size = new System.Drawing.Size(94, 21);
+            this.ImportMD.TabIndex = 15;
+            this.ImportMD.Text = "Import MD";
+            this.ImportMD.UseVisualStyleBackColor = true;
+            this.ImportMD.CheckedChanged += new System.EventHandler(this.ImportMD_CheckedChanged);
+            // 
             // ImportWebDialog
             // 
             this.AcceptButton = this.okButton;
@@ -149,6 +162,7 @@ namespace River.OneMoreAddIn.Commands
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(585, 213);
+            this.Controls.Add(this.ImportMD);
             this.Controls.Add(this.checkBox_EnableDebug);
             this.Controls.Add(this.imagesBox);
             this.Controls.Add(this.newChildButton);
@@ -185,5 +199,6 @@ namespace River.OneMoreAddIn.Commands
 		private System.Windows.Forms.RadioButton newChildButton;
 		private System.Windows.Forms.CheckBox imagesBox;
         private System.Windows.Forms.CheckBox checkBox_EnableDebug;
+        private System.Windows.Forms.CheckBox ImportMD;
     }
 }
