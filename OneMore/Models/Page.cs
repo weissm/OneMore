@@ -92,10 +92,7 @@ namespace River.OneMoreAddIn.Models
 		/// means there is an obvious selection region, and partial means the selection
 		/// region is zero.
 		/// </summary>
-		public SelectionScope SelectionScope { get; private set; }
-
-
-
+		public SelectionScope SelectionScope { get;  set; }
 
 		public string Title
 		{
