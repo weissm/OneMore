@@ -26,7 +26,7 @@ namespace River.OneMoreAddIn.Models
 	/// <summary>
 	/// Wraps a page with helper methods
 	/// </summary>
-	internal partial class Page
+    public partial class Page
 	{
 		//// Page meta to indicate data storage analysis report
 		//public static readonly string AnalysisMetaName = "omAnalysisReport";
@@ -84,7 +84,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
+        public XElement Root { get; set; }
 
 
 		/// <summary>
@@ -137,62 +137,6 @@ namespace River.OneMoreAddIn.Models
 			return container;
 		}
 
-
-		/// <summary>
-		/// Appends HTML content to the current page
-		/// </summary>
-		/// <param name="html"></param>
-		public void AddHtmlContent(string html)
-		{
-			var container = EnsureContentContainer();
-
-			container.Add(new XElement(Namespace + "HTMLBlock",
-				new XElement(Namespace + "Data", new XCData(html))
-				));
-		}
-
-
-		/// <summary>
-		/// Adds the given content after the selected insertion point; this will not
-		/// replace selected regions.
-		/// </summary>
-		/// <param name="content">The content to add</param>
-		public void AddNextParagraph(XElement content)
-		{
-			InsertParagraph(content, false);
-		}
-
-
-		public void AddNextParagraph(params XElement[] content)
-		{
-			// consumer will build content array in document-order but InsertParagraph inserts
-			// just prior to the insertion point which will reverse the order of content items
-			// so insert them in reverse order intentionally so they show up correctly
-			for (var i = content.Length - 1; i >= 0; i--)
-			{
-				InsertParagraph(content[i], false);
-			}
-		}
-
-
-		/// <summary>
-		/// Adds the given QuickStyleDef element in the proper document order, just after
-		/// the TagDef elements if there are any
-		/// </summary>
-		/// <param name="def"></param>
-		public void AddQuickStyleDef(XElement def)
-		{
-			var tagdef = Root.Elements(Namespace + "TagDef").LastOrDefault();
-			if (tagdef == null)
-			{
-				Root.AddFirst(def);
-			}
-			else
-			{
-				tagdef.AddAfterSelf(def);
-			}
-		}
-
 		public List<XElement> GetAllNodesBelowLevel1(string searchString)
 		{
 			var xmlKeyDocContent = GetAllTNodesBelowLevel1(searchString);
@@ -213,7 +157,7 @@ namespace River.OneMoreAddIn.Models
 				.ToList();
 			return xmlKeyDocContent;
 		}
-		public void encodeDefs(XElement myDoc, string[] defNameList = null)
+        public virtual void encodeDefs(XElement myDoc, string[] defNameList = null)
 		{
 			foreach (string defName in (defNameList != null ? defNameList : new string[] { "TagDef", "QuickStyleDef" }))
 			{
@@ -274,49 +218,52 @@ namespace River.OneMoreAddIn.Models
 		}
 		};
 
-		public struct tagIndexStruct
-		{
-			public string Name;
-			public int Type;
-			public int Symbol;
-			public int ID;
-			public string FontColor;
-			public string HighLightColor;
-			public tagIndexStruct(string n, int t, int s, int id, string fontcolor = "automatic", string highlightcolor = "none")
-			{ Name = n; Type = t; Symbol = s; ID = id; FontColor = fontcolor; HighLightColor = highlightcolor; }
-		};
-		public enum cldTags
-		{
-			Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette,
-			notebook, question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right, one, mailbox, musical_note, secret, movie_camera, book, zap
-		}
+        public enum cldTags
+        {
+            Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
+            question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
+            one, mailbox, musical_note, secret, movie_camera, book, notebook, zap
+        }
 
-		public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
-				new tagIndexStruct("Aufgaben", 0, 3, (int) cldTags.Aufgaben),
-				new tagIndexStruct("1) Main Agenda Item", 0, 59, (int) cldTags.MainItem),
-				new tagIndexStruct("2) Top Level Topic", 1, 64, (int) cldTags.TopLevel),
-				new tagIndexStruct("3) HighLights", 25, 3, (int) cldTags.HighLights, "#339966"),
-				new tagIndexStruct("4) LowLights", 4, 113, (int) cldTags.LowLights, "#FF0000"),
-				new tagIndexStruct("question",       7, 13, (int) cldTags.question),
-				new tagIndexStruct("star",           8, 17, (int) cldTags.star),
-				new tagIndexStruct("exclamation",    9, 18, (int) cldTags.exclamation),
-				new tagIndexStruct("phone",         10, 21, (int) cldTags.phone),
-				new tagIndexStruct("bulb",          11, 23, (int) cldTags.bulb),
-				new tagIndexStruct("house",         12, 33, (int) cldTags.house),
-				new tagIndexStruct("three",         13, 39, (int) cldTags.three),
-				new tagIndexStruct("zero",          14, 51, (int) cldTags.zero),
-				new tagIndexStruct("two",           15, 59, (int) cldTags.two),
-				new tagIndexStruct("arrow_right",   16, 64, (int) cldTags.arrow_right),
-				new tagIndexStruct("one",           17, 70, (int) cldTags.one),
-				new tagIndexStruct("busts_in_silhouette", 5, 116, (int) cldTags.busts_in_silhouette),
-				new tagIndexStruct("mailbox",       18, 118, (int) cldTags.mailbox),
-				new tagIndexStruct("musical_note",  19, 121, (int) cldTags.musical_note),
-				new tagIndexStruct("secret",        20, 131, (int) cldTags.secret),
-				new tagIndexStruct("book",          22, 132, (int) cldTags.book),
-				new tagIndexStruct("movie_camera",  21, 133, (int) cldTags.movie_camera),
-				new tagIndexStruct("notebook",       6, 134, (int) cldTags.notebook),
-				new tagIndexStruct(Enum.GetName(typeof(cldTags), cldTags.zap), 23, 140, (int) cldTags.zap)
-			};
+        public struct tagIndexStruct
+        {
+            public string Name;
+            public int Type;
+            public int Symbol;
+            public int ID;
+            public string FontColor;
+            public string HighLightColor;
+            public tagIndexStruct(string name, int symbol, int id, int type = 0, string fontcolor = "automatic", string highlightcolor = "none")
+            { Name = name; Type = type; Symbol = symbol; ID = id; FontColor = fontcolor; HighLightColor = highlightcolor; }
+        };
+
+        public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
+                new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) cldTags.Aufgaben),
+                new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) cldTags.MainItem),
+                new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) cldTags.TopLevel),
+                new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) cldTags.HighLights,   fontcolor: "#339966"),
+                new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) cldTags.LowLights,    fontcolor: "#FF0000"),
+                new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) cldTags.busts_in_silhouette),
+                new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) cldTags.white_check_mark),
+                new tagIndexStruct(name: "question",            symbol: 13,  id: (int) cldTags.question),
+                new tagIndexStruct(name: "star",                symbol: 17,  id: (int) cldTags.star),
+                new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) cldTags.exclamation),
+                new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) cldTags.phone),
+                new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) cldTags.bulb),
+                new tagIndexStruct(name: "house",               symbol: 33,  id: (int) cldTags.house),
+                new tagIndexStruct(name: "three",               symbol: 39,  id: (int) cldTags.three),
+                new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) cldTags.zero),
+                new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) cldTags.two),
+                new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) cldTags.arrow_right),
+                new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) cldTags.one),
+                new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) cldTags.mailbox),
+                new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) cldTags.musical_note),
+                new tagIndexStruct(name: "secret",              symbol: 131, id: (int) cldTags.secret),
+                new tagIndexStruct(name: "book",                symbol: 132, id: (int) cldTags.book),
+                new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) cldTags.movie_camera),
+                new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) cldTags.notebook),
+                new tagIndexStruct(name: Enum.GetName(typeof(cldTags), cldTags.zap), symbol: 140, id: (int) cldTags.zap)
+            };
 
 		public struct QuickStyleIndexStruct
 		{
@@ -447,7 +394,7 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
-		public void decodeDefs(string[] defNameList = null)
+                public virtual void decodeDefs(string[] defNameList = null)
 		{
 			if (defNameList == null)
 			{
@@ -492,6 +439,62 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
+
+		/// <summary>
+		/// Appends HTML content to the current page
+		/// </summary>
+		/// <param name="html"></param>
+		public void AddHtmlContent(string html)
+		{
+			var container = EnsureContentContainer();
+
+			container.Add(new XElement(Namespace + "HTMLBlock",
+				new XElement(Namespace + "Data", new XCData(html))
+				));
+		}
+
+
+		/// <summary>
+		/// Adds the given content after the selected insertion point; this will not
+		/// replace selected regions.
+		/// </summary>
+		/// <param name="content">The content to add</param>
+		public void AddNextParagraph(XElement content)
+		{
+			InsertParagraph(content, false);
+		}
+
+
+		public void AddNextParagraph(params XElement[] content)
+		{
+			// consumer will build content array in document-order but InsertParagraph inserts
+			// just prior to the insertion point which will reverse the order of content items
+			// so insert them in reverse order intentionally so they show up correctly
+			for (var i = content.Length - 1; i >= 0; i--)
+			{
+				InsertParagraph(content[i], false);
+			}
+		}
+
+
+		/// <summary>
+		/// Adds the given QuickStyleDef element in the proper document order, just after
+		/// the TagDef elements if there are any
+		/// </summary>
+		/// <param name="def"></param>
+		public void AddQuickStyleDef(XElement def)
+		{
+			var tagdef = Root.Elements(Namespace + "TagDef").LastOrDefault();
+			if (tagdef == null)
+			{
+				Root.AddFirst(def);
+			}
+			else
+			{
+				tagdef.AddAfterSelf(def);
+			}
+		}
+
 
 		/// <summary>
 		/// Adds a TagDef to the page and returns its index value. If the tag already exists
