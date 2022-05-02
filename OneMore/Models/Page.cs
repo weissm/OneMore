@@ -215,7 +215,11 @@ namespace River.OneMoreAddIn.Models
 		}
 		};
 
+<<<<<<< HEAD
         public enum tlTags
+=======
+        public enum cldTags
+>>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
         {
             Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
             question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
@@ -235,6 +239,7 @@ namespace River.OneMoreAddIn.Models
         };
 
         public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
+<<<<<<< HEAD
                 new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) tlTags.Aufgaben),
                 new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) tlTags.MainItem),
                 new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) tlTags.TopLevel),
@@ -260,6 +265,33 @@ namespace River.OneMoreAddIn.Models
                 new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) tlTags.movie_camera),
                 new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) tlTags.notebook),
                 new tagIndexStruct(name: Enum.GetName(typeof(tlTags), tlTags.zap), symbol: 140, id: (int) tlTags.zap)
+=======
+                new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) cldTags.Aufgaben),
+                new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) cldTags.MainItem),
+                new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) cldTags.TopLevel),
+                new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) cldTags.HighLights,   fontcolor: "#339966"),
+                new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) cldTags.LowLights,    fontcolor: "#FF0000"),
+                new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) cldTags.busts_in_silhouette),
+                new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) cldTags.white_check_mark),
+                new tagIndexStruct(name: "question",            symbol: 13,  id: (int) cldTags.question),
+                new tagIndexStruct(name: "star",                symbol: 17,  id: (int) cldTags.star),
+                new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) cldTags.exclamation),
+                new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) cldTags.phone),
+                new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) cldTags.bulb),
+                new tagIndexStruct(name: "house",               symbol: 33,  id: (int) cldTags.house),
+                new tagIndexStruct(name: "three",               symbol: 39,  id: (int) cldTags.three),
+                new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) cldTags.zero),
+                new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) cldTags.two),
+                new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) cldTags.arrow_right),
+                new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) cldTags.one),
+                new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) cldTags.mailbox),
+                new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) cldTags.musical_note),
+                new tagIndexStruct(name: "secret",              symbol: 131, id: (int) cldTags.secret),
+                new tagIndexStruct(name: "book",                symbol: 132, id: (int) cldTags.book),
+                new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) cldTags.movie_camera),
+                new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) cldTags.notebook),
+                new tagIndexStruct(name: Enum.GetName(typeof(cldTags), cldTags.zap), symbol: 140, id: (int) cldTags.zap)
+>>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
             };
 
 		public struct QuickStyleIndexStruct
@@ -391,7 +423,11 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
+<<<<<<< HEAD
          public virtual void decodeDefs(string[] defNameList = null)
+=======
+                public virtual void decodeDefs(string[] defNameList = null)
+>>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
 		{
 			if (defNameList == null)
 			{
