@@ -215,11 +215,7 @@ namespace River.OneMoreAddIn.Models
 		}
 		};
 
-<<<<<<< HEAD
-        public enum tlTags
-=======
         public enum cldTags
->>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
         {
             Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
             question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
@@ -239,33 +235,6 @@ namespace River.OneMoreAddIn.Models
         };
 
         public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
-<<<<<<< HEAD
-                new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) tlTags.Aufgaben),
-                new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) tlTags.MainItem),
-                new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) tlTags.TopLevel),
-                new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) tlTags.HighLights,   fontcolor: "#339966"),
-                new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) tlTags.LowLights,    fontcolor: "#FF0000"),
-                new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) tlTags.busts_in_silhouette),
-                new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) tlTags.white_check_mark),
-                new tagIndexStruct(name: "question",            symbol: 13,  id: (int) tlTags.question),
-                new tagIndexStruct(name: "star",                symbol: 17,  id: (int) tlTags.star),
-                new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) tlTags.exclamation),
-                new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) tlTags.phone),
-                new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) tlTags.bulb),
-                new tagIndexStruct(name: "house",               symbol: 33,  id: (int) tlTags.house),
-                new tagIndexStruct(name: "three",               symbol: 39,  id: (int) tlTags.three),
-                new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) tlTags.zero),
-                new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) tlTags.two),
-                new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) tlTags.arrow_right),
-                new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) tlTags.one),
-                new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) tlTags.mailbox),
-                new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) tlTags.musical_note),
-                new tagIndexStruct(name: "secret",              symbol: 131, id: (int) tlTags.secret),
-                new tagIndexStruct(name: "book",                symbol: 132, id: (int) tlTags.book),
-                new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) tlTags.movie_camera),
-                new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) tlTags.notebook),
-                new tagIndexStruct(name: Enum.GetName(typeof(tlTags), tlTags.zap), symbol: 140, id: (int) tlTags.zap)
-=======
                 new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) cldTags.Aufgaben),
                 new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) cldTags.MainItem),
                 new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) cldTags.TopLevel),
@@ -291,7 +260,6 @@ namespace River.OneMoreAddIn.Models
                 new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) cldTags.movie_camera),
                 new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) cldTags.notebook),
                 new tagIndexStruct(name: Enum.GetName(typeof(cldTags), cldTags.zap), symbol: 140, id: (int) cldTags.zap)
->>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
             };
 
 		public struct QuickStyleIndexStruct
@@ -423,11 +391,7 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
-<<<<<<< HEAD
-         public virtual void decodeDefs(string[] defNameList = null)
-=======
                 public virtual void decodeDefs(string[] defNameList = null)
->>>>>>> bcb785e5ce231295472bd1d5a2247ce94061c753
 		{
 			if (defNameList == null)
 			{
