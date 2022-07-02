@@ -31,6 +31,7 @@ namespace River.OneMoreAddIn.Settings
 			"ribRemoveCitationsButton",		// ... Remove Pasted Citations
 			"ribRemoveEmptyButton",			// ... Remove Empty Paragraphs and Headings
 			"ribRemoveSpacingButton",		// ... Remove Paragraph Spacing
+			"ribRestoreAutosizeButton",		// ... Restore Auto-size Container Widths
 			"ribTrimButton",				// ... Trim Whitespace
 			"ribEditMenu",					// Edit Menu
 			"ribColorizeMenu",				// ... Colorize
@@ -49,6 +50,8 @@ namespace River.OneMoreAddIn.Settings
 			"ribSaveCollapsedButton",		// ... Save Collapsed Outline
 			"ribRestoreCollapsedButton",	// ... Restore Collapsed Outline
 			"ribWordCountButton",			// ... Word Count
+			"ribCopyLinkToPageButton",		// Copy Linnk To Page
+			"ribCopyLinkToParagraphButton",	// Copy Linnk To Paragraph
 			"ribRemindersMenu",				// Reminders
 			"ribRemindButton",				// ... Add or update reminder
 			"ribCompleteReminderButton",	// ... Complete reminder

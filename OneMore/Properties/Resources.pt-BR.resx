@@ -3823,6 +3823,18 @@ Qualquer</value>
     <value>Cole e mantenha apenas o texto (Ctrl + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="SelectStyleCommand_context" xml:space="preserve">
+    <value>Mova o cursor de texto para uma única posição na página. Regiões de seleção não são permitidas.</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>Colar e manter apenas o texto</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>Cole e mantenha apenas o texto (Ctrl + Shift + V)</value>
+    <comment>ribbon item</comment>
+  </data>
   <data name="RemoveEmptyCommand_option" xml:space="preserve">
     <value>Remova todas as linhas vazias?
 
@@ -3836,6 +3848,77 @@ Selecione Não para manter uma linha vazia entre os parágrafos</value>
   </data>
   <data name="ribInsertDateTimeButton_Label" xml:space="preserve">
     <value>Data classificável com hora</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToPage" xml:space="preserve">
+    <value>Link copiado para esta página</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToParagraph" xml:space="preserve">
+    <value>Link copiado para este parágrafo</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToPageButton" xml:space="preserve">
+    <value>Copie o link para a página</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToParagraphButton" xml:space="preserve">
+    <value>Copie o link para o parágrafo</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ribCopyLinkToPageButton_Label" xml:space="preserve">
+    <value>Copie o link para a página</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribCopyLinkToParagraphButton_Label" xml:space="preserve">
+    <value>Copie o link para o parágrafo</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ExportDialog_embeddedBox.Text" xml:space="preserve">
+    <value>Anexos de incorporação</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ReportRemindersDialog.Text" xml:space="preserve">
+    <value>Escopo de relatório</value>
+  </data>
+  <data name="ReportRemindersDialog_groupBox.Text" xml:space="preserve">
+    <value>Alcance</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
+    <value>Gerar relatório para lembretes neste escopo</value>
+    <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebookRadio.Text" xml:space="preserve">
+    <value>Todas as seções no caderno atual</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebooksRadio.Text" xml:space="preserve">
+    <value>Todos os cadernos</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_sectionRadio.Text" xml:space="preserve">
+    <value>A seção atual</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
+    <value>Crie uma nova página de relatório</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_oldRadio.Text" xml:space="preserve">
+    <value>Atualize este relatório existente</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_Text" xml:space="preserve">
+    <value>Velho ou novo</value>
+    <comment>title</comment>
+  </data>
+  <data name="ContextMenuSheet_ribRestoreAutosizeButton" xml:space="preserve">
+    <value>... restaurar larguras de contêiner de tamanho automático</value>
+    <comment>context menu option</comment>
+  </data>
+  <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
+    <value>Restaurar larguras de contêiner de tamanho automático</value>
     <comment>ribbon item</comment>
   </data>
 </root>

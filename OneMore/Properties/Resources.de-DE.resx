@@ -3826,4 +3826,87 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
     <value>Sortierbares Datum mit der Uhrzeit</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>Einfügen und nur Text halten</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="SelectStyleCommand_context" xml:space="preserve">
+    <value>Bewegen Sie den Textcursor in eine einzige Position auf der Seite. Auswahlregionen sind nicht zulässig.</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToPage" xml:space="preserve">
+    <value>Kopierte Link zu dieser Seite</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToParagraph" xml:space="preserve">
+    <value>Kopierte Link zu diesem Absatz</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToPageButton" xml:space="preserve">
+    <value>Link zu Seite kopieren</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToParagraphButton" xml:space="preserve">
+    <value>Link zu Absatz kopieren</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ribCopyLinkToPageButton_Label" xml:space="preserve">
+    <value>Link zu Seite kopieren</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribCopyLinkToParagraphButton_Label" xml:space="preserve">
+    <value>Link zu Absatz kopieren</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ExportDialog_embeddedBox.Text" xml:space="preserve">
+    <value>Einbettungsanhänge</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ReportRemindersDialog.Text" xml:space="preserve">
+    <value>Berichterstattung</value>
+  </data>
+  <data name="ReportRemindersDialog_groupBox.Text" xml:space="preserve">
+    <value>Zielfernrohr</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
+    <value>Erstellen Sie Bericht für Erinnerungen in diesem Bereich</value>
+    <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebookRadio.Text" xml:space="preserve">
+    <value>Alle Abschnitte im aktuellen Notizbuch</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebooksRadio.Text" xml:space="preserve">
+    <value>Alle Notizbücher</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_sectionRadio.Text" xml:space="preserve">
+    <value>Der aktuelle Abschnitt</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
+    <value>Erstellen Sie eine neue Berichtsseite</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_oldRadio.Text" xml:space="preserve">
+    <value>Aktualisieren Sie diesen vorhandenen Bericht</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_Text" xml:space="preserve">
+    <value>Alt oder neu</value>
+    <comment>title</comment>
+  </data>
+  <data name="ContextMenuSheet_ribRestoreAutosizeButton" xml:space="preserve">
+    <value>... automatische Behälterbreiten wiederherstellen</value>
+    <comment>context menu option</comment>
+  </data>
+  <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
+    <value>Stellen Sie die Containerbreiten der automatischen Größe wieder her</value>
+    <comment>ribbon item</comment>
+  </data>
 </root>

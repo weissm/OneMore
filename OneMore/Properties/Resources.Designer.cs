@@ -1058,6 +1058,24 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Page.
+        /// </summary>
+        internal static string ContextMenuSheet_ribCopyLinkToPageButton {
+            get {
+                return ResourceManager.GetString("ContextMenuSheet_ribCopyLinkToPageButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Paragraph.
+        /// </summary>
+        internal static string ContextMenuSheet_ribCopyLinkToParagraphButton {
+            get {
+                return ResourceManager.GetString("ContextMenuSheet_ribCopyLinkToParagraphButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ... Decrease Text Size.
         /// </summary>
         internal static string ContextMenuSheet_ribDecreaseFontSizeButton {
@@ -1301,6 +1319,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ... Restore Auto-size Container Widths.
+        /// </summary>
+        internal static string ContextMenuSheet_ribRestoreAutosizeButton {
+            get {
+                return ResourceManager.GetString("ContextMenuSheet_ribRestoreAutosizeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ... Restore Collapsed Outline.
         /// </summary>
         internal static string ContextMenuSheet_ribRestoreCollapsedButton {
@@ -1424,6 +1451,24 @@ namespace River.OneMoreAddIn.Properties {
         internal static string CopyFolderCommand_InvalidTarget {
             get {
                 return ResourceManager.GetString("CopyFolderCommand_InvalidTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copied link to this page.
+        /// </summary>
+        internal static string CopyLinkCommand_LinkToPage {
+            get {
+                return ResourceManager.GetString("CopyLinkCommand_LinkToPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copied link to this paragraph.
+        /// </summary>
+        internal static string CopyLinkCommand_LinkToParagraph {
+            get {
+                return ResourceManager.GetString("CopyLinkCommand_LinkToParagraph", resourceCulture);
             }
         }
         
@@ -2101,6 +2146,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ExportDialog_attachmentsBox_Text {
             get {
                 return ResourceManager.GetString("ExportDialog_attachmentsBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Embed attachments.
+        /// </summary>
+        internal static string ExportDialog_embeddedBox_Text {
+            get {
+                return ResourceManager.GetString("ExportDialog_embeddedBox.Text", resourceCulture);
             }
         }
         
@@ -4712,6 +4766,87 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scope.
+        /// </summary>
+        internal static string ReportRemindersDialog_groupBox_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_groupBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate report for reminders in this scope.
+        /// </summary>
+        internal static string ReportRemindersDialog_introLabel_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_introLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All sections in the current notebook.
+        /// </summary>
+        internal static string ReportRemindersDialog_notebookRadio_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_notebookRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All notebooks.
+        /// </summary>
+        internal static string ReportRemindersDialog_notebooksRadio_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_notebooksRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current section.
+        /// </summary>
+        internal static string ReportRemindersDialog_sectionRadio_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_sectionRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report Scope.
+        /// </summary>
+        internal static string ReportRemindersDialog_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new report page.
+        /// </summary>
+        internal static string ReportRemindersReuseDialog_newRadio_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersReuseDialog_newRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update this existing report.
+        /// </summary>
+        internal static string ReportRemindersReuseDialog_oldRadio_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersReuseDialog_oldRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old or New.
+        /// </summary>
+        internal static string ReportRemindersReuseDialog_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersReuseDialog_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Absolute.
         /// </summary>
         internal static string ResizeImagesDialog_absRadio_Text {
@@ -5184,6 +5319,24 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribCopyFolderButton_Label {
             get {
                 return ResourceManager.GetString("ribCopyFolderButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Page.
+        /// </summary>
+        internal static string ribCopyLinkToPageButton_Label {
+            get {
+                return ResourceManager.GetString("ribCopyLinkToPageButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Paragraph.
+        /// </summary>
+        internal static string ribCopyLinkToParagraphButton_Label {
+            get {
+                return ResourceManager.GetString("ribCopyLinkToParagraphButton_Label", resourceCulture);
             }
         }
         
@@ -6259,6 +6412,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore Auto-size Container Widths.
+        /// </summary>
+        internal static string ribRestoreAutosizeButton_Label {
+            get {
+                return ResourceManager.GetString("ribRestoreAutosizeButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore Collapsed Outline.
         /// </summary>
         internal static string ribRestoreCollapsedButton_Label {
@@ -7025,6 +7187,15 @@ namespace River.OneMoreAddIn.Properties {
             get {
                 object obj = ResourceManager.GetObject("SectionMask", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move the text cursor to a single position on the page. Selection regions are not allowed..
+        /// </summary>
+        internal static string SelectStyleCommand_context {
+            get {
+                return ResourceManager.GetString("SelectStyleCommand_context", resourceCulture);
             }
         }
         

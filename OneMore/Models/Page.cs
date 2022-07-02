@@ -26,7 +26,7 @@ namespace River.OneMoreAddIn.Models
 	/// <summary>
 	/// Wraps a page with helper methods
 	/// </summary>
-    public partial class Page
+	public partial class Page
 	{
 		//// Page meta to indicate data storage analysis report
 		//public static readonly string AnalysisMetaName = "omAnalysisReport";
@@ -84,7 +84,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-        public XElement Root { get; set; }
+		public XElement Root { get; private set; }
 
 
 		/// <summary>
@@ -92,7 +92,17 @@ namespace River.OneMoreAddIn.Models
 		/// means there is an obvious selection region, and partial means the selection
 		/// region is zero.
 		/// </summary>
-		public SelectionScope SelectionScope { get;  set; }
+		public SelectionScope SelectionScope { get; private set; }
+
+
+		/// <summary>
+		/// Gets an indication that the text cursor is positioned over either a hyperlink
+		/// or a MathML equation, both of which return zero-length selection ranges.
+		/// </summary>
+		public bool SelectionSpecial { get; private set; }
+
+
+
 
 		public string Title
 		{
@@ -134,6 +144,7 @@ namespace River.OneMoreAddIn.Models
 			return container;
 		}
 
+
 		public List<XElement> GetAllNodesBelowLevel1(string searchString)
 		{
 			var xmlKeyDocContent = GetAllTNodesBelowLevel1(searchString);
@@ -154,7 +165,7 @@ namespace River.OneMoreAddIn.Models
 				.ToList();
 			return xmlKeyDocContent;
 		}
-        public virtual void encodeDefs(XElement myDoc, string[] defNameList = null)
+		public virtual void encodeDefs(XElement myDoc, string[] defNameList = null)
 		{
 			foreach (string defName in (defNameList != null ? defNameList : new string[] { "TagDef", "QuickStyleDef" }))
 			{
@@ -215,52 +226,52 @@ namespace River.OneMoreAddIn.Models
 		}
 		};
 
-        public enum tlTags
-        {
-            Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
-            question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
-            one, mailbox, musical_note, secret, movie_camera, book, notebook, zap
-        }
+		public enum tlTags
+		{
+			Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
+			question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
+			one, mailbox, musical_note, secret, movie_camera, book, notebook, zap
+		}
 
-        public struct tagIndexStruct
-        {
-            public string Name;
-            public int Type;
-            public int Symbol;
-            public int ID;
-            public string FontColor;
-            public string HighLightColor;
-            public tagIndexStruct(string name, int symbol, int id, int type = 0, string fontcolor = "automatic", string highlightcolor = "none")
-            { Name = name; Type = type; Symbol = symbol; ID = id; FontColor = fontcolor; HighLightColor = highlightcolor; }
-        };
+		public struct tagIndexStruct
+		{
+			public string Name;
+			public int Type;
+			public int Symbol;
+			public int ID;
+			public string FontColor;
+			public string HighLightColor;
+			public tagIndexStruct(string name, int symbol, int id, int type = 0, string fontcolor = "automatic", string highlightcolor = "none")
+			{ Name = name; Type = type; Symbol = symbol; ID = id; FontColor = fontcolor; HighLightColor = highlightcolor; }
+		};
 
-        public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
-                new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) tlTags.Aufgaben),
-                new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) tlTags.MainItem),
-                new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) tlTags.TopLevel),
-                new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) tlTags.HighLights,   fontcolor: "#339966"),
-                new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) tlTags.LowLights,    fontcolor: "#FF0000"),
-                new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) tlTags.busts_in_silhouette),
-                new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) tlTags.white_check_mark),
-                new tagIndexStruct(name: "question",            symbol: 13,  id: (int) tlTags.question),
-                new tagIndexStruct(name: "star",                symbol: 17,  id: (int) tlTags.star),
-                new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) tlTags.exclamation),
-                new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) tlTags.phone),
-                new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) tlTags.bulb),
-                new tagIndexStruct(name: "house",               symbol: 33,  id: (int) tlTags.house),
-                new tagIndexStruct(name: "three",               symbol: 39,  id: (int) tlTags.three),
-                new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) tlTags.zero),
-                new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) tlTags.two),
-                new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) tlTags.arrow_right),
-                new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) tlTags.one),
-                new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) tlTags.mailbox),
-                new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) tlTags.musical_note),
-                new tagIndexStruct(name: "secret",              symbol: 131, id: (int) tlTags.secret),
-                new tagIndexStruct(name: "book",                symbol: 132, id: (int) tlTags.book),
-                new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) tlTags.movie_camera),
-                new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) tlTags.notebook),
-                new tagIndexStruct(name: Enum.GetName(typeof(tlTags), tlTags.zap), symbol: 140, id: (int) tlTags.zap)
-            };
+		public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
+				new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) tlTags.Aufgaben),
+				new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) tlTags.MainItem),
+				new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) tlTags.TopLevel),
+				new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) tlTags.HighLights,   fontcolor: "#339966"),
+				new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) tlTags.LowLights,    fontcolor: "#FF0000"),
+				new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) tlTags.busts_in_silhouette),
+				new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) tlTags.white_check_mark),
+				new tagIndexStruct(name: "question",            symbol: 13,  id: (int) tlTags.question),
+				new tagIndexStruct(name: "star",                symbol: 17,  id: (int) tlTags.star),
+				new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) tlTags.exclamation),
+				new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) tlTags.phone),
+				new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) tlTags.bulb),
+				new tagIndexStruct(name: "house",               symbol: 33,  id: (int) tlTags.house),
+				new tagIndexStruct(name: "three",               symbol: 39,  id: (int) tlTags.three),
+				new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) tlTags.zero),
+				new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) tlTags.two),
+				new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) tlTags.arrow_right),
+				new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) tlTags.one),
+				new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) tlTags.mailbox),
+				new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) tlTags.musical_note),
+				new tagIndexStruct(name: "secret",              symbol: 131, id: (int) tlTags.secret),
+				new tagIndexStruct(name: "book",                symbol: 132, id: (int) tlTags.book),
+				new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) tlTags.movie_camera),
+				new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) tlTags.notebook),
+				new tagIndexStruct(name: Enum.GetName(typeof(tlTags), tlTags.zap), symbol: 140, id: (int) tlTags.zap)
+			};
 
 		public struct QuickStyleIndexStruct
 		{
@@ -391,7 +402,7 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
-         public virtual void decodeDefs(string[] defNameList = null)
+		public virtual void decodeDefs(string[] defNameList = null)
 		{
 			if (defNameList == null)
 			{
@@ -434,7 +445,7 @@ namespace River.OneMoreAddIn.Models
 							node.RemoveAttributes();
 							node.Add(new XAttribute("quickStyleIndex", tagDefNode.Attribute("index").Value.ToString()));
 							if (collapsedAttribute != null)
-                            {
+							{
 								node.Add(collapsedAttribute);
 							}
 						}
@@ -1115,13 +1126,14 @@ namespace River.OneMoreAddIn.Models
 					var cdata = cursor.FirstNode as XCData;
 
 					// empty or link or xml-comment because we can't tell the difference between
-					// a zero-selection zero-selection link and a partial or fully selected link.
-					// Note that XML comments are used to wrap mathML equations
+					// a zero-selection link and a partial or fully selected link. Note that XML
+					// comments are used to wrap mathML equations
 					if (cdata.Value.Length == 0 ||
-						Regex.IsMatch(cdata.Value, @"<a href.+?</a>") ||
-						Regex.IsMatch(cdata.Value, @"<!--.+?-->"))
+						Regex.IsMatch(cdata.Value, @"<a\s+href.+?</a>", RegexOptions.Singleline) ||
+						Regex.IsMatch(cdata.Value, @"<!--.+?-->", RegexOptions.Singleline))
 					{
 						SelectionScope = SelectionScope.Empty;
+						SelectionSpecial = cdata.Value.Length > 0;
 						return cursor;
 					}
 				}

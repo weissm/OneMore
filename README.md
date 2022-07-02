@@ -29,9 +29,9 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, German, Polish, Portuguese, and Spanish*. Please let me know if you'd like it translated to another language. I use my [ResxTranslator](https://github.com/stevencohn/ResxTranslator) program to automate the translations but can also override inaccuracies of specific words and phrases. If you think a translation is not correct, again please let me know.
 
 <a name="features"></a>
-## Features (147)
+## Features (151)
 
-[Clean commands](../../wiki/Clean-Commands) (11)
+[Clean commands](../../wiki/Clean-Commands) (12)
 
 * Change spacing between sentences to one or two spaces
 * Clear background color and reset text color of selected text
@@ -41,6 +41,7 @@ OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, 
 * Remove ink annotations from the current page
 * Remove spacing between paragraphs and headings
 * Remove tags from the current page, those not associated with reminders
+* Restore Container Size Auto Widths
 * Show/Hide the page date and time stamps under the title on page or all pages in section
 * Trim leading whitespace from selected text
 * Trim trailing whitespace from selected text
@@ -101,10 +102,12 @@ OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, 
 * Remove numbering from sections
 * Remove numbering from pages
 
-[Page Commands](../../wiki/Page-Commands) (11)
+[Page Commands](../../wiki/Page-Commands) (13)
 * Arrange containers vertically or in columns
 * Add caption to selected file attachments on the page
 * Add special icon to the page title, also appears in page hierarchy
+* Copy formatted hyperlink to page
+* Copy formatted hyperlink to paragraph
 * Expand or Collapse indented outlines, save and restore outlining
 * Fit background grid spacing to most common text size
 * Merge pages, preserving formatting and position of outlines
@@ -137,13 +140,14 @@ OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, 
 * Add arbitrary tags to a page (Alt + T)
 * Search arbitrary page tags to index, copy, or move selected pages (Ctrl + Alt + T)
 
-[Snippets commands](../../wiki/Snippets-Commands) (16)
+[Snippets commands](../../wiki/Snippets-Commands) (17)
 
 * Insert single (Shift + Alt + F11) or double (Shift + Alt + F12) horizontal line
 * Insert breadcrumb at top of page
 * Insert Table of Contents of headers, pages, or sections
 * Insert small or large monthly calendar for a specific month
 * Insert sortable date, similar to 2020-12-23 (Ctrl + Shift + D)
+* Insert sortable date/time (Ctrl + Shift + Alt + D)
 * Insert a text box, a single-cell table, and optionally wrap selecting content
 * Insert Code box similar to Confluence Code macro, optionally wrap selected content (F6)
 * Insert Info/Warn boxes similar to Confluence Info and Warn macros

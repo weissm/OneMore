@@ -3834,4 +3834,87 @@ Sélectionnez Non pour conserver une ligne vide entre les paragraphes</value>
     <value>Date de tri avec le temps</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>Coller et garder le texte seulement</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>Coller et garder le texte uniquement (Ctrl + Maj + V)</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="SelectStyleCommand_context" xml:space="preserve">
+    <value>Déplacez le curseur de texte en une seule position sur la page. Les régions de sélection ne sont pas autorisées.</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToPage" xml:space="preserve">
+    <value>Lien copié vers cette page</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToParagraph" xml:space="preserve">
+    <value>Lien copié à ce paragraphe</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToPageButton" xml:space="preserve">
+    <value>Copier le lien vers la page</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToParagraphButton" xml:space="preserve">
+    <value>Copier le lien vers le paragraphe</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ribCopyLinkToPageButton_Label" xml:space="preserve">
+    <value>Copier le lien vers la page</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribCopyLinkToParagraphButton_Label" xml:space="preserve">
+    <value>Copier le lien vers le paragraphe</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ExportDialog_embeddedBox.Text" xml:space="preserve">
+    <value>Attachements d'intégration</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ReportRemindersDialog.Text" xml:space="preserve">
+    <value>SPODE SPORT</value>
+  </data>
+  <data name="ReportRemindersDialog_groupBox.Text" xml:space="preserve">
+    <value>Portée</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
+    <value>Générer un rapport pour les rappels dans cette portée</value>
+    <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebookRadio.Text" xml:space="preserve">
+    <value>Toutes les sections du cahier actuel</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebooksRadio.Text" xml:space="preserve">
+    <value>Tous les cahiers</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_sectionRadio.Text" xml:space="preserve">
+    <value>La section actuelle</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
+    <value>Créer une nouvelle page de rapport</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_oldRadio.Text" xml:space="preserve">
+    <value>Mettre à jour ce rapport existant</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_Text" xml:space="preserve">
+    <value>Ancien ou nouveau</value>
+    <comment>title</comment>
+  </data>
+  <data name="ContextMenuSheet_ribRestoreAutosizeButton" xml:space="preserve">
+    <value>... restaurer les largeurs de conteneurs de taille automatique</value>
+    <comment>context menu option</comment>
+  </data>
+  <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
+    <value>Restaurer les largeurs de conteneurs de taille automatique</value>
+    <comment>ribbon item</comment>
+  </data>
 </root>

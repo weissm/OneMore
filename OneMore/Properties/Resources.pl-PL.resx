@@ -3891,4 +3891,87 @@ Wybierz Nie, aby zachować jedną pustą linię między akapitami</value>
     <value>Data sortowania z czasem</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>Wklej tylko tekst</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>Wklej i trzymaj tylko tekst (Ctrl + Shift + V)</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="SelectStyleCommand_context" xml:space="preserve">
+    <value>Przesuń kursor tekstowy na pojedynczą pozycję na stronie. Regiony wyboru nie są dozwolone.</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToPage" xml:space="preserve">
+    <value>Skopiowany link do tej strony</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToParagraph" xml:space="preserve">
+    <value>Skopiowany link do tego akapitu</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToPageButton" xml:space="preserve">
+    <value>Skopiuj link do strony</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToParagraphButton" xml:space="preserve">
+    <value>Skopiuj link do akapitu</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ribCopyLinkToPageButton_Label" xml:space="preserve">
+    <value>Skopiuj link do strony</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribCopyLinkToParagraphButton_Label" xml:space="preserve">
+    <value>Skopiuj link do akapitu</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ExportDialog_embeddedBox.Text" xml:space="preserve">
+    <value>Osadzone załączniki</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ReportRemindersDialog.Text" xml:space="preserve">
+    <value>Zakres raportu</value>
+  </data>
+  <data name="ReportRemindersDialog_groupBox.Text" xml:space="preserve">
+    <value>Zakres</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
+    <value>Wygeneruj raport dla przypomnień w tym zakresie</value>
+    <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebookRadio.Text" xml:space="preserve">
+    <value>Wszystkie sekcje w bieżącym notatniku</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebooksRadio.Text" xml:space="preserve">
+    <value>Wszystkie notebooki</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_sectionRadio.Text" xml:space="preserve">
+    <value>Obecna sekcja</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
+    <value>Utwórz nową stronę raportu</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_oldRadio.Text" xml:space="preserve">
+    <value>Zaktualizuj ten istniejący raport</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_Text" xml:space="preserve">
+    <value>Stare lub nowe</value>
+    <comment>title</comment>
+  </data>
+  <data name="ContextMenuSheet_ribRestoreAutosizeButton" xml:space="preserve">
+    <value>... Przywróć szerokości pojemników z automatyczną wielkości</value>
+    <comment>context menu option</comment>
+  </data>
+  <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
+    <value>Przywróć szerokości pojemników z automatyczną wielkości</value>
+    <comment>ribbon item</comment>
+  </data>
 </root>

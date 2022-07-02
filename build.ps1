@@ -2,20 +2,23 @@
 .SYNOPSIS
 Build both x86 and x64 msi
 
-.NOTES
-In order for devenv.com to successfully build a vdproj project, the following commands must be 
-run once on the machine to configure Registry settings:
+.PARAMETER ConfigBits
+Specifies the bitness of the build: 64 or 86, default is 64
 
-    cd 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild';
-    .\DisableOutOfProcBuild.exe;
+.PARAMETER Both
+Build both x86 and x64 kits.
 
+.PARAMETER Prep
+Run DisableOutOfProcBuild. This only needs to be run once on a machine, or after upgrading
+or reinstalling Visual Studio. It is required to build installer kits from the command line.
 #>
 
 # CmdletBinding adds -Verbose functionality, SupportsShouldProcess adds -WhatIf
 [CmdletBinding(SupportsShouldProcess = $true)]
 param (
     [int] $configbits = 64,
-    [switch] $both
+    [switch] $both,
+    [switch] $prep
     )
 
 Begin
@@ -58,7 +61,24 @@ Begin
             return $false
         }
 
+        $script:ideroot = Split-Path -Parent $devenv
         return $true
+    }
+
+    function DisableOutOfProcBuild
+    {
+        $0 = Join-Path $ideroot 'CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild'
+        if (Test-Path $0)
+        {
+            Push-Location $0
+            if (Test-Path .\DisableOutOfProcBuild.exe) {
+                .\DisableOutOfProcBuild.exe
+            }
+            Pop-Location
+            Write-Host '... disabled out-of-proc builds; reboot is recommended'
+            return
+        }
+        Write-Host "*** could not find $0\DisableOutOfProcBuild.exe" -ForegroundColor Yellow
     }
 
     function PreserveVdproj
@@ -141,6 +161,9 @@ Begin
             Remove-Item .\Debug\*.* -Force -Confirm:$false
         }
 
+        $cmd = "$devenv .\OneMoreSetup.vdproj /build ""Debug|x$bitness"" /project Setup /projectconfig Debug"
+        write-Host $cmd -ForegroundColor DarkGray
+
         # build
         . $devenv .\OneMoreSetup.vdproj /build "Debug|x$bitness" /project Setup /projectconfig Debug
 
@@ -151,27 +174,34 @@ Begin
 }
 Process
 {
-    Push-Location OneMoreSetup
-    $script:vdproj = Resolve-Path .\OneMoreSetup.vdproj
-    
-    if (FindVisualStudio)
+    if (-not (FindVisualStudio))
     {
-        PreserveVdproj
-
-        if ($configbits -eq 86 -or $both)
-        {
-            Configure 86
-            Build 86
-        }
-
-        if ($configBits -eq 64 -or $both)
-        {
-            Configure 64
-            Build 64
-        }
-
-        RestoreVdproj
+        return
+    }
+    
+    if ($prep)
+    {
+        DisableOutOfProcBuild
+        return
     }
 
+    Push-Location OneMoreSetup
+    $script:vdproj = Resolve-Path .\OneMoreSetup.vdproj
+
+    PreserveVdproj
+
+    if ($configbits -eq 86 -or $both)
+    {
+        Configure 86
+        Build 86
+    }
+
+    if ($configBits -eq 64 -or $both)
+    {
+        Configure 64
+        Build 64
+    }
+
+    RestoreVdproj
     Pop-Location
 }

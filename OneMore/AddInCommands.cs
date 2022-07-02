@@ -141,6 +141,12 @@ namespace River.OneMoreAddIn
 		public async Task CopyDownCmd(IRibbonControl control)
 			=> await factory.Run<FillCellsCommand>(FillCells.CopyDown);
 
+		public async Task CopyLinkToPageCmd(IRibbonControl control)
+			=> await factory.Run<CopyLinkCommand>(false);
+
+		public async Task CopyLinkToParagraphCmd(IRibbonControl control)
+			=> await factory.Run<CopyLinkCommand>(true);
+
 		public async Task CrawlWebPageCmd(IRibbonControl control)
 			=> await factory.Run<CrawlWebPageCommand>();
 
@@ -428,6 +434,9 @@ namespace River.OneMoreAddIn
 
 		public async Task ResizeImagesCmd(IRibbonControl control)
 			=> await factory.Run<ResizeImagesCommand>();
+
+		public async Task RestoreAutosizeCmd(IRibbonControl control)
+			=> await factory.Run<RestoreAutosizeCommand>();
 
 		public async Task RestoreCollapsedCmd(IRibbonControl control)
 			=> await factory.Run<ExpandoCommand>(Expando.Restore);

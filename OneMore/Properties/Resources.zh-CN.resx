@@ -1704,7 +1704,7 @@ OneNote 将自动关闭</value>
     <comment>ribbon item</comment>
   </data>
   <data name="StyleDialog_afterLabel.Text" xml:space="preserve">
-    <value>之后的空间：</value>
+    <value>段后空间：</value>
     <comment>label</comment>
   </data>
   <data name="StyleDialog_applyColorsBox.Text" xml:space="preserve">
@@ -1716,7 +1716,7 @@ OneNote 将自动关闭</value>
     <comment>button tip</comment>
   </data>
   <data name="StyleDialog_beforeLabel.Text" xml:space="preserve">
-    <value>前空格：</value>
+    <value>段前空间:</value>
     <comment>label</comment>
   </data>
   <data name="StyleDialog_boldButton.Text" xml:space="preserve">
@@ -2490,7 +2490,7 @@ ISO-code then comma then language name</comment>
     <comment>Ribbon OneMore menu item, no spell check on this page</comment>
   </data>
   <data name="StyleDialog_spacingLabel.Text" xml:space="preserve">
-    <value>间距：</value>
+    <value>行距：</value>
     <comment>label</comment>
   </data>
   <data name="ContextMenuSheet_ribJoinParagraphButton" xml:space="preserve">
@@ -3828,6 +3828,89 @@ OneNote 文件 (*.one)</value>
   </data>
   <data name="ribInsertDateTimeButton_Label" xml:space="preserve">
     <value>与时间分类的日期</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>粘贴并保持文字</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>仅粘贴并保持文本（Ctrl + Shift + V）</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="SelectStyleCommand_context" xml:space="preserve">
+    <value>将文本光标移动到页面上的单个位置。不允许选择区域。</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToPage" xml:space="preserve">
+    <value>复制到此页面的链接</value>
+    <comment>message box</comment>
+  </data>
+  <data name="CopyLinkCommand_LinkToParagraph" xml:space="preserve">
+    <value>复制到本段的链接</value>
+    <comment>message box</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToPageButton" xml:space="preserve">
+    <value>复制链接到页面</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ContextMenuSheet_ribCopyLinkToParagraphButton" xml:space="preserve">
+    <value>复制链接到段落</value>
+    <comment>context menu sheet</comment>
+  </data>
+  <data name="ribCopyLinkToPageButton_Label" xml:space="preserve">
+    <value>复制链接到页面</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribCopyLinkToParagraphButton_Label" xml:space="preserve">
+    <value>复制链接到段落</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ExportDialog_embeddedBox.Text" xml:space="preserve">
+    <value>嵌入附件</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="ReportRemindersDialog.Text" xml:space="preserve">
+    <value>报告范围</value>
+  </data>
+  <data name="ReportRemindersDialog_groupBox.Text" xml:space="preserve">
+    <value>范围</value>
+    <comment>groupbox</comment>
+  </data>
+  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
+    <value>在此范围中生成提醒的报告</value>
+    <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebookRadio.Text" xml:space="preserve">
+    <value>当前笔记本中的所有部分</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_notebooksRadio.Text" xml:space="preserve">
+    <value>所有笔记本</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersDialog_sectionRadio.Text" xml:space="preserve">
+    <value>当前部分</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
+    <value>创建一个新的报告页面</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_oldRadio.Text" xml:space="preserve">
+    <value>更新此现有报告</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ReportRemindersReuseDialog_Text" xml:space="preserve">
+    <value>旧的或新的</value>
+    <comment>title</comment>
+  </data>
+  <data name="ContextMenuSheet_ribRestoreAutosizeButton" xml:space="preserve">
+    <value>...还原自动大小的容器宽度</value>
+    <comment>context menu option</comment>
+  </data>
+  <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
+    <value>还原自动大小的容器宽度</value>
     <comment>ribbon item</comment>
   </data>
 </root>

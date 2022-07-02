@@ -128,7 +128,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Windows">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.22000.0\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -147,6 +147,7 @@
     <Compile Include="Colorizer\Theme.cs" />
     <Compile Include="Commands\Clean\RemoveInkCommand.cs" />
     <Compile Include="Commands\Clean\RemoveTagsCommand.cs" />
+    <Compile Include="Commands\Clean\RestoreAutosizeCommand.cs" />
     <Compile Include="Commands\CommandService.cs" />
     <Compile Include="Commands\Clean\BreakingDialog.cs">
       <SubType>Form</SubType>
@@ -215,6 +216,7 @@
       <DependentUpon>FitGridToTextDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Commands\References\BiLinkCommand.cs" />
+    <Compile Include="Commands\References\CopyLinkCommand.cs" />
     <Compile Include="Commands\References\EmbedSubpageProxy.cs" />
     <Compile Include="Commands\References\LinkReferencesCommand.cs" />
     <Compile Include="Commands\References\LinkDialog.cs">
@@ -252,6 +254,18 @@
     </Compile>
     <Compile Include="Commands\Reminders\ReminderSerializer.cs" />
     <Compile Include="Commands\Reminders\ReportRemindersCommand.cs" />
+    <Compile Include="Commands\Reminders\ReportRemindersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Reminders\ReportRemindersDialog.Designer.cs">
+      <DependentUpon>ReportRemindersDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Reminders\ReportRemindersReuseDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Reminders\ReportRemindersReuseDialog.Designer.cs">
+      <DependentUpon>ReportRemindersReuseDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commands\Settings\KeyboardGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -430,6 +444,7 @@
     <Compile Include="Helpers\Office\Models\OutlookTaskFolders.cs" />
     <Compile Include="Helpers\Office\Models\OutlookTasks.cs" />
     <Compile Include="Helpers\Office\Outlook.cs" />
+    <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\SingleThreaded.cs" />
     <Compile Include="Helpers\SynchronizationContextAwaiter.cs" />
     <Compile Include="Commands\Tools\Updater\IUpdateReport.cs" />
@@ -1020,6 +1035,12 @@
     <EmbeddedResource Include="Commands\Reminders\RemindDialog.resx">
       <DependentUpon>RemindDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Reminders\ReportRemindersDialog.resx">
+      <DependentUpon>ReportRemindersDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Reminders\ReportRemindersReuseDialog.resx">
+      <DependentUpon>ReportRemindersReuseDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Commands\Settings\LinesSheet.resx">
       <DependentUpon>LinesSheet.cs</DependentUpon>
     </EmbeddedResource>
@@ -1215,13 +1236,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.42</Version>
+      <Version>1.11.38</Version>
     </PackageReference>
     <PackageReference Include="InputSimulator">
       <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
-      <Version>0.16.0</Version>
+      <Version>0.30.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities">
       <Version>2.2.0</Version>
