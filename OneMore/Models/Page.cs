@@ -84,7 +84,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
+		public XElement Root { get;  set; }
 
 
 		/// <summary>
@@ -92,7 +92,7 @@ namespace River.OneMoreAddIn.Models
 		/// means there is an obvious selection region, and partial means the selection
 		/// region is zero.
 		/// </summary>
-		public SelectionScope SelectionScope { get; private set; }
+		public SelectionScope SelectionScope { get;  set; }
 
 
 		/// <summary>
