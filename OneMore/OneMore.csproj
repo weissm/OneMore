@@ -1236,7 +1236,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.38</Version>
+      <Version>1.11.43</Version>
     </PackageReference>
     <PackageReference Include="InputSimulator">
       <Version>1.0.4</Version>
