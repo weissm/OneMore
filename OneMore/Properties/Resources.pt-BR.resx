@@ -1899,7 +1899,7 @@ Nesta secção</value>
     <comment>dialog title</comment>
   </data>
   <data name="ribSearchMenu_Label" xml:space="preserve">
-    <value>Seque e tag</value>
+    <value>Pesquise e tag</value>
     <comment>ribbon menu item</comment>
   </data>
   <data name="ribTaggedButton_Label" xml:space="preserve">
@@ -3920,5 +3920,17 @@ Selecione Não para manter uma linha vazia entre os parágrafos</value>
   <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
     <value>Restaurar larguras de contêiner de tamanho automático</value>
     <comment>ribbon item</comment>
+  </data>
+  <data name="CrawlWebPageDialog_selectLabel.Text" xml:space="preserve">
+    <value>Selecionar tudo</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_unselectLabel.Text" xml:space="preserve">
+    <value>Selecione nenhum</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
+    <value>Use títulos de texto</value>
+    <comment>checkbox</comment>
   </data>
 </root>

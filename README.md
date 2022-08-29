@@ -20,13 +20,11 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 
 *Want more from OneMore? OneMore has more...* [Click here to see a list of all features](#features)
 
-![screenshot](../../wiki/images/Screenshot.png)
+| Some of the OneMore menus | The OneMore Calendar |
+|---|---|
+| ![screenshot](../../wiki/images/Screenshot.png) | ![Calendar](../../wiki/images/Calendar.png) |
+_Click an image to enlarge_
 
-### The new Calendar app (BETA)
-![Calendar](../../wiki/images/Calendar.png)
-
-## Languages
-OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, German, Polish, Portuguese, and Spanish*. Please let me know if you'd like it translated to another language. I use my [ResxTranslator](https://github.com/stevencohn/ResxTranslator) program to automate the translations but can also override inaccuracies of specific words and phrases. If you think a translation is not correct, again please let me know.
 
 <a name="features"></a>
 ## Features (151)
@@ -207,63 +205,9 @@ OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, 
     * Crop and rotate the image
     * Resize the image
 
-### OneMore in the Media
-
-* [How to Increase the Functionality of OneNote With OneMore Add-In](https://www.makeuseof.com/increase-functionally-onenote-with-onemore-add-in/)
-
-### Why?
-
-I wanted something more than what OneNote provided. I was overwhelmed by _OneNote Gem_,
-aghast at its bloated useless overloads of what was already otherwise available or features that
-I would never use in a million years - and, oh yeah, that price! I admit I was intrigued by the
-_Onetastic Macro_ approach but thought it limited and obtuse, decipherable only by programmers.
-And both of these charge money for something that should be open source and neither provided exactly
-what I wanted. So I did what any self respecting software engineer would do... I built my own.
-
-**Please Support**  
-I do this as a hobby. I will never charge you to use OneMore. So it is with great humility and
-appreciation that I humbly request that you consider a small donation to support the development
-of OneMore. In exchange, I pledge to continue listening with an open mind and to respond to your
-questions and tips in a timely manner.
-
-Please consider a sponsorship or one-time donation, click here:
-
-   [![Sponsor](../../wiki/images/Sponsor.png)](https://github.com/sponsors/stevencohn)
-
-
-### Minimum Prerequisites for Development
-
-* Developed for Windows 10
-* Microsoft Visual Studio 2019<sup>1</sup> including Office primary interop assemblies
-* Microsoft [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/)<sup>2</sup>
-* Microsoft [Visual Studio 2019 Installer Projects extension](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects)
-* .NET Framework 4.8
-* Microsoft OneNote 2016 32-bit or 64-bit
-
-<sup>1</sup>_VSCode cannot be used since it doesn't support COMReference entries in csproj files_ 
-
-<sup>2</sup>_The Windows 10 SDK is required to reference the Windows.winmd meta file located
-at "C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.**version**.0\Windows.winmd"
-where **version** is the version of the SDK you have installed, e.g. 19041. If your SDK has
-a different version then you must replace the **Windows** reference in OneMoreAddin.csproj_
-
-Tested recently with:
-* Windows 10 21H1 19043.1165
-* VS2019 16.10.4
-* Win10 SDK 10.0.19041.0
-* OneNote 2019/O365 16.0.14326.20164 64-bit
-
-#### Dependencies
-
-* [HtmlAgilityPack](https://www.nuget.org/packages/HtmlAgilityPack) - nuget, MIT license
-   * Normalizes HTML and non-conformant XML to well-formed XML that can be consumed by XElement.Parse
-* [InputSimulator](https://github.com/michaelnoonan/inputsimulator) - nuget, MIT license
-   * Replaces the use of SendKeys.Send, adding support for multilingual keyboards
-* [MarkdownDeep](https://github.com/toptensoftware/markdowndeep) - DLL in external folder
-   * Transforms markdown to HTML when importing md files
-
+---
 <a name="install"></a>
-## How to Install OneMore
+## 💾 How to Install OneMore
 
 1. Close OneNote if it is currently running (See below if you need to install OneNote)
 2. Download the [latest installer from here](https://github.com/stevencohn/OneMore/releases/latest)
@@ -292,9 +236,8 @@ where &lt;username&gt; is the user name of an account with admin rights and
 
 You wil be prompted for the password of the admin user. The installation will continue.
 
-```diff
-- You must sign out and then sign in again before you will see OneMore in the OneNote ribbon.
-```
+You must sign out and then sign in again before you will see OneMore in the OneNote ribbon.
+
 
 ### How to Upgrade OneMore
 
@@ -308,12 +251,12 @@ the new installer will simply overwrite the old files and _upgrade_ OneMore. Not
 download the installer, you will need to unblock it by opening its Properties dialog and clicking
 the _Unblock_ checkbox.
 
-## How to Install OneNote
+### How to Install OneNote
 
 OneNote can be installed after installing Office or even installed standalone without Office at all.
 
 1. Optionally install Office - do not run the Setup.exe; instead, run Office\Setup64.exe
-   - Download OfficeSetup.exe [from here](https://support.microsoft.com/en-us/office/install-or-reinstall-onenote-for-windows-c08068d8-b517-4464-9ff2-132cb9c45c08)
+   - Download the OneNote installer, OfficeSetup.exe [from here](https://support.microsoft.com/en-us/office/install-or-reinstall-onenote-for-windows-c08068d8-b517-4464-9ff2-132cb9c45c08)
    - If run standalone, it will install 32-bit OneNote
    - If run after installing Office, it will install 32 or 64 bit based on the bitness of Office
 1. Download the standalone OneNote installer (does not require Office or can be installed ontop of Office)
@@ -324,9 +267,67 @@ Note that Microsoft has changed its OneNote strategy. Instead of promoting the O
 which sucks in my opinion, they are now working on combining the best features from that app into a new
 desktop edition, hopefully to be released in 2022.
 
----
+## Languages
+OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, German, Polish, Portuguese, and Spanish*. Please let me know if you'd like it translated to another language. I use my [ResxTranslator](https://github.com/stevencohn/ResxTranslator) program to automate the translations but can also override inaccuracies of specific words and phrases. If you think a translation is not correct, again please let me know.
 
+### OneMore in the Media
+
+* [How to Increase the Functionality of OneNote With OneMore Add-In](https://www.makeuseof.com/increase-functionally-onenote-with-onemore-add-in/)
+
+### Why?
+
+I wanted something more than what OneNote provided. I was overwhelmed by _OneNote Gem_,
+aghast at its bloated useless overloads of what was already otherwise available or features that
+I would never use in a million years - and, oh yeah, that price! I admit I was intrigued by the
+_Onetastic Macro_ approach but thought it limited and obtuse, decipherable only by programmers.
+And both of these charge money for something that should be open source and neither provided exactly
+what I wanted. So I did what any self respecting software engineer would do... I built my own.
+
+**Please Support**  
+I do this as a hobby. I will never charge you to use OneMore. So it is with great humility and
+appreciation that I humbly request that you consider a small donation to support the development
+of OneMore. In exchange, I pledge to continue listening with an open mind and to respond to your
+questions and tips in a timely manner.
+
+Please consider a sponsorship or one-time donation, click here:
+
+   [![Sponsor](../../wiki/images/Sponsor.png)](https://github.com/sponsors/stevencohn)
+
+---
 ## Developing OneMore
 
-See the [Developer Notes](../../wiki/~-Developer-Notes) page in the Wiki where I keep a list of 
-technical references and information regarding developing and debugging this OneNote add-in.
+Are you programmer? Whether you're a professional or just curious, please feel free to explore
+the source code and have a play. See the [Developer Notes](../../wiki/~-Developer-Notes) page
+in the Wiki where I keep a list of technical references and information regarding developing
+and debugging this OneNote add-in.
+
+### Minimum Prerequisites for Development
+
+* Developed for Windows 10
+* Microsoft Visual Studio 2019<sup>1</sup> including Office primary interop assemblies
+* Microsoft [Windows 10 SDK](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk/)<sup>2</sup>
+* Microsoft [Visual Studio 2019 Installer Projects extension](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects)
+* .NET Framework 4.8
+* Microsoft OneNote 2016 32-bit or 64-bit
+
+<sup>1</sup>_VSCode cannot be used since it doesn't support COMReference entries in csproj files_ 
+
+<sup>2</sup>_The Windows 10 SDK is required to reference the Windows.winmd meta file located
+at "C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.**version**.0\Windows.winmd"
+where **version** is the version of the SDK you have installed, e.g. 19041. If your SDK has
+a different version then you must replace the **Windows** reference in OneMoreAddin.csproj_
+
+Tested recently with:
+* Windows 11 Pro 21H2 22000.918
+* Windows 11 SDK 10.0.22000.832
+* Visual Studio 2022 17.3.2
+* OneNote® 2021 MSO (Version 2207 Build 16.0.15427.20182) 64-bit 
+
+#### Dependencies
+
+* [HtmlAgilityPack](https://www.nuget.org/packages/HtmlAgilityPack) - nuget, MIT license
+   * Normalizes HTML and non-conformant XML to well-formed XML that can be consumed by XElement.Parse
+* [InputSimulator](https://github.com/michaelnoonan/inputsimulator) - nuget, MIT license
+   * Replaces the use of SendKeys.Send, adding support for multilingual keyboards
+* [MarkdownDeep](https://github.com/toptensoftware/markdowndeep) - DLL in external folder
+   * Transforms markdown to HTML when importing md files

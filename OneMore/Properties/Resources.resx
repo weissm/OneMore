@@ -312,7 +312,7 @@ Deferred</value>
     <comment>radio</comment>
   </data>
   <data name="ribSearchMenu_Label" xml:space="preserve">
-    <value>Seach and Tag</value>
+    <value>Search and Tag</value>
     <comment>ribbon menu item</comment>
   </data>
   <data name="Pronunciate_FullWord" xml:space="preserve">
@@ -3969,5 +3969,17 @@ Select No to keep one empty line between paragraphs</value>
   <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
     <value>Restore Auto-size Container Widths</value>
     <comment>ribbon item</comment>
+  </data>
+  <data name="CrawlWebPageDialog_selectLabel.Text" xml:space="preserve">
+    <value>Select all</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_unselectLabel.Text" xml:space="preserve">
+    <value>Select none</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
+    <value>Use Text Titles</value>
+    <comment>checkbox</comment>
   </data>
 </root>

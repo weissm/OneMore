@@ -1899,7 +1899,7 @@ In deze sectie</value>
     <comment>dialog title</comment>
   </data>
   <data name="ribSearchMenu_Label" xml:space="preserve">
-    <value>Seach en tag</value>
+    <value>Zoeken en tag</value>
     <comment>ribbon menu item</comment>
   </data>
   <data name="ribTaggedButton_Label" xml:space="preserve">
@@ -3920,5 +3920,17 @@ Selecteer NO om één lege regel tussen paragrafen te behouden</value>
   <data name="ribRestoreAutosizeButton_Label" xml:space="preserve">
     <value>Herstel automatische grootte containerbreedtes</value>
     <comment>ribbon item</comment>
+  </data>
+  <data name="CrawlWebPageDialog_selectLabel.Text" xml:space="preserve">
+    <value>Selecteer alles</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_unselectLabel.Text" xml:space="preserve">
+    <value>Selecteer geen</value>
+    <comment>link label</comment>
+  </data>
+  <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
+    <value>Gebruik teksttitels</value>
+    <comment>checkbox</comment>
   </data>
 </root>
