@@ -29,61 +29,63 @@ namespace River.OneMoreAddIn.Commands
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportWebDialog));
-			this.addressLabel = new System.Windows.Forms.Label();
-			this.addressBox = new System.Windows.Forms.TextBox();
-			this.okButton = new System.Windows.Forms.Button();
-			this.cancelButton = new System.Windows.Forms.Button();
-			this.appendButton = new System.Windows.Forms.RadioButton();
-			this.newPageButton = new System.Windows.Forms.RadioButton();
-			this.newChildButton = new System.Windows.Forms.RadioButton();
-			this.imagesBox = new System.Windows.Forms.CheckBox();
-			this.SuspendLayout();
-			// 
-			// addressLabel
-			// 
-			this.addressLabel.AutoSize = true;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportWebDialog));
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.addressBox = new System.Windows.Forms.TextBox();
+            this.okButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.appendButton = new System.Windows.Forms.RadioButton();
+            this.newPageButton = new System.Windows.Forms.RadioButton();
+            this.newChildButton = new System.Windows.Forms.RadioButton();
+            this.imagesBox = new System.Windows.Forms.CheckBox();
+            this.checkBox_EnableDebug = new System.Windows.Forms.CheckBox();
+            this.ImportMD = new System.Windows.Forms.CheckBox();
+            this.SuspendLayout();
+            // 
+            // addressLabel
+            // 
+            this.addressLabel.AutoSize = true;
 			this.addressLabel.Location = new System.Drawing.Point(18, 30);
 			this.addressLabel.Name = "addressLabel";
 			this.addressLabel.Size = new System.Drawing.Size(68, 20);
-			this.addressLabel.TabIndex = 0;
-			this.addressLabel.Text = "Address";
-			// 
-			// addressBox
-			// 
+            this.addressLabel.TabIndex = 0;
+            this.addressLabel.Text = "Address";
+            // 
+            // addressBox
+            // 
 			this.addressBox.Location = new System.Drawing.Point(92, 27);
 			this.addressBox.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
 			this.addressBox.Name = "addressBox";
 			this.addressBox.Size = new System.Drawing.Size(548, 26);
-			this.addressBox.TabIndex = 1;
-			this.addressBox.TextChanged += new System.EventHandler(this.addressBox_TextChanged);
-			// 
-			// okButton
-			// 
-			this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.okButton.Enabled = false;
-			this.okButton.Location = new System.Drawing.Point(434, 210);
-			this.okButton.Name = "okButton";
-			this.okButton.Size = new System.Drawing.Size(100, 38);
-			this.okButton.TabIndex = 9;
-			this.okButton.Text = "OK";
-			this.okButton.UseVisualStyleBackColor = true;
-			// 
-			// cancelButton
-			// 
-			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.cancelButton.Location = new System.Drawing.Point(540, 210);
-			this.cancelButton.Name = "cancelButton";
-			this.cancelButton.Size = new System.Drawing.Size(100, 38);
-			this.cancelButton.TabIndex = 8;
-			this.cancelButton.Text = "Cancel";
-			this.cancelButton.UseVisualStyleBackColor = true;
-			// 
-			// appendButton
-			// 
-			this.appendButton.AutoSize = true;
+            this.addressBox.TabIndex = 1;
+            this.addressBox.TextChanged += new System.EventHandler(this.addressBox_TextChanged);
+            // 
+            // okButton
+            // 
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Enabled = false;
+      	    this.okButton.Location = new System.Drawing.Point(434, 210);
+            this.okButton.Name = "okButton";
+	    this.okButton.Size = new System.Drawing.Size(100, 38);
+            this.okButton.TabIndex = 9;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+	    this.cancelButton.Location = new System.Drawing.Point(540, 210);
+  	    this.cancelButton.Name = "cancelButton";
+	    this.cancelButton.Size = new System.Drawing.Size(100, 38);
+            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // appendButton
+            // 
+            this.appendButton.AutoSize = true;
 			this.appendButton.Location = new System.Drawing.Point(92, 171);
 			this.appendButton.Name = "appendButton";
 			this.appendButton.Size = new System.Drawing.Size(202, 24);
@@ -122,9 +124,33 @@ namespace River.OneMoreAddIn.Commands
 			this.imagesBox.TabIndex = 13;
 			this.imagesBox.Text = "Import as static images";
 			this.imagesBox.UseVisualStyleBackColor = true;
-			// 
-			// ImportWebDialog
-			// 
+            // 
+            // checkBox_EnableDebug
+            // 
+            this.checkBox_EnableDebug.AutoSize = true;
+            this.checkBox_EnableDebug.Location = new System.Drawing.Point(386, 58);
+            this.checkBox_EnableDebug.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBox_EnableDebug.Name = "checkBox_EnableDebug";
+            this.checkBox_EnableDebug.Size = new System.Drawing.Size(120, 21);
+            this.checkBox_EnableDebug.TabIndex = 14;
+            this.checkBox_EnableDebug.Text = "Enable Debug";
+            this.checkBox_EnableDebug.UseVisualStyleBackColor = true;
+            this.checkBox_EnableDebug.CheckedChanged += new System.EventHandler(this.checkBox_EnableDebug_CheckedChanged);
+            // 
+            // ImportMD
+            // 
+            this.ImportMD.AutoSize = true;
+            this.ImportMD.Location = new System.Drawing.Point(386, 90);
+            this.ImportMD.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ImportMD.Name = "ImportMD";
+            this.ImportMD.Size = new System.Drawing.Size(94, 21);
+            this.ImportMD.TabIndex = 15;
+            this.ImportMD.Text = "Import MD";
+            this.ImportMD.UseVisualStyleBackColor = true;
+            this.ImportMD.CheckedChanged += new System.EventHandler(this.ImportMD_CheckedChanged);
+            // 
+            // ImportWebDialog
+            // 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,5 +189,7 @@ namespace River.OneMoreAddIn.Commands
 		private System.Windows.Forms.RadioButton newPageButton;
 		private System.Windows.Forms.RadioButton newChildButton;
 		private System.Windows.Forms.CheckBox imagesBox;
-	}
+        private System.Windows.Forms.CheckBox checkBox_EnableDebug;
+        private System.Windows.Forms.CheckBox ImportMD;
+    }
 }

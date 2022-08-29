@@ -12,7 +12,8 @@ namespace River.OneMoreAddIn.Models
 	using River.OneMoreAddIn.Styles;
 	using System;
 	using System.Collections.Generic;
-	using System.Drawing;
+    using System.Data;
+    using System.Drawing;
 	using System.Globalization;
 	using System.Linq;
 	using System.Media;
@@ -25,7 +26,7 @@ namespace River.OneMoreAddIn.Models
 	/// <summary>
 	/// Wraps a page with helper methods
 	/// </summary>
-	internal partial class Page
+	public partial class Page
 	{
 		//// Page meta to indicate data storage analysis report
 		//public static readonly string AnalysisMetaName = "omAnalysisReport";
@@ -83,7 +84,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
+		public XElement Root { get;  set; }
 
 
 		/// <summary>
@@ -91,7 +92,7 @@ namespace River.OneMoreAddIn.Models
 		/// means there is an obvious selection region, and partial means the selection
 		/// region is zero.
 		/// </summary>
-		public SelectionScope SelectionScope { get; private set; }
+		public SelectionScope SelectionScope { get;  set; }
 
 
 		/// <summary>
@@ -143,6 +144,315 @@ namespace River.OneMoreAddIn.Models
 			return container;
 		}
 
+
+		public List<XElement> GetAllNodesBelowLevel1(string searchString)
+		{
+			var xmlKeyDocContent = GetAllTNodesBelowLevel1(searchString);
+			for (int nodectr = 0; nodectr < xmlKeyDocContent.Count(); nodectr++)
+			{
+				xmlKeyDocContent[nodectr] = xmlKeyDocContent[nodectr].Parent;
+			}
+			return xmlKeyDocContent;
+		}
+		public List<XElement> GetAllTNodesBelowLevel1(string searchString)
+		{
+			List<XElement> xmlKeyDocContent =
+				Root
+				.Element(Namespace + "Outline")
+				.Element(Namespace + "OEChildren")
+				.Descendants(Namespace + "T")
+				.Where(n => (n.Value.StartsWith(searchString)))
+				.ToList();
+			return xmlKeyDocContent;
+		}
+		public virtual void encodeDefs(XElement myDoc, string[] defNameList = null)
+		{
+			foreach (string defName in (defNameList != null ? defNameList : new string[] { "TagDef", "QuickStyleDef" }))
+			{
+				switch (defName)
+				{
+					case "TagDef": encodeTags(myDoc); break;
+					case "QuickStyleDef": encodeQuickStyle(myDoc); break;
+				}
+			}
+		}
+		public void encodeTags(XElement myDoc)
+		{
+			string defName = "TagDef";
+			{
+				// now work with symbolic IDs
+				IEnumerable<XElement> xmlTagContent = myDoc.Descendants(Namespace + defName)
+					.Where(x => !x.Attribute("index").Value.Contains(x.Attribute("name").Value));
+				foreach (var tagDefNode in xmlTagContent)
+				{
+					int tagDefNodeIndex = int.Parse(tagDefNode.Attribute("index")
+											.Value.ToString());
+					foreach (XElement node in myDoc.Descendants(Namespace + "Tag")
+						.Where(n => n.Attribute("index").Value == tagDefNodeIndex.ToString()))
+					{
+						node.Attribute("index").SetValue(tagDefNode.Attribute("name").Value.ToString());
+					}
+				}
+			}
+		}
+		public void encodeQuickStyle(XElement myDoc, string[] defNameList = null)
+		{
+			string defName = "QuickStyleDef";
+			// now work with symbolic IDs
+			IEnumerable<XElement> xmlTagContent = myDoc.Descendants(Namespace + defName)
+				.Where(x => !x.Attribute("index").Value.Contains(x.Attribute("name").Value));
+			foreach (var tagDefNode in xmlTagContent)
+			{
+				int tagDefNodeIndex = int.Parse(tagDefNode.Attribute("index")
+										.Value.ToString());
+				foreach (XElement node in myDoc.Descendants(Namespace + "OE")
+					 .Where(n => n.Attribute("quickStyleIndex") != null)
+					.Where(n => n.Attribute("quickStyleIndex").Value == tagDefNodeIndex.ToString()))
+				{
+					node.Attribute("quickStyleIndex").SetValue(tagDefNode.Attribute("name").Value.ToString());
+				}
+			}
+		}
+		public static DataTable synTable =
+		new DataTable
+		{
+			Columns = { { "Syn", typeof(String) }, { "Org", typeof(String) } },
+			Rows =
+		{
+					{ "Distribution Group", "Verteilergruppe" },
+					{ "In Attendance", "Teilnehmend" },
+					{ "Tasks", "Aufgaben" },
+					{ "To Do", "Aufgaben"}
+		}
+		};
+
+		public enum tlTags
+		{
+			Aufgaben, MainItem, TopLevel, HighLights, LowLights, busts_in_silhouette, white_check_mark,
+			question, star, exclamation, phone, bulb, house, three, zero, two, arrow_right,
+			one, mailbox, musical_note, secret, movie_camera, book, notebook, zap
+		}
+
+		public struct tagIndexStruct
+		{
+			public string Name;
+			public int Type;
+			public int Symbol;
+			public int ID;
+			public string FontColor;
+			public string HighLightColor;
+			public tagIndexStruct(string name, int symbol, int id, int type = 0, string fontcolor = "automatic", string highlightcolor = "none")
+			{ Name = name; Type = type; Symbol = symbol; ID = id; FontColor = fontcolor; HighLightColor = highlightcolor; }
+		};
+
+		public static tagIndexStruct[] tagIndex = new tagIndexStruct[] {
+				new tagIndexStruct(name: "Aufgaben",            symbol: 3,   id: (int) tlTags.Aufgaben),
+				new tagIndexStruct(name: "1) Main Agenda Item", symbol: 59,  id: (int) tlTags.MainItem),
+				new tagIndexStruct(name: "2) Top Level Topic",  symbol: 64,  id: (int) tlTags.TopLevel),
+				new tagIndexStruct(name: "3) HighLights",       symbol: 25,   id: (int) tlTags.HighLights,   fontcolor: "#339966"),
+				new tagIndexStruct(name: "4) LowLights",        symbol: 113, id: (int) tlTags.LowLights,    fontcolor: "#FF0000"),
+				new tagIndexStruct(name: "Verteilergruppe",     symbol: 116, id: (int) tlTags.busts_in_silhouette),
+				new tagIndexStruct(name: "Teilnehmend",         symbol: 94,  id: (int) tlTags.white_check_mark),
+				new tagIndexStruct(name: "question",            symbol: 13,  id: (int) tlTags.question),
+				new tagIndexStruct(name: "star",                symbol: 17,  id: (int) tlTags.star),
+				new tagIndexStruct(name: "exclamation",         symbol: 18,  id: (int) tlTags.exclamation),
+				new tagIndexStruct(name: "phone",               symbol: 21,  id: (int) tlTags.phone),
+				new tagIndexStruct(name: "bulb",                symbol: 23,  id: (int) tlTags.bulb),
+				new tagIndexStruct(name: "house",               symbol: 33,  id: (int) tlTags.house),
+				new tagIndexStruct(name: "three",               symbol: 39,  id: (int) tlTags.three),
+				new tagIndexStruct(name: "zero",                symbol: 51,  id: (int) tlTags.zero),
+				new tagIndexStruct(name: "two",                 symbol: 59,  id: (int) tlTags.two),
+				new tagIndexStruct(name: "arrow_right",         symbol: 64,  id: (int) tlTags.arrow_right),
+				new tagIndexStruct(name: "one",                 symbol: 70,  id: (int) tlTags.one),
+				new tagIndexStruct(name: "mailbox",             symbol: 118, id: (int) tlTags.mailbox),
+				new tagIndexStruct(name: "musical_note",        symbol: 121, id: (int) tlTags.musical_note),
+				new tagIndexStruct(name: "secret",              symbol: 131, id: (int) tlTags.secret),
+				new tagIndexStruct(name: "book",                symbol: 132, id: (int) tlTags.book),
+				new tagIndexStruct(name: "movie_camera",        symbol: 133, id: (int) tlTags.movie_camera),
+				new tagIndexStruct(name: "notebook",            symbol: 134, id: (int) tlTags.notebook),
+				new tagIndexStruct(name: Enum.GetName(typeof(tlTags), tlTags.zap), symbol: 140, id: (int) tlTags.zap)
+			};
+
+		public struct QuickStyleIndexStruct
+		{
+			public string Name;
+			public string FontColor;
+			public string HighlightColor;
+			public string Font;
+			public double FontSize;
+			public double SpaceBefore;
+			public double SpaceAfter;
+			public QuickStyleIndexStruct(string nameP, string fontColorP = "automatic", string hightlightColorP = "automatic", string fontP = "Calibri", double fontsizeP = 11.0, double spaceBeforeP = 0.0, double spaceAfterP = 0.0)
+			{ Name = nameP; FontColor = fontColorP; HighlightColor = hightlightColorP; Font = fontP; FontColor = fontColorP; FontSize = fontsizeP; SpaceBefore = spaceBeforeP; SpaceAfter = spaceAfterP; }
+		};
+		public static QuickStyleIndexStruct[] quickStyleIndex = new QuickStyleIndexStruct[] {
+				new QuickStyleIndexStruct("PageTitle", fontColorP:"#80be6a", fontsizeP:20, fontP:"Source Sans Pro Black"),
+				new QuickStyleIndexStruct("p", fontsizeP:11.0, fontP:"Source Sans Pro Light", spaceBeforeP: 0.0, spaceAfterP: 0.0),
+				new QuickStyleIndexStruct("h1", fontColorP:"#be806a", fontsizeP:16.0, fontP:"Source Sans Pro Black", spaceBeforeP: 1.0, spaceAfterP: 0.5),
+				new QuickStyleIndexStruct("h2", fontColorP:"#be806a", fontsizeP:14.0, fontP:"Source Sans Pro Black", spaceBeforeP: 0.8, spaceAfterP: 0.5),
+				new QuickStyleIndexStruct("h3", fontColorP:"#be806a", fontsizeP:13.0, fontP:"Source Sans Pro Black", spaceBeforeP: 0.3, spaceAfterP: 0.3),
+				new QuickStyleIndexStruct("h4", fontColorP:"#be806a", fontsizeP:12.0, fontP:"Source Sans Pro Black", spaceBeforeP: 0.3, spaceAfterP: 0.3)
+			};
+
+
+		public void checkDefs()
+		{
+			// detect ID for aufgaben tag and generate table accordingly
+			if (Root == null)
+			{
+				return;
+			}
+			foreach (string defName in new string[] { "TagDef", "QuickStyleDef" })
+			{
+				IEnumerable<XElement> xmlTagContent = Root.Descendants(Namespace + defName);
+
+				// now ensure, that current doc has proper named tag index
+				foreach (var currMomDefs in xmlTagContent)
+				{
+					var currMomDefsName = currMomDefs.Attribute("name").Value;
+					DataRow synonymExists = synTable.Select("Syn = '" + currMomDefsName + "'").FirstOrDefault();
+					if (synonymExists != null)
+					{
+						currMomDefs.Attribute("name").Value = synonymExists["Org"].ToString();
+					}
+				}
+				encodeDefs(Root, defNameList: new string[] { defName });
+				// remove doublicates
+				xmlTagContent
+				.GroupBy(z => z.Attribute("name").Value)
+				.Where(z => z.Count() > 1) //Filter only the distinct one
+				.SelectMany(z => z) //All in where has to be retuned
+				.ToList()
+				.ForEach(z => z.Remove());
+				xmlTagContent = Root.Descendants(Namespace + defName);
+
+				// ensure that mandatory tagIDs sare set
+				for (int tagID = 0; tagID < (defName.Equals("TagDef") ? tagIndex.Count() : quickStyleIndex.Count()); tagID++)
+				{
+					var defNodeName = (defName.Equals("TagDef") ? tagIndex[tagID].Name : quickStyleIndex[tagID].Name);
+					XElement defNode = xmlTagContent
+											.Where(x => x.Attribute("name").Value == defNodeName)
+											.FirstOrDefault();
+					if (defNode != null)
+					{
+						defNode.SetAttributeValue("index", tagID.ToString("00000") + "_" + defNodeName);
+					}
+					else
+					{
+						// generate TagDef / quickStyleDefs
+						XElement docNode = Root.Descendants(Namespace + defName)
+						.LastOrDefault();
+						XElement newDefNode;
+						if (defName.Equals("TagDef"))
+						{
+							newDefNode = new XElement(Namespace + defName,
+													   new XAttribute("index", tagID.ToString("00000") + "_" + defNodeName),
+													   new XAttribute("type", tagIndex[tagID].Type.ToString()),
+													   new XAttribute("symbol", tagIndex[tagID].Symbol.ToString()),
+													   new XAttribute("fontColor", tagIndex[tagID].FontColor.ToString()),
+													   new XAttribute("highlightColor", tagIndex[tagID].HighLightColor.ToString()),
+													   new XAttribute("name", tagIndex[tagID].Name));
+						}
+						else
+						{
+							newDefNode = new XElement(Namespace + "QuickStyleDef",
+														new XAttribute("index", tagID.ToString("00000") + "_" + defNodeName),
+														new XAttribute("name", quickStyleIndex[tagID].Name),
+														new XAttribute("fontColor", quickStyleIndex[tagID].FontColor.ToString()),
+														new XAttribute("highlightColor", quickStyleIndex[tagID].HighlightColor.ToString()),
+														new XAttribute("font", quickStyleIndex[tagID].Font.ToString()),
+														new XAttribute("fontSize", quickStyleIndex[tagID].FontSize.ToString()),
+														new XAttribute("spaceBefore", quickStyleIndex[tagID].SpaceBefore.ToString("N1", CultureInfo.CreateSpecificCulture("en-US"))),
+														new XAttribute("spaceAfter", quickStyleIndex[tagID].SpaceAfter.ToString("N1", CultureInfo.CreateSpecificCulture("en-US"))));
+						}
+						if (docNode != null)
+						{
+							docNode.AddAfterSelf(newDefNode);
+						}
+						else
+						{
+							Root.AddFirst(newDefNode);
+						}
+					}
+				}
+				// set index for all non mandatory tags
+				foreach (var node in xmlTagContent.Where(x => !x.Attribute("index").Value.Contains(x.Attribute("name").Value)))
+				{
+					node.SetAttributeValue("index", "111" + "_" + node.Attribute("name").Value);
+				}
+				// remove doublicates
+				if (xmlTagContent.Count() > 0)
+				{
+					var xmlTagContentDoubles = xmlTagContent.GroupBy(x => x.Attribute("name").Value).Where(g => g.Count() > 1);
+					foreach (var xmlTagContentDouble in xmlTagContentDoubles)
+					{
+						bool firstID = true;
+						foreach (var xmlTagContentDoubleID in xmlTagContentDouble)
+						{
+							if (firstID)
+							{
+								firstID = false;
+							}
+							else
+							{
+								xmlTagContentDoubleID.Remove();
+							}
+						}
+					}
+				}
+			}
+		}
+		public virtual void decodeDefs(string[] defNameList = null)
+		{
+			if (defNameList == null)
+			{
+				defNameList = new string[] { "TagDef", "QuickStyleDef" };
+			}
+			foreach (string defName in defNameList)
+			{
+				string targetName = "";
+				switch (defName)
+				{
+					case "TagDef": targetName = "Tag"; break;
+					case "QuickStyleDef": targetName = "quickStyleIndex"; break;
+				}
+
+				// now convert symbolic IDs back to numeric
+				IEnumerable<XElement> xmlTagContent = Root.Descendants(Namespace + defName);
+				var tagDefNodesSortedList = xmlTagContent.OrderBy(d => (d.Attribute("index").Value));
+				var index = 0;
+				foreach (var tagDefNode in tagDefNodesSortedList)
+				{
+					var tagDefNodeName = tagDefNode.Attribute("name")
+											.Value.ToString();
+					tagDefNode.SetAttributeValue("index", index++);
+					if (defName.Equals("TagDef"))
+					{
+						foreach (XElement node in Root.Descendants(Namespace + targetName)
+							.Where(n => n.Attribute("index").Value == tagDefNodeName.ToString()))
+						{
+							node.Attribute("index").SetValue(tagDefNode.Attribute("index").Value.ToString());
+						}
+					}
+					else
+					if (defName.Equals("QuickStyleDef"))
+					{
+						foreach (XElement node in Root.Descendants(Namespace + "OE")
+						 .Where(n => n.Attribute("quickStyleIndex") != null)
+						.Where(n => n.Attribute("quickStyleIndex").Value == tagDefNodeName.ToString()))
+						{
+							var collapsedAttribute = node.Attribute("collapsed");
+							node.RemoveAttributes();
+							node.Add(new XAttribute("quickStyleIndex", tagDefNode.Attribute("index").Value.ToString()));
+							if (collapsedAttribute != null)
+							{
+								node.Add(collapsedAttribute);
+							}
+						}
+					}
+				}
+			}
+		}
 
 		/// <summary>
 		/// Appends HTML content to the current page

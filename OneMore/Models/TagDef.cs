@@ -7,7 +7,7 @@ namespace River.OneMoreAddIn.Models
 	using System.Xml.Linq;
 
 
-	internal class TagDef : XElement
+	public class TagDef : XElement
 	{
 		private int indexValue;
 

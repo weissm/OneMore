@@ -4,10 +4,10 @@
 
 namespace River.OneMoreAddIn.Commands
 {
-	using River.OneMoreAddIn.Models;
-	using System;
-	using System.Diagnostics;
-	using System.IO;
+using River.OneMoreAddIn.Models;
+using System;
+using System.Diagnostics;
+using System.IO;
 	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -193,6 +193,7 @@ namespace River.OneMoreAddIn.Commands
 							return false;
 						}
 					}
+
 					catch (Exception exc)
 					{
 						logger.WriteLine("error running Execute(string)", exc);
@@ -218,6 +219,8 @@ namespace River.OneMoreAddIn.Commands
 
 			Process process = null;
 
+			string arg = plugin.Arguments.IsNullOrEmpty() ? "" : $"{plugin.Arguments} \"{path}\"";
+
 			try
 			{
 				process = new Process
@@ -225,12 +228,13 @@ namespace River.OneMoreAddIn.Commands
 					StartInfo = new ProcessStartInfo
 					{
 						FileName = plugin.Command,
-						Arguments = $"{plugin.Arguments} \"{path}\"",
+						Arguments = arg,
 						CreateNoWindow = true,
 						UseShellExecute = false,
 						RedirectStandardOutput = true,
-						RedirectStandardError = true
-					},
+						RedirectStandardError = true,
+						WindowStyle = ProcessWindowStyle.Minimized
+			},
 
 					EnableRaisingEvents = true
 				};
