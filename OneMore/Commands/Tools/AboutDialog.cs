@@ -18,6 +18,7 @@ namespace River.OneMoreAddIn.Commands
 		public AboutDialog()
 		{
 			InitializeComponent();
+			sponsorButton.SetHandCursor();
 
 			Logger.SetDesignMode(DesignMode);
 		}
@@ -60,6 +61,12 @@ namespace River.OneMoreAddIn.Commands
 		private void GoHome(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(homeLink.Text);
+		}
+
+
+		private void GotoSponsorship(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start((string)sponsorButton.Tag);
 		}
 
 

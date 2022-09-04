@@ -142,6 +142,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please support future development of OneMore.
+        /// </summary>
+        internal static string AboutDialog_pleaseLabel_Text {
+            get {
+                return ResourceManager.GetString("AboutDialog_pleaseLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OneMore Add-in.
         /// </summary>
         internal static string AboutDialog_Text {
@@ -7144,7 +7153,9 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to URL Patterns must contain a string replacement token, such as &amp;q={0}.
+        ///   Looks up a localized string similar to URL Patterns must contain a string replacement token, such as &amp;q={0}
+        ///
+        ///Search engines will appear in the page context menu, right-click..
         /// </summary>
         internal static string SearchEngineSheet_introLabel_Text {
             get {
@@ -7848,6 +7859,26 @@ namespace River.OneMoreAddIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Sponsor {
+            get {
+                object obj = ResourceManager.GetObject("Sponsor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SponsorOver {
+            get {
+                object obj = ResourceManager.GetObject("SponsorOver", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Sports {
             get {
                 object obj = ResourceManager.GetObject("Sports", resourceCulture);
@@ -8481,6 +8512,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OneNote Timer.
+        /// </summary>
+        internal static string TimerWindow_Text {
+            get {
+                return ResourceManager.GetString("TimerWindow.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide date and time.
         /// </summary>
         internal static string ToggleDttmDialog_hideRadio_Text {
@@ -8828,6 +8868,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string word_No {
+            get {
+                return ResourceManager.GetString("word_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OK.
         /// </summary>
         internal static string word_OK {
@@ -8977,6 +9026,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string word_Width {
             get {
                 return ResourceManager.GetString("word_Width", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string word_Yes {
+            get {
+                return ResourceManager.GetString("word_Yes", resourceCulture);
             }
         }
         

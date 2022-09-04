@@ -908,7 +908,9 @@ OneNote zamknie się automatycznie</value>
     <comment>warning message</comment>
   </data>
   <data name="SearchEngineSheet_introLabel.Text" xml:space="preserve">
-    <value>Wzory URL muszą zawierać token zastępczy łańcucha, takie jak i q = {0}</value>
+    <value>Wzorce adresów URL muszą zawierać token zastępujący ciąg, taki jak &amp;q={0}
+
+Wyszukiwarki pojawią się w menu kontekstowym strony, kliknij prawym przyciskiem myszy.</value>
     <comment>label</comment>
   </data>
   <data name="RemindDialog_statusBox.Text" xml:space="preserve">
@@ -3985,5 +3987,19 @@ Wybierz Nie, aby zachować jedną pustą linię między akapitami</value>
   <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
     <value>Użyj tytułów tekstowych</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="word_No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="word_Yes" xml:space="preserve">
+    <value>TAk</value>
+  </data>
+  <data name="TimerWindow.Text" xml:space="preserve">
+    <value>Zegar OneNote</value>
+    <comment>window title</comment>
+  </data>
+  <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
+    <value>Prosimy o wsparcie przyszłego rozwoju OneMore</value>
+    <comment>label</comment>
   </data>
 </root>
