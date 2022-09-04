@@ -1835,7 +1835,9 @@ Kop - opnemen in inhoudsopgave</value>
     <comment>button</comment>
   </data>
   <data name="SearchEngineSheet_introLabel.Text" xml:space="preserve">
-    <value>URL-patronen moeten een tekenreeksvervangingstoken bevatten, zoals &amp;q={0}</value>
+    <value>URL-patronen moeten een tekenreeksvervangingstoken bevatten, zoals &amp;q={0}
+
+Zoekmachines verschijnen in het contextmenu van de pagina, klik met de rechtermuisknop.</value>
     <comment>label</comment>
   </data>
   <data name="SearchEngineSheet_upButton.Text" xml:space="preserve">
@@ -3932,5 +3934,19 @@ Selecteer NO om één lege regel tussen paragrafen te behouden</value>
   <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
     <value>Gebruik teksttitels</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="word_No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="word_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="TimerWindow.Text" xml:space="preserve">
+    <value>OneNote-timer</value>
+    <comment>window title</comment>
+  </data>
+  <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
+    <value>Steun de toekomstige ontwikkeling van OneMore</value>
+    <comment>label</comment>
   </data>
 </root>

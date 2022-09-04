@@ -4,6 +4,7 @@
 
 namespace River.OneMoreAddIn.Commands
 {
+	using Chinese;
 	using System.Linq;
 	using System.Text.RegularExpressions;
 	using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace River.OneMoreAddIn.Commands
 
 	internal class WordCountCommand : Command
 	{
+		private const string CJKPattern = @"\p{IsCJKUnifiedIdeographs}+";
+
 
 		public WordCountCommand()
 		{
@@ -26,6 +29,8 @@ namespace River.OneMoreAddIn.Commands
 				var runs = page.GetSelectedElements(true);
 				var count = 0;
 
+				var regex = new Regex(CJKPattern);
+
 				foreach (var run in runs)
 				{
 					var cdatas = run.DescendantNodes().OfType<XCData>();
@@ -34,7 +39,17 @@ namespace River.OneMoreAddIn.Commands
 						var text = cdata.GetWrapper().Value.Trim();
 						if (text.Length > 0)
 						{
-							count += Regex.Matches(text, @"[\w]+").Count;
+							//logger.WriteLine($"counting '{text}'");
+
+							if (regex.IsMatch(text))
+							{
+								// works well for Chinese but is questionable for JP and KO
+								count += ChineseTokenizer.SplitWords(text).Count();
+							}
+							else
+							{
+								count += Regex.Matches(text, @"[\w]+").Count;
+							}
 						}
 					}
 				}
@@ -51,5 +66,45 @@ namespace River.OneMoreAddIn.Commands
 
 			await Task.Yield();
 		}
+
+
+		/*
+		 * test using GTranslate48 nuget...
+		 * 
+		private async Task<string> Transliterate(string text)
+		{
+			try
+			{
+				// this nonsense is all rather absurd but it works...
+
+				text = await await SingleThreaded.Invoke(async () =>
+				{
+					using (var translator = new AggregateTranslator())
+					{
+						// verify language
+						var language = await translator.DetectLanguageAsync(text);
+						logger.WriteLine($"detected language '{language.ISO6391}'");
+						if (language.ISO6391 == "zh-CN" ||
+							language.ISO6391 == "jp-JP" ||
+							language.ISO6391 == "ko-KR")
+						{
+							text = (await translator.TransliterateAsync(
+								text, "en", language.ISO6391)).Transliteration;
+
+							return text;
+						}
+					}
+
+					return null;
+				});
+			}
+			catch (Exception exc)
+			{
+				logger.WriteLine(exc);
+			}
+
+			return text;
+		}
+		*/
 	}
 }

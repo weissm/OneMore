@@ -5,6 +5,7 @@
 #pragma warning disable CS3001  // Type is not CLS-compliant
 #pragma warning disable S1215   // "GC.Collect" should not be called
 #pragma warning disable IDE0042 // Deconstruct variable declaration
+#pragma warning disable S3885   // Use Load instead of LoadFrom
 
 namespace River.OneMoreAddIn
 {
@@ -16,6 +17,7 @@ namespace River.OneMoreAddIn
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Globalization;
+	using System.IO;
 	using System.Management;
 	using System.Runtime.InteropServices;
 	using System.Threading.Tasks;
@@ -78,6 +80,50 @@ namespace River.OneMoreAddIn
 				var module = hostproc[0].MainModule;
 				logger.WriteLine($"{module.FileName} ({module.FileVersionInfo.ProductVersion})");
 			}
+
+			AppDomain.CurrentDomain.AssemblyResolve += CustomAssemblyResolve;
+			AppDomain.CurrentDomain.UnhandledException += CatchUnhandledException;
+		}
+
+
+		/// <summary>
+		/// Special handler to load third-party DLL references from nugets like GTranslate
+		/// which for some reason aren't found using the default path traversal.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
+		/// <returns></returns>
+		private System.Reflection.Assembly CustomAssemblyResolve(object sender, ResolveEventArgs args)
+		{
+			//logger.WriteLine($"AssemblyResolve of '{args.Name}'");
+
+			var path = new Uri(Path.Combine(
+				Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase),
+				args.Name.Substring(0, args.Name.IndexOf(',')) + ".dll"
+				)).LocalPath;
+
+			try
+			{
+				logger.WriteLine($"resolving {path}");
+				var asm = System.Reflection.Assembly.LoadFrom(path);
+				return asm;
+			}
+			catch (Exception exc)
+			{
+				logger.WriteLine($"AssemblyResolve exception", exc);
+				return null;
+			}
+		}
+
+
+		/// <summary>
+		/// Catch-all
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CatchUnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			logger.WriteLine("Unhandled appdomain exception", (Exception)e.ExceptionObject);
 		}
 
 

@@ -1830,7 +1830,9 @@
     <comment>button</comment>
   </data>
   <data name="SearchEngineSheet_introLabel.Text" xml:space="preserve">
-    <value>يجب أن تحتوي أنماط عناوين URL على رمز مميز لاستبدال السلسلة ، مثل &amp;q={0}</value>
+    <value>يجب أن تحتوي أنماط عناوين URL على رمز مميز لاستبدال السلسلة ، مثل &amp; q = {0}
+
+ستظهر محركات البحث في قائمة سياق الصفحة ، انقر بزر الماوس الأيمن.</value>
     <comment>label</comment>
   </data>
   <data name="SearchEngineSheet_upButton.Text" xml:space="preserve">
@@ -3932,5 +3934,19 @@ ISO-code then comma then language name</comment>
   <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
     <value>استخدم عناوين النص</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="word_No" xml:space="preserve">
+    <value>رقم</value>
+  </data>
+  <data name="word_Yes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="TimerWindow.Text" xml:space="preserve">
+    <value>مؤقت OneNote</value>
+    <comment>window title</comment>
+  </data>
+  <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
+    <value>الرجاء دعم التطوير المستقبلي لـ OneMore</value>
+    <comment>label</comment>
   </data>
 </root>

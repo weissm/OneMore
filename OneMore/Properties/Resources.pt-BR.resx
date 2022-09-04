@@ -1835,7 +1835,9 @@ Título - incluir no TOC</value>
     <comment>button</comment>
   </data>
   <data name="SearchEngineSheet_introLabel.Text" xml:space="preserve">
-    <value>Os padrões de URL devem conter um token de substituição de string, como &amp;amp; q = {0}</value>
+    <value>Os padrões de URL devem conter um token de substituição de string, como &amp;q={0}
+
+Os mecanismos de pesquisa aparecerão no menu de contexto da página, clique com o botão direito.</value>
     <comment>label</comment>
   </data>
   <data name="SearchEngineSheet_upButton.Text" xml:space="preserve">
@@ -3932,5 +3934,19 @@ Selecione Não para manter uma linha vazia entre os parágrafos</value>
   <data name="CrawlWebPageDialog_useTextBox.Text" xml:space="preserve">
     <value>Use títulos de texto</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="word_No" xml:space="preserve">
+    <value>Não</value>
+  </data>
+  <data name="word_Yes" xml:space="preserve">
+    <value>Sim</value>
+  </data>
+  <data name="TimerWindow.Text" xml:space="preserve">
+    <value>Temporizador do OneNote</value>
+    <comment>window title</comment>
+  </data>
+  <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
+    <value>Por favor, apoie o desenvolvimento futuro do OneMore</value>
+    <comment>label</comment>
   </data>
 </root>

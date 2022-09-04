@@ -5,6 +5,7 @@
 namespace OneMoreCalendar
 {
 	using System;
+	using System.Drawing;
 	using System.Windows.Forms;
 
 
@@ -14,6 +15,8 @@ namespace OneMoreCalendar
 		public AboutDialog()
 		{
 			InitializeComponent();
+
+			sponsorButton.SetHandCursor();
 
 			// TODO: beta
 			versionLabel.Text = string.Format(versionLabel.Text, AssemblyInfo.Version) + " (BETA)";
@@ -30,6 +33,11 @@ namespace OneMoreCalendar
 		private void GoHome(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(homeLink.Text);
+		}
+
+		private void GotoSponsorship(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start((string)sponsorButton.Tag);
 		}
 	}
 }

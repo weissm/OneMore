@@ -207,7 +207,7 @@ _Click an image to enlarge_
 
 ---
 <a name="install"></a>
-## 💾 How to Install OneMore
+## 💾 How to Install OneMore as an Administrator
 
 1. Close OneNote if it is currently running (See below if you need to install OneNote)
 2. Download the [latest installer from here](https://github.com/stevencohn/OneMore/releases/latest)
@@ -224,7 +224,7 @@ _Click an image to enlarge_
      the user name and password of an account with admin rights. See below for further instructions.
 5. Run OneNote and enjoy
 
-#### Install from a normal user account
+### How to Install OneMore as a Normal User
 The OneMore installer requires admin rights to complete configuration and update the Windows Registry.
 If you have the user name and password of an account with admin rights, you can run the OneMore installer
 from your current account using this command entered from a console window:
@@ -270,9 +270,11 @@ desktop edition, hopefully to be released in 2022.
 ## Languages
 OneMore is translated to *Arabic, Chinese (Simplified), Dutch, English, French, German, Polish, Portuguese, and Spanish*. Please let me know if you'd like it translated to another language. I use my [ResxTranslator](https://github.com/stevencohn/ResxTranslator) program to automate the translations but can also override inaccuracies of specific words and phrases. If you think a translation is not correct, again please let me know.
 
-### OneMore in the Media
+### OneMore in the Media and Online
 
-* [How to Increase the Functionality of OneNote With OneMore Add-In](https://www.makeuseof.com/increase-functionally-onenote-with-onemore-add-in/)
+* [makeuseof.com - How to Increase the Functionality of OneNote With OneMore Add-In](https://www.makeuseof.com/increase-functionally-onenote-with-onemore-add-in/)
+* [MSN Technology - Every Programmer Who Uses OneNote Needs This Add-On ASAP](https://www.msn.com/en-us/news/technology/every-programmer-who-uses-onenote-needs-this-add-on-asap/ar-AAZL7dk)
+* [Microsoft OneNote Forum](https://answers.microsoft.com/en-us/msoffice/forum/all/onemore-add-in-for-onenote/4290f427-aec4-4365-920b-6523ca98f221)
 
 ### Why?
 
@@ -325,6 +327,8 @@ Tested recently with:
 
 #### Dependencies
 
+* [Chinese](https://www.nuget.org/packages/Chinese) - nuget, MIT license
+   * Used by Word Count command for Chinese text
 * [HtmlAgilityPack](https://www.nuget.org/packages/HtmlAgilityPack) - nuget, MIT license
    * Normalizes HTML and non-conformant XML to well-formed XML that can be consumed by XElement.Parse
 * [InputSimulator](https://github.com/michaelnoonan/inputsimulator) - nuget, MIT license
