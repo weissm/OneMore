@@ -2281,7 +2281,7 @@ ISO-code then comma then language name</comment>
     <comment>favorites button</comment>
   </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
-    <value>الإضافات المحفوظة</value>
+    <value>الإضافات</value>
     <comment>favorites menu</comment>
   </data>
   <data name="PluginsSheet.Text" xml:space="preserve">
@@ -3948,5 +3948,14 @@ ISO-code then comma then language name</comment>
   <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
     <value>الرجاء دعم التطوير المستقبلي لـ OneMore</value>
     <comment>label</comment>
+  </data>
+  <data name="word_Favorites" xml:space="preserve">
+    <value>المفضلة</value>
+  </data>
+  <data name="word_Go" xml:space="preserve">
+    <value>يذهب</value>
+  </data>
+  <data name="ChooseFavoriteCommand" xml:space="preserve">
+    <value>اختر المفضلة</value>
   </data>
 </root>

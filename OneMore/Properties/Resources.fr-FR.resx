@@ -2282,7 +2282,7 @@ ISO-code then comma then language name</comment>
     <comment>favorites button</comment>
   </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
-    <value>Mes plugins enregistrés</value>
+    <value>Plugins</value>
     <comment>favorites menu</comment>
   </data>
   <data name="PluginsSheet.Text" xml:space="preserve">
@@ -3944,5 +3944,14 @@ Sélectionnez Non pour conserver une ligne vide entre les paragraphes</value>
   <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
     <value>Veuillez soutenir le développement futur de OneMore</value>
     <comment>label</comment>
+  </data>
+  <data name="word_Favorites" xml:space="preserve">
+    <value>Favoris</value>
+  </data>
+  <data name="word_Go" xml:space="preserve">
+    <value>Aller</value>
+  </data>
+  <data name="ChooseFavoriteCommand" xml:space="preserve">
+    <value>Choisissez favori</value>
   </data>
 </root>
