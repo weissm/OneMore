@@ -15,13 +15,37 @@ namespace River.OneMoreAddIn
 
 	internal class ClipboardProvider
 	{
+		private readonly object gate;
 		private readonly Dictionary<Win.TextDataFormat, string> stash;
 		private BitmapSource stashedImage;
 
 
 		public ClipboardProvider()
 		{
+			gate = new object();
 			stash = new Dictionary<Win.TextDataFormat, string>();
+		}
+
+
+		public async Task<string> GetHtml()
+		{
+			return await SingleThreaded.Invoke(() =>
+			{
+				return Win.Clipboard.ContainsText(Win.TextDataFormat.Html)
+					? Win.Clipboard.GetText(Win.TextDataFormat.Html)
+					: null;
+			});
+		}
+
+
+		public async Task<string> GetText()
+		{
+			return await SingleThreaded.Invoke(() =>
+			{
+				return Win.Clipboard.ContainsText(Win.TextDataFormat.Text)
+					? Win.Clipboard.GetText(Win.TextDataFormat.Text)
+					: null;
+			});
 		}
 
 
@@ -29,7 +53,11 @@ namespace River.OneMoreAddIn
 		{
 			await SingleThreaded.Invoke(() =>
 			{
-				Win.Clipboard.SetText(text, Win.TextDataFormat.Html);
+				// avoids 0x800401D0/CLIPBRD_E_CANT_OPEN due to thread contentions
+				lock (gate)
+				{
+					Win.Clipboard.SetText(text, Win.TextDataFormat.Html);
+				}
 			});
 		}
 
@@ -38,7 +66,11 @@ namespace River.OneMoreAddIn
 		{
 			await SingleThreaded.Invoke(() =>
 			{
-				Win.Clipboard.SetText(text, Win.TextDataFormat.Text);
+				// avoids 0x800401D0/CLIPBRD_E_CANT_OPEN due to thread contentions
+				lock (gate)
+				{
+					Win.Clipboard.SetText(text, Win.TextDataFormat.Text);
+				}
 			});
 		}
 
@@ -74,28 +106,32 @@ namespace River.OneMoreAddIn
 		{
 			await SingleThreaded.Invoke(() =>
 			{
-				// multiple formats must be collated into a single data object
-				var data = new Win.DataObject();
-				var something = false;
-
-				if (stashedImage != null)
+				// avoids 0x800401D0/CLIPBRD_E_CANT_OPEN due to thread contentions
+				lock (gate)
 				{
-					data.SetImage(stashedImage);
-					something = true;
-				}
+					// multiple formats must be collated into a single data object
+					var data = new Win.DataObject();
+					var something = false;
 
-				if (stash.Count > 0)
-				{
-					foreach (var key in stash.Keys)
+					if (stashedImage != null)
 					{
-						data.SetData(ConvertToDataFormats(key), stash[key]);
+						data.SetImage(stashedImage);
 						something = true;
 					}
-				}
 
-				if (something)
-				{
-					Win.Clipboard.SetDataObject(data, true);
+					if (stash.Count > 0)
+					{
+						foreach (var key in stash.Keys)
+						{
+							data.SetData(ConvertToDataFormats(key), stash[key]);
+							something = true;
+						}
+					}
+
+					if (something)
+					{
+						Win.Clipboard.SetDataObject(data, true);
+					}
 				}
 			});
 
