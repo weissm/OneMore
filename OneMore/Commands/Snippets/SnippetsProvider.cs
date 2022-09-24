@@ -25,7 +25,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public SnippetsProvider() : base()
 		{
-			store = Path.Combine(PathFactory.GetAppDataPath(), DirectoryName);
+			store = Path.Combine(PathHelper.GetAppDataPath(), DirectoryName);
 		}
 
 
@@ -125,7 +125,7 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				PathFactory.EnsurePathExists(store);
+				PathHelper.EnsurePathExists(store);
 
 				using (var writer = new StreamWriter(path))
 				{
@@ -144,9 +144,6 @@ namespace River.OneMoreAddIn.Commands
 		public XElement MakeSnippetsMenu(XNamespace ns)
 		{
 			var menu = new XElement(ns + "menu",
-				new XAttribute("id", "ribCustomSnippetsMenu"),
-				new XAttribute("getLabel", "GetRibbonLabel"),
-				new XAttribute("imageMso", "GroupInsertShapes"),
 				new XElement(ns + "button",
 					new XAttribute("id", SaveSnippetButtonId),
 					new XAttribute("getLabel", "GetRibbonLabel"),

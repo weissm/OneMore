@@ -1,13 +1,6 @@
-﻿# ![logo](../../wiki/images/Logo.jpg "logo") OneMore - a OneNote Add-in
+﻿# ![logo](../../wiki/images/Logo.png "logo") OneMore - a OneNote Add-in
 
-A OneNote add-in with powerful yet simple and effective features.
-
-## 💾 How do I Install OneMore?
-There are [full instructions here](#install). 
-
-## 💁 Everything You Wanted to Know...
-
-See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some pleasant reading material...
+A OneNote add-in with powerful yet simple and effective features. See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some pleasant reading material...
 
 * Integrated with the OneNote ribbon, [context menus](../../wiki#extended-context-menus), and [keyboard shortcuts](../../wiki#keys) for easy access
 * [Customize the Text context menu](../../wiki/Settings) to add OneMore commands or a a custom search engine
@@ -17,17 +10,18 @@ See the [**project wiki**](../../wiki) for full details. Meanwhile, here's some 
 * Save and reuse [custom snippets](../../wiki/Custom-Styles-and-Favorites#Favorites) of content anywhere on any page
 * Add [formulas](../../wiki/Table-Commands) to table cell using Excel-like expressions
 
+## How do I Install OneMore?
+There are [full instructions here](#install). 
 
-*Want more from OneMore? OneMore has more...* [Click here to see a list of all features](#features)
+## Screenshots
 
 | Some of the OneMore menus | The OneMore Calendar |
 |---|---|
 | ![screenshot](../../wiki/images/Screenshot.png) | ![Calendar](../../wiki/images/Calendar.png) |
 _Click an image to enlarge_
 
-
-<a name="features"></a>
-## Features (151)
+## 💁 Features (151)
+*Want more from OneMore? OneMore has more...*
 
 [Clean commands](../../wiki/Clean-Commands) (12)
 
@@ -208,6 +202,8 @@ _Click an image to enlarge_
 ---
 <a name="install"></a>
 ## 💾 How to Install OneMore as an Administrator
+The OneMore installer requires admin rights to complete configuration and update the Windows Registry.
+If your account has admin rights then follow these steps:
 
 1. Close OneNote if it is currently running (See below if you need to install OneNote)
 2. Download the [latest installer from here](https://github.com/stevencohn/OneMore/releases/latest)
@@ -225,7 +221,6 @@ _Click an image to enlarge_
 5. Run OneNote and enjoy
 
 ### How to Install OneMore as a Normal User
-The OneMore installer requires admin rights to complete configuration and update the Windows Registry.
 If you have the user name and password of an account with admin rights, you can run the OneMore installer
 from your current account using this command entered from a console window:
 
@@ -296,12 +291,12 @@ Please consider a sponsorship or one-time donation, click here:
    [![Sponsor](../../wiki/images/Sponsor.png)](https://github.com/sponsors/stevencohn)
 
 ---
-## Developing OneMore
+## 🤖 Developing OneMore
 
-Are you programmer? Whether you're a professional or just curious, please feel free to explore
-the source code and have a play. See the [Developer Notes](../../wiki/~-Developer-Notes) page
-in the Wiki where I keep a list of technical references and information regarding developing
-and debugging this OneNote add-in.
+Are you programmer? Please feel free to explore the source code and have a play.
+See the [Developer Notes](../../wiki/~-Developer-Notes) page in the Wiki where I keep a list of
+technical references and information regarding developing and debugging this OneNote add-in.
+And mind [the license](https://github.com/stevencohn/OneMore/blob/main/LICENSE).
 
 ### Minimum Prerequisites for Development
 

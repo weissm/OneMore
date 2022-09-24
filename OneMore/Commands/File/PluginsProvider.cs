@@ -15,6 +15,7 @@ namespace River.OneMoreAddIn.Commands
 
 	internal class PluginsProvider : Loggable
 	{
+		private const string RunPluginButtonId = "ribPluginButton";
 		private const string ManagePluginsButtonId = "ribManagePluginsButton";
 
 		private const string DirectoryName = "Plugins";
@@ -25,7 +26,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public PluginsProvider() : base()
 		{
-			store = Path.Combine(PathFactory.GetAppDataPath(), DirectoryName);
+			store = Path.Combine(PathHelper.GetAppDataPath(), DirectoryName);
 		}
 
 
@@ -171,7 +172,7 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				PathFactory.EnsurePathExists(store);
+				PathHelper.EnsurePathExists(store);
 
 				using (var writer = new StreamWriter(path, false))
 				{
@@ -203,9 +204,12 @@ namespace River.OneMoreAddIn.Commands
 			}
 
 			var menu = new XElement(ns + "menu",
-				new XAttribute("id", "ribPluginsMenu"),
-				new XAttribute("getLabel", "GetRibbonLabel"),
-				new XAttribute("imageMso", "AddInsMenu"),
+				new XElement(ns + "button",
+					new XAttribute("id", RunPluginButtonId),
+					new XAttribute("getLabel", "GetRibbonLabel"),
+					new XAttribute("imageMso", "ComAddInsDialog"),
+					new XAttribute("onAction", "RunPluginCmd")
+					),
 				new XElement(ns + "button",
 					new XAttribute("id", ManagePluginsButtonId),
 					new XAttribute("getLabel", "GetRibbonLabel"),

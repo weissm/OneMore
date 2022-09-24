@@ -128,7 +128,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Windows">
-      <HintPath>..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.22000.0\Windows.winmd</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -161,6 +161,12 @@
     <Compile Include="Commands\Clean\BreakingCommand.cs" />
     <Compile Include="Commands\Edit\ColorizeCommand.cs" />
     <Compile Include="Commands\Edit\PasteTextCommand.cs" />
+    <Compile Include="Commands\Favorites\FavoritesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Favorites\FavoritesDialog.Designer.cs">
+      <DependentUpon>FavoritesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commands\File\CrawlHyperlink.cs" />
     <Compile Include="Commands\File\CrawlWebPageCommand.cs" />
     <Compile Include="Commands\File\CrawlWebPageDialog.cs">
@@ -304,6 +310,7 @@
     <Compile Include="Commands\Tables\FillerModels\IFiller.cs" />
     <Compile Include="Commands\Tables\FillerModels\NumberFiller.cs" />
     <Compile Include="Commands\Tables\FillCellsCommand.cs" />
+    <Compile Include="Commands\Tables\Formulas\FormulaValues.cs" />
     <Compile Include="Commands\Tables\InsertCellsCommand.cs" />
     <Compile Include="Commands\Tables\InsertCellsDialog.cs">
       <SubType>Form</SubType>
@@ -693,7 +700,7 @@
     <Compile Include="Helpers\Office\Office.cs" />
     <Compile Include="Helpers\Office\PowerPoint.cs" />
     <Compile Include="Helpers\Office\Word.cs" />
-    <Compile Include="Helpers\PathFactory.cs" />
+    <Compile Include="Helpers\PathHelper.cs" />
     <Compile Include="Models\QuickStyleMapping.cs" />
     <Compile Include="Commands\Settings\ContextMenuSheet.cs">
       <SubType>UserControl</SubType>
@@ -1022,6 +1029,9 @@
     <EmbeddedResource Include="Commands\Extras\TimerWindow.resx">
       <DependentUpon>TimerWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Favorites\FavoritesDialog.resx">
+      <DependentUpon>FavoritesDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Commands\File\CrawlWebPageDialog.resx">
       <DependentUpon>CrawlWebPageDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -1295,7 +1305,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>taskkill /fi "pid gt 0" /im ONENOTE.exe</PreBuildEvent>
+    <PreBuildEvent>taskkill /fi "pid gt 0" /im ONENOTE.exe /t</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

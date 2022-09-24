@@ -1066,7 +1066,7 @@ Notizbücher</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ctxCleanMenu_Label" xml:space="preserve">
-    <value>Sauber...</value>
+    <value>Aufräumen...</value>
     <comment>Context menu</comment>
   </data>
   <data name="ctxLowercaseButton_Label" xml:space="preserve">
@@ -2829,8 +2829,9 @@ OneNote-Datei (*.one)</value>
     <comment>ribbon item</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    Verweise auf diese Seite zuordnen
-  <comment>ribbon button</comment></data>
+    <value>Verweise auf diese Seite zuordnen</value>
+    <comment>ribbon button</comment>
+  </data>
   <data name="BiLinkCommand_Marked" xml:space="preserve">
     <value>Als Anker markiert "{0}". </value>
     <comment>message box</comment>
@@ -3827,14 +3828,6 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
     <value>Sortierbares Datum mit der Uhrzeit</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="ribPasteTextButton_Label" xml:space="preserve">
-    <value>Einfügen und nur Text halten</value>
-    <comment>ribbon item</comment>
-  </data>
-  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
-    <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
-    <comment>ribbon item</comment>
-  </data>
   <data name="SelectStyleCommand_context" xml:space="preserve">
     <value>Bewegen Sie den Textcursor in eine einzige Position auf der Seite. Auswahlregionen sind nicht zulässig.</value>
     <comment>message box</comment>
@@ -3935,5 +3928,14 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
   <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
     <value>Bitte unterstützen Sie die zukünftige Entwicklung von OneMore</value>
     <comment>label</comment>
+  </data>
+  <data name="word_Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="word_Go" xml:space="preserve">
+    <value>gehen</value>
+  </data>
+  <data name="ChooseFavoriteCommand" xml:space="preserve">
+    <value>Wählen Sie einen Favoriten</value>
   </data>
 </root>

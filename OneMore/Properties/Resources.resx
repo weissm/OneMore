@@ -2592,7 +2592,7 @@ In this section</value>
     <comment>message box</comment>
   </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
-    <value>My Saved Plugins</value>
+    <value>Plugins</value>
     <comment>favorites menu</comment>
   </data>
   <data name="ribImportButton_Label" xml:space="preserve">
@@ -4003,5 +4003,14 @@ Select No to keep one empty line between paragraphs</value>
   <data name="AboutDialog_pleaseLabel.Text" xml:space="preserve">
     <value>Please support future development of OneMore</value>
     <comment>label</comment>
+  </data>
+  <data name="word_Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="word_Go" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="ChooseFavoriteCommand" xml:space="preserve">
+    <value>Choose Favorite</value>
   </data>
 </root>
