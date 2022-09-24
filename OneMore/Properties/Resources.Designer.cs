@@ -1545,6 +1545,33 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to create {0} pages?.
+        /// </summary>
+        internal static string CreatePagesCommand_CreatePages {
+            get {
+                return ResourceManager.GetString("CreatePagesCommand_CreatePages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created pages. OneNote will update momentarily.
+        /// </summary>
+        internal static string CreatePagesCommand_Done {
+            get {
+                return ResourceManager.GetString("CreatePagesCommand_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A name list was not found on the page.
+        /// </summary>
+        internal static string CreatePagesCommand_NoNamesFound {
+            get {
+                return ResourceManager.GetString("CreatePagesCommand_NoNamesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select one image to crop.
         /// </summary>
         internal static string CropImage_oneImage {
@@ -4785,6 +4812,16 @@ namespace River.OneMoreAddIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Rename {
+            get {
+                object obj = ResourceManager.GetObject("Rename", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Reorder {
             get {
                 object obj = ResourceManager.GetObject("Reorder", resourceCulture);
@@ -4933,6 +4970,17 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ResizeImagesDialog_imageSizeLabel_Text {
             get {
                 return ResourceManager.GetString("ResizeImagesDialog_imageSizeLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resize all images
+        ///Do not shrink larger images
+        ///Do no enlarge smaller images.
+        /// </summary>
+        internal static string ResizeImagesDialog_limitsBox_Text {
+            get {
+                return ResourceManager.GetString("ResizeImagesDialog_limitsBox.Text", resourceCulture);
             }
         }
         
@@ -5544,6 +5592,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribExpandContentButton_Label {
             get {
                 return ResourceManager.GetString("ribExpandContentButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand Snippet From Name.
+        /// </summary>
+        internal static string ribExpandSnippetButton_Label {
+            get {
+                return ResourceManager.GetString("ribExpandSnippetButton_Label", resourceCulture);
             }
         }
         
@@ -8972,6 +9029,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string word_Refresh {
             get {
                 return ResourceManager.GetString("word_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
+        /// </summary>
+        internal static string word_Rename {
+            get {
+                return ResourceManager.GetString("word_Rename", resourceCulture);
             }
         }
         

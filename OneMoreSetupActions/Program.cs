@@ -40,6 +40,18 @@ namespace OneMoreSetupActions
 			logger = new Logger("OneMoreSetup");
 			stepper = new Stepper();
 
+			logger.WriteLine();
+			if (args[0] == "--install" || args[0] == "--uninstall")
+			{
+				logger.WriteLine(new string('=', 70));
+				logger.WriteLine($"starting action: {args[0]}");
+			}
+			else
+			{
+				logger.WriteLine(new string('-', 50));
+				logger.WriteLine($"reentry action: {args[0]}");
+			}
+
 			if (args.Any(a => a == "--x64" || a == "--x86"))
 			{
 				CheckBitness(args.Any(a => a == "--x64"));
@@ -151,17 +163,17 @@ namespace OneMoreSetupActions
 					new TrustedProtocolAction(logger, stepper).Install() == CustomAction.SUCCESS &&
 					new EdgeWebViewAction(logger, stepper).Install() == CustomAction.SUCCESS)
 				{
-					logger.WriteLine("completed successfully");
+					logger.WriteLine("install completed successfully");
 					return CustomAction.SUCCESS;
 				}
 
-				logger.WriteLine("completed suspiciously");
+				logger.WriteLine("install completed suspiciously");
 				return CustomAction.SUCCESS;
 				//return FAILURE;
 			}
 			catch (Exception exc)
 			{
-				logger.WriteLine("error registering");
+				logger.WriteLine("install failed; error registering");
 				logger.WriteLine(exc);
 				return CustomAction.FAILURE;
 			}
@@ -185,18 +197,18 @@ namespace OneMoreSetupActions
 
 				if (ok0 && ok1 && ok2 && ok3)
 				{
-					logger.WriteLine("completed successfully");
+					logger.WriteLine("uninstall completed successfully");
 				}
 				else
 				{
-					logger.WriteLine("completed with warnings");
+					logger.WriteLine("uninstall completed with warnings");
 				}
 
 				return CustomAction.SUCCESS;
 			}
 			catch (Exception exc)
 			{
-				logger.WriteLine("error unregistering");
+				logger.WriteLine("uninstall failed; error unregistering");
 				logger.WriteLine(exc);
 				return CustomAction.FAILURE;
 			}

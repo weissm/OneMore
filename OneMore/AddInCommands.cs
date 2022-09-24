@@ -161,6 +161,9 @@ namespace River.OneMoreAddIn
 		public async Task CrawlWebPageCmd(IRibbonControl control)
 			=> await factory.Run<CrawlWebPageCommand>();
 
+		public async Task CreatePagesCmd(IRibbonControl control)
+			=> await factory.Run<CreatePagesCommand>();
+
 		public async Task CropImageCmd(IRibbonControl control)
 			=> await factory.Run<CropImageCommand>();
 
@@ -204,6 +207,12 @@ namespace River.OneMoreAddIn
 
 		public async Task ExpandContentCmd(IRibbonControl control)
 			=> await factory.Run<ExpandoCommand>(Expando.Expand);
+
+
+		[Command("ribExpandSnippetButton_Label", Keys.Alt | Keys.F3)]
+		public async Task ExpandSnippetCmd(IRibbonControl control)
+			=> await factory.Run<InsertSnippetCommand>(string.Empty);
+
 
 		public async Task FillAcrossCmd(IRibbonControl control)
 			=> await factory.Run<FillCellsCommand>(FillCells.FillAcross);
