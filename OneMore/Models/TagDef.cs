@@ -126,8 +126,4 @@ idx	typ	sym	default	Tag
 30	30	28	false	To Do priority 1
 31	31	71	false	To Do priority 2
 32	32	8	false	Client request
-<<<<<<< HEAD
 */
-=======
-*/
->>>>>>> improveMD
