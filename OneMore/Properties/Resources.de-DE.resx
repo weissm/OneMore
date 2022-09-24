@@ -1066,7 +1066,7 @@ Notizbücher</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="ctxCleanMenu_Label" xml:space="preserve">
-    <value>Sauber...</value>
+    <value>Aufräumen...</value>
     <comment>Context menu</comment>
   </data>
   <data name="ctxLowercaseButton_Label" xml:space="preserve">
@@ -2273,7 +2273,7 @@ ISO-code then comma then language name</comment>
     <comment>favorites button</comment>
   </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
-    <value>Plugins</value>
+    <value>Meine gespeicherten Plugins</value>
     <comment>favorites menu</comment>
   </data>
   <data name="PluginsSheet.Text" xml:space="preserve">
@@ -2829,8 +2829,9 @@ OneNote-Datei (*.one)</value>
     <comment>ribbon item</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    Verweise auf diese Seite zuordnen
-  <comment>ribbon button</comment></data>
+    <value>Verweise auf diese Seite zuordnen</value>
+    <comment>ribbon button</comment>
+  </data>
   <data name="BiLinkCommand_Marked" xml:space="preserve">
     <value>Als Anker markiert "{0}". </value>
     <comment>message box</comment>
@@ -3827,14 +3828,6 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
     <value>Sortierbares Datum mit der Uhrzeit</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="ribPasteTextButton_Label" xml:space="preserve">
-    <value>Einfügen und nur Text halten</value>
-    <comment>ribbon item</comment>
-  </data>
-  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
-    <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
-    <comment>ribbon item</comment>
-  </data>
   <data name="SelectStyleCommand_context" xml:space="preserve">
     <value>Bewegen Sie den Textcursor in eine einzige Position auf der Seite. Auswahlregionen sind nicht zulässig.</value>
     <comment>message box</comment>
@@ -3943,31 +3936,6 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
     <value>gehen</value>
   </data>
   <data name="ChooseFavoriteCommand" xml:space="preserve">
-    <value>Wählen Sie Favorit</value>
-  </data>
-  <data name="CreatePagesCommand_CreatePages" xml:space="preserve">
-    <value>Möchten Sie {0} Seiten erstellen?</value>
-    <comment>message box</comment>
-  </data>
-  <data name="CreatePagesCommand_Done" xml:space="preserve">
-    <value>Erstellte Seiten. OneNote wird in Kürze aktualisiert</value>
-    <comment>message box</comment>
-  </data>
-  <data name="CreatePagesCommand_NoNamesFound" xml:space="preserve">
-    <value>Eine Namensliste wurde auf der Seite nicht gefunden</value>
-    <comment>message box</comment>
-  </data>
-  <data name="ribExpandSnippetButton_Label" xml:space="preserve">
-    <value>Erweitern Sie Snippet From Name</value>
-    <comment>menu item</comment>
-  </data>
-  <data name="word_Rename" xml:space="preserve">
-    <value>Umbenennen</value>
-  </data>
-  <data name="ResizeImagesDialog_limitsBox.Text" xml:space="preserve">
-    <value>Größe aller Bilder ändern
-Größere Bilder nicht verkleinern
-Vergrößern Sie kleinere Bilder nicht</value>
-    <comment>combobox</comment>
+    <value>Wählen Sie einen Favoriten</value>
   </data>
 </root>
