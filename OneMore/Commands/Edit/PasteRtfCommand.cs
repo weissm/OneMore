@@ -16,8 +16,6 @@ namespace River.OneMoreAddIn.Commands
 	using System.Windows.Documents;
 	using System.Xml;
 	using System.Xml.Linq;
-	using WindowsInput;
-	using WindowsInput.Native;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
@@ -63,9 +61,7 @@ namespace River.OneMoreAddIn.Commands
 				// focus on the OneNote main window provides a direct path for SendKeys
 				Native.SetForegroundWindow(one.WindowHandle);
 
-				//System.Windows.Forms.SendKeys.SendWait("^(v)");
-				new InputSimulator().Keyboard
-					.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+				await new ClipboardProvider().Paste();
 			}
 
 			await Task.Yield();
@@ -82,9 +78,17 @@ namespace River.OneMoreAddIn.Commands
 				if (Clipboard.ContainsText(TextDataFormat.Html))
 				{
 					var text = Clipboard.GetText(TextDataFormat.Html);
-					html = TranslateWhitespace(text.Substring(text.IndexOf("<html>")));
-
-					RebuildClipboard(AddHtmlPreamble(html));
+					var offset = text.IndexOf("<html>");
+					if (offset >= 0)
+					{
+						html = TranslateWhitespace(text.Substring(offset));
+						RebuildClipboard(AddHtmlPreamble(html));
+					}
+					else
+					{
+						logger.WriteLine("HTML tag not found in clipboard snippet:");
+						logger.WriteLine(text);
+					}
 				}
 				else if (Clipboard.ContainsText(TextDataFormat.Rtf))
 				{
