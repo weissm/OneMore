@@ -20,7 +20,7 @@ There are [full instructions here](#install).
 | ![screenshot](../../wiki/images/Screenshot.png) | ![Calendar](../../wiki/images/Calendar.png) |
 _Click an image to enlarge_
 
-## 💁 Features (152)
+## 💁 Features (153)
 *Want more from OneMore? OneMore has more...*
 
 [Clean commands](../../wiki/Clean-Commands) (12)
@@ -133,8 +133,9 @@ _Click an image to enlarge_
 * Add arbitrary tags to a page (Alt + T)
 * Search arbitrary page tags to index, copy, or move selected pages (Ctrl + Alt + T)
 
-[Snippets commands](../../wiki/Snippets-Commands) (17)
+[Snippets commands](../../wiki/Snippets-Commands) (18)
 
+* Expand custom snippet from name (Alt + F3)
 * Insert single (Shift + Alt + F11) or double (Shift + Alt + F12) horizontal line
 * Insert breadcrumb at top of page
 * Insert Table of Contents of headers, pages, or sections
@@ -205,6 +206,10 @@ _Click an image to enlarge_
 ## 💾 How to Install OneMore as an Administrator
 The OneMore installer requires admin rights to complete configuration and update the Windows Registry.
 If your account has admin rights then follow these steps:
+
+> Please note that I currently cannot support OneMore with Microsoft Office Insider or Beta builds.
+> I'm very sorry for the inconvenience. If I have an opportunity to access these special channels,
+> I will update this notice.
 
 1. Close OneNote if it is currently running (See below if you need to install OneNote)
 2. Download the [latest installer from here](https://github.com/stevencohn/OneMore/releases/latest)
