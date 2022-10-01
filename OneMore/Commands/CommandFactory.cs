@@ -19,7 +19,7 @@ namespace River.OneMoreAddIn
 	/// <summary>
 	/// Instantiates and runs OneMore commands
 	/// </summary>
-	internal class CommandFactory
+	public class CommandFactory
 	{
 		private readonly ILogger logger;
 		private readonly IRibbonUI ribbon;

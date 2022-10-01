@@ -16,7 +16,7 @@ namespace River.OneMoreAddIn.UI
 
 
 
-	internal class LocalizableForm : Form, IOneMoreWindow
+	public class LocalizableForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 
@@ -38,7 +38,14 @@ namespace River.OneMoreAddIn.UI
 		/// <returns></returns>
 		protected static bool NeedsLocalizing()
 		{
-			return AddIn.Culture.TwoLetterISOLanguageName != "en";
+			if (AddIn.Culture == null)
+            {
+				return false;
+            }
+            else
+            {
+				return AddIn.Culture.TwoLetterISOLanguageName != "en";
+			}
 		}
 
 
