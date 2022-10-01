@@ -50,6 +50,11 @@ namespace River.OneMoreAddIn
 							hyperlink = one.GetHyperlink(page.PageId, objectID);
 							if (!string.IsNullOrEmpty(hyperlink))
 							{
+								// remove any descendant Images to prevent bad XML parsing
+								// from brokets in OCR text, also remove indented paragraphs
+								selected.Descendants(ns + "Image").Remove();
+								selected.Descendants(ns + "OEChildren").Remove();
+
 								text = selected.TextValue();
 								if (text.Length > 20)
 								{
