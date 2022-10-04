@@ -962,6 +962,9 @@
     <None Include="Colorizer\Languages\xml.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\customui14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Emoji\Automobile.png" />
     <Content Include="Properties\Emoji\Bullet.png" />
     <Content Include="Properties\Emoji\Calendar.png" />
@@ -1053,6 +1056,7 @@
     <None Include="Properties\0336.OneNoteApplication_2013.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\onenotecontrols-2016.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Commands\Clean\BreakingDialog.resx">
@@ -1315,6 +1319,9 @@
     </PackageReference>
     <PackageReference Include="InputSimulator">
       <Version>1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Markdig">
+      <Version>0.30.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities">
       <Version>2.2.0</Version>
