@@ -634,7 +634,7 @@ Notizbücher</value>
     <comment>label</comment>
   </data>
   <data name="Emoji_Architecture" xml:space="preserve">
-    <value>Die Architektur</value>
+    <value>Architektur</value>
     <comment>emoji</comment>
   </data>
   <data name="Emoji_Automobile" xml:space="preserve">
@@ -1240,7 +1240,7 @@ Operatoren: + - / * ^
 Zellreferenz: A1, A2, ... ZZZ999
 Zellbereich: A1:A22
 Symbole: PI, E</value>
-  <comment></comment></data>
+  </data>
   <data name="FormulaDialog_selectedLabel.Text" xml:space="preserve">
     <value>Ausgewählte Zellen:</value>
     <comment>label</comment>
@@ -1452,7 +1452,7 @@ Symbole: PI, E</value>
   </data>
   <data name="ContextMenuSheet_introBox.Text" xml:space="preserve">
     <value>Wählen Sie Befehle aus, die im Kontextmenü Seite angezeigt werden sollen. </value>
-    <comment>intro</comment>
+    <comment>intro label</comment>
   </data>
   <data name="ContextMenuSheet_ribPasteRtfButton" xml:space="preserve">
     <value>Rich Text einfügen</value>
@@ -2224,7 +2224,7 @@ ISO-code then comma then language name</comment>
     <comment>ribbon button</comment>
   </data>
   <data name="ribSettingsButton_Label" xml:space="preserve">
-    <value>die Einstellungen</value>
+    <value>Einstellungen</value>
     <comment>ribbon button</comment>
   </data>
   <data name="InsertCalendarDialog_indentBox.Text" xml:space="preserve">
@@ -2640,8 +2640,9 @@ OneNote-Datei (*.one)</value>
     <comment>ribbon item</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    Verweise auf diese Seite zuordnen
-  <comment>ribbon button</comment></data>
+    <value>Verweise auf diese Seite zuordnen</value>
+    <comment>ribbon button</comment>
+  </data>
   <data name="BiLinkCommand_Marked" xml:space="preserve">
     <value>Als Anker markiert "{0}". </value>
     <comment>message box</comment>
@@ -3356,11 +3357,11 @@ Aufgeschoben</value>
     <comment>toolstrip button</comment>
   </data>
   <data name="SettingsDialog_keyboardNode.Text" xml:space="preserve">
-    <value>Klaviatur</value>
+    <value>Tastatur</value>
     <comment>treenode</comment>
   </data>
   <data name="KeyboardSheet.Text" xml:space="preserve">
-    <value>Klaviatur</value>
+    <value>Tastatur</value>
     <comment>sheet</comment>
   </data>
   <data name="ResizeImagesDialog_preserveBox.Text" xml:space="preserve">
@@ -3595,14 +3596,6 @@ Wählen Sie Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
   </data>
   <data name="ribInsertDateTimeButton_Label" xml:space="preserve">
     <value>Sortierbares Datum mit der Uhrzeit</value>
-    <comment>ribbon item</comment>
-  </data>
-  <data name="ribPasteTextButton_Label" xml:space="preserve">
-    <value>Einfügen und nur Text halten</value>
-    <comment>ribbon item</comment>
-  </data>
-  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
-    <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
   <data name="SelectStyleCommand_context" xml:space="preserve">
@@ -4030,5 +4023,9 @@ Vergrößern Sie kleinere Bilder nicht</value>
   </data>
   <data name="SettingsDialog_aliasNode.Text" xml:space="preserve">
     <value>Befehlsaliase</value>
+  </data>
+  <data name="SnippetsSheet_introLabel.Text" xml:space="preserve">
+    <value>Verwaltung der benutzerdefinierten Snippets</value>
+    <comment>intro label</comment>
   </data>
 </root>
