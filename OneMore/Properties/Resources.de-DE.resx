@@ -4013,6 +4013,7 @@ Vergrößern Sie kleinere Bilder nicht</value>
   <data name="RemoveDuplicatesDialog_includeTitlesBox.Text" xml:space="preserve">
     <value>Beziehen Sie beim Vergleich Seitentitel mit ein</value>
     <comment>checkbox</comment>
+  </data>
   <data name="SnippetsSheet_introLabel.Text" xml:space="preserve">
     <value>Verwaltung der benutzerdefinierten Snippets</value>
     <comment>intro label</comment>
