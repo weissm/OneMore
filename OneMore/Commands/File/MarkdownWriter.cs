@@ -93,7 +93,6 @@ namespace River.OneMoreAddIn.Commands
 		public string Save()
 		{
 			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
-			path = @"c:\tmp";
 			MemoryStream mem = new MemoryStream();
 			StreamWriter sw = new StreamWriter(mem);
 			string retString = "";
