@@ -45,7 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <RegisterForComInterop>false</RegisterForComInterop>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>
     </CodeAnalysisRuleSet>
@@ -1323,6 +1323,9 @@
     <PackageReference Include="Chinese">
       <Version>0.5.0</Version>
     </PackageReference>
+    <PackageReference Include="Conari">
+      <Version>1.5.0</Version>
+    </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.46</Version>
     </PackageReference>
@@ -1330,7 +1333,7 @@
       <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Markdig">
-      <Version>0.30.2</Version>
+      <Version>0.30.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities">
       <Version>2.2.0</Version>
@@ -1361,6 +1364,9 @@
     </PackageReference>
     <PackageReference Include="System.Text.Encodings.Web">
       <Version>6.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="UnmanagedExports.Repack.Upgrade">
+      <Version>1.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
