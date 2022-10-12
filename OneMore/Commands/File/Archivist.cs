@@ -4,21 +4,26 @@
 
 namespace River.OneMoreAddIn.Commands
 {
+	using Microsoft.Office.Interop.Outlook;
+	using RGiesecke.DllExport;
 	using River.OneMoreAddIn.Models;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using System.Runtime.InteropServices;
 	using System.Text;
 	using System.Text.RegularExpressions;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Web;
+	using System.Windows.Media.Media3D;
 	using System.Xml.Linq;
+	using Exception = System.Exception;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
-	internal class Archivist : Loggable
+	public class Archivist : Loggable
 	{
 		private readonly OneNote one;
 		private readonly string home;
@@ -339,17 +344,70 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
-		#endregion ExportHtml
+        #endregion ExportHtml
+        [DllExport("printstrings", CallingConvention = CallingConvention.Cdecl)]
+        public static void PrintStrings(ref object obj)
+        {
+            obj = new string[] { "hello", "world" };
+        }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="filename"></param>
+        [DllExport("ExportOnenote2Markdown", CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.AnsiBStr)]
+        public static string ExportOnenote2Markdown(string title)
+		{
+            string pageTitle = "";
+            var pageTitleFull = "";
+            string targetDir = "c:\\tmp\\";
+            string targetFile = targetDir + "test.md";
+            string _outputData = "";
+            using (var one = new River.OneMoreAddIn.OneNote())
+            {
+                Page page;
+                page = one.GetPage();
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="root"></param>
-		/// <param name="filename"></param>
-		public void ExportMarkdown(Page page, string filename, bool withAttachments)
+                var archivist = new Archivist(one);
+                pageTitleFull = page.Title;
+                pageTitle = page.Title.Replace(" ", string.Empty);
+                string fullFileName = targetDir + pageTitle + ".md";
+
+                archivist.ExportMarkdown(page, filename: fullFileName, withAttachments: true);
+                _outputData = File.ReadAllText(fullFileName);
+                Console.WriteLine(_outputData);
+				return _outputData;
+            }
+        }
+		[DllExport("ExportXml2Markdown", CallingConvention = CallingConvention.Cdecl)]
+		[return: MarshalAs(UnmanagedType.AnsiBStr)]
+		public static string ExportXml2Markdown(string workFile)
+		{
+            System.Diagnostics.Debugger.Launch();
+            string _outputData = "";
+
+			var outputFile = workFile.Replace(".xml", ".md");
+
+			var root = XElement.Load(workFile);
+			Page page = new Page(root);
+
+			var writer = new MarkdownWriter(page, withAttachments: false);
+			Console.WriteLine("writer: " + writer);
+			var result = writer.Save();
+			Console.WriteLine("result:" + result);
+
+			writer.Save(outputFile);
+
+			_outputData = File.ReadAllText(outputFile);
+			Console.WriteLine(_outputData);
+			return _outputData;
+		}
+
+        public void ExportMarkdown(Page page, string filename, bool withAttachments)
 		{
 			try
 			{
