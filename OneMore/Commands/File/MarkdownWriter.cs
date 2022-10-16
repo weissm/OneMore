@@ -17,9 +17,10 @@ namespace River.OneMoreAddIn.Commands
 	using System.Linq;
     using System.Text;
     using System.Xml.Linq;
+    using System.Threading.Tasks;
 
 
-	internal class MarkdownWriter
+    internal class MarkdownWriter
 	{
 		private sealed class Context
 		{
@@ -91,6 +92,67 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+        /// <summary>
+        /// Copy the given content as markdown to the clipboard using the current
+        /// page as a template for tag and style references.
+        /// </summary>
+        /// <param name="content"></param>
+        public async Task Copy(XElement content)
+        {
+            copyMode = true;
+            using var stream = new MemoryStream();
+            using (writer = new StreamWriter(stream))
+            {
+                writer.WriteLine($"# {page.Title}");
+
+                if (content.Name.LocalName == "Page")
+                {
+                    content.Elements(ns + "Outline")
+                        .Elements(ns + "OEChildren")
+                        .Elements()
+                        .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+                }
+                else
+                {
+                    content.Elements()
+                        .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+                }
+
+                writer.WriteLine();
+                writer.Flush();
+
+                stream.Position = 0;
+                using var reader = new StreamReader(stream);
+
+                var clippy = new ClipboardProvider();
+                await clippy.SetText(reader.ReadToEnd());
+            }
+        }
+
+/*
+        /// <summary>
+        /// Save the page as markdown to the specified file.
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Save(string filename)
+        {
+#if !LOG
+            path = Path.GetDirectoryName(filename);
+            using (writer = File.CreateText(filename))
+#endif
+            {
+                writer.WriteLine($"# {page.Title}");
+
+                page.Root.Elements(ns + "Outline")
+                    .Elements(ns + "OEChildren")
+                    .Elements()
+                    .ForEach(e => Write(e));
+
+                writer.WriteLine();
+            }
+        }
+
+*/        
 		public string Save()
 		{
 			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
