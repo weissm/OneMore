@@ -387,7 +387,7 @@ namespace River.OneMoreAddIn.Commands
 		[return: MarshalAs(UnmanagedType.AnsiBStr)]
 		public static string ExportXml2Markdown(string workFile)
 		{
-            System.Diagnostics.Debugger.Launch();
+//            System.Diagnostics.Debugger.Launch();
             string _outputData = "";
 
 			var outputFile = workFile.Replace(".xml", ".md");
