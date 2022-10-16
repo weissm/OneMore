@@ -15,7 +15,6 @@ namespace River.OneMoreAddIn.Commands
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-	using System.Threading.Tasks;
     using System.Text;
     using System.Xml.Linq;
 
@@ -41,11 +40,11 @@ namespace River.OneMoreAddIn.Commands
 		private readonly List<Style> quickStyles;
 		private readonly Stack<Context> contexts;
 		private int imageCounter;
-		private bool copyMode;
+        private bool copyMode;
 #if LOG
 		private readonly ILogger writer = Logger.Current;
 #else
-		private StreamWriter writer;
+        private StreamWriter writer;
 		private string path;
 #endif
 		// helper class to pass parameter
@@ -74,48 +73,6 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		/// <summary>
-		/// Copy the given content as markdown to the clipboard using the current
-		/// page as a template for tag and style references.
-		/// </summary>
-		/// <param name="content"></param>
-		public async Task Copy(XElement content)
-		{
-			copyMode = true;
-			using var stream = new MemoryStream();
-			using (writer = new StreamWriter(stream))
-			{
-				writer.WriteLine($"# {page.Title}");
-
-				if (content.Name.LocalName == "Page")
-				{
-					content.Elements(ns + "Outline")
-						.Elements(ns + "OEChildren")
-						.Elements()
-						.ForEach(e => Write(e));
-				}
-				else
-				{
-					content.Elements()
-						.ForEach(e => Write(e));
-				}
-
-				writer.WriteLine();
-				writer.Flush();
-
-				stream.Position = 0;
-				using var reader = new StreamReader(stream);
-
-				var clippy = new ClipboardProvider();
-				await clippy.SetText(reader.ReadToEnd());
-			}
-		}
-
-
-		/// <summary>
-		/// Save the page as markdown to the specified file.
-		/// </summary>
-		/// <param name="filename"></param>
 		public void Save(string filename)
 		{
 #if !LOG
@@ -214,18 +171,12 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Image":
-					if (!copyMode)
-					{
-						WriteImage(element);
-					}
+					WriteImage(element);
 					dive = false;
 					break;
 
 				case "InsertedFile":
-					if (!copyMode)
-					{
-						WriteFile(element);
-					}
+					WriteFile(element);
 					dive = false;
 					break;
 
@@ -253,7 +204,7 @@ namespace River.OneMoreAddIn.Commands
 
 				// if not in a table cell
 				// or in a cell and this OE is followed by another OE
-				if (!contained || (element.NextNode != null))
+				if (!contained && (element.NextNode != null))
 				{
 					writer.WriteLine("");
 				} else if (contained)
@@ -306,8 +257,8 @@ namespace River.OneMoreAddIn.Commands
 				case "h6": styleprefix = ("###### "); break;
 				case "blockquote": styleprefix = ("> "); break;
 				// cite and code are both block-scope style, on the OE
-				case "cite": writer.Write("*"); break;
-				case "code": writer.Write("`"); break;
+				case "cite": styleprefix = ("*"); break;
+				case "code": styleprefix = ("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
@@ -325,8 +276,8 @@ namespace River.OneMoreAddIn.Commands
 			{
 				case 3:     // to do
 				case 8:     // client request
-				case 12:    // schedule/callback
-				case 28:    // todo prio 1
+				case 12:	// schedule/callback
+				case 28:	// todo prio 1
 				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
@@ -337,27 +288,26 @@ namespace River.OneMoreAddIn.Commands
 
 					break;
 
-				case 6: writer.Write(":question: "); break;         // question
-				case 13: writer.Write(":star: "); break;            // important
-				case 17: writer.Write(":exclamation: "); break;     // critical
-				case 18: writer.Write(":phone: "); break;           // phone
-				case 21: writer.Write(":bulb: "); break;            // idea
-				case 23: writer.Write(":house: "); break;           // address
-				case 33: writer.Write(":three: "); break;           // three
-				case 39: writer.Write(":zero: "); break;            // zero
-				case 51: writer.Write(":two: "); break;             // two
+				case 6: retValue = (":question: "); break;         // question
+				case 13: retValue = (":star: "); break;            // important
+				case 17: retValue = (":exclamation: "); break;     // critical
+				case 18: retValue = (":phone: "); break;           // phone
+				case 21: retValue = (":bulb: "); break;            // idea
+				case 23: retValue = (":house: "); break;           // address
+				case 33: retValue = (":three: "); break;           // three
+				case 39: retValue = (":zero: "); break;            // zero
+				case 51: retValue = (":two: "); break;              // two
 				case 59: retValue = (":arrow_right: "); break;                // agenda
 				case 64: retValue = (":star: "); break;             // custom 1
-				case 70: writer.Write(":one: "); break;             // one
+				case 70: retValue = (":one: "); break;              // one
 				case 116: retValue = (":busts_in_silhouette: "); break;            // busts_in_silhouette																	
 				case 117: retValue = (":notebook: "); break;            // notebook																	
-				case 118: writer.Write(":mailbox: "); break;        // contact
-				case 121: writer.Write(":musical_note: "); break;   // music to listen to
-				case 131: writer.Write(":secret: "); break;         // password
-				case 133: writer.Write(":movie_camera: "); break;   // movie to see
-				case 132: writer.Write(":book: "); break;           // book to read
-				case 140: writer.Write(":zap: "); break;            // lightning bolt
-//				default: writer.Write(":o: "); break;
+				case 118: retValue = (":mailbox: "); break;        // contact
+				case 121: retValue = (":musical_note: "); break;   // music to listen to
+				case 131: retValue = (":secret: "); break;			// password
+				case 133: retValue = (":movie_camera: "); break;   // movie to see
+				case 132: retValue = (":book: "); break;           // book to read
+				case 140: retValue = (":zap: "); break;            // lightning bolt																	
 				default: break;									   // retValue = (":o: "); break;
 			}
 			return retValue;
