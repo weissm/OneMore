@@ -9,13 +9,15 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
 	using System;
-	using System.Collections.Generic;
+    using System.Collections;
+    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
 	using System.Threading.Tasks;
-	using System.Xml.Linq;
+    using System.Text;
+    using System.Xml.Linq;
 
 
 	internal class MarkdownWriter
@@ -30,7 +32,8 @@ namespace River.OneMoreAddIn.Commands
 		// no good way to indent text; closest alternative is to use a string of nbsp but that
 		// conflicts with other directives like headings and list numbering. so substitute
 		// indentations (OEChildren) with the blockquote directive instead
-		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+//		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+		private const string Indent = "  "; //&nbsp;&nbsp;&nbsp;&nbsp;";
 
 		private readonly Page page;
 		private readonly XNamespace ns;
@@ -45,7 +48,21 @@ namespace River.OneMoreAddIn.Commands
 		private StreamWriter writer;
 		private string path;
 #endif
+		// helper class to pass parameter
+		public class PrefixClass
+		{
+			public string indent = "";
+			public string tags = "";
+			public string bullets = "";
 
+			public PrefixClass(string set_indent = "", string set_tags = "", string set_bullets = "")
+			{
+				indent = set_indent;
+				tags = set_tags;
+				bullets = set_bullets;
+			}
+
+		}
 
 		public MarkdownWriter(Page page, bool withAttachments)
 		{
@@ -111,27 +128,59 @@ namespace River.OneMoreAddIn.Commands
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
-					.ForEach(e => Write(e));
+					.ForEach(e => { PrefixClass prefix = new PrefixClass() ; Write(e, ref prefix); });
 
 				writer.WriteLine();
 			}
 		}
 
+		public string Save()
+		{
+			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			MemoryStream mem = new MemoryStream();
+			StreamWriter sw = new StreamWriter(mem);
+			string retString = "";
+
+			using (writer = sw)
+			{
+				writer.WriteLine($"# {page.Title}");
+
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+
+				writer.WriteLine();
+				sw.Flush();
+				mem.Position = 0;
+				StreamReader sr = new StreamReader(mem);
+				retString = sr.ReadToEnd();
+			}
+			return retString;
+		}
 
 		private void Write(XElement element,
-			string prefix = "",
+			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
 		{
+
 			bool pushed = false;
 			bool dive = true;
-
+			var keepindents = prefix.indent;
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
 					pushed = DetectQuickStyle(element);
-					writer.WriteLine("  ");
-					prefix = $"{Indent}{prefix}";
+					if (contained)
+                    {
+						writer.Write("<br>");
+                    }
+					else
+                    {
+						writer.WriteLine("");
+					}
+					prefix.indent = $"{Indent}{prefix.indent}";
 					break;
 
 				case "OE":
@@ -140,21 +189,28 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Tag":
-					WriteTag(element);
+					prefix.tags += WriteTag(element, contained);
 					break;
 
 				case "T":
+					if (element.GetCData().Value.Trim().IsNullOrEmpty())
+                    {
+						break;
+                    }
 					pushed = DetectQuickStyle(element);
-					if (startpara) Stylize(prefix);
-					WriteText(element.GetCData(), startpara);
+					if (startpara) { Stylize(prefix); prefix.tags = ""; prefix.bullets = ""; }
+					WriteText(element.GetCData(), startpara, contained);
 					break;
 
 				case "Bullet":
-					writer.Write($"{prefix}- ");
+					// in md dash needs to be first in line
+					prefix.bullets = "- " + prefix.bullets;
 					break;
 
 				case "Number":
-					writer.Write($"{prefix}1. ");
+					// in md number needs to be first in line
+					prefix.bullets = "1. " + prefix.bullets;
+
 					break;
 
 				case "Image":
@@ -174,7 +230,7 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Table":
-					WriteTable(element);
+					WriteTable(element, prefix.indent);
 					dive = false;
 					break;
 			}
@@ -183,8 +239,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 				foreach (var child in element.Elements())
 				{
-					Write(child, prefix, startpara);
-					startpara = false;
+					Write(child, ref prefix, startpara, contained);
 				}
 			}
 
@@ -200,8 +255,12 @@ namespace River.OneMoreAddIn.Commands
 				// or in a cell and this OE is followed by another OE
 				if (!contained || (element.NextNode != null))
 				{
-					writer.WriteLine("  ");
-				}
+					writer.WriteLine("");
+				} else if (contained)
+                {
+					writer.Write("<br>");
+                }
+				prefix.indent = keepindents;
 			}
 		}
 
@@ -230,36 +289,37 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void Stylize(string prefix)
+		private void Stylize(PrefixClass prefix)
 		{
-			writer.Write(prefix);
+			var styleprefix = "";
 			if (contexts.Count == 0) return;
 			var context = contexts.Peek();
 			var quick = quickStyles.First(q => q.Index == context.QuickStyleIndex);
 			switch (quick.Name)
 			{
-				case "PageTitle": writer.Write("# "); break;
-				case "h1": writer.Write("# "); break;
-				case "h2": writer.Write("## "); break;
-				case "h3": writer.Write("### "); break;
-				case "h4": writer.Write("#### "); break;
-				case "h5": writer.Write("##### "); break;
-				case "h6": writer.Write("###### "); break;
-				case "blockquote": writer.Write("> "); break;
+				case "PageTitle": styleprefix = ("# "); break;
+				case "h1": styleprefix = ("# "); break;
+				case "h2": styleprefix = ("## "); break;
+				case "h3": styleprefix = ("### "); break;
+				case "h4": styleprefix = ("#### "); break;
+				case "h5": styleprefix = ("##### "); break;
+				case "h6": styleprefix = ("###### "); break;
+				case "blockquote": styleprefix = ("> "); break;
 				// cite and code are both block-scope style, on the OE
 				case "cite": writer.Write("*"); break;
 				case "code": writer.Write("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
+			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
-
-		private void WriteTag(XElement element)
+		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
 				.Where(e => e.Attribute("index").Value == element.Attribute("index").Value)
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
+			var retValue = "";
 
 			switch (symbol)
 			{
@@ -271,7 +331,10 @@ namespace River.OneMoreAddIn.Commands
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
-					writer.Write($"- [{check}] ");
+					retValue = contained
+					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
+					  : ($"- [{check}] ");
+
 					break;
 
 				case 6: writer.Write(":question: "); break;         // question
@@ -283,23 +346,31 @@ namespace River.OneMoreAddIn.Commands
 				case 33: writer.Write(":three: "); break;           // three
 				case 39: writer.Write(":zero: "); break;            // zero
 				case 51: writer.Write(":two: "); break;             // two
+				case 59: retValue = (":arrow_right: "); break;                // agenda
+				case 64: retValue = (":star: "); break;             // custom 1
 				case 70: writer.Write(":one: "); break;             // one
+				case 116: retValue = (":busts_in_silhouette: "); break;            // busts_in_silhouette																	
+				case 117: retValue = (":notebook: "); break;            // notebook																	
 				case 118: writer.Write(":mailbox: "); break;        // contact
 				case 121: writer.Write(":musical_note: "); break;   // music to listen to
 				case 131: writer.Write(":secret: "); break;         // password
 				case 133: writer.Write(":movie_camera: "); break;   // movie to see
 				case 132: writer.Write(":book: "); break;           // book to read
 				case 140: writer.Write(":zap: "); break;            // lightning bolt
-				default: writer.Write(":o: "); break;
+//				default: writer.Write(":o: "); break;
+				default: break;									   // retValue = (":o: "); break;
 			}
+			return retValue;
 		}
 
 
-		private void WriteText(XCData cdata, bool startParagraph)
+		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
-				.Replace("<br>", "  ") // usually followed by NL so leave it there
-				.Replace("[", "\\[")   // escape to prevent confusion with md links
+				.Replace("<br>", "") // usually followed by NL so leave it there
+//				.Replace("<br>", "  ") // usually followed by NL so leave it there
+//				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
@@ -340,6 +411,14 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
+			if (raw.Trim().IsNullOrEmpty())
+			{
+				return;
+			}
+			if (contained)
+            {
+				raw = raw.Replace("\n", "<br>");
+            }
 			if (startParagraph && raw.Length > 0 && raw.StartsWith("#"))
 			{
 				writer.Write("\\");
@@ -420,7 +499,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteTable(XElement element)
+		private void WriteTable(XElement element, string indents)
 		{
 			var table = new Table(element);
 
@@ -428,7 +507,7 @@ namespace River.OneMoreAddIn.Commands
 			writer.WriteLine();
 
 			// header
-			writer.Write("|");
+			writer.Write(indents + "|");
 			for (int i = 0; i < table.ColumnCount; i++)
 			{
 				writer.Write($" {TableCell.IndexToLetters(i + 1)} |");
@@ -452,7 +531,7 @@ namespace River.OneMoreAddIn.Commands
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => Write(e, contained: true));
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
 
 					writer.Write(" | ");
 				}
