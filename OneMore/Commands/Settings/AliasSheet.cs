@@ -9,6 +9,7 @@ namespace River.OneMoreAddIn.Settings
 	using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Linq;
+	using System.Reflection;
 	using System.Windows.Forms;
 	using System.Xml.Linq;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
@@ -65,7 +66,9 @@ namespace River.OneMoreAddIn.Settings
 
 			// heavily relies on naming convention, suffix must be "Cmd"
 			var methods = typeof(AddIn).GetMethods()
-				.Where(m => m.Name.EndsWith("Cmd"));
+				.Where(m =>
+					m.Name.EndsWith("Cmd") &&
+					m.GetCustomAttribute(typeof(IgnorePaletteAttribute)) == null);
 
 			foreach (var methodName in methods.Select(m => m.Name))
 			{
@@ -73,10 +76,10 @@ namespace River.OneMoreAddIn.Settings
 				var nam = methodName.Substring(0, methodName.Length - 3);
 
 				// translate to display name
-				var name = Resx.ResourceManager.GetString($"rib{nam}Button_Label");
+				var name = Resx.ResourceManager.GetString($"rib{nam}Button_Label", AddIn.Culture);
 				if (string.IsNullOrEmpty(name))
 				{
-					name = Resx.ResourceManager.GetString($"om{name}Button_Label");
+					name = Resx.ResourceManager.GetString($"om{name}Button_Label", AddIn.Culture);
 				}
 
 				if (!string.IsNullOrWhiteSpace(name))
