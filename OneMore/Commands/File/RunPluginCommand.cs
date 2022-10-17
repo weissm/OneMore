@@ -187,14 +187,14 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				logger.WriteLine($"running {plugin.Command} {plugin.Arguments} --workpath \"{path}\"");
+				logger.WriteLine($"running {plugin.Command} {plugin.Arguments} --workfile \"{path}\"");
 
 				process = new Process
 				{
 					StartInfo = new ProcessStartInfo
 					{
 						FileName = plugin.Command,
-						Arguments = $"{plugin.Arguments} --workpath \"{path}\"",
+						Arguments = $"{plugin.Arguments} --workfile \"{path}\"",
 						CreateNoWindow = true,
 						UseShellExecute = false,
 						RedirectStandardOutput = true,
