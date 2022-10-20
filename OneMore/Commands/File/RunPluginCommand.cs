@@ -62,7 +62,7 @@ namespace River.OneMoreAddIn.Commands
 
                 // add link ot onenote as argument for script
                 var pageInfo = one.GetPageInfo(page.PageId);
-                plugin.Arguments += $" --onenoteLink \"{pageInfo.Link}\"";
+                plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
 
                 // copy contents for comparison later
                 string original = page.Root.ToString(SaveOptions.DisableFormatting);
@@ -169,7 +169,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 				progress.Tag = workPath;
 				progress.SetMessage(string.Format(
-					Resx.Plugin_Running, plugin.Command, plugin.Arguments, $"--workfile {workPath}"));
+					Resx.Plugin_Running, plugin.Command, plugin.Arguments, $"-w {workPath}"));
 
 				result = progress.ShowTimedDialog(owner, ExecuteWorker);
 			}
@@ -187,14 +187,14 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				logger.WriteLine($"running {plugin.Command} {plugin.Arguments} --workfile \"{path}\"");
+				logger.WriteLine($"running {plugin.Command} {plugin.Arguments} -w \"{path}\"");
 
 				process = new Process
 				{
 					StartInfo = new ProcessStartInfo
 					{
 						FileName = plugin.Command,
-						Arguments = $"{plugin.Arguments} --workfile \"{path}\"",
+						Arguments = $"{plugin.Arguments} -w \"{path}\"",
 						CreateNoWindow = true,
 						UseShellExecute = false,
 						RedirectStandardOutput = true,
