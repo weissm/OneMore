@@ -97,8 +97,12 @@ namespace River.OneMoreAddIn
 
 			if (exc.InnerException != null)
 			{
-				FormatDetails(exc, builder, depth + 1);
-			}
+				const int MAX_DEPTH = 3; // avoid stack overflow
+				if (depth < MAX_DEPTH)
+				{
+                    FormatDetails(exc, builder, depth + 1);
+                }
+            }
 		}
 
 
