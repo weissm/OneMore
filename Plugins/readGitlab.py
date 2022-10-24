@@ -9,6 +9,7 @@ parser.add_argument('-u', '--url', help='Specify gitlab url')
 parser.add_argument('-w', '--workFile', help='Specify XML work file')
 parser.add_argument('-i', '--inputLink', help='Specify input Link')
 parser.add_argument('-f', '--debugFile', help='Specify debugFile')
+parser.add_argument('-l', '--onenoteLink', help='Specify onenoteLink')
 args = parser.parse_args()
 
 from xml.dom import minidom
