@@ -5,7 +5,6 @@
 namespace River.OneMoreAddIn.Commands
 {
 	using Microsoft.Office.Interop.Outlook;
-	using RGiesecke.DllExport;
 	using River.OneMoreAddIn.Models;
 	using System;
 	using System.Collections.Generic;
@@ -17,7 +16,6 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Web;
-	using System.Windows.Media.Media3D;
 	using System.Xml.Linq;
 	using Exception = System.Exception;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
