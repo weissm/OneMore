@@ -557,7 +557,7 @@ namespace River.OneMoreAddIn.Commands
 				var outerHtmlorg = doc.DocumentNode.OuterHtml;
                 string outerHtml = System.IO.File.ReadAllText(@"C:\tmp\outer.xml");
 
-                page.AddHtmlContent(outerHtml);
+                page.AddHtmlContent(outerHtmlorg);
 
 
 				await one.Update(page);
