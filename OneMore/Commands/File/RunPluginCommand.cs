@@ -134,8 +134,12 @@ namespace River.OneMoreAddIn.Commands
 
 			var content = page.Root.ToString(SaveOptions.DisableFormatting);
 
-			try
-			{
+            // add link ot onenote as argument for script
+            var pageInfo = one.GetPageInfo(page.PageId);
+            plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
+
+            try
+            {
 				// write the page XML to the working path
 				page.Root.Save(workpath, SaveOptions.DisableFormatting);
 			}
@@ -232,12 +236,12 @@ namespace River.OneMoreAddIn.Commands
 				var abscmd = Environment.ExpandEnvironmentVariables(plugin.Command);
 				var absargs = Environment.ExpandEnvironmentVariables(plugin.Arguments);
 
-				logger.WriteLine($"running {abscmd} {absargs} \"{path}\"");
+				logger.WriteLine($"running {abscmd} {absargs} -w \"{path}\"");
 
 				var info = new ProcessStartInfo
 				{
 					FileName = abscmd,
-					Arguments = $"{absargs} \"{path}\"",
+					Arguments = $"{absargs} -w \"{path}\"",
 					CreateNoWindow = true,
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
