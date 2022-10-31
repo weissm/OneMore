@@ -35,8 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9D56
 	ProjectSection(SolutionItems) = preProject
 		Plugins\Get-MeetingDate-readme.txt = Plugins\Get-MeetingDate-readme.txt
 		Plugins\Get-MeetingDate.ps1 = Plugins\Get-MeetingDate.ps1
-		Plugins\Set-RainbowSections-readme.txt = Plugins\Set-RainbowSections-readme.txt
 		Plugins\Set-RainbowSections.ps1 = Plugins\Set-RainbowSections.ps1
+		Plugins\Set-RainbowSections-readme.txt = Plugins\Set-RainbowSections-readme.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{31896922-72FF-4823-80C0-8EC46936AC71}"
@@ -84,12 +84,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x64.Build.0 = Debug|Any CPU
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x86.Build.0 = Debug|Any CPU
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|Any CPU.Build.0 = Debug|x86
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x64.ActiveCfg = Debug|x64
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x64.Build.0 = Debug|x64
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x86.ActiveCfg = Debug|x86
+		{D874E185-08FE-48C5-BADE-0FE84060C978}.Debug|x86.Build.0 = Debug|x86
 		{D874E185-08FE-48C5-BADE-0FE84060C978}.Release|Any CPU.ActiveCfg = Release|x86
 		{D874E185-08FE-48C5-BADE-0FE84060C978}.Release|x64.ActiveCfg = Release|x64
 		{D874E185-08FE-48C5-BADE-0FE84060C978}.Release|x64.Build.0 = Release|x64
