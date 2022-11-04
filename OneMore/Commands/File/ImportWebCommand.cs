@@ -21,10 +21,8 @@ namespace River.OneMoreAddIn.Commands
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 	using Win = System.Windows;
 	using System.Text;
-	using Markdig;
 	using static River.OneMoreAddIn.Models.Page;
 	using System.Web.Script.Serialization;
-	using System.Runtime.InteropServices;
 	using Newtonsoft.Json.Linq;
 
 	public class ImportWebCommand : Command
@@ -47,9 +45,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 		}
 
-        public async static void ImportAsMarkdown(
-			[MarshalAs(UnmanagedType.LPWStr)] string address,
-            [MarshalAs(UnmanagedType.LPWStr)] string markdown)
+        public async static void ImportAsMarkdown(string address,string markdown)
         {
             ImportWebCommand ImportWeb = new ImportWebCommand();
             ImportWeb.address = address;
