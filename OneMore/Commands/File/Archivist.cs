@@ -349,50 +349,34 @@ namespace River.OneMoreAddIn.Commands
         /// </summary>
         /// <param name="root"></param>
         /// <param name="filename"></param>
-//        [DllExport("ExportOnenote2Markdown", CallingConvention = CallingConvention.Cdecl)]
-//        [return: MarshalAs(UnmanagedType.AnsiBStr)]
         public static string ExportOnenote2Markdown(string title)
 		{
-            string pageTitle = "";
-            var pageTitleFull = "";
             string targetDir = "c:\\tmp\\";
-            string targetFile = targetDir + "test.md";
-            string _outputData = "";
             using (var one = new River.OneMoreAddIn.OneNote())
             {
                 Page page;
                 page = one.GetPage();
 
                 var archivist = new Archivist(one);
-                pageTitleFull = page.Title;
-                pageTitle = page.Title.Replace(" ", string.Empty);
+                var pageTitleFull = page.Title;
+                var pageTitle = page.Title.Replace(" ", string.Empty);
                 string fullFileName = targetDir + pageTitle + ".md";
 
                 archivist.ExportMarkdown(page, filename: fullFileName, withAttachments: true);
-                _outputData = File.ReadAllText(fullFileName);
-                Console.WriteLine(_outputData);
+                var _outputData = File.ReadAllText(fullFileName);
+//                Console.WriteLine(_outputData);
 				return _outputData;
             }
         }
-//		[DllExport("ExportXml2Markdown", CallingConvention = CallingConvention.Cdecl)]
-//		[return: MarshalAs(UnmanagedType.AnsiBStr)]
 		public static string ExportXml2Markdown(string workFile)
 		{
-            string _outputData = "";
-
-			var outputFile = workFile.Replace(".xml", ".md");
-
 			var root = XElement.Load(workFile);
 			Page page = new Page(root);
 
 			var writer = new MarkdownWriter(page, withAttachments: false);
 			var result = writer.Save();
 
-			writer.Save(outputFile);
-
-			_outputData = File.ReadAllText(outputFile);
-			Console.WriteLine(_outputData);
-			return _outputData;
+			return result;
 		}
 
         public void ExportMarkdown(Page page, string filename, bool withAttachments)
