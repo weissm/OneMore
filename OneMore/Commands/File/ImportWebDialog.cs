@@ -54,8 +54,7 @@ namespace River.OneMoreAddIn.Commands
 
 
 		public bool ImportImages => imagesBox.Checked;
-
-
+	
 		public ImportWebTarget Target
 		{
 			get
@@ -81,5 +80,16 @@ namespace River.OneMoreAddIn.Commands
 		{
 			okButton.Enabled = Uri.IsWellFormedUriString(addressBox.Text.Trim(), UriKind.Absolute);
 		}
+		
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox_EnableDebug_CheckedChanged(object sender, EventArgs e)
+        {
+			System.Diagnostics.Debugger.Launch();
+		}
+
 	}
 }

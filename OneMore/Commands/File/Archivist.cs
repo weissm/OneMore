@@ -9,16 +9,18 @@ namespace River.OneMoreAddIn.Commands
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using System.Runtime.InteropServices;
 	using System.Text;
 	using System.Text.RegularExpressions;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Web;
 	using System.Xml.Linq;
+	using Exception = System.Exception;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
-	internal class Archivist : Loggable
+	public class Archivist : Loggable
 	{
 		private readonly OneNote one;
 		private readonly string home;
@@ -338,18 +340,46 @@ namespace River.OneMoreAddIn.Commands
 				}
 			}
 		}
+        #endregion ExportHtml
 
-		#endregion ExportHtml
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="filename"></param>
+        public static string ExportOnenote2Markdown(string title)
+		{
+            string targetDir = "c:\\tmp\\";
+            using (var one = new River.OneMoreAddIn.OneNote())
+            {
+                Page page;
+                page = one.GetPage();
 
-		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                var archivist = new Archivist(one);
+                var pageTitleFull = page.Title;
+                var pageTitle = page.Title.Replace(" ", string.Empty);
+                string fullFileName = targetDir + pageTitle + ".md";
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="root"></param>
-		/// <param name="filename"></param>
-		public void ExportMarkdown(Page page, string filename, bool withAttachments)
+                archivist.ExportMarkdown(page, filename: fullFileName, withAttachments: true);
+                var _outputData = File.ReadAllText(fullFileName);
+//                Console.WriteLine(_outputData);
+				return _outputData;
+            }
+        }
+		public static string ExportXml2Markdown(string workFile)
+		{
+			var root = XElement.Load(workFile);
+			Page page = new Page(root);
+
+			var writer = new MarkdownWriter(page, withAttachments: false);
+			var result = writer.Save();
+
+			return result;
+		}
+
+        public void ExportMarkdown(Page page, string filename, bool withAttachments)
 		{
 			try
 			{
