@@ -24,6 +24,8 @@ namespace River.OneMoreAddIn.Commands
 	using Markdig;
 	using static River.OneMoreAddIn.Models.Page;
 	using System.Web.Script.Serialization;
+	using System.Runtime.InteropServices;
+	using Newtonsoft.Json.Linq;
 
 	public class ImportWebCommand : Command
 	{
@@ -34,6 +36,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 		private string address = null;
+		private string markdown = null;
 		private bool importImages = false;
 		private bool importMarkdown = false;
 		private ImportWebTarget target;
@@ -44,8 +47,23 @@ namespace River.OneMoreAddIn.Commands
 		{
 		}
 
+        public async static void ImportAsMarkdown(
+			[MarshalAs(UnmanagedType.LPWStr)] string address,
+            [MarshalAs(UnmanagedType.LPWStr)] string markdown)
+        {
+            ImportWebCommand ImportWeb = new ImportWebCommand();
+            ImportWeb.address = address;
+            ImportWeb.target = ImportWebTarget.Append;
+            ImportWeb.importImages = true;
+            ImportWeb.markdown = markdown;
 
-		public override async Task Execute(params object[] args)
+			ProgressDialog progress = new ProgressDialog();
+			CancellationToken token = new CancellationToken();
+
+            await ImportWeb.ImportMarkdown( progress,  token);
+        }
+
+        public override async Task Execute(params object[] args)
 		{
 			if (!HttpClientFactory.IsNetworkAvailable())
 			{
@@ -63,7 +81,6 @@ namespace River.OneMoreAddIn.Commands
 				address = dialog.Address;
 				target = dialog.Target;
 				importImages = dialog.ImportImages;
-				importMarkdown = dialog.ImportMarkdown;
 			}
 
 			var name = "ReadGitLab";
@@ -71,10 +88,6 @@ namespace River.OneMoreAddIn.Commands
 			if (importImages)
 			{
 				await ImportAsImages();
-			}
-			else if (importMarkdown)
-			{
-				ImportAsMarkdown();
 			}
 			else if (address.Contains("gitlab") && File.Exists(path))
 			{
@@ -304,7 +317,7 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
-		private void ImportAsMarkdown()
+        private void ImportAsMarkdown()
 		{
 			using (progress = new ProgressDialog(8))
 			{
@@ -437,53 +450,54 @@ namespace River.OneMoreAddIn.Commands
 			var escapeID = "[CLD-";
 
 			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-			var markdown = "";
 			using (var one = new River.OneMoreAddIn.OneNote())
 			{
 				var page = one.GetPage();
 				var ns = page.Namespace;
 
-				// read all selected items into markdown
-				page.Root
-					.Elements(ns + "Outline")
-					.Elements(ns + "OEChildren")
-					.Descendants(ns + "T")
-					.Where(e =>
-					{
-						var node = e;
-						if (node != null)
-						{
-							var attr = node.Attribute("selected");
-							return (attr != null && attr?.Value == "all");
-						}
-						else
-						{
-							return false;
-						}
-					})
-					.ForEach(e => { markdown += e.Value + "\n"; });
+				if (markdown.IsNullOrEmpty())
+				{
+                    // read all selected items into markdown
+                    page.Root
+                        .Elements(ns + "Outline")
+                        .Elements(ns + "OEChildren")
+                        .Descendants(ns + "T")
+                        .Where(e =>
+                        {
+                            var node = e;
+                            if (node != null)
+                            {
+                                var attr = node.Attribute("selected");
+                                return (attr != null && attr?.Value == "all");
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        })
+                        .ForEach(e => { markdown += e.Value + "\n"; });
 
-				// remove all selected items
-				var elements = page.Root
-					.Elements(ns + "Outline")
-					.Elements(ns + "OEChildren")
-					.Descendants(ns + "OE")
-					.Where(e =>
-					{
-						var node = e.Descendants(ns + "T").FirstOrDefault();
-						if (node != null)
-						{
-							var attr = node.Attribute("selected");
-							return (attr != null && attr?.Value == "all");
-						}
-						else
-						{
-							return false;
-						}
-					});
-				elements.Remove();
-
-				var container = page.EnsureContentContainer();
+                    // remove all selected items
+                    var elements = page.Root
+                        .Elements(ns + "Outline")
+                        .Elements(ns + "OEChildren")
+                        .Descendants(ns + "OE")
+                        .Where(e =>
+                        {
+                            var node = e.Descendants(ns + "T").FirstOrDefault();
+                            if (node != null)
+                            {
+                                var attr = node.Attribute("selected");
+                                return (attr != null && attr?.Value == "all");
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                    elements.Remove();
+                }
+                var container = page.EnsureContentContainer();
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 				if (target == ImportWebTarget.NewPage)
 				{
@@ -573,7 +587,7 @@ namespace River.OneMoreAddIn.Commands
 			return true;
 		}
 
-		public async Task ImportMarkdownPostprocessing(string escapeID)
+        public async Task ImportMarkdownPostprocessing(string escapeID)
 		{
 			using (var one = new River.OneMoreAddIn.OneNote())
 			{
