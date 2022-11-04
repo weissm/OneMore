@@ -495,7 +495,7 @@
     <comment>message box title</comment>
   </data>
   <data name="AboutDialog_titleLabel.Text" xml:space="preserve">
-    <value>OneMore Add-In für OneNote 2016</value>
+    <value>OneMore-Add-In für OneNote</value>
     <comment>Add-in full name</comment>
   </data>
   <data name="AboutDialog_updateLink.Text" xml:space="preserve">
@@ -3329,7 +3329,7 @@ Aufgeschoben</value>
     <comment>ribbon/context menu</comment>
   </data>
   <data name="KeyboardSheet_introLabel.Text" xml:space="preserve">
-    <value>Verwalten Sie ihre benutzerdefinierten Tastenkombinationen. Wählen Sie einen Befehl aus und drücken Sie eine Tastenfolge.</value>
+    <value>Verwalten Sie Ihre benutzerdefinierten Tastenkombinationen. Wählen Sie einen Befehl aus und drücken Sie eine Tastenfolge.</value>
     <comment>label</comment>
   </data>
   <data name="KeyboardSheet_keyColumn.HeaderText" xml:space="preserve">
