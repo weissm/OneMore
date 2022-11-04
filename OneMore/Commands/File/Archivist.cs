@@ -4,7 +4,6 @@
 
 namespace River.OneMoreAddIn.Commands
 {
-	using Microsoft.Office.Interop.Outlook;
 	using River.OneMoreAddIn.Models;
 	using System;
 	using System.Collections.Generic;
@@ -341,13 +340,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 			}
 		}
-
         #endregion ExportHtml
-        [DllExport("printstrings", CallingConvention = CallingConvention.Cdecl)]
-        public static void PrintStrings(ref object obj)
-        {
-            obj = new string[] { "hello", "world" };
-        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -356,8 +349,8 @@ namespace River.OneMoreAddIn.Commands
         /// </summary>
         /// <param name="root"></param>
         /// <param name="filename"></param>
-        [DllExport("ExportOnenote2Markdown", CallingConvention = CallingConvention.Cdecl)]
-        [return: MarshalAs(UnmanagedType.AnsiBStr)]
+//        [DllExport("ExportOnenote2Markdown", CallingConvention = CallingConvention.Cdecl)]
+//        [return: MarshalAs(UnmanagedType.AnsiBStr)]
         public static string ExportOnenote2Markdown(string title)
 		{
             string pageTitle = "";
@@ -381,11 +374,10 @@ namespace River.OneMoreAddIn.Commands
 				return _outputData;
             }
         }
-		[DllExport("ExportXml2Markdown", CallingConvention = CallingConvention.Cdecl)]
-		[return: MarshalAs(UnmanagedType.AnsiBStr)]
+//		[DllExport("ExportXml2Markdown", CallingConvention = CallingConvention.Cdecl)]
+//		[return: MarshalAs(UnmanagedType.AnsiBStr)]
 		public static string ExportXml2Markdown(string workFile)
 		{
-//            System.Diagnostics.Debugger.Launch();
             string _outputData = "";
 
 			var outputFile = workFile.Replace(".xml", ".md");
@@ -394,9 +386,7 @@ namespace River.OneMoreAddIn.Commands
 			Page page = new Page(root);
 
 			var writer = new MarkdownWriter(page, withAttachments: false);
-			Console.WriteLine("writer: " + writer);
 			var result = writer.Save();
-			Console.WriteLine("result:" + result);
 
 			writer.Save(outputFile);
 
