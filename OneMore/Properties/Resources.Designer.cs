@@ -6042,16 +6042,18 @@ namespace River.OneMoreAddIn.Properties {
                 return ResourceManager.GetString("ribExtrasMenu_Label", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
-        internal static string ribFavoritesMenu_Label {
-            get {
+        internal static string ribFavoritesMenu_Label
+        {
+            get
+            {
                 return ResourceManager.GetString("ribFavoritesMenu_Label", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
