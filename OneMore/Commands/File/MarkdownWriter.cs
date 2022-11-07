@@ -291,7 +291,7 @@ namespace River.OneMoreAddIn.Commands
 				if (quick != null)
 				{
 					// cite becomes italic
-					if (quick.Name == "cite") context.Enclosure = "*";
+					if (quick.Name == "cite") context.Enclosure = "_";
 					else if (quick.Name == "code") context.Enclosure = "`";
 				}
 				contexts.Push(context);
@@ -395,25 +395,28 @@ namespace River.OneMoreAddIn.Commands
 				{
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
-					if (style.IsItalic) text = $"*{text}*";
+					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
 			}
 
-			foreach (var anchor in wrapper.Elements("a"))
+            foreach (var anchor in wrapper.Elements("a").ToList())
 			{
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
 				{
+                    // Link working with latest markdown releases
+                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
-						anchor.ReplaceWith(anchor.Value);
-					}
-					else
-					{
-						anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
+						// anchor.ReplaceWith(anchor.Value);
+                    }
+                    else
+					*/
+                    {
+                        anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
 					}
 				}
 			}
