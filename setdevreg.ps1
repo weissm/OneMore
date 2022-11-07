@@ -23,7 +23,7 @@ Begin
 Process
 {
     $here = Get-Location
-    $dll = Join-Path $here 'OneMore\bin\x86\Debug\River.OneMoreAddIn.dll'
+    $dll = Join-Path $here 'OneMore\bin\x64\Debug\River.OneMoreAddIn.dll'
     if (!(Test-Path $dll))
     {
         Write-Host "cannot find $dll"
