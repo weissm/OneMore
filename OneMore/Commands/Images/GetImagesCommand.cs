@@ -151,7 +151,7 @@ namespace River.OneMoreAddIn.Commands
 
 				if (tasks.Any())
 				{
-					Task.WaitAll(tasks.ToArray());
+					Task.WhenAll(tasks.ToArray());
 
 					count = tasks.Sum(t => t.Result);
 				}
@@ -190,7 +190,7 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				image = await DownloadImage(href);
+				image = await DownloadImage(href).ConfigureAwait(false);
 			}
 			catch (Exception exc)
 			{
@@ -264,13 +264,14 @@ namespace River.OneMoreAddIn.Commands
 			{
 				using (var source = new CancellationTokenSource(TimeSpan.FromSeconds(10)))
 				{
-					using (var response = await client.GetAsync(new Uri(url, UriKind.Absolute), source.Token))
+					var myurl = new Uri(url, UriKind.Absolute);
+                    using (var response = await client.GetAsync(myurl, source.Token).ConfigureAwait(false))
 					{
 						if (response.IsSuccessStatusCode)
 						{
 							using (var stream = new MemoryStream())
 							{
-								await response.Content.CopyToAsync(stream);
+								await response.Content.CopyToAsync(stream).ConfigureAwait(false);
 
 								var detector = new ImageDetector();
 								if (detector.GetSignature(stream) != ImageSignature.Unknown)
