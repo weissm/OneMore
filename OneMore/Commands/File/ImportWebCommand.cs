@@ -52,8 +52,8 @@ namespace River.OneMoreAddIn.Commands
             ImportWeb.target = ImportWebTarget.Append;
             ImportWeb.importImages = true;
             ImportWeb.markdown = markdown;
-
-			ProgressDialog progress = new ProgressDialog();
+            System.Diagnostics.Debugger.Launch();
+            ProgressDialog progress = new ProgressDialog();
 			CancellationToken token = new CancellationToken();
 
             await ImportWeb.ImportMarkdown( progress,  token);
@@ -591,26 +591,30 @@ namespace River.OneMoreAddIn.Commands
 				var ns = page.Namespace;
 				page.checkDefs();
 
-				// Replace Todo
-				XElement tagToplevelItemNode = new XElement(ns + "Tag",
-											new XAttribute("index", tagIndex[(int)tlTags.Aufgaben].Name),
-											new XAttribute("completed", bool.FalseString.ToLower()),
-											new XAttribute("disabled", bool.FalseString.ToLower())
-											);
-				foreach (XElement line in page.GetAllNodesBelowLevel1("[ ]"))
+                // Replace Todo and distingish complete/non-complete
+                foreach (var todoIds in new string [] { "[]", "[ ]", "[x]", "[X]"})
 				{
-					var lineTextNode = line.Descendants(ns + "T").FirstOrDefault();
-					var linkText = lineTextNode.Value.Trim().Replace("[ ]", "").Replace("[]", "");
-					lineTextNode.SetValue(linkText);
-					line.AddFirst(tagToplevelItemNode);
-				}
+					bool isComplete = todoIds == "[x]" || todoIds == "[X]";
+                    XElement tagToplevelItemNode = new XElement(ns + "Tag",
+                                                new XAttribute("index", tagIndex[(int)tlTags.Aufgaben].Name),
+                                                new XAttribute("completed", (isComplete? bool.TrueString:bool.FalseString).ToLower()),
+                                                new XAttribute("disabled", bool.FalseString.ToLower())
+                                                );
+                    foreach (XElement line in page.GetAllNodesBelowLevel1(todoIds))
+                    {
+                        var lineTextNode = line.Descendants(ns + "T").FirstOrDefault();
+                        var linkText = lineTextNode.Value.Trim().Replace(todoIds, "");
+                        lineTextNode.SetValue(linkText);
+                        line.AddFirst(tagToplevelItemNode);
+                    }
+                }
 
-				// Replace Tags
-				for (int tagIdCtr = 0; tagIdCtr < tagIndex.Count(); tagIdCtr++)
+                // Replace Tags
+                for (int tagIdCtr = 0; tagIdCtr < tagIndex.Count(); tagIdCtr++)
 				{
 					var headerName = tagIndex[tagIdCtr].Name;
 					var headerEnum = Enum.GetName(typeof(tlTags), tagIndex[tagIdCtr].ID);
-					tagToplevelItemNode = new XElement(ns + "Tag",
+					var tagToplevelItemNode = new XElement(ns + "Tag",
 												new XAttribute("index", headerName)
 												);
 					foreach (XElement node in page.GetAllTNodesBelowLevel1(":" + headerEnum + ":"))
@@ -640,7 +644,7 @@ namespace River.OneMoreAddIn.Commands
 					var linkText = node.Value.Trim().Replace(escapeID + "Title" + "] ", "");
 					linkText = $"<a href=\"{address}\">{linkText}</a>";
 					page.Title = linkText;
-					node.Remove();
+					node.Parent.Remove();
 				}
 				page.decodeDefs();
 				await one.Update(page);
