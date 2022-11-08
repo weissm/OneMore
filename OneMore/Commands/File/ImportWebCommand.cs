@@ -642,8 +642,11 @@ namespace River.OneMoreAddIn.Commands
 				foreach (XElement node in page.GetAllTNodesBelowLevel1(escapeID + "Title" + "] "))
 				{
 					var linkText = node.Value.Trim().Replace(escapeID + "Title" + "] ", "");
-					linkText = $"<a href=\"{address}\">{linkText}</a>";
-					page.Title = linkText;
+					if (!linkText.Contains("href="))
+					{
+                        linkText = $"<a href=\"{address}\">{linkText}</a>";
+                    }
+                    page.Title = linkText;
 					node.Parent.Remove();
 				}
 				page.decodeDefs();
