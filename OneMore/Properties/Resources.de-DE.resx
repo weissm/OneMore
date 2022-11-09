@@ -1709,7 +1709,7 @@ Absatz - ganzer Absatz
     <comment>button</comment>
   </data>
   <data name="StyleDialog_Text" xml:space="preserve">
-    <value>Benutzerdefinierte Stile</value>
+    <value>Nutzer-Stile</value>
     <comment>dialog title</comment>
   </data>
   <data name="StyleDialog_transparentToolStripMenuItem.Text" xml:space="preserve">
@@ -3324,8 +3324,6 @@ Aufgeschoben</value>
     <value>Alles zurücksetzen</value>
     <comment>toolstrip button</comment>
   </data>
-<<<<<<< HEAD
-=======
   <data name="KeyboardSheet_resetButton.Text" xml:space="preserve">
     <value>Zurücksetzen</value>
     <comment>toolstrip button</comment>
@@ -3338,7 +3336,6 @@ Aufgeschoben</value>
     <value>Tastatur</value>
     <comment>sheet</comment>
   </data>
->>>>>>> improveMD25
   <data name="ResizeImagesDialog_preserveBox.Text" xml:space="preserve">
     <value>Speichergröße beibehalten</value>
     <comment>checkbox</comment>
