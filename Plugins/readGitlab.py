@@ -9,6 +9,7 @@ parser.add_argument('-w', '--workFile', help='Specify XML work file')
 parser.add_argument('-i', '--inputLink', help='Specify input Link')
 parser.add_argument('-f', '--debugFile', help='Specify debugFile')
 parser.add_argument('-l', '--onenoteLink', help='Specify onenoteLink')
+parser.add_argument('-p', '--pythonParser', help='use build-in python parser, otherwise DLL will be used', action='store_true')
 args = parser.parse_args()
 #
 # read xml
@@ -36,7 +37,7 @@ issue = project.issues.get(targetID)
 # 
 # add markdown into onenote xml
 #
-if False:
+if args.pythonParser:
     elementTitle = xmlDoc.getElementsByTagNameNS(ns, "Title")[0].getElementsByTagNameNS(ns, "T")[0]
     # Set its text content
     if elementTitle.firstChild:
