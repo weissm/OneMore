@@ -17,7 +17,6 @@ from xml.dom import minidom
 xmlDoc = minidom.parse(args.workFile)
 # extract parameters
 root = xmlDoc.documentElement
-print(xmlDoc)
 a = root.childNodes.item(1)
 ns = a.namespaceURI
 #
@@ -34,52 +33,38 @@ targetID = int(targetURI.path.rsplit('/', 1)[1])
 # get projects
 project = gl.projects.get(targetProject)
 issue = project.issues.get(targetID)
-print(issue.description)
 # 
 # add markdown into onenote xml
 #
-import xml.etree.ElementTree as ET
-etXml = ET.parse(args.workFile)
-etRoot = etXml.getroot()
-# read standard vars
-ns = etRoot.tag.split("}")[0]+"}"
-creation_time = etRoot.find(f"Title")
+if False:
+    elementTitle = xmlDoc.getElementsByTagNameNS(ns, "Title")[0].getElementsByTagNameNS(ns, "T")[0]
+    # Set its text content
+    if elementTitle.firstChild:
+        # Assumes that the first child is in fact a text node
+        elementTitle.firstChild.nodeValue = issue.title
+    else:
+        # If the element is empty, add a child node
+        elementTitle.appendChild(xmlDoc.createTextNode(issue.title))
 
+    for line in issue.description.splitlines():
+        elementT = xmlDoc.createElementNS(ns, "one:T")
+        elementT.appendChild(xmlDoc.createCDATASection(line))
+        elementOE = xmlDoc.createElementNS(ns, "one:OE")
+        elementOE.appendChild(elementT)
+        elementName = xmlDoc.getElementsByTagNameNS(ns, "OE")
+        elementLen = len(elementName) - 1
+        elementName[elementLen].parentNode.insertBefore(elementOE, elementName[elementLen])
+    #
+    # write results
+    #
+    with open(args.workFile, "w") as xml_file:
+        xmlDoc.writexml(xml_file)
 
-elementTitle = xmlDoc.getElementsByTagNameNS(ns, "Title")
-test2 = elementTitle.getElementsByTagNameNS(ns, "T")
-test = elementTitle[0].childNodes[0].firstChild.firstChild.nodeValue
-print (test)
-resultado = []
-for j in range(len(elementTitle)):
-    resultado.append(xmlDoc.getElementsByTagNameNS(ns, 'Title')[j].firstChild.data)
-    print(resultado[j])
-elementT = elementTitle.getElementsByTagNameNS(ns, "T")
-elementT.firstChild.nodeValue = issue.title
-
-for line in issue.description.splitlines():
-    elementT = xmlDoc.createElementNS(ns, "one:T")
-    elementT.appendChild(xmlDoc.createCDATASection(line))
-    elementOE = xmlDoc.createElementNS(ns, "one:OE")
-    elementOE.appendChild(elementT)
-    elementName = xmlDoc.getElementsByTagNameNS(ns, "OE")
-    elementLen = len(elementName) - 1
-    elementName[elementLen].parentNode.insertBefore(elementOE, elementName[elementLen])
-
-escapeID = "[CLD-"
-markdown = escapeID + "Title" + "] " + issue.title + "\n";
-markdown += issue.description
-# process doc
-# see here https://github.com/pythonnet/pythonnet/wiki/How-to-call-a-dynamic-library
-import sys, clr
-sys.path.append(r"c:\Program Files\River\OneMoreAddIn")
-clr.AddReference('River.OneMoreAddIn')
-from River.OneMoreAddIn.Commands import ImportWebCommand
-ImportWebCommand.ImportAsMarkdown(args.inputLink, markdown)
-
-#
-# write results
-#
-with open(args.workFile, "w") as xml_file:
-    xmlDoc.writexml(xml_file)
-
+else:
+    # process doc
+    # see here https://github.com/pythonnet/pythonnet/wiki/How-to-call-a-dynamic-library
+    import sys, clr
+    sys.path.append(r"c:\Program Files\River\OneMoreAddIn")
+    clr.AddReference('River.OneMoreAddIn')
+    from River.OneMoreAddIn.Commands import ImportWebCommand
+    ImportWebCommand.ImportAsMarkdown(args.inputLink, issue.description, issue.title)
