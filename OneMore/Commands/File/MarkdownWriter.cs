@@ -233,12 +233,18 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Image":
+					if (!copyMode)
+					{
 					WriteImage(element);
+					}
 					dive = false;
 					break;
 
 				case "InsertedFile":
+					if (!copyMode)
+					{
 					WriteFile(element);
+					}
 					dive = false;
 					break;
 
@@ -253,6 +259,7 @@ namespace River.OneMoreAddIn.Commands
 				foreach (var child in element.Elements())
 				{
 					Write(child, ref prefix, startpara, contained);
+					startpara = false;
 				}
 			}
 
