@@ -34,8 +34,9 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 		private string address = null;
-		private string markdown = null;
-		private bool importImages = false;
+        private string markdown = null;
+        private string title = null;
+        private bool importImages = false;
 		private bool importMarkdown = false;
 		private ImportWebTarget target;
 		private ProgressDialog progress;
@@ -45,14 +46,15 @@ namespace River.OneMoreAddIn.Commands
 		{
 		}
 
-        public async static void ImportAsMarkdown(string address,string markdown)
+        public async static void ImportAsMarkdown(string address,string markdown, string title)
         {
             ImportWebCommand ImportWeb = new ImportWebCommand();
             ImportWeb.address = address;
             ImportWeb.target = ImportWebTarget.Append;
             ImportWeb.importImages = true;
+            ImportWeb.title = title;
             ImportWeb.markdown = markdown;
-            System.Diagnostics.Debugger.Launch();
+//            System.Diagnostics.Debugger.Launch();
             ProgressDialog progress = new ProgressDialog();
 			CancellationToken token = new CancellationToken();
 
@@ -442,8 +444,7 @@ namespace River.OneMoreAddIn.Commands
 			var targetID = int.Parse(baseUri.Segments[baseUri.Segments.Length - 1]);
 			var targetProjectURL = baseUri.AbsoluteUri.Split(new string[] { baseUri.LocalPath }, StringSplitOptions.None)[0];
 			var importWeb = new River.OneMoreAddIn.Commands.ImportWebCommand();
-			// todo - replace cld-
-			var escapeID = "[CLD-";
+			var escapeID = "[OM-";
 
 			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 			using (var one = new River.OneMoreAddIn.OneNote())
@@ -556,7 +557,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-				foreach (var header in new string[] { "h1", "h2", "h3", "h4" })
+				foreach (var header in new string[] { "h1", "h2", "h3", "h4", "h5", "h6" })
 				{
 					foreach (var node in doc.DocumentNode.Descendants(header).ToList())
 					{
@@ -565,7 +566,6 @@ namespace River.OneMoreAddIn.Commands
 					}
 				}
 				var outerHtmlorg = doc.DocumentNode.OuterHtml;
-                string outerHtml = System.IO.File.ReadAllText(@"C:\tmp\outer.xml");
 
                 page.AddHtmlContent(outerHtmlorg);
 
@@ -626,7 +626,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 
 				// Replace Header
-				foreach (var header in new string[] { "h1", "h2", "h3", "h4" })
+				foreach (var header in new string[] { "h1", "h2", "h3", "h4", "h5", "h6" })
 				{
 					foreach (XElement line in page.GetAllNodesBelowLevel1(escapeID + header + "]"))
 					{
@@ -639,16 +639,11 @@ namespace River.OneMoreAddIn.Commands
 				}
 
 				// replace Title
-				foreach (XElement node in page.GetAllTNodesBelowLevel1(escapeID + "Title" + "] "))
+				if (!title.Contains("href="))
 				{
-					var linkText = node.Value.Trim().Replace(escapeID + "Title" + "] ", "");
-					if (!linkText.Contains("href="))
-					{
-                        linkText = $"<a href=\"{address}\">{linkText}</a>";
-                    }
-                    page.Title = linkText;
-					node.Parent.Remove();
-				}
+					title = $"<a href=\"{address}\">{title}</a>";
+                }
+                page.Title = title;
 				page.decodeDefs();
 				await one.Update(page);
 			}
