@@ -73,9 +73,9 @@
             imageMso="EditLinks"
             getContent="GetFavoritesContent"
             keytip="SF"/>
-
+          
           <dynamicMenu
-            id="ribPluginsMenu"
+            id="ribPluginsTopMenu"
             getLabel="GetRibbonLabel"
             size="normal"
             imageMso="EditLinks"
