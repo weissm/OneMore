@@ -72,7 +72,7 @@ namespace River.OneMoreAddIn.Commands
 				yield break;
 			}
 
-			foreach (var file in Directory.GetFiles(store, $"*{Extension}"))
+			foreach (var file in Directory.GetFiles(store, $"*{Extension}").OrderBy(f => f))
 			{
 				yield return Path.GetFileNameWithoutExtension(file);
 			}
