@@ -40,8 +40,9 @@ namespace River.OneMoreAddIn.Settings
 				Localize(new string[]
 				{
 					"introLabel",
-					"deleteLabel=word_Delete"
-				});
+                    "refreshButton=word_Run",
+                    "deleteLabel=word_Delete"
+                });
 
 				nameColumn.HeaderText = Resx.word_Name;
 				cmdColumn.HeaderText = Resx.word_Command;
@@ -187,48 +188,65 @@ namespace River.OneMoreAddIn.Settings
 		}
 
 
-		private void DeleteItem(object sender, EventArgs e)
-		{
-			if (gridView.SelectedCells.Count == 0)
+        private void DeleteItem(object sender, EventArgs e)
+        {
+            if (gridView.SelectedCells.Count == 0)
+                return;
+
+            int rowIndex = gridView.SelectedCells[0].RowIndex;
+            if (rowIndex >= plugins.Count)
+                return;
+
+            var plugin = plugins[rowIndex];
+
+            var result = MessageBox.Show(
+                string.Format(Resx.PluginsSheet_ConfirmDelete, plugin.Name),
+                "OneMore",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2,
+                MessageBoxOptions.DefaultDesktopOnly);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            if (pinProvider.Delete(plugin.Path))
+            {
+                Logger.Current.WriteLine($"Deleted {plugin.Name} plugin");
+
+                plugins.RemoveAt(rowIndex);
+                updated = true;
+
+                rowIndex--;
+                if (rowIndex >= 0)
+                {
+                    gridView.Rows[rowIndex].Cells[0].Selected = true;
+                }
+            }
+            else
+            {
+                Logger.Current.WriteLine($"Could not delete {plugin.Name} plugin");
+            }
+        }
+
+
+        private async void RunItem(object sender, EventArgs e)
+        {
+            if (gridView.SelectedCells.Count == 0)
+                return;
+
+            int rowIndex = gridView.SelectedCells[0].RowIndex;
+            if (rowIndex >= plugins.Count)
 				return;
 
-			int rowIndex = gridView.SelectedCells[0].RowIndex;
-			if (rowIndex >= plugins.Count)
-				return;
-
-			var plugin = plugins[rowIndex];
-
-			var result = MessageBox.Show(
-				string.Format(Resx.PluginsSheet_ConfirmDelete, plugin.Name),
-				"OneMore",
-				MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-				MessageBoxDefaultButton.Button2,
-				MessageBoxOptions.DefaultDesktopOnly);
-
-			if (result != DialogResult.Yes)
-				return;
-
-			if (pinProvider.Delete(plugin.Path))
-			{
-				Logger.Current.WriteLine($"Deleted {plugin.Name} plugin");
-
-				plugins.RemoveAt(rowIndex);
-				updated = true;
-
-				rowIndex--;
-				if (rowIndex >= 0)
-				{
-					gridView.Rows[rowIndex].Cells[0].Selected = true;
-				}
-			}
-			else
-			{
-				Logger.Current.WriteLine($"Could not delete {plugin.Name} plugin");
-			}
-		}
+            var plugin = plugins[rowIndex];
+		
+            var runPluginCommand = new RunPluginCommand();
+            runPluginCommand.SetLogger(Logger.Current);
+            await runPluginCommand.Execute(plugin.Path);
+        }
 
 
-		public override bool CollectSettings()
+        public override bool CollectSettings()
 		{
 			if (updated)
 			{
@@ -237,5 +255,19 @@ namespace River.OneMoreAddIn.Settings
 
 			return false;
 		}
-	}
+
+        private void deleteLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void runLabel_Click(object sender, EventArgs e)
+        {
+        }
+    }
 }
