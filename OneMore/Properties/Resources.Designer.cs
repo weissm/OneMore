@@ -4581,17 +4581,31 @@ namespace River.OneMoreAddIn.Properties {
                 return ResourceManager.GetString("RecalculateFormulaCommand_NoFormula", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Refresh {
-            get {
+        internal static System.Drawing.Bitmap Run
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Run", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refresh
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("Refresh", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to No references found to this page.
         /// </summary>
@@ -6072,10 +6086,10 @@ namespace River.OneMoreAddIn.Properties {
         {
             get
             {
-                return ResourceManager.GetString("ribFavoritesMenu_Label", resourceCulture);
+                                return ResourceManager.GetString("ribFavoritesMenu_Label", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
