@@ -4355,4 +4355,18 @@ Last Column Font</value>
   <data name="word_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="SnippetsSheet_introLabel.Text" xml:space="preserve">
+    <value>Manage my custom snippets</value>
+    <comment>label</comment>
+  </data>
+  <data name="word_Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
+  <data name="word_Reminder" xml:space="preserve">
+    <value>Reminder</value>
+  </data>
+  <data name="SortListDialog_duplicatesBox.Text" xml:space="preserve">
+    <value>Remove duplicates</value>
+    <comment>checkbox</comment>
+  </data>
 </root>
