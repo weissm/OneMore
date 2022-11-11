@@ -78,7 +78,7 @@
             id="ribPluginsTopMenu"
             getLabel="GetRibbonLabel"
             size="normal"
-            imageMso="EditLinks"
+            imageMso="AddInsMenu"
             getContent="GetPluginsContent"
             keytip="SM"/>
 
