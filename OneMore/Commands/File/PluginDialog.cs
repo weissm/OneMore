@@ -393,7 +393,6 @@ namespace River.OneMoreAddIn.Commands
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 		}
 
-
 		private void ChangeAsChild(object sender, EventArgs e)
 		{
 			plugin.AsChildPage = childBox.Checked;
