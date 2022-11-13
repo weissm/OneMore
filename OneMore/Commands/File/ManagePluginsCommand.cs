@@ -19,7 +19,8 @@ namespace River.OneMoreAddIn.Commands
 		{
 			using (var dialog = new SettingsDialog(args[0] as IRibbonUI))
 			{
-				dialog.ActivateSheet(SettingsDialog.Sheets.Plugins);
+                System.Diagnostics.Debugger.Launch();
+                dialog.ActivateSheet(SettingsDialog.Sheets.Plugins);
 				dialog.ShowDialog();
 			}
 
