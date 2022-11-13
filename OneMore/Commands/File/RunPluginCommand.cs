@@ -136,7 +136,10 @@ namespace River.OneMoreAddIn.Commands
 
             // add link ot onenote as argument for script
             var pageInfo = one.GetPageInfo(page.PageId);
-            plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
+			if (plugin.GetoptsStyle)
+			{
+				plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
+			}
 
 
 			try
@@ -235,14 +238,15 @@ namespace River.OneMoreAddIn.Commands
 			try
 			{
 				var abscmd = Environment.ExpandEnvironmentVariables(plugin.Command);
-				var absargs = Environment.ExpandEnvironmentVariables(plugin.Arguments);
+                var absargs = Environment.ExpandEnvironmentVariables(plugin.Arguments);
+				var absgetoptStyle = plugin.GetoptsStyle?"-w":"";
 
-				logger.WriteLine($"running {abscmd} {absargs} -w \"{path}\"");
+                logger.WriteLine($"running {abscmd} {absargs} {absgetoptStyle} \"{path}\"");
 
 				var info = new ProcessStartInfo
 				{
 					FileName = abscmd,
-					Arguments = $"{absargs} -w \"{path}\"",
+					Arguments = $"{absargs} {absgetoptStyle} \"{path}\"",
 					CreateNoWindow = true,
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
