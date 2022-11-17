@@ -9,15 +9,13 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
 	using System;
-    using System.Collections;
     using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-    using System.Text;
-    using System.Xml.Linq;
     using System.Threading.Tasks;
+    using System.Xml.Linq;
 
 
     internal class MarkdownWriter
@@ -74,24 +72,6 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		public void Save(string filename)
-		{
-#if !LOG
-			path = Path.GetDirectoryName(filename);
-			using (writer = File.CreateText(filename))
-#endif
-			{
-				writer.WriteLine($"# {page.Title}");
-
-				page.Root.Elements(ns + "Outline")
-					.Elements(ns + "OEChildren")
-					.Elements()
-					.ForEach(e => { PrefixClass prefix = new PrefixClass() ; Write(e, ref prefix); });
-
-				writer.WriteLine();
-			}
-		}
-
         /// <summary>
         /// Copy the given content as markdown to the clipboard using the current
         /// page as a template for tag and style references.
@@ -129,7 +109,6 @@ namespace River.OneMoreAddIn.Commands
             }
         }
 
-/*
         /// <summary>
         /// Save the page as markdown to the specified file.
         /// </summary>
@@ -146,13 +125,15 @@ namespace River.OneMoreAddIn.Commands
                 page.Root.Elements(ns + "Outline")
                     .Elements(ns + "OEChildren")
                     .Elements()
-                    .ForEach(e => Write(e));
+                    .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
                 writer.WriteLine();
             }
         }
 
-*/        
+        /// <summary>
+        /// Save the page as markdown to a string
+        /// </summary>
 		public string Save()
 		{
 			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
@@ -177,7 +158,6 @@ namespace River.OneMoreAddIn.Commands
 			}
 			return retString;
 		}
-
 		private void Write(XElement element,
 			ref PrefixClass prefix,
 			bool startpara = false,
@@ -217,7 +197,9 @@ namespace River.OneMoreAddIn.Commands
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					if (startpara) { Stylize(prefix); prefix.tags = ""; prefix.bullets = ""; }
+					Stylize(prefix); 
+					prefix.tags = ""; 
+					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
 					break;
 
