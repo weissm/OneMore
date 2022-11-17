@@ -7,6 +7,7 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.Models;
 	using System;
 	using System.Collections.Generic;
+	using System.Diagnostics;
 	using System.IO;
 	using System.Linq;
 	using System.Runtime.InteropServices;
@@ -372,8 +373,9 @@ namespace River.OneMoreAddIn.Commands
 		{
 			var root = XElement.Load(workFile);
 			Page page = new Page(root);
+//            System.Diagnostics.Debugger.Launch();
 
-			var writer = new MarkdownWriter(page, withAttachments: false);
+            var writer = new MarkdownWriter(page, withAttachments: false);
 			var result = writer.Save();
 
 			return result;
