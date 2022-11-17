@@ -5448,6 +5448,15 @@ namespace River.OneMoreAddIn.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Apply Style 1.
         /// </summary>
+        internal static string ribApplyStyle0Button_Label {
+            get {
+                return ResourceManager.GetString("ribApplyStyle0Button_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply Style 2.
+        /// </summary>
         internal static string ribApplyStyle1Button_Label {
             get {
                 return ResourceManager.GetString("ribApplyStyle1Button_Label", resourceCulture);
@@ -5455,7 +5464,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 2.
+        ///   Looks up a localized string similar to Apply Style 3.
         /// </summary>
         internal static string ribApplyStyle2Button_Label {
             get {
@@ -5464,7 +5473,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 3.
+        ///   Looks up a localized string similar to Apply Style 4.
         /// </summary>
         internal static string ribApplyStyle3Button_Label {
             get {
@@ -5473,7 +5482,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 4.
+        ///   Looks up a localized string similar to Apply Style 5.
         /// </summary>
         internal static string ribApplyStyle4Button_Label {
             get {
@@ -5482,7 +5491,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 5.
+        ///   Looks up a localized string similar to Apply Style 6.
         /// </summary>
         internal static string ribApplyStyle5Button_Label {
             get {
@@ -5491,7 +5500,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 6.
+        ///   Looks up a localized string similar to Apply Style 7.
         /// </summary>
         internal static string ribApplyStyle6Button_Label {
             get {
@@ -5500,7 +5509,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 7.
+        ///   Looks up a localized string similar to Apply Style 8.
         /// </summary>
         internal static string ribApplyStyle7Button_Label {
             get {
@@ -5509,20 +5518,11 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply Style 8.
+        ///   Looks up a localized string similar to Apply Style 9.
         /// </summary>
         internal static string ribApplyStyle8Button_Label {
             get {
                 return ResourceManager.GetString("ribApplyStyle8Button_Label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Apply Style 9.
-        /// </summary>
-        internal static string ribApplyStyle9Button_Label {
-            get {
-                return ResourceManager.GetString("ribApplyStyle9Button_Label", resourceCulture);
             }
         }
         

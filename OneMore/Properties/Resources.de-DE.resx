@@ -3743,10 +3743,6 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribApplyStyle8Button_Label" xml:space="preserve">
-    <value>Stil 8 anwenden</value>
-    <comment>not a menu, hotkey only</comment>
-  </data>
-  <data name="ribApplyStyle9Button_Label" xml:space="preserve">
     <value>Stil 9 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
@@ -3763,7 +3759,7 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>context menu option</comment>
   </data>
   <data name="ribApplyStyle6Button_Label" xml:space="preserve">
-    <value>Stil 6 anwenden</value>
+    <value>Stil 7 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribInsertGrayStatusButton_Label" xml:space="preserve">
@@ -3771,7 +3767,7 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>Ribbon OneMore menu item, Snippets...</comment>
   </data>
   <data name="ribApplyStyle1Button_Label" xml:space="preserve">
-    <value>Stil 1 anwenden</value>
+    <value>Stil 2 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribRefreshFootnotesButton_Label" xml:space="preserve">
@@ -3787,7 +3783,7 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>context menu option</comment>
   </data>
   <data name="ribApplyStyle7Button_Label" xml:space="preserve">
-    <value>Stil 7 anwenden</value>
+    <value>Stil 8 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribRefreshFootnotesButton_Screentip" xml:space="preserve">
@@ -3795,15 +3791,15 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>ribbon button</comment>
   </data>
   <data name="ribApplyStyle2Button_Label" xml:space="preserve">
-    <value>Stil 2 anwenden</value>
-    <comment>not a menu, hotkey only</comment>
-  </data>
-  <data name="ribApplyStyle3Button_Label" xml:space="preserve">
     <value>Stil 3 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
+  <data name="ribApplyStyle3Button_Label" xml:space="preserve">
+    <value>Stil 4 anwenden</value>
+    <comment>not a menu, hotkey only</comment>
+  </data>
   <data name="ribApplyStyle5Button_Label" xml:space="preserve">
-    <value>Stil 5 anwenden</value>
+    <value>Stil 6 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribSearchAndReplaceButton_Screentip" xml:space="preserve">
@@ -3867,7 +3863,7 @@ Vergrößern Sie kleinere Bilder nicht</value>
     <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribApplyStyle4Button_Label" xml:space="preserve">
-    <value>Stil 4 anwenden</value>
+    <value>Stil 5 anwenden</value>
     <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribInsertExpandButton_Label" xml:space="preserve">
@@ -4231,5 +4227,9 @@ Schriftart der letzten Spalte</value>
   <data name="SnippetsSheet_introLabel.Text" xml:space="preserve">
     <value>Verwaltung der benutzerdefinierten Snippets</value>
     <comment>intro label</comment>
+  </data>
+  <data name="ribApplyStyle0Button_Label" xml:space="preserve">
+    <value>Stil 1 anwenden</value>
+    <comment>not a menu, hotkey only</comment>
   </data>
 </root>
