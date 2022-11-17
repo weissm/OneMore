@@ -3,14 +3,15 @@
 #
 import argparse
 parser = argparse.ArgumentParser("Parse options")
-parser.add_argument('-t', '--token', help='Specify gitlab token')
+parser.add_argument('-t', '--token', help='Specify gitlab token', default="")
 parser.add_argument('-u', '--url', help='Specify gitlab url')
 parser.add_argument('-w', '--workFile', help='Specify XML work file')
-parser.add_argument('-i', '--inputLink', help='Specify input Link')
+parser.add_argument('-i', '--inputLink', help='Specify input Link', default="https://gitlab.com/gitlab-examples/install-runner-via-k8s-agent/-/issues/1")
 parser.add_argument('-f', '--debugFile', help='Specify debugFile')
 parser.add_argument('-l', '--onenoteLink', help='Specify onenoteLink')
 parser.add_argument('-p', '--pythonParser', help='use build-in python parser, otherwise DLL will be used', action='store_true')
 args = parser.parse_args()
+# def
 #
 # read xml
 #
