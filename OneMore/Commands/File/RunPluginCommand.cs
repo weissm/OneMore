@@ -319,7 +319,13 @@ namespace River.OneMoreAddIn.Commands
 				var root = XElement.Load(workpath);
 				var updated = root.ToString(SaveOptions.DisableFormatting);
 
-				if (updated == content && !plugin.CreateNewPage)
+				if (plugin.Timeout == 0)
+				{
+                    UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+                    return null;
+                }
+
+                if (updated == content && !plugin.CreateNewPage)
 				{
 					UIHelper.ShowInfo(Resx.Plugin_NoChanges);
 					return null;

@@ -57,7 +57,7 @@
             this.failLockRadio = new System.Windows.Forms.RadioButton();
             this.pageGroup = new System.Windows.Forms.GroupBox();
             this.sectionGroup = new System.Windows.Forms.GroupBox();
-            this.checkGetoptsStyle = new System.Windows.Forms.CheckBox();
+            this.getoptsStyle = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeoutBox)).BeginInit();
             this.pageGroup.SuspendLayout();
@@ -223,7 +223,7 @@
             this.pluginsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pluginsBox.FormattingEnabled = true;
             this.pluginsBox.Location = new System.Drawing.Point(124, 25);
-            this.pluginsBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pluginsBox.Margin = new System.Windows.Forms.Padding(4);
             this.pluginsBox.Name = "pluginsBox";
             this.pluginsBox.Size = new System.Drawing.Size(514, 24);
             this.pluginsBox.TabIndex = 0;
@@ -241,7 +241,7 @@
             // nameBox
             // 
             this.nameBox.Location = new System.Drawing.Point(124, 62);
-            this.nameBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nameBox.Margin = new System.Windows.Forms.Padding(4);
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(514, 22);
             this.nameBox.TabIndex = 1;
@@ -251,7 +251,7 @@
             // 
             this.errorBox.Image = ((System.Drawing.Image)(resources.GetObject("errorBox.Image")));
             this.errorBox.Location = new System.Drawing.Point(644, 62);
-            this.errorBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.errorBox.Margin = new System.Windows.Forms.Padding(4);
             this.errorBox.Name = "errorBox";
             this.errorBox.Size = new System.Drawing.Size(23, 28);
             this.errorBox.TabIndex = 19;
@@ -362,17 +362,17 @@
             this.sectionGroup.TabStop = false;
             this.sectionGroup.Visible = false;
             // 
-            // checkGetoptsStyle
+            // getoptsStyle
             // 
-            this.checkGetoptsStyle.AutoSize = true;
-            this.checkGetoptsStyle.Location = new System.Drawing.Point(237, 172);
-            this.checkGetoptsStyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkGetoptsStyle.Name = "checkGetoptsStyle";
-            this.checkGetoptsStyle.Size = new System.Drawing.Size(181, 20);
-            this.checkGetoptsStyle.TabIndex = 10;
-            this.checkGetoptsStyle.Text = "Enable getopts style args";
-            this.checkGetoptsStyle.UseVisualStyleBackColor = true;
-            this.checkGetoptsStyle.CheckedChanged += new System.EventHandler(this.checkGetoptsStyle_CheckedChanged);
+            this.getoptsStyle.AutoSize = true;
+            this.getoptsStyle.Location = new System.Drawing.Point(237, 172);
+            this.getoptsStyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.getoptsStyle.Name = "getoptsStyle";
+            this.getoptsStyle.Size = new System.Drawing.Size(181, 20);
+            this.getoptsStyle.TabIndex = 10;
+            this.getoptsStyle.Text = "Enable getopts style args";
+            this.getoptsStyle.UseVisualStyleBackColor = true;
+            this.getoptsStyle.CheckedChanged += new System.EventHandler(this.checkGetoptsStyle_CheckedChanged);
             // 
             // PluginDialog
             // 
@@ -381,7 +381,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(692, 423);
-            this.Controls.Add(this.checkGetoptsStyle);
+            this.Controls.Add(this.getoptsStyle);
             this.Controls.Add(this.sectionGroup);
             this.Controls.Add(this.pageGroup);
             this.Controls.Add(this.targetLabel);
@@ -452,6 +452,6 @@
 		private System.Windows.Forms.RadioButton failLockRadio;
 		private System.Windows.Forms.GroupBox pageGroup;
 		private System.Windows.Forms.GroupBox sectionGroup;
-        private System.Windows.Forms.CheckBox checkGetoptsStyle;
+        private System.Windows.Forms.CheckBox getoptsStyle;
     }
 }
