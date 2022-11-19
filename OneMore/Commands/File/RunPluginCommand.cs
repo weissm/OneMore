@@ -17,6 +17,7 @@ namespace River.OneMoreAddIn.Commands
 	using System.Xml;
 	using System.Xml.Linq;
 	using System.Xml.Schema;
+	using static System.Net.Mime.MediaTypeNames;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
@@ -321,7 +322,21 @@ namespace River.OneMoreAddIn.Commands
 
 				if (plugin.Timeout == 0)
 				{
-                    UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+                    // UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+
+					using (var box = new MoreMessageBox())
+					{
+                        box.SetIcon(MessageBoxIcon.Information);
+                        box.SetButtons(MessageBoxButtons.YesNo);
+                        box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
+                        box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
+                        box.ShowLogLink();
+                        if (box.ShowDialog(Owner) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(plugin.Command);
+                        }
+                    }
+
                     return null;
                 }
 
