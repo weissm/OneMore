@@ -19,18 +19,25 @@ namespace River.OneMoreAddIn.Commands
 	using Windows.Storage.Streams;
 	using Hap = HtmlAgilityPack;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
-
+	using Win = System.Windows;
+	using System.Text;
+	using static River.OneMoreAddIn.Models.Page;
+	using System.Web.Script.Serialization;
+	using Newtonsoft.Json.Linq;
 
 	public class ImportWebCommand : Command
 	{
-		private sealed class WebPageInfo
+		public sealed class WebPageInfo
 		{
 			public string Content;
 			public string Title;
 		}
 
 		private string address = null;
-		private bool importImages = false;
+        private string markdown = null;
+        private string title = null;
+        private bool importImages = false;
+		private bool importMarkdown = false;
 		private ImportWebTarget target;
 		private ProgressDialog progress;
 
@@ -39,8 +46,22 @@ namespace River.OneMoreAddIn.Commands
 		{
 		}
 
+        public async static void ImportAsMarkdown(string address,string markdown, string title)
+        {
+            ImportWebCommand ImportWeb = new ImportWebCommand();
+            ImportWeb.address = address;
+            ImportWeb.target = ImportWebTarget.Append;
+            ImportWeb.importImages = true;
+            ImportWeb.title = title;
+            ImportWeb.markdown = markdown;
+//            System.Diagnostics.Debugger.Launch();
+            ProgressDialog progress = new ProgressDialog();
+			CancellationToken token = new CancellationToken();
 
-		public override async Task Execute(params object[] args)
+            await ImportWeb.ImportMarkdown( progress,  token);
+        }
+
+        public override async Task Execute(params object[] args)
 		{
 			if (!HttpClientFactory.IsNetworkAvailable())
 			{
@@ -60,9 +81,35 @@ namespace River.OneMoreAddIn.Commands
 				importImages = dialog.ImportImages;
 			}
 
+			var name = "ReadGitLab";
+			var path = "C:\\Users\\mweiss\\AppData\\Roaming\\OneMore\\Plugins\\" + name + ".js";
 			if (importImages)
 			{
 				await ImportAsImages();
+			}
+			else if (address.Contains("gitlab") && File.Exists(path))
+			{
+				var target = Path.Combine(Path.GetTempPath(), $"{name}");
+
+				// add html link to argument list
+				using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+				using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
+				{
+					var json = await reader.ReadToEndAsync();
+
+					var serializer = new JavaScriptSerializer();
+					var plugin = serializer.Deserialize<Plugin>(json);
+
+					plugin.Name = target;
+					plugin.Arguments +=  $" -i \"{address}\"";
+
+					var provider = new PluginsProvider();
+					await provider.Save(plugin);
+				}
+
+				await factory.Run<RunPluginCommand>(target + ".js");
+
+				ImportAsMarkdown();
 			}
 			else
 			{
@@ -70,6 +117,13 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+		public void initVars(string Address, bool ImportImages = true, bool ImportMarkdown = true)
+		{
+			address = Address;
+			target = ImportWebTarget.Append;
+			importImages = ImportImages;
+			importMarkdown = ImportMarkdown;
+		}
 
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -88,6 +142,7 @@ namespace River.OneMoreAddIn.Commands
 
 		private async Task ImportImages(ProgressDialog progress, CancellationToken token)
 		{
+			logger = Logger.Current;
 			logger.Start();
 			logger.StartClock();
 
@@ -256,9 +311,20 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+        private void ImportAsMarkdown()
+		{
+			using (progress = new ProgressDialog(8))
+			{
+
+				progress.SetMessage($"Importing {address}...");
+				progress.ShowTimedDialog(ImportMarkdown);
+			}
+		}
+
 		private async Task<bool> ImportHtml(ProgressDialog progress, CancellationToken token)
 		{
 			var baseUri = new Uri(address);
+			logger = Logger.Current;
 
 			logger.WriteLine($"importing web page {baseUri.AbsoluteUri}");
 			logger.StartClock();
@@ -364,6 +430,220 @@ namespace River.OneMoreAddIn.Commands
 
 			logger.WriteTime("import web completed");
 			return true;
+		}
+
+
+		public async Task<bool> ImportMarkdown(ProgressDialog progress, CancellationToken token)
+		{
+			var baseUri = new Uri(address);
+			var targetProject = baseUri.AbsolutePath.Split(new string[] { @"/-/issues" }, StringSplitOptions.None)[0].Substring(1);
+			var targetID = int.Parse(baseUri.Segments[baseUri.Segments.Length - 1]);
+			var targetProjectURL = baseUri.AbsoluteUri.Split(new string[] { baseUri.LocalPath }, StringSplitOptions.None)[0];
+			var importWeb = new River.OneMoreAddIn.Commands.ImportWebCommand();
+			var escapeID = "[OM-";
+
+			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+			using (var one = new River.OneMoreAddIn.OneNote())
+			{
+				var page = one.GetPage();
+				var ns = page.Namespace;
+
+				if (markdown.IsNullOrEmpty())
+				{
+                    // read all selected items into markdown
+                    page.Root
+                        .Elements(ns + "Outline")
+                        .Elements(ns + "OEChildren")
+                        .Descendants(ns + "T")
+                        .Where(e =>
+                        {
+                            var node = e;
+                            if (node != null)
+                            {
+                                var attr = node.Attribute("selected");
+                                return (attr != null && attr?.Value == "all");
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        })
+                        .ForEach(e => { markdown += e.Value + "\n"; });
+
+                    // remove all selected items
+                    var elements = page.Root
+                        .Elements(ns + "Outline")
+                        .Elements(ns + "OEChildren")
+                        .Descendants(ns + "OE")
+                        .Where(e =>
+                        {
+                            var node = e.Descendants(ns + "T").FirstOrDefault();
+                            if (node != null)
+                            {
+                                var attr = node.Attribute("selected");
+                                return (attr != null && attr?.Value == "all");
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        });
+                    elements.Remove();
+                }
+                var container = page.EnsureContentContainer();
+				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+				if (target == ImportWebTarget.NewPage)
+				{
+					if (token.IsCancellationRequested)
+					{
+						progress.DialogResult = DialogResult.Cancel;
+						progress.Close();
+						return false;
+					}
+
+					await one.Update(page);
+					page = await CreatePage(one,
+						target == ImportWebTarget.ChildPage ? one.GetPage() : null,
+						title: "New Page"
+						);
+				}
+
+				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+				// convert to markdown
+				var html1 = Markdig.Markdown.ToHtml(markdown);
+				// parse MD into html as interim format
+
+				var builder = new StringBuilder();
+				builder.AppendLine("<html>");
+				builder.AppendLine("<body>");
+				builder.AppendLine("<!--StartFragment-->");
+				builder.AppendLine(html1);
+				builder.AppendLine("<!--EndFragment-->");
+				builder.AppendLine("</body>");
+				builder.AppendLine("</html>");
+				var html = builder.ToString();
+				var replaceString = (@"<img src=""/uploads");
+				var newString = string.Format(@"<img src=""{0}/uploads", targetProject);
+				html = html.Replace(replaceString, newString);
+				var doc = ReplaceImagesWithAnchors(html, new Uri(targetProjectURL), out var hasImages);
+				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+				if ((progress != null) && doc == null)
+				{
+					Giveup(Resx.ImportWebCommand_BadUrl);
+					progress.DialogResult = DialogResult.Abort;
+					progress.Close();
+					return false;
+				}
+
+				if ((progress != null) && token.IsCancellationRequested)
+				{
+					progress.DialogResult = DialogResult.Cancel;
+					progress.Close();
+					return false;
+				}
+				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+				var hasAnchors = EncodeLocalAnchors(doc, baseUri);
+				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+				if ((progress != null) && token.IsCancellationRequested)
+				{
+					progress.DialogResult = DialogResult.Cancel;
+					progress.Close();
+					return false;
+				}
+				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+				foreach (var header in new string[] { "h1", "h2", "h3", "h4", "h5", "h6" })
+				{
+					foreach (var node in doc.DocumentNode.Descendants(header).ToList())
+					{
+						node.InnerHtml = escapeID + header + "] " + node.InnerHtml;
+						node.Name = "p";
+					}
+				}
+				var outerHtmlorg = doc.DocumentNode.OuterHtml;
+
+                page.AddHtmlContent(outerHtmlorg);
+
+
+				await one.Update(page);
+				logger.WriteLine("pass 1 updated page with injected HTML");
+
+				if (hasImages || hasAnchors)
+				{
+					await PatchPage(page, one, hasImages, hasAnchors);
+				}
+			}
+			await ImportMarkdownPostprocessing(escapeID);
+			logger.WriteTime("import markdown completed");
+			return true;
+		}
+
+        public async Task ImportMarkdownPostprocessing(string escapeID)
+		{
+			using (var one = new River.OneMoreAddIn.OneNote())
+			{
+				var page = one.GetPage();
+				var ns = page.Namespace;
+				page.checkDefs();
+
+                // Replace Todo and distingish complete/non-complete
+                foreach (var todoIds in new string [] { "[]", "[ ]", "[x]", "[X]"})
+				{
+					bool isComplete = todoIds == "[x]" || todoIds == "[X]";
+                    XElement tagToplevelItemNode = new XElement(ns + "Tag",
+                                                new XAttribute("index", tagIndex[(int)tlTags.Aufgaben].Name),
+                                                new XAttribute("completed", (isComplete? bool.TrueString:bool.FalseString).ToLower()),
+                                                new XAttribute("disabled", bool.FalseString.ToLower())
+                                                );
+                    foreach (XElement line in page.GetAllNodesBelowLevel1(todoIds))
+                    {
+                        var lineTextNode = line.Descendants(ns + "T").FirstOrDefault();
+                        var linkText = lineTextNode.Value.Trim().Replace(todoIds, "");
+                        lineTextNode.SetValue(linkText);
+                        line.AddFirst(tagToplevelItemNode);
+                    }
+                }
+
+                // Replace Tags
+                for (int tagIdCtr = 0; tagIdCtr < tagIndex.Count(); tagIdCtr++)
+				{
+					var headerName = tagIndex[tagIdCtr].Name;
+					var headerEnum = Enum.GetName(typeof(tlTags), tagIndex[tagIdCtr].ID);
+					var tagToplevelItemNode = new XElement(ns + "Tag",
+												new XAttribute("index", headerName)
+												);
+					foreach (XElement node in page.GetAllTNodesBelowLevel1(":" + headerEnum + ":"))
+					{
+						var linkText = node.Value.Trim().Replace(":" + headerEnum + ":", "");
+						node.SetValue(linkText);
+						node.Parent.AddFirst(tagToplevelItemNode);
+					}
+				}
+
+				// Replace Header
+				foreach (var header in new string[] { "h1", "h2", "h3", "h4", "h5", "h6" })
+				{
+					foreach (XElement line in page.GetAllNodesBelowLevel1(escapeID + header + "]"))
+					{
+						var lineTextNode = line.Descendants(ns + "T").FirstOrDefault();
+						var linkText = lineTextNode.Value.Trim().Replace(escapeID + header + "] ", "");
+						lineTextNode.SetValue(linkText);
+						var nodeQuick = line.Attribute("quickStyleIndex");
+						line.SetAttributeValue("quickStyleIndex", header);
+					}
+				}
+
+				// replace Title
+				if (!title.Contains("href="))
+				{
+					title = $"<a href=\"{address}\">{title}</a>";
+                }
+                page.Title = title;
+				page.decodeDefs();
+				await one.Update(page);
+			}
+			//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 		}
 
 
@@ -526,6 +806,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			// use HtmlAgilityPack to normalize and clean up the HTML...
 
+			logger = Logger.Current;
 			var doc = new Hap.HtmlDocument();
 			doc.LoadHtml(content);
 
