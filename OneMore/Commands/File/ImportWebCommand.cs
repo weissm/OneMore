@@ -21,7 +21,7 @@ namespace River.OneMoreAddIn.Commands
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
-	internal class ImportWebCommand : Command
+	public class ImportWebCommand : Command
 	{
 		private sealed class WebPageInfo
 		{
@@ -459,7 +459,7 @@ namespace River.OneMoreAddIn.Commands
 
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-		private async Task<WebPageInfo> DownloadWebContent(Uri uri)
+		public async Task<WebPageInfo> DownloadWebContent(Uri uri)
 		{
 			const string GetTitleJS = "document.getElementsByTagName('title')[0].innerText;";
 			const string GetContentJS = "document.documentElement.outerHTML;";
@@ -521,7 +521,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private Hap.HtmlDocument ReplaceImagesWithAnchors(
+		public Hap.HtmlDocument ReplaceImagesWithAnchors(
 			string content, Uri baseUri, out bool replaced)
 		{
 			// use HtmlAgilityPack to normalize and clean up the HTML...
@@ -568,7 +568,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private bool EncodeLocalAnchors(Hap.HtmlDocument doc, Uri baseUri)
+		public bool EncodeLocalAnchors(Hap.HtmlDocument doc, Uri baseUri)
 		{
 			var body = doc.DocumentNode.SelectSingleNode("//body");
 			if (body == null)
@@ -629,7 +629,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private async Task PatchPage(Page page, OneNote one, bool hasImages, bool hasAnchors)
+		public async Task PatchPage(Page page, OneNote one, bool hasImages, bool hasAnchors)
 		{
 			try
 			{

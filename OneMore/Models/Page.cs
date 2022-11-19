@@ -25,7 +25,7 @@ namespace River.OneMoreAddIn.Models
 	/// <summary>
 	/// Wraps a page with helper methods
 	/// </summary>
-	internal partial class Page
+	public partial class Page
 	{
 		//// Page meta to indicate data storage analysis report
 		//public static readonly string AnalysisMetaName = "omAnalysisReport";
@@ -83,7 +83,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
+		public XElement Root { get;  set; }
 
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace River.OneMoreAddIn.Models
 		/// means there is an obvious selection region, and partial means the selection
 		/// region is zero.
 		/// </summary>
-		public SelectionScope SelectionScope { get; private set; }
+		public SelectionScope SelectionScope { get;  set; }
 
 
 		/// <summary>
