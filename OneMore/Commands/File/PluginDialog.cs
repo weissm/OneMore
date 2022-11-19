@@ -82,7 +82,8 @@ namespace River.OneMoreAddIn.Commands
 				PageName = plugin.PageName,
 				AsChildPage = plugin.AsChildPage,
 				SkipLocked = plugin.SkipLocked,
-				Timeout = plugin.Timeout
+                GetoptsStyle = plugin.GetoptsStyle,
+	            Timeout = plugin.Timeout
 			};
 
 			single = true;
@@ -113,8 +114,9 @@ namespace River.OneMoreAddIn.Commands
 			PageName = pageNameBox.Text,
 			Timeout = (int)timeoutBox.Value,
 			SkipLocked = skipLockRadio.Checked,
-			// set path for replay functionality
-			Path = plugin.Path
+            GetoptsStyle = getoptsStyle.Checked,
+            // set path for replay functionality
+            Path = plugin.Path
 		};
 
 
@@ -193,7 +195,10 @@ namespace River.OneMoreAddIn.Commands
 
 				pageNameBox.Text = plugin.PageName;
 				childBox.Checked = plugin.AsChildPage;
-				skipLockRadio.Checked = true;
+				getoptsStyle.Checked = plugin.GetoptsStyle;
+
+
+                skipLockRadio.Checked = true;
 			}
 			else
 			{
@@ -208,7 +213,8 @@ namespace River.OneMoreAddIn.Commands
 				updateRadio.Checked = true;
 				pageNameBox.Text = String.Empty;
 				childBox.Checked = false;
-			}
+
+            }
 		}
 
 
@@ -234,7 +240,8 @@ namespace River.OneMoreAddIn.Commands
 			updateRadio.Enabled = !read;
 			pageNameBox.ReadOnly = read;
 			childBox.Enabled = !read;
-			saveButton.Enabled = !read;
+			getoptsStyle.Enabled = !read;
+            saveButton.Enabled = !read;
 		}
 
 
@@ -270,6 +277,8 @@ namespace River.OneMoreAddIn.Commands
 				plugin.Arguments = argsBox.Text.Trim();
 			else if (sender == pageNameBox)
 				plugin.PageName = pageNameBox.Text.Trim();
+			if (plugin.Arguments == null)
+				plugin.Arguments = "";
 
 			saveButton.Enabled =
 				valid &&
@@ -385,16 +394,19 @@ namespace River.OneMoreAddIn.Commands
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 		}
 
-
 		private void ChangeAsChild(object sender, EventArgs e)
 		{
 			plugin.AsChildPage = childBox.Checked;
 		}
+        private void checkGetoptsStyle_CheckedChanged(object sender, EventArgs e)
+        {
+            plugin.GetoptsStyle = getoptsStyle.Checked;
+        }
 
 
-		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-		private async void SavePlugin(object sender, EventArgs e)
+        private async void SavePlugin(object sender, EventArgs e)
 		{
 			if (!plugin.TargetPage)
 			{
@@ -437,5 +449,6 @@ namespace River.OneMoreAddIn.Commands
 		{
 			DialogResult = DialogResult.OK;
 		}
-	}
+
+    }
 }
