@@ -50,11 +50,11 @@ namespace River.OneMoreAddIn.Commands
         {
             ImportWebCommand ImportWeb = new ImportWebCommand();
             ImportWeb.address = address;
-            ImportWeb.target = ImportWebTarget.Append;
+			ImportWeb.target = ImportWebTarget.Replace;
             ImportWeb.importImages = true;
             ImportWeb.title = title;
             ImportWeb.markdown = markdown;
-//            System.Diagnostics.Debugger.Launch();
+            // System.Diagnostics.Debugger.Launch();
             ProgressDialog progress = new ProgressDialog();
 			CancellationToken token = new CancellationToken();
 
@@ -506,11 +506,19 @@ namespace River.OneMoreAddIn.Commands
 						target == ImportWebTarget.ChildPage ? one.GetPage() : null,
 						title: "New Page"
 						);
-				}
+				} else if (target == ImportWebTarget.Replace)
+				{
+					// remove all items
+					var elements = page.Root
+						.Elements(ns + "Outline")
+						.Elements(ns + "OEChildren")
+						.Descendants(ns + "OE");
+                    elements.Remove();
+                }
 
-				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-				// convert to markdown
-				var html1 = Markdig.Markdown.ToHtml(markdown);
+                //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+                // convert to markdown
+                var html1 = Markdig.Markdown.ToHtml(markdown);
 				// parse MD into html as interim format
 
 				var builder = new StringBuilder();
