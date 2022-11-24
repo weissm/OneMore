@@ -13,7 +13,8 @@ namespace River.OneMoreAddIn.Commands
 	internal enum ImportWebTarget
 	{
 		Append,
-		NewPage,
+        Replace,
+        NewPage,
 		ChildPage
 	}
 
