@@ -16,7 +16,7 @@ namespace River.OneMoreAddIn.Models
 	/// Set the PageNamespace.Value property prior to using a model class. Otherwise, use
 	/// the model constructors that accept an XNamespace argument.
 	/// </summary>
-	internal static class PageNamespace
+	public static class PageNamespace
 	{
 		private static XNamespace ns;
 
