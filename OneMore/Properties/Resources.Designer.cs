@@ -3243,6 +3243,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die First day of week ähnelt.
+        /// </summary>
+        internal static string InsertCalendarDialog_firstLabel_Text {
+            get {
+                return ResourceManager.GetString("InsertCalendarDialog_firstLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Format ähnelt.
         /// </summary>
         internal static string InsertCalendarDialog_formatLabel_Text {
@@ -3284,6 +3293,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string InsertCalendarDialog_smallRadio_Text {
             get {
                 return ResourceManager.GetString("InsertCalendarDialog_smallRadio.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insert Calendar ähnelt.
+        /// </summary>
+        internal static string InsertCalendarDialog_Text {
+            get {
+                return ResourceManager.GetString("InsertCalendarDialog.Text", resourceCulture);
             }
         }
         
@@ -4225,6 +4243,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No content to paste; copy one or more table cells to paste ähnelt.
+        /// </summary>
+        internal static string PasteCellsCommand_NoContent {
+            get {
+                return ResourceManager.GetString("PasteCellsCommand_NoContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Select a table cell where pasted cells should start overlaying ähnelt.
         /// </summary>
         internal static string PasteCellsCommand_SelectCell {
@@ -4782,6 +4809,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Subject ähnelt.
+        /// </summary>
+        internal static string RemindDialog_subjectLabel_Text {
+            get {
+                return ResourceManager.GetString("RemindDialog_subjectLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Tag ähnelt.
         /// </summary>
         internal static string RemindDialog_tagLabel_Text {
@@ -4868,15 +4904,6 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ReminderReport_noReminders {
             get {
                 return ResourceManager.GetString("ReminderReport_noReminders", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Reminder ähnelt.
-        /// </summary>
-        internal static string ReminderReport_ReminderColumn {
-            get {
-                return ResourceManager.GetString("ReminderReport_ReminderColumn", resourceCulture);
             }
         }
         
@@ -5428,6 +5455,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribApplyStyle1Button_Label {
             get {
                 return ResourceManager.GetString("ribApplyStyle1Button_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Apply Style 3 ähnelt.
+        /// </summary>
+        internal static string ribApplyStyle2Button_Label {
+            get {
+                return ResourceManager.GetString("ribApplyStyle2Button_Label", resourceCulture);
             }
         }
         
@@ -7416,6 +7452,24 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update all embedded content on this page ähnelt.
+        /// </summary>
+        internal static string ribUpdateSubpageButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribUpdateSubpageButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die To UPPERCASE ähnelt.
+        /// </summary>
+        internal static string ribUppercaseButton_Label {
+            get {
+                return ResourceManager.GetString("ribUppercaseButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Convert text to uppercase (Ctrl + Shift + Alt + U) ähnelt.
         /// </summary>
         internal static string ribUppercaseButton_Screentip {
@@ -8856,6 +8910,17 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In all notebooks
+        ///In this notebook
+        ///In this section ähnelt.
+        /// </summary>
+        internal static string TaggedDialog_scopeBox_Items {
+            get {
+                return ResourceManager.GetString("TaggedDialog_scopeBox.Items", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Tags: ähnelt.
         /// </summary>
         internal static string TaggedDialog_tagsLabel_Text {
@@ -9192,6 +9257,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string UpdateDialog_currentLabel_Text {
             get {
                 return ResourceManager.GetString("UpdateDialog_currentLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Last updated: ähnelt.
+        /// </summary>
+        internal static string UpdateDialog_lastUpdatedLabel_Text {
+            get {
+                return ResourceManager.GetString("UpdateDialog_lastUpdatedLabel.Text", resourceCulture);
             }
         }
         
