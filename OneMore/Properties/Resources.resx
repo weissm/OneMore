@@ -316,13 +316,6 @@ OneNote will close automatically</value>
   <data name="AutoComplete_recentlyUsed" xml:space="preserve">
     <value>recently used</value>
     <comment>listview annotation</comment>
-  <data name="ReminderReport_ReminderColumn" xml:space="preserve">
-    <value>Reminder</value>
-    <comment>column</comment>
-  </data>
-  <data name="ribLowercaseButton_Screentip" xml:space="preserve">
-    <value>Convert text to lowercase (Ctrl + Shift + U)</value>
-    <comment>Ribbon OneMore menu item</comment>
   </data>
   <data name="Automobile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Emoji\Automobile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1470,9 +1463,9 @@ Symbols: PI, E</value>
     <value>Import Web Page</value>
     <comment>dialog title</comment>
   </data>
-  <data name="ribFavoritesMenu_Label" xml:space="preserve">
-    <value>Favorites</value>
-    <comment>Ribbon main favorites button NODUP</comment>
+  <data name="InsertCalendarDialog.Text" xml:space="preserve">
+    <value>Insert Calendar</value>
+    <comment>dialog title</comment>
   </data>
   <data name="InsertCalendarDialog_clickLabel.Text" xml:space="preserve">
     <value>click to change</value>
@@ -1482,20 +1475,8 @@ Symbols: PI, E</value>
     <value>Heading color</value>
     <comment>label</comment>
   </data>
-  <data name="ContextMenuSheet_ribEnableSpellCheckButton" xml:space="preserve">
-    <value>... Enable Spell Check</value>
-    <comment>context menu option</comment>
-  </data>
-  <data name="SortListCommand_BadContext" xml:space="preserve">
-    <value>Move the text cursor to an item of a list</value>
-    <comment>message box</comment>
-  </data>
-  <data name="ribApplyStyle5Button_Label" xml:space="preserve">
-    <value>Apply Style 6</value>
-    <comment>not a menu, hotkey only</comment>
-  </data>
-  <data name="KeyboardSheet_introLabel.Text" xml:space="preserve">
-    <value>Manage my custom keyboard shortcuts. Select a command and press a key sequence.</value>
+  <data name="InsertCalendarDialog_firstLabel.Text" xml:space="preserve">
+    <value>First day of week</value>
     <comment>label</comment>
   </data>
   <data name="InsertCalendarDialog_formatLabel.Text" xml:space="preserve">
@@ -1917,9 +1898,9 @@ Deferred</value>
   <data name="Passwords" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Emoji\Passwords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Error_SelectImage" xml:space="preserve">
-    <value>Select an image before invoking this command</value>
-    <comment>error message box</comment>
+  <data name="PasteCellsCommand_NoContent" xml:space="preserve">
+    <value>No content to paste; copy one or more table cells to paste</value>
+    <comment>message box</comment>
   </data>
   <data name="PasteCellsCommand_SelectCell" xml:space="preserve">
     <value>Select a table cell where pasted cells should start overlaying</value>
@@ -2183,9 +2164,9 @@ Waiting on someone else
 Deferred</value>
     <comment>combobox</comment>
   </data>
-  <data name="KeyboardSheet_resetAllButton.Text" xml:space="preserve">
-    <value>Reset all</value>
-    <comment>toolstrip button</comment>
+  <data name="RemindDialog_subjectLabel.Text" xml:space="preserve">
+    <value>Subject</value>
+    <comment>label</comment>
   </data>
   <data name="RemindDialog_tagLabel.Text" xml:space="preserve">
     <value>Tag</value>
@@ -2469,10 +2450,9 @@ Polaroid</value>
     <value>Apply Style 2</value>
     <comment>not a menu, hotkey only</comment>
   </data>
-  <data name="SortDialog_pinNotesBox.Text" xml:space="preserve">
-    <value>Pin Notes to top and
-Quick Notes to bottom</value>
-    <comment>checkbox</comment>
+  <data name="ribApplyStyle2Button_Label" xml:space="preserve">
+    <value>Apply Style 3</value>
+    <comment>not a menu, hotkey only</comment>
   </data>
   <data name="ribApplyStyle3Button_Label" xml:space="preserve">
     <value>Apply Style 4</value>
@@ -3344,12 +3324,13 @@ Quick Notes to bottom</value>
     <value>Update Embedded Pages</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="UpArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>images\uparrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ribUpdateSubpageButton_Screentip" xml:space="preserve">
+    <value>Update all embedded content on this page</value>
+    <comment>ribbon item screentip</comment>
   </data>
-  <data name="SearchEngineDialog_urlColumn.HeaderText" xml:space="preserve">
-    <value>URL Pattern</value>
-    <comment>url col</comment>
+  <data name="ribUppercaseButton_Label" xml:space="preserve">
+    <value>To UPPERCASE</value>
+    <comment>Ribbon OneMore menu item NODUP</comment>
   </data>
   <data name="ribUppercaseButton_Screentip" xml:space="preserve">
     <value>Convert text to uppercase (Ctrl + Shift + Alt + U)</value>
@@ -3973,8 +3954,11 @@ Heading - include in TOC</value>
 Any</value>
     <comment>listbox</comment>
   </data>
-  <data name="Error_NoAttachments" xml:space="preserve">
-    <value>No attachments found on page</value>
+  <data name="TaggedDialog_scopeBox.Items" xml:space="preserve">
+    <value>In all notebooks
+In this notebook
+In this section</value>
+    <comment>drop down</comment>
   </data>
   <data name="TaggedDialog_tagsLabel.Text" xml:space="preserve">
     <value>Tags:</value>
@@ -4121,8 +4105,8 @@ Any</value>
     <value>OneMore is up to date</value>
     <comment>panel title</comment>
   </data>
-  <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
-    <value>Generate report for reminders in this scope</value>
+  <data name="UpdateDialog_lastUpdatedLabel.Text" xml:space="preserve">
+    <value>Last updated:</value>
     <comment>label</comment>
   </data>
   <data name="UpdateDialog_releaseDateLabel.Text" xml:space="preserve">
