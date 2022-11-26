@@ -16,12 +16,20 @@ to determine the m/d/y order and re-order as necessary to be y/m/d for sortabili
 [CmdletBinding(SupportsShouldProcess = $true)]
 
 param (
-	[Parameter(Position = 0, Mandatory = $true, ValueFromPipeline = $true)]
-	[string] $Path
+      [Parameter(Mandatory = $true, ValueFromPipeline = $true)][String]$w,
+	[Parameter(Mandatory=$false, ValueFromPipeline = $true)][String]$o
 )
 
 Begin
 {
+#	$params = @{}
+#	$MyInvocation.Line.Substring(($MyInvocation.Line.IndexOf('--') + 2)) -split ' --' | %{
+#	  $_ -match '(\S+) ?(.+)?' | Out-Null
+#	  $params.($matches[1]) = $matches[2]
+#	}
+#	$Path = $params.WorkFile
+	$Path = $w
+
 	# match shortdate+shorttime pattern for all cultures
 	$pattern = '(\d{1,4}[/\-\.]\d{1,4}[/\-\.]\d{1,4}) \d{1,2}:\d{1,2}'
 
