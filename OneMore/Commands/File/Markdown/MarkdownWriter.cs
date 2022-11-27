@@ -109,6 +109,7 @@ namespace River.OneMoreAddIn.Commands
             }
         }
 
+
         /// <summary>
         /// Save the page as markdown to the specified file.
         /// </summary>
@@ -126,6 +127,13 @@ namespace River.OneMoreAddIn.Commands
                     .Elements(ns + "OEChildren")
                     .Elements()
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+
+                // page level Images outside of any Outline
+                page.Root.Elements(ns + "Image")
+                    .ForEach(e => {
+                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
+                        writer.WriteLine();
+                    });
 
                 writer.WriteLine();
             }

@@ -117,13 +117,6 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
-		public void initVars(string Address, bool ImportImages = true, bool ImportMarkdown = true)
-		{
-			address = Address;
-			target = ImportWebTarget.Append;
-			importImages = ImportImages;
-			importMarkdown = ImportMarkdown;
-		}
 
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
