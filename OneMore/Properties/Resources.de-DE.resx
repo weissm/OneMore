@@ -952,7 +952,7 @@ Schriftart der letzten Spalte</value>
     <comment>quickdialog intro</comment>
   </data>
   <data name="Emoji_Architecture" xml:space="preserve">
-    <value>Die Architektur</value>
+    <value>Architektur</value>
     <comment>emoji</comment>
   </data>
   <data name="Emoji_Automobile" xml:space="preserve">
@@ -1682,7 +1682,7 @@ Symbole: PI, E</value>
     <comment>dialog title</comment>
   </data>
   <data name="NetwordConnectionUnavailable" xml:space="preserve">
-    <value>Netzwerkverbindung ist nicht verfügbar</value>
+    <value>Netzwerkverbindung nicht verfügbar</value>
     <comment>error</comment>
   </data>
   <data name="NewStyle" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -1949,7 +1949,7 @@ Aktuelles Notizbuch</value>
     <comment>question</comment>
   </data>
   <data name="PluginsSheet_introLabel.Text" xml:space="preserve">
-    <value>Verwalte meine Plugins</value>
+    <value>Verwalte Plugins</value>
     <comment>label</comment>
   </data>
   <data name="Pronunciate_EmptyWord" xml:space="preserve">

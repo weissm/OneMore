@@ -73,9 +73,17 @@
             image="Favorites"
             getContent="GetFavoritesContent"
             keytip="SF"/>
+          
+          <dynamicMenu
+            id="ribPluginsTopMenu"
+            getLabel="GetRibbonLabel"
+            size="normal"
+            imageMso="AddInsMenu"
+            getContent="GetPluginsContent"
+            keytip="SM"/>
 
           <menu id="ribSnippetsMenu" getLabel="GetRibbonLabel"
-                image="Snippets" showImage="true" size="large" keytip="SS">
+                image="Snippets" showImage="false" size="normal" keytip="SS">
             <dynamicMenu
               id="ribCustomSnippetsMenu"
               getLabel="GetRibbonLabel"
