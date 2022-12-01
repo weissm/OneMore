@@ -138,7 +138,7 @@
     <comment>message box message</comment>
   </data>
   <data name="AboutDialog_LatestTitle" xml:space="preserve">
-    <value>Du bist gut zu gehen!</value>
+    <value>Alles bereit!</value>
     <comment>message box title</comment>
   </data>
   <data name="AboutDialog_NewVersionMessage" xml:space="preserve">
