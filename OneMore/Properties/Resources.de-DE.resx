@@ -2837,12 +2837,8 @@ Polaroid</value>
     <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">
-    <value>Ersetze URLs durch Titel</value>
-    <comment>ribbon references</comment>
-  </data>
-  <data name="ribNameUrlsButton_Screentip" xml:space="preserve">
     <value>Ersetze URLs durch Webseitentitel</value>
-    <comment>ribbon references</comment>
+    <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribNewStyleButton_Label" xml:space="preserve">
     <value>Stil aus Auswahl erstellen</value>
@@ -3002,10 +2998,6 @@ Polaroid</value>
   <data name="SaveSnippetDialog_nameLabel.Text" xml:space="preserve">
     <value>Snippet-Name:</value>
     <comment>label</comment>
-  </data>
-  <data name="ribRemoveInkButton_Screentip" xml:space="preserve">
-    <value>Entfernen Sie alle Stiftzeichnungen von dieser Seite</value>
-    <comment>ribbon clean</comment>
   </data>
   <data name="ribRemovePageNumbersButton_Label" xml:space="preserve">
     <value>Seitenzahlen entfernen</value>
