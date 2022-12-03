@@ -3607,6 +3607,10 @@ Nach der letzten Gruppe</value>
     <value>Plugin ausführen</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
+  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
+    <value>Plugins</value>
+    <comment>Benutzerdefinierte Top Menu</comment>
+  </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
     <value>Plugins</value>
     <comment>favorites menu</comment>
