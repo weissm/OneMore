@@ -2792,14 +2792,6 @@ Nach der letzten Gruppe</value>
     <value>Komprimieren Sie Bilder, indem Sie PNG in JPG konvertieren</value>
     <comment>ribbon images</comment>
   </data>
-  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
-    <value>Markdown konvertieren</value>
-    <comment>ribbon edit</comment>
-  </data>
-  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
-    <value>Konvertieren Sie die Seite oder den ausgewählten Markdown in das OneNote-Format</value>
-    <comment>ribbon edit</comment>
-  </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>Kopieren</value>
     <comment>ribbon table</comment>
@@ -3503,10 +3495,6 @@ Nach der letzten Gruppe</value>
     <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="ribPinPageButton_Label" xml:space="preserve">
-    <value>Seite zu meiner Leseliste hinzufügen</value>
-    <comment>navigator</comment>
-  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>Zeichne PlantUML</value>
     <comment>ribbon images</comment>
@@ -3526,14 +3514,6 @@ Nach der letzten Gruppe</value>
   <data name="ribPluginsMenu_Screentip" xml:space="preserve">
     <value>Benutzerdefinierte Plugins ausführen und verwalten</value>
     <comment>ribbon file</comment>
-  </data>
-  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
-    <value>Vorschau des Markdowns</value>
-    <comment>ribbon edit</comment>
-  </data>
-  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
-    <value>Vorschau der Seite oder des ausgewählten Texts als Markdown</value>
-    <comment>ribbon edit</comment>
   </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Aussprache einfügen</value>
