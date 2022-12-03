@@ -2840,12 +2840,8 @@ Polaroid</value>
     <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">
-    <value>Ersetze URLs durch Titel</value>
-    <comment>ribbon references</comment>
-  </data>
-  <data name="ribNameUrlsButton_Screentip" xml:space="preserve">
     <value>Ersetze URLs durch Webseitentitel</value>
-    <comment>ribbon references</comment>
+    <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribNewStyleButton_Label" xml:space="preserve">
     <value>Stil aus Auswahl erstellen</value>
