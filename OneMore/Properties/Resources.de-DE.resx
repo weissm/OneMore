@@ -2074,10 +2074,6 @@ In diesem Abschnitt</value>
     <value>Leere Auswahl. Wählen Sie einen gültigen Block von PlantUML-Text aus.</value>
     <comment>error message</comment>
   </data>
-  <data name="PlantUmlCommand_PlantUrl" xml:space="preserve">
-    <value>http://www.plantuml.com/plantuml/png/</value>
-    <comment>PlantUML Remote servier SKIP</comment>
-  </data>
   <data name="Plugin_InvalidSchema" xml:space="preserve">
     <value>Ungültiges XML erkannt. </value>
     <comment>error message</comment>
