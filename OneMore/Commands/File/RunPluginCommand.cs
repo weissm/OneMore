@@ -17,6 +17,7 @@ namespace River.OneMoreAddIn.Commands
 	using System.Xml;
 	using System.Xml.Linq;
 	using System.Xml.Schema;
+	using static System.Net.Mime.MediaTypeNames;
 	using Resx = Properties.Resources;
 
 
@@ -133,6 +134,13 @@ namespace River.OneMoreAddIn.Commands
 			logger.WriteLine($"plugin working file is {workpath}");
 
 			var content = page.Root.ToString(SaveOptions.DisableFormatting);
+
+			// add link ot onenote as argument for script
+			var pageInfo = one.GetPageInfo(page.PageId);
+			if (plugin.GetoptsStyle)
+			{
+				plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
+			}
 
 			try
 			{
