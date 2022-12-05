@@ -161,7 +161,7 @@ namespace River.OneMoreAddIn.Commands
 
 				if (tasks.Any())
 				{
-					Task.WaitAll(tasks.ToArray());
+					Task.WhenAll(tasks.ToArray());
 
 					count = tasks.Sum(t => t.Result);
 				}
@@ -200,7 +200,7 @@ namespace River.OneMoreAddIn.Commands
 
 			try
 			{
-				image = await DownloadImage(href);
+				image = await DownloadImage(href).ConfigureAwait(false);
 			}
 			catch (Exception exc)
 			{
