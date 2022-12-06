@@ -36,7 +36,7 @@ namespace River.OneMoreAddIn.UI
 	/// <summary>
 	/// Defines themes and projects onto UI elements
 	/// </summary>
-	internal class ThemeManager : Loggable
+	public class ThemeManager : Loggable
 	{
 
 		private const string CustomThemeFile = "OneMoreTheme.json";
