@@ -4,7 +4,7 @@
 
 namespace River.OneMoreAddIn.Styles
 {
-	internal enum StandardStyles
+	public enum StandardStyles
 	{
 		Heading1,
 		Heading2,
