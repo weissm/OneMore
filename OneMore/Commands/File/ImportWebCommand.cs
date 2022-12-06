@@ -36,7 +36,7 @@ namespace River.OneMoreAddIn.Commands
 	/// downloads a local copy of the chromium browser so this will take some extra time.
 	/// Subsequent uses should be faster however.
 	/// </summary>
-	internal class ImportWebCommand : Command
+	public class ImportWebCommand : Command
 	{
 		private const string ClientKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";
 		private const string RuntimeId = "{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}";
