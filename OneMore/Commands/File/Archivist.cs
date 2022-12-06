@@ -21,7 +21,7 @@ namespace River.OneMoreAddIn.Commands
 	using Exception = System.Exception;
 
 
-	internal class Archivist : Loggable
+	public class Archivist : Loggable
 	{
 		private readonly OneNote one;
 		private readonly string home;
