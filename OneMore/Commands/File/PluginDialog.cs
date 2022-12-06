@@ -275,6 +275,8 @@ namespace River.OneMoreAddIn.Commands
 				plugin.Arguments = argsBox.Text.Trim();
 			else if (sender == pageNameBox)
 				plugin.PageName = pageNameBox.Text.Trim();
+			if (plugin.Arguments == null)
+				plugin.Arguments = "";
 
 			saveButton.Enabled =
 				valid &&
@@ -395,6 +397,11 @@ namespace River.OneMoreAddIn.Commands
 		{
 			plugin.AsChildPage = childBox.Checked;
 		}
+
+       private void checkGetoptsStyle_CheckedChanged(object sender, EventArgs e)
+        {
+            plugin.GetoptsStyle = getoptsStyle.Checked;
+        }
 
 
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
