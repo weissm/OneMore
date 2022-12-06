@@ -15,7 +15,7 @@ namespace River.OneMoreAddIn.Models
 	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
-	internal partial class Page
+	public partial class Page
 	{
 		private List<Style> quickStyles;
 		private List<Style> customStyles;
