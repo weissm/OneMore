@@ -16,7 +16,7 @@ namespace River.OneMoreAddIn
 	/// Base class for every OneMore command, providing common services and
 	/// requiring implementation of an Execute entry point
 	/// </summary>
-	internal abstract class Command
+	public abstract class Command
 	{
 
 		// commands are injected with logger, ribbon, owner window, and the tash collector...
