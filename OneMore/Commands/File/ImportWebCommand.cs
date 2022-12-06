@@ -35,7 +35,7 @@ namespace River.OneMoreAddIn.Commands
 	/// downloads a local copy of the chromium browser so this will take some extra time.
 	/// Subsequent uses should be faster however.
 	/// </summary>
-	internal class ImportWebCommand : Command
+	public class ImportWebCommand : Command
 	{
 		private sealed class WebPageInfo
 		{
