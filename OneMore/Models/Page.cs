@@ -150,10 +150,6 @@ namespace River.OneMoreAddIn.Models
 			return xmlKeyDocContent;
 		}
 		public virtual void encodeDefs(XElement myDoc, string[] defNameList = null)
-
-
-
-
 		{
 			foreach (string defName in (defNameList != null ? defNameList : new string[] { "TagDef", "QuickStyleDef" }))
 			{
@@ -162,25 +158,11 @@ namespace River.OneMoreAddIn.Models
 					case "TagDef": encodeTags(myDoc); break;
 					case "QuickStyleDef": encodeQuickStyle(myDoc); break;
 				}
-
-
-
-
-
-
-
-
-
-
 			}
 		}
 		public void encodeTags(XElement myDoc)
-
 		{
 			string defName = "TagDef";
-
-
-
 			{
 				// now work with symbolic IDs
 				IEnumerable<XElement> xmlTagContent = myDoc.Descendants(Namespace + defName)
@@ -198,11 +180,6 @@ namespace River.OneMoreAddIn.Models
 			}
 		}
 		public void encodeQuickStyle(XElement myDoc, string[] defNameList = null)
-
-
-
-
-
 		{
 			string defName = "QuickStyleDef";
 			// now work with symbolic IDs
@@ -222,18 +199,9 @@ namespace River.OneMoreAddIn.Models
 		}
 		public static DataTable synTable =
 		new DataTable
-
-
-
-
-
-
-
 		{
 			Columns = { { "Syn", typeof(String) }, { "Org", typeof(String) } },
 			Rows =
-
-
 		{
 					{ "Distribution Group", "Verteilergruppe" },
 					{ "In Attendance", "Teilnehmend" },
@@ -250,19 +218,6 @@ namespace River.OneMoreAddIn.Models
 		}
 
 		public struct tagIndexStruct
-
-
-
-
-
-
-
-
-
-
-
-
-
 		{
 			public string Name;
 			public int Type;
@@ -408,11 +363,6 @@ namespace River.OneMoreAddIn.Models
 				}
 				// set index for all non mandatory tags
 				foreach (var node in xmlTagContent.Where(x => !x.Attribute("index").Value.Contains(x.Attribute("name").Value)))
-
-
-
-
-
 				{
 					node.SetAttributeValue("index", "111" + "_" + node.Attribute("name").Value);
 				}
@@ -424,9 +374,6 @@ namespace River.OneMoreAddIn.Models
 					{
 						bool firstID = true;
 						foreach (var xmlTagContentDoubleID in xmlTagContentDouble)
-
-
-
 						{
 							if (firstID)
 							{
@@ -442,17 +389,8 @@ namespace River.OneMoreAddIn.Models
 			}
 		}
 		public virtual void decodeDefs(string[] defNameList = null)
-
-
-
-
-
-
 		{
 			if (defNameList == null)
-
-
-
 			{
 				defNameList = new string[] { "TagDef", "QuickStyleDef" };
 			}
@@ -501,6 +439,7 @@ namespace River.OneMoreAddIn.Models
 				}
 			}
 		}
+
 		/// <summary>
 		/// Appends HTML content to the current page
 		/// </summary>
