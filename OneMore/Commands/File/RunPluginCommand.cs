@@ -135,12 +135,13 @@ namespace River.OneMoreAddIn.Commands
 
 			var content = page.Root.ToString(SaveOptions.DisableFormatting);
 
-			// add link ot onenote as argument for script
-			var pageInfo = one.GetPageInfo(page.PageId);
+            // add link ot onenote as argument for script
+            var pageInfo = one.GetPageInfo(page.PageId);
 			if (plugin.GetoptsStyle)
 			{
 				plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
 			}
+
 
 			try
 			{
@@ -243,7 +244,6 @@ namespace River.OneMoreAddIn.Commands
 
 				logger.WriteLine($"running {abscmd} {absargs} {absgetoptStyle} \"{path}\"");
 
-
 				var info = new ProcessStartInfo
 				{
 					FileName = abscmd,
@@ -322,20 +322,20 @@ namespace River.OneMoreAddIn.Commands
 
 				if (plugin.Timeout == 0)
 				{
-                    // UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+ //                   UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
 
 					using (var box = new MoreMessageBox())
 					{
-                        box.SetIcon(MessageBoxIcon.Information);
-                        box.SetButtons(MessageBoxButtons.YesNo);
-                        box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
-                        box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
-                        box.ShowLogLink();
-                        if (box.ShowDialog(Owner) == DialogResult.Yes)
-                        {
-                            System.Diagnostics.Process.Start(plugin.Command);
-                        }
-                    }
+					box.SetIcon(MessageBoxIcon.Information);
+					box.SetButtons(MessageBoxButtons.YesNo);
+					box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
+					box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
+					box.ShowLogLink();
+					if (box.ShowDialog(Owner) == DialogResult.Yes)
+					{
+						System.Diagnostics.Process.Start(plugin.Command);
+					}
+				}
 
                     return null;
                 }
