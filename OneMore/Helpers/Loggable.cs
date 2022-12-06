@@ -4,7 +4,7 @@
 
 namespace River.OneMoreAddIn
 {
-	internal abstract class Loggable
+	public abstract class Loggable
 	{
 		protected ILogger logger;
 
