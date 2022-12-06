@@ -424,6 +424,39 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+        /// <summary>
+        /// Save the page as markdown to a string
+        /// </summary>
+		public string Save()
+		{
+			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			MemoryStream mem = new MemoryStream();
+			StreamWriter sw = new StreamWriter(mem);
+			string retString = "";
+
+			using (writer = sw)
+			{
+				writer.WriteLine($"# {page.Title}");
+
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+
+				// page level Images outside of any Outline
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); writer.WriteLine();
+					});
+
+				writer.WriteLine();
+				sw.Flush();
+				mem.Position = 0;
+				StreamReader sr = new StreamReader(mem);
+				retString = sr.ReadToEnd();
+			}
+			return retString;
+		}
 
 		private void WriteTable(XElement element)
 		{
