@@ -9,7 +9,7 @@ namespace River.OneMoreAddIn
 	using System.Linq;
 
 
-	internal static class IEnumerableExtensions
+	public static class IEnumerableExtensions
 	{
 
 		public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action)

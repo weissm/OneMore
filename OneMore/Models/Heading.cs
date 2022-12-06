@@ -12,7 +12,7 @@ namespace River.OneMoreAddIn.Models
 	/// Used by InsertTOC and OutlineFormatting commands to reference 
 	/// predefined and user-defined headings on the page
 	/// </summary>
-	internal class Heading
+	public class Heading
 	{
 		/// <summary>
 		/// Reference to the heading OE on the page
