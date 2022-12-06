@@ -12,7 +12,7 @@ namespace River.OneMoreAddIn.UI
 	using System.Windows.Forms;
 
 
-	internal class LocalizableForm : Form, IOneMoreWindow
+	public class LocalizableForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 
