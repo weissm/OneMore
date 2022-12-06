@@ -810,6 +810,12 @@
               getScreentip="GetRibbonScreentip"
               onAction="CalendarCmd"/>
             <button
+              id="ribShowXmlButton"
+              imageMso="XmlSource"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="ShowXmlCmd"/>
+            <button
               id="ribSettingsButton"
               imageMso="ReadingViewToolsMenu"
               getLabel="GetRibbonLabel"
