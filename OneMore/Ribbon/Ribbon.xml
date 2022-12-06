@@ -73,9 +73,17 @@
             image="Favorites"
             getContent="GetFavoritesContent"
             keytip="SF"/>
+          
+          <dynamicMenu
+            id="ribPluginsTopMenu"
+            getLabel="GetRibbonLabel"
+            size="normal"
+            imageMso="AddInsMenu"
+            getContent="GetPluginsContent"
+            keytip="SM"/>
 
           <menu id="ribSnippetsMenu" getLabel="GetRibbonLabel"
-                image="Snippets" showImage="true" size="large" keytip="SS">
+                image="Snippets" showImage="false" size="normal" keytip="SS">
             <dynamicMenu
               id="ribCustomSnippetsMenu"
               getLabel="GetRibbonLabel"
@@ -781,20 +789,20 @@
                 imageMso="ShowJournalPage"
                 getLabel="GetRibbonLabel"
                 onAction="InsertTimerCmd"/>
-              <button
-                id="ribShowXmlButton"
-                imageMso="XmlSource"
-                getLabel="GetRibbonLabel"
-                getScreentip="GetRibbonScreentip"
-                onAction="ShowXmlCmd"/>
             </menu>
-            <menuSeparator id="sepTools" />
+            <menuSeparator id="sepTools" getTitle="GetRibbonLabel" />
             <button
-              id="ribCommandPaletteButton"
-              imageMso="FormControlEditBox"
+              id="ribCalendarButton"
+              imageMso="OpenAttachedCalendar"
               getLabel="GetRibbonLabel"
               getScreentip="GetRibbonScreentip"
-              onAction="CommandPaletteCmd"/>
+              onAction="CalendarCmd"/>
+            <button
+              id="ribShowXmlButton"
+              imageMso="XmlSource"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="ShowXmlCmd"/>
             <button
               id="ribCalendarButton"
               imageMso="OpenAttachedCalendar"
