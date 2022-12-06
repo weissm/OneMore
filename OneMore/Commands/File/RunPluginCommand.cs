@@ -243,12 +243,10 @@ namespace River.OneMoreAddIn.Commands
 
 				logger.WriteLine($"running {abscmd} {absargs} {absgetoptStyle} \"{path}\"");
 
-				logger.WriteLine($"running {abscmd} {absargs} \"{path}\"");
-
 				var info = new ProcessStartInfo
 				{
 					FileName = abscmd,
-					Arguments = $"{absargs} \"{path}\"",
+					Arguments = $"{absargs} {absgetoptStyle} \"{path}\"",
 					CreateNoWindow = true,
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
@@ -321,7 +319,27 @@ namespace River.OneMoreAddIn.Commands
 				var root = XElement.Load(workpath);
 				var updated = root.ToString(SaveOptions.DisableFormatting);
 
-				if (updated == content && !plugin.CreateNewPage)
+				if (plugin.Timeout == 0)
+				{
+                    // UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+
+					using (var box = new MoreMessageBox())
+					{
+                        box.SetIcon(MessageBoxIcon.Information);
+                        box.SetButtons(MessageBoxButtons.YesNo);
+                        box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
+                        box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
+                        box.ShowLogLink();
+                        if (box.ShowDialog(Owner) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(plugin.Command);
+                        }
+                    }
+
+                    return null;
+                }
+
+                if (updated == content && !plugin.CreateNewPage)
 				{
 					UIHelper.ShowInfo(Resx.Plugin_NoChanges);
 					return null;
