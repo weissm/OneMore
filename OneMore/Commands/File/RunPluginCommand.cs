@@ -1,4 +1,4 @@
-﻿//************************************************************************************************
+//************************************************************************************************
 // Copyright © 2020 Steven M Cohn.  All rights reserved.
 //************************************************************************************************
 
@@ -17,7 +17,8 @@ namespace River.OneMoreAddIn.Commands
 	using System.Xml;
 	using System.Xml.Linq;
 	using System.Xml.Schema;
-	using Resx = River.OneMoreAddIn.Properties.Resources;
+	using static System.Net.Mime.MediaTypeNames;
+	using Resx = Properties.Resources;
 
 
 	internal class RunPluginCommand : Command
@@ -111,7 +112,7 @@ namespace River.OneMoreAddIn.Commands
 				PageName = "$name (2)"
 			};
 
-			if (dialog.ShowDialog() == DialogResult.Cancel)
+			if (dialog.ShowDialog(owner) == DialogResult.Cancel)
 			{
 				plugin = null;
 				return false;
@@ -133,6 +134,14 @@ namespace River.OneMoreAddIn.Commands
 			logger.WriteLine($"plugin working file is {workpath}");
 
 			var content = page.Root.ToString(SaveOptions.DisableFormatting);
+
+            // add link ot onenote as argument for script
+            var pageInfo = one.GetPageInfo(page.PageId);
+			if (plugin.GetoptsStyle)
+			{
+				plugin.Arguments += $" -l \"\'{pageInfo.Link}'\"";
+			}
+
 
 			try
 			{
@@ -170,7 +179,7 @@ namespace River.OneMoreAddIn.Commands
 
 				box.AppendMessage(" Do you wish to continue?");
 
-				if (box.ShowDialog(Owner) == DialogResult.No)
+				if (box.ShowDialog(owner) == DialogResult.No)
 				{
 					return null;
 				}
@@ -231,13 +240,14 @@ namespace River.OneMoreAddIn.Commands
 			{
 				var abscmd = Environment.ExpandEnvironmentVariables(plugin.Command);
 				var absargs = Environment.ExpandEnvironmentVariables(plugin.Arguments);
+				var absgetoptStyle = plugin.GetoptsStyle?"-w":"";
 
-				logger.WriteLine($"running {abscmd} {absargs} \"{path}\"");
+				logger.WriteLine($"running {abscmd} {absargs} {absgetoptStyle} \"{path}\"");
 
 				var info = new ProcessStartInfo
 				{
 					FileName = abscmd,
-					Arguments = $"{absargs} \"{path}\"",
+					Arguments = $"{absargs} {absgetoptStyle} \"{path}\"",
 					CreateNoWindow = true,
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
@@ -309,6 +319,26 @@ namespace River.OneMoreAddIn.Commands
 			{
 				var root = XElement.Load(workpath);
 				var updated = root.ToString(SaveOptions.DisableFormatting);
+
+				if (plugin.Timeout == 0)
+				{
+ //                   UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+
+					using (var box = new MoreMessageBox())
+					{
+					box.SetIcon(MessageBoxIcon.Information);
+					box.SetButtons(MessageBoxButtons.YesNo);
+					box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
+					box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
+					box.ShowLogLink();
+					if (box.ShowDialog(owner) == DialogResult.Yes)
+					{
+						System.Diagnostics.Process.Start(plugin.Command);
+					}
+				}
+
+                    return null;
+                }
 
 				if (updated == content && !plugin.CreateNewPage)
 				{
