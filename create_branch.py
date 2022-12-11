@@ -54,4 +54,7 @@ if args.debug:
     # delete for debug purposes
     remote = repo.remote(name='origin')
     remote.push(refspec=(':' +  args.target))
+    
+# .\build.ps1 64
+# Start-Process PowerShell.exe -Verb runAs -ArgumentList "Copy-Item -Force -Recurse -Path 'C:\Users\mweiss\source\shared\work\OneMore\OneMore\bin\x64\Debug\*' -Destination 'C:\Program Files\River\OneMoreAddIn' -Verbose" -Wait
 
