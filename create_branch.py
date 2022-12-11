@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO)
 
 # parse parameter
 parser = argparse.ArgumentParser("Parse options")
-parser.add_argument('-t', '--target', help='Target branch', default="improveMD36")
+parser.add_argument('-t', '--target', help='Target branch', default="improveMD37")
 parser.add_argument('-d', '--debug', help='Support debug', action='store_true')
 parser.add_argument('-v', '--verbose', help='Be verbose', action='store_false')
 args = parser.parse_args()
