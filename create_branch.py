@@ -55,6 +55,16 @@ if args.debug:
     remote = repo.remote(name='origin')
     remote.push(refspec=(':' +  args.target))
     
+
+import subprocess, sys    
+p = subprocess.Popen('powershell.exe .\build.ps1 64',  stdout=subprocess.PIPE)
+p_out, p_err = p.communicate()
+print(p_out)
+
+p = subprocess.Popen("Start-Process PowerShell.exe -Verb runAs -ArgumentList \"Copy-Item -Force -Recurse -Path 'C:\Users\mweiss\source\shared\work\OneMore\OneMore\bin\x64\Debug\*' -Destination 'C:\Program Files\River\OneMoreAddIn' -Verbose\" -Wait",  stdout=subprocess.PIPE)
+p_out, p_err = p.communicate()
+print(p_out)
+
 # .\build.ps1 64
-# Start-Process PowerShell.exe -Verb runAs -ArgumentList "Copy-Item -Force -Recurse -Path 'C:\Users\mweiss\source\shared\work\OneMore\OneMore\bin\x64\Debug\*' -Destination 'C:\Program Files\River\OneMoreAddIn' -Verbose" -Wait
+# 
 
