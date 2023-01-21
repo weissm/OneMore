@@ -38,6 +38,8 @@ namespace River.OneMoreAddIn.Commands
 
 		private const string RefreshStyle = "font-style:italic;font-size:9.0pt;color:#808080";
 
+		private const int SynopsisLength = 110;
+
 		private OneNote one;
 		private OneNote.Scope scope;
 		private Page page;
@@ -172,7 +174,7 @@ namespace River.OneMoreAddIn.Commands
 
 				var withElement = new XElement("A",
 					new XAttribute("href", pageLink),
-					page.Title
+					title
 					);
 
 				var editor = new SearchAndReplaceEditor(whatText, withElement,
@@ -192,8 +194,9 @@ namespace River.OneMoreAddIn.Commands
 					progress.SetMessage(referal.Attribute(NameAttr).Value);
 
 					var refpage = one.GetPage(referal.Attribute("ID").Value, OneNote.PageDetail.Basic);
+					var reftitle = Unstamp(refpage.Title);
 
-					logger.WriteLine($"searching for matches on '{refpage.Title}'");
+					logger.WriteLine($"searching for matches on '{reftitle}'");
 
 					var count = editor.SearchAndReplace(refpage);
 					if (count > 0)
@@ -203,7 +206,7 @@ namespace River.OneMoreAddIn.Commands
 
 						if (synopses)
 						{
-							referal.SetAttributeValue(SynopsisAttr, GetSynopsis(refpage));
+							referal.SetAttributeValue(SynopsisAttr, GetSynopsis(refpage, title));
 						}
 
 						updates++;
@@ -238,13 +241,17 @@ namespace River.OneMoreAddIn.Commands
 
 		private string Unstamp(string title)
 		{
-			// ignore the date stamp prefix in a page title
+			// ignore the date stamp prefix and emoji prefixes in a page title
 
+			// strip date stamp
 			var match = Regex.Match(title, @"^\d{4}-\d{2}-\d{2}\s");
 			if (match.Success)
 			{
 				title = title.Substring(match.Length);
 			}
+
+			// strip emojis (Segoe UI Emoji font)
+			title = Emojis.RemoveEmojis(title);
 
 			return title.Trim();
 		}
@@ -271,7 +278,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private string GetSynopsis(Page page)
+		private string GetSynopsis(Page page, string title)
 		{
 			var body = page.Root
 				.Elements(ns + "Outline")
@@ -288,8 +295,19 @@ namespace River.OneMoreAddIn.Commands
 			// an issue where TextValue() can't parse embedded XML snippets in image OCR
 			body.Descendants(ns + "Image").Remove();
 
-			var synopsis = body.TextValue();
-			return synopsis.Length < 111 ? synopsis : synopsis.Substring(0, 110);
+			// extract snippet of text surrounding first occurances of title within body...
+			// Note that attemps were made to find the sentence containing the title but this
+			// gets complicated when it contains decimals (4.5) or names (Mr. John Q. Public)
+
+			var text = body.TextValue();
+			var start = text.IndexOf(title);
+			if (start < 0 || string.IsNullOrWhiteSpace(title))
+			{
+				return text.Length <= SynopsisLength ? text : text.Substring(0, SynopsisLength);
+			}
+
+			start = Math.Max(start - ((SynopsisLength - title.Length) / 2), 0);
+			return text.Substring(start, Math.Min(SynopsisLength, text.Length - start));
 		}
 
 
