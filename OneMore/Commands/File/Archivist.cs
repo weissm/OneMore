@@ -15,10 +15,10 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading.Tasks;
 	using System.Web;
 	using System.Xml.Linq;
+	using Resx = Properties.Resources;
 	using System.Diagnostics;
 	using System.Runtime.InteropServices;
 	using Exception = System.Exception;
-	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
 	internal class Archivist : Loggable
