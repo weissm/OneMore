@@ -81,6 +81,12 @@ namespace River.OneMoreAddIn.Commands
 		/// </summary>
 		public bool AsChildPage { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to use Getopts style arguments
+        /// Example -w <file>.xml
+        /// </summary>
+        public bool GetoptsStyle { get; set; }
+      
 
 		/// <summary>
 		/// Gets or sets the name of the new page to create, if CreateNewPage is true.
