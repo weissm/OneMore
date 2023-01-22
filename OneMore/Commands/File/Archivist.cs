@@ -16,6 +16,9 @@ namespace River.OneMoreAddIn.Commands
 	using System.Web;
 	using System.Xml.Linq;
 	using Resx = Properties.Resources;
+	using System.Diagnostics;
+	using System.Runtime.InteropServices;
+	using Exception = System.Exception;
 
 
 	internal class Archivist : Loggable
@@ -367,6 +370,25 @@ namespace River.OneMoreAddIn.Commands
 		/// </summary>
 		/// <param name="root"></param>
 		/// <param name="filename"></param>
+        public async Task<string> ExportOnenote2Markdown(string title)
+		{
+            string targetDir = "c:\\tmp\\";
+            await using (var one = new River.OneMoreAddIn.OneNote())
+            {
+                Page page;
+                page = await one.GetPage();
+
+                var archivist = new Archivist(one);
+                var pageTitleFull = page.Title;
+                var pageTitle = page.Title.Replace(" ", string.Empty);
+                string fullFileName = targetDir + pageTitle + ".md";
+
+                archivist.ExportMarkdown(page, filename: fullFileName, withAttachments: true);
+                var _outputData = File.ReadAllText(fullFileName);
+//                Console.WriteLine(_outputData);
+				return _outputData;
+            }
+        }
 		public void ExportMarkdown(Page page, string filename, bool withAttachments)
 		{
 			try
