@@ -15,10 +15,10 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading.Tasks;
 	using System.Web;
 	using System.Xml.Linq;
-	using Resx = Properties.Resources;
 	using System.Diagnostics;
 	using System.Runtime.InteropServices;
 	using Exception = System.Exception;
+	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
 	internal class Archivist : Loggable
@@ -379,7 +379,7 @@ namespace River.OneMoreAddIn.Commands
         public async Task<string> ExportOnenote2Markdown(string title)
 		{
             string targetDir = "c:\\tmp\\";
-            await using (var one = new River.OneMoreAddIn.OneNote())
+            using (var one = new River.OneMoreAddIn.OneNote())
             {
                 Page page;
                 page = await one.GetPage();
