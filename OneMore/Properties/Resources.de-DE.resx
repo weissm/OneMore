@@ -180,6 +180,14 @@
   <data name="AddInTitle" xml:space="preserve">
     <value>OneMoreAddIn</value>
   </data>
+  <data name="AddTitleIconDialog.Text" xml:space="preserve">
+    <value>Kleine Symbole</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="AddTitleIconDialog_introLabel.Text" xml:space="preserve">
+    <value>Wähle ein oder mehrere Symbole aus, um sie dem Seitentitel hinzuzufügen</value>
+    <comment>instructions</comment>
+  </data>
   <data name="AliasSheet.Text" xml:space="preserve">
     <value>Definieren Sie Befehlsaliase zur Verwendung in der Befehlspalette</value>
     <comment>intro box</comment>
@@ -944,7 +952,7 @@ Schriftart der letzten Spalte</value>
     <comment>quickdialog intro</comment>
   </data>
   <data name="Emoji_Architecture" xml:space="preserve">
-    <value>Architektur</value>
+    <value>Die Architektur</value>
     <comment>emoji</comment>
   </data>
   <data name="Emoji_Automobile" xml:space="preserve">
@@ -1215,7 +1223,7 @@ Operatoren: + - / * ^
 Zellreferenz: A1, A2, ... ZZZ999
 Zellbereich: A1:A22
 Symbole: PI, E</value>
-  </data>
+  <comment></comment></data>
   <data name="FormulaDialog_helpButton.Text" xml:space="preserve">
     <value>Hilfe</value>
     <comment>help checkbox button</comment>
@@ -1322,25 +1330,33 @@ Symbole: PI, E</value>
     <value>An diese Seite anhängen</value>
     <comment>radio</comment>
   </data>
-  <data name="MapDialog_groupBox.Text" xml:space="preserve">
-    <value>Seiten in</value>
+  <data name="ImportDialog_powerCreateButton.Text" xml:space="preserve">
+    <value>Erstelle eine neue Seite</value>
+    <comment>radio</comment>
+  </data>
+  <data name="ImportDialog_powerGroup.Text" xml:space="preserve">
+    <value>Powerpoint-Optionen</value>
     <comment>group box</comment>
   </data>
-  <data name="MapDialog_notebookRadio.Text" xml:space="preserve">
-    <value>Alle Abschnitte im aktuellen Notizbuch</value>
+  <data name="ImportDialog_powerSectionButton.Text" xml:space="preserve">
+    <value>Erstellen Sie für jede Folie einen neuen Abschnitt mit einer Seite</value>
     <comment>radio</comment>
   </data>
-  <data name="MapDialog_notebooksRadio.Text" xml:space="preserve">
-    <value>Alle Notizbücher</value>
+  <data name="ImportDialog_Text" xml:space="preserve">
+    <value>Importieren</value>
+    <comment>dialog title</comment>
+  </data>
+  <data name="ImportDialog_wordAppendButton.Text" xml:space="preserve">
+    <value>An diese Seite anhängen</value>
     <comment>radio</comment>
   </data>
-  <data name="MapDialog_sectionRadio.Text" xml:space="preserve">
-    <value>Der aktuelle Abschnitt</value>
+  <data name="ImportDialog_wordCreateButton.Text" xml:space="preserve">
+    <value>Erstellen Sie eine neue Seite</value>
     <comment>radio</comment>
   </data>
-  <data name="MapDialog_synopsisBox.Text" xml:space="preserve">
-    <value>Füge eine Zusammenfassung jeder Seite hinzu</value>
-    <comment>checkbox</comment>
+  <data name="ImportDialog_wordGroup.Text" xml:space="preserve">
+    <value>Word-Optionen</value>
+    <comment>group box</comment>
   </data>
   <data name="ImportOutlookTasksDialog.Text" xml:space="preserve">
     <value>Aufgaben aus Outlook importieren</value>
@@ -1446,17 +1462,17 @@ Symbole: PI, E</value>
     <value>Zellen einfügen</value>
     <comment>dialog title</comment>
   </data>
-  <data name="OutlineDialog_alphaRadio.Text" xml:space="preserve">
-    <value>Alphanumerisch</value>
-    <comment>radio button</comment>
+  <data name="InsertCellsDialog_numLabel.Text" xml:space="preserve">
+    <value>Anzahl der einzufügenden Zellen:</value>
+    <comment>numeric label</comment>
   </data>
-  <data name="OutlineDialog_cleanBox.Text" xml:space="preserve">
-    <value>Vorhandene Nummerierung entfernen / bereinigen</value>
-    <comment>checkbox</comment>
+  <data name="InsertCellsDialog_shiftDownRadio.Text" xml:space="preserve">
+    <value>Verschieben Sie die Zellen nach unten</value>
+    <comment>radio</comment>
   </data>
-  <data name="OutlineDialog_indentationsGroup.Text" xml:space="preserve">
-    <value>Einrückungen</value>
-    <comment>group box title</comment>
+  <data name="InsertCellsDialog_shiftRightRadio.Text" xml:space="preserve">
+    <value>Verschieben Sie die Zellen nach rechts</value>
+    <comment>radio</comment>
   </data>
   <data name="InsertCodeBlockCommand_Code" xml:space="preserve">
     <value>Dein Code hier ...</value>
@@ -1679,17 +1695,17 @@ Symbole: PI, E</value>
     <value>Nummerierungsseite {0}</value>
     <comment>progress status dialog</comment>
   </data>
-  <data name="Pronunciate_EmptyWord" xml:space="preserve">
-    <value>Das ausgewählte Wort darf nicht leer sein</value>
-    <comment>error message box</comment>
+  <data name="NumberPagesDialog.Text" xml:space="preserve">
+    <value>Seitennummerierung</value>
+    <comment>dialog title</comment>
   </data>
-  <data name="Pronunciate_FullWord" xml:space="preserve">
-    <value>Muss ein vollständiges Wort auswählen</value>
-    <comment>error message box</comment>
+  <data name="NumberPagesDialog_alphaRadio.Text" xml:space="preserve">
+    <value>Alphanumerisch</value>
+    <comment>radio button</comment>
   </data>
-  <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>Die Definition des Wortes {0} konnte nicht abgerufen werden.\n</value>
-    <comment>error message box</comment>
+  <data name="NumberPagesDialog_cleanBox.Text" xml:space="preserve">
+    <value>Vorhandene Nummerierung entfernen / bereinigen</value>
+    <comment>checkbox</comment>
   </data>
   <data name="NumberPagesDialog_introLabel.Text" xml:space="preserve">
     <value>Wähle den Nummerierungsstil</value>
@@ -1921,13 +1937,13 @@ Aktuelles Notizbuch</value>
     <value>Aktuelle Seite aktualisieren</value>
     <comment>radio button</comment>
   </data>
-  <data name="ResizeImagesDialog_presetRadio.Text" xml:space="preserve">
-    <value>Voreinstellung</value>
-    <comment>radio</comment>
+  <data name="PluginsSheet.Text" xml:space="preserve">
+    <value>Meine Plugins verwalten</value>
+    <comment>sheet title</comment>
   </data>
-  <data name="ResizeImagesDialog_sizeLink.Text" xml:space="preserve">
-    <value>{0} x {1}</value>
-    <comment>width x height</comment>
+  <data name="PluginsSheet_ConfirmDelete" xml:space="preserve">
+    <value>Plugin "{0}" löschen</value>
+    <comment>question</comment>
   </data>
   <data name="PluginsSheet_introLabel.Text" xml:space="preserve">
     <value>Verwalte meine Plugins</value>
@@ -2337,6 +2353,10 @@ Polaroid</value>
   <data name="ribAddFormulaButton_Screentip" xml:space="preserve">
     <value>Formel in ausgewählten Tabellenzellen hinzufügen / bearbeiten (F5)</value>
     <comment>Ribbon OneMore menu item, Formula...</comment>
+  </data>
+  <data name="ribAddTitleIconButton_Label" xml:space="preserve">
+    <value>Symbol zum Seitentitel hinzufügen</value>
+    <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
   <data name="ribAnalyzeButton_Label" xml:space="preserve">
     <value>Datenspeicher analysieren</value>
@@ -2801,9 +2821,8 @@ Polaroid</value>
     <comment>ribbon button</comment>
   </data>
   <data name="ribLinkReferencesButton_Label" xml:space="preserve">
-    <value>Verweise auf diese Seite zuordnen</value>
-    <comment>ribbon button</comment>
-  </data>
+    Verweise auf diese Seite zuordnen
+  <comment>ribbon button</comment></data>
   <data name="ribLoadStylesButton_Label" xml:space="preserve">
     <value>Style-Design laden</value>
     <comment>ribbon styles</comment>
@@ -2907,6 +2926,14 @@ Polaroid</value>
     <value>Einfügen und nur Text halten</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPasteTextButton_Label" xml:space="preserve">
+    <value>Einfügen und nur Text halten</value>
+    <comment>ribbon item</comment>
+  </data>
+  <data name="ribPasteTextButton_Screentip" xml:space="preserve">
+    <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
+    <comment>ribbon item</comment>
+  </data>
   <data name="ribPasteTextButton_Screentip" xml:space="preserve">
     <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
     <comment>ribbon item</comment>
@@ -2995,9 +3022,9 @@ Polaroid</value>
     <value>Fußnote entfernen (Strg + Umschalt + F)</value>
     <comment>Ribbon OneMore menu item, Extras...</comment>
   </data>
-  <data name="SaveSnippetDialog_nameLabel.Text" xml:space="preserve">
-    <value>Snippet-Name:</value>
-    <comment>label</comment>
+  <data name="ribRemoveInkButton_Label" xml:space="preserve">
+    <value>Tinte entfernen</value>
+    <comment>ribbon item</comment>
   </data>
   <data name="ribRemovePageNumbersButton_Label" xml:space="preserve">
     <value>Seitenzahlen entfernen</value>
@@ -3130,21 +3157,21 @@ Polaroid</value>
     <value>Notizbücher sortieren</value>
     <comment>ribbon/context menu</comment>
   </data>
-  <data name="SettingsDialog_linesNode.Text" xml:space="preserve">
-    <value>Horizontale Linien</value>
-    <comment>settings dialog</comment>
+  <data name="ribSortNotebookSectionsButton_Label" xml:space="preserve">
+    <value>Abschnitte im Notizbuch sortieren</value>
+    <comment>ribbon/context menu</comment>
   </data>
-  <data name="SettingsDialog_pluginsNode.Text" xml:space="preserve">
-    <value>Plugins</value>
-    <comment>tree node</comment>
+  <data name="ribSortPageButton_Label" xml:space="preserve">
+    <value>Untergeordnete Seiten sortieren</value>
+    <comment>ribbon/context menu</comment>
   </data>
-  <data name="SettingsDialog_Restart" xml:space="preserve">
-    <value>Eine oder mehrere Änderungen erfordern einen Neustart von OneNote. </value>
-    <comment>restart message</comment>
+  <data name="ribSortPagesButton_Label" xml:space="preserve">
+    <value>Seiten im Abschnitt sortieren</value>
+    <comment>ribbon/context menu</comment>
   </data>
-  <data name="SettingsDialog_ribbonNode.Text" xml:space="preserve">
-    <value>Bandmass</value>
-    <comment>treenode</comment>
+  <data name="ribSortSectionPagesButton_Label" xml:space="preserve">
+    <value>Seiten im Abschnitt sortieren</value>
+    <comment>ribbon/context menu</comment>
   </data>
   <data name="ribSplitButton_Label" xml:space="preserve">
     <value>Seite teilen</value>
@@ -3496,9 +3523,9 @@ Suchmaschinen werden im Kontextmenü der Seite angezeigt, klicken Sie mit der re
     <value>Manuelle Suche</value>
     <comment>tab</comment>
   </data>
-  <data name="SplitTableDialog_copyHeaderBox.Text" xml:space="preserve">
-    <value>Doppelte Tabellenkopfzeile</value>
-    <comment>checkbox</comment>
+  <data name="ShowXmlDialog_nbPagesTab.Text" xml:space="preserve">
+    <value>Notebook mit Seiten.</value>
+    <comment>tab</comment>
   </data>
   <data name="ShowXmlDialog_nbSectionsTab.Text" xml:space="preserve">
     <value>Notizbuch mit Abschnitten.</value>
@@ -4036,8 +4063,8 @@ In diesem Abschnitt</value>
   <data name="word_Add" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
-  <data name="word_Grayscale" xml:space="preserve">
-    <value>Graustufen</value>
+  <data name="word_Alias" xml:space="preserve">
+    <value>Alias</value>
   </data>
   <data name="word_Apply" xml:space="preserve">
     <value>Sich bewerben</value>
@@ -4072,8 +4099,8 @@ In diesem Abschnitt</value>
   <data name="word_Delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
-  <data name="word_Options" xml:space="preserve">
-    <value>Optionen</value>
+  <data name="word_Distance" xml:space="preserve">
+    <value>Distanz</value>
   </data>
   <data name="word_Due" xml:space="preserve">
     <value>Während</value>
@@ -4213,155 +4240,5 @@ In diesem Abschnitt</value>
   </data>
   <data name="word_Code" xml:space="preserve">
     <value>Code</value>
-  </data>
-  <data name="Emoji_CheckMark" xml:space="preserve">
-    <value>Häkchen</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_Cloud" xml:space="preserve">
-    <value>Wolke</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_Copyright" xml:space="preserve">
-    <value>Urheberrechte ©</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_Eyes" xml:space="preserve">
-    <value>Augen</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_LeftwardsArrow" xml:space="preserve">
-    <value>Pfeil nach links</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_RightwardsArrow" xml:space="preserve">
-    <value>Pfeil nach rechts</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_Section" xml:space="preserve">
-    <value>Abschnitt</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="Emoji_XMark" xml:space="preserve">
-    <value>X-Markierung</value>
-    <comment>emoji</comment>
-  </data>
-  <data name="EmojiDialog.Text" xml:space="preserve">
-    <value>Titel-Emojis</value>
-    <comment>dialog title</comment>
-  </data>
-  <data name="EmojiDialog_introLabel.Text" xml:space="preserve">
-    <value>Wählen Sie ein oder mehrere Emojis aus, um sie dem Seitentitel hinzuzufügen</value>
-    <comment>instructions</comment>
-  </data>
-  <data name="ribEmojiButton_Label" xml:space="preserve">
-    <value>Seitentitel Emoji hinzufügen</value>
-    <comment>Ribbon OneMore menu item, Extras... EDIT</comment>
-  </data>
-  <data name="word_Limit" xml:space="preserve">
-    <value>Grenze</value>
-  </data>
-  <data name="HasActiveMedia" xml:space="preserve">
-    <value>OneMore-Befehle können nicht aufgerufen werden, während eine Aufzeichnung aktiv ist. Bitte stoppen Sie die Aufnahme und versuchen Sie es erneut.</value>
-  </data>
-  <data name="RemoveCitations_From" xml:space="preserve">
-    <value>Aus</value>
-    <comment>prefix word</comment>
-  </data>
-  <data name="phrase_PathNotFound" xml:space="preserve">
-    <value>Pfad nicht gefunden</value>
-  </data>
-  <data name="ribRemoveDateStampButton_Label" xml:space="preserve">
-    <value>Datumsstempel entfernen</value>
-    <comment>section context menu</comment>
-  </data>
-  <data name="DrawPlantUml_EmptySelection" xml:space="preserve">
-    <value>Leere Auswahl. Wählen Sie einen gültigen Block von PlantUML-Text aus.</value>
-    <comment>error message</comment>
-  </data>
-  <data name="DrawPlantUml_Error" xml:space="preserve">
-    <value>Ungültige Syntax oder unvollständige Auswahl von PlantUML</value>
-    <comment>error message</comment>
-  </data>
-  <data name="DrawPlantUml_NoParent" xml:space="preserve">
-    <value>Ungültige Auswahl; muss einen Textblock auswählen</value>
-    <comment>error message</comment>
-  </data>
-  <data name="ribDrawPlantUmlButton_Label" xml:space="preserve">
-    <value>Zeichne PlantUML</value>
-    <comment>ribbon images</comment>
-  </data>
-  <data name="ribDrawPlantUmlButton_Screentip" xml:space="preserve">
-    <value>PlantUML- oder Graphviz-Bild aus ausgewähltem Text rendern</value>
-    <comment>ribbon images</comment>
-  </data>
-  <data name="ResizeImagesDialog_resetLinkLabel.Text" xml:space="preserve">
-    <value>Werte zurücksetzen</value>
-    <comment>link label</comment>
-  </data>
-  <data name="ImportDialog_pdfGroup.Text" xml:space="preserve">
-    <value>PDF-Optionen</value>
-    <comment>group box</comment>
-  </data>
-  <data name="phrase_AppendToThisPage" xml:space="preserve">
-    <value>An diese Seite anhängen</value>
-  </data>
-  <data name="phrase_CreateANewPage" xml:space="preserve">
-    <value>Erstellen Sie eine neue Seite</value>
-  </data>
-  <data name="PageColorDialog_applyThemeBox.Text" xml:space="preserve">
-    <value>Wenden Sie Stile auf diese Seite an</value>
-    <comment>checkbox</comment>
-  </data>
-  <data name="PageColorDialog_contrastWarning" xml:space="preserve">
-    <value>Text kann unleserlich sein</value>
-    <comment>label</comment>
-  </data>
-  <data name="PageColorDialog_currentThemeLabel.Text" xml:space="preserve">
-    <value>Das aktuelle Designthema ist {0}</value>
-    <comment>label</comment>
-  </data>
-  <data name="PageColorDialog_customLabel" xml:space="preserve">
-    <value>Klicken Sie hier, um Ihre eigene benutzerdefinierte Farbe zu ändern</value>
-    <comment>label</comment>
-  </data>
-  <data name="PageColorDialog_expander.Title" xml:space="preserve">
-    <value>Erweiterte Optionen</value>
-    <comment>expander control</comment>
-  </data>
-  <data name="PageColorDialog_loadThemeLink.Text" xml:space="preserve">
-    <value>Laden Sie ein anderes Stilthema</value>
-    <comment>linklabel</comment>
-  </data>
-  <data name="PageColorDialog_noLabel.Text" xml:space="preserve">
-    <value>oder wählen Sie keine Seitenfarbe</value>
-    <comment>label</comment>
-  </data>
-  <data name="PageColorDialog_omLabel" xml:space="preserve">
-    <value>Klicken Sie hier, um eine vordefinierte Farbe auszuwählen</value>
-    <comment>label</comment>
-  </data>
-  <data name="ribPageColorButton_Label" xml:space="preserve">
-    <value>Seitenfarbe</value>
-    <comment>page context menu</comment>
-  </data>
-  <data name="ribPageColorButton_Screentip" xml:space="preserve">
-    <value>Wählen Sie eine benutzerdefinierte Farbe für den Seitenhintergrund</value>
-    <comment>page context menu</comment>
-  </data>
-  <data name="LoadStyleTheme_errorLoading" xml:space="preserve">
-    <value>Datei kann nicht geladen werden oder Datei ist leer</value>
-  </data>
-  <data name="LoadStyleTheme_filter" xml:space="preserve">
-    <value>Designdateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
-    <comment>OpenFileDialog filter</comment>
-  </data>
-  <data name="LoadStyleTheme_Title" xml:space="preserve">
-    <value>Style-Design laden</value>
-    <comment>OpenFileDialog title</comment>
-  </data>
-  <data name="ribEditStylesButton_named" xml:space="preserve">
-    <value>Stildesign bearbeiten ({0})</value>
-    <comment>ribbon styles with theme name</comment>
   </data>
 </root>
