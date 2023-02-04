@@ -15,6 +15,7 @@ parser.add_argument('-b', '--build', help='build project', action='store_true')
 parser.add_argument('-r', '--rebase', help='start rebase', action='store_true')
 parser.add_argument('-u', '--undo', help='undo: start reset and revert changes', action='store_true')
 parser.add_argument('-a', '--all', help='conduct all, i.e. rebase, build, copy', action='store_true')
+parser.add_argument('-p', '--update', help='pull & push all branches of concern', action='store_true')
 args = parser.parse_args(None if sys.argv[1:] else ['-h'])
 
 import subprocess, sys    
@@ -46,7 +47,7 @@ def copyToTarget():
     for line in p.stdout:
         print(line, end='') # process line here
 
-def rebase(reset_only = False):
+def rebase(reset_only = False, update_only = False):
   # for tracing, should be somehow merged with repo
   if args.verbose:
       from git.cmd import Git
@@ -63,16 +64,23 @@ def rebase(reset_only = False):
 
   # handle dedicated branches
   # branches = ["improveMarkdown", "addPythonSupport", "fixWhenAll", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
-  branches = ["improveMarkdown", "addPythonSupport", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
+  # branches = ["improveMarkdown", "addPythonSupport", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
   # branches = ["improveGerTranslation"]
+  branches = ["main", "improveMarkdown", "addPythonSupport", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
   for branch in branches:
       logger.info('---------------------------------------------')
       logger.info('Start handdling ' + branch )
       logger.info('---------------------------------------------')
+      
       repo.git.checkout(branch)
       if reset_only:
           repo.git.reset("--hard", "origin/" +  branch)
           continue
+      # refresh branch    
+      repo.git.pull()
+      repo.git.push()
+      if update_only:
+          continue;
       tag = datetime.datetime.today().strftime("%y-%m-%d") + "_" + branch 
       # create tag only if not already exist, assumption one per day is enough
       try:
@@ -81,8 +89,11 @@ def rebase(reset_only = False):
       except:
           logger.info('Tag exists allready, skip creation.')
           pass
-      repo.git.rebase("main")
+      if branch != "main":    
+          repo.git.rebase("main")
 
+  if update_only:
+      return
   # create new baseline
   logger.info('---------------------------------------------')
   logger.info('Start creation of ' + args.target )
@@ -101,9 +112,6 @@ def rebase(reset_only = False):
       repo.git.pull()
       repo.git.push()
 
-  # final push    
-  repo.git.push()
-
   if args.debug:
       # delete for debug purposes
       remote = repo.remote(name='origin')
@@ -111,6 +119,10 @@ def rebase(reset_only = False):
     
 if args.undo:
   rebase(reset_only=True)
+  exit()
+
+if args.update:
+  rebase(update_only=True)
   exit()
 
 if args.rebase or args.all:
