@@ -1,13 +1,15 @@
 # 
 # script for automatic merging of multiple branches
 #
-import logging, datetime, argparse, sys
+import logging, datetime, argparse, sys, re
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('')
 
 # parse parameter
-parser = argparse.ArgumentParser("Parse options")
-parser.add_argument('-t', '--target', help='Target branch', default="improveMD37")
+parser = argparse.ArgumentParser( description = "Parse options", 
+                                  epilog = "example of use: \n  python ../create_branch.py -t improveMDXXX -a \n ",
+                                  formatter_class=argparse.RawDescriptionHelpFormatter)
+parser.add_argument('-t', '--target', help='Target branch, use "XXX" to replace by next index', default="improveMDXXX")
 parser.add_argument('-d', '--debug', help='Support debug', action='store_true')
 parser.add_argument('-v', '--verbose', help='Be verbose', action='store_false')
 parser.add_argument('-c', '--copytotarget', help='Copy to target in program files', action='store_true')
@@ -54,7 +56,7 @@ def rebase(reset_only = False, update_only = False):
       type(Git()).GIT_PYTHON_TRACE="full"
       g = Git('.')
 
-  # repot
+  # repo
   from git import Repo
   repo = Repo('.')
 
@@ -91,6 +93,7 @@ def rebase(reset_only = False, update_only = False):
           pass
       if branch != "main":    
           repo.git.rebase("main")
+          repo.git.push(force=True)
 
   if update_only:
       return
@@ -101,22 +104,40 @@ def rebase(reset_only = False, update_only = False):
   repo.git.checkout("main")
   if reset_only:
       repo.git.push('--delete', repo.remote().name, args.target)
-      repo.delete_head(args.target) 
+      repo.delete_head(args.target, force=True) 
       return
   repo.git.checkout("-b",args.target)
   push_output = repo.git.push('--set-upstream', repo.remote().name, args.target)
 
   # merge branches
   for branch in branches:
-      repo.git.merge(branch)
-      repo.git.pull()
-      repo.git.push()
+      repo.git.rebase(branch)
+      repo.git.push(force=True)
 
   if args.debug:
       # delete for debug purposes
       remote = repo.remote(name='origin')
       remote.push(refspec=(':' +  args.target))
     
+
+if "XXX" in args.target:
+  # repo
+  from git import Repo
+  repo = Repo('.')
+
+  remote_refs = repo.remote().refs
+
+  search_string = args.target.replace("XXX","")
+  max_number = 0
+  for refs in remote_refs:
+      if search_string in refs.name:
+        number = re.findall("(.*)improveMD(\d+)", refs.name, flags=re.MULTILINE)[0][1]    
+        # print(search_string + " found here: " + refs.name + ". Number: " + number)
+        max_number = max(max_number, int(number))
+  print (" --> Maxnumber is " + str(max_number))
+  args.target = args.target.replace("XXX", str(max_number+1))
+
+
 if args.undo:
   rebase(reset_only=True)
   exit()
