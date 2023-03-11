@@ -49,7 +49,7 @@ class GitBranchHelper():
 
   def buildProject():
     with subprocess.Popen(["powershell.exe", "-noprofile", "-command", ".\\build.ps1 64"],
-      stdout = subprocess.PIPE, stderr = subprocess.PIPE, bufsize=1, universal_newlines=True
+      stdout = subprocess.PIPE, stderr = subprocess.PIPE, bufsize=1, universal_newlines=True, encoding="cp437"
     ) as p:
       for line in p.stdout:
           print(line, end='') # process line here
@@ -77,8 +77,9 @@ class GitBranchHelper():
 
   def rebase(self, reset_only = False, update_only = False):
     # handle dedicated branches
-    # branches = ["improveMarkdown", "addPythonSupport", "fixWhenAll", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
-    self.branches = ["improveMarkdown", "addPythonSupport", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
+    # self.branches = ["improveMarkdown", "addPythonSupport", "fixWhenAll", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
+    # self.branches = ["improveMarkdown", "addPythonSupport", "improveGerTranslation", "improvePlugInMenu", "misc", "makepublic"]
+    self.branches = ["improveMarkdown", "addPythonSupport", "improvePlugInMenu", "misc", "makepublic"]
     for branch in self.branches:
         logger.info('---------------------------------------------')
         logger.info('Start handdling ' + branch )
