@@ -214,7 +214,7 @@
   </hint>
   <hint name="RemindCommand_Reuse">
     <source>Click Yes to update this existing report, No to create a new report, or Cancel</source>
-    <preferred>Klicke auf Ja, um diesen vorhandenen Bericht zu aktualisieren, auf Nein, um einen neuen Bericht zu erstellen, oder auf Abbrechen</preferred>
+    <preferred>Klicke auf Ja, um den vorhandenen Bericht zu aktualisieren, auf Nein, um einen neuen Bericht zu erstellen, oder auf Abbrechen</preferred>
   </hint>
   <hint name="RemindDialog_snoozeLabel.Text">
     <source>Click snooze to be reminded in</source>
