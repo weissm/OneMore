@@ -250,10 +250,10 @@ namespace River.OneMoreAddIn.Commands
 			bool startpara = false,
 			bool contained = false)
 		{
+
 			bool pushed = false;
 			bool dive = true;
 			var keepindents = prefix.indent;
-
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
@@ -315,7 +315,7 @@ namespace River.OneMoreAddIn.Commands
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					Stylize(prefix);
+					Stylize(prefix); 
 					prefix.tags = ""; 
 					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
@@ -409,7 +409,7 @@ namespace River.OneMoreAddIn.Commands
 					var name = quick.Name.ToLower();
 
 					// cite becomes italic
-					if (quick.Name == "cite") context.Enclosure = "*";
+					if (quick.Name == "cite") context.Enclosure = "_";
 					else if (quick.Name == "code") context.Enclosure = "`";
 				}
 
@@ -447,7 +447,6 @@ namespace River.OneMoreAddIn.Commands
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
-
 		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
@@ -460,15 +459,15 @@ namespace River.OneMoreAddIn.Commands
 			{
 				case 3:     // to do
 				case 8:     // client request
-				case 12:    // schedule/callback
-				case 28:    // todo prio 1
+				case 12:	// schedule/callback
+				case 28:	// todo prio 1
 				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
 					retValue = contained
 					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
-					  : ($"[{check}] ");
+					  : ($"- [{check}] ");
 
 					break;
 
@@ -492,7 +491,7 @@ namespace River.OneMoreAddIn.Commands
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
 				case 132: retValue = (":book: "); break;           // book to read
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
-				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
+				default: break;									   // retValue = (":o: "); break;
 			}
 			return retValue;
 			return retValue;
@@ -504,8 +503,8 @@ namespace River.OneMoreAddIn.Commands
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-				// .Replace("<br>", "  ") // usually followed by NL so leave it there
-				// .Replace("[", "\\[")   // escape to prevent confusion with md links
+//				.Replace("<br>", "  ") // usually followed by NL so leave it there
+//				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
@@ -677,7 +676,22 @@ namespace River.OneMoreAddIn.Commands
 
 			// table needs a blank line before it
 			writer.WriteLine();
-			bool first_row = true;
+
+			// header
+			writer.Write(indents + "|");
+			for (int i = 0; i < table.ColumnCount; i++)
+			{
+				writer.Write($" {TableCell.IndexToLetters(i + 1)} |");
+			}
+			writer.WriteLine();
+
+			// separator
+			writer.Write("|");
+			for (int i = 0; i < table.ColumnCount; i++)
+			{
+				writer.Write(" :--- |");
+			}
+			writer.WriteLine();
 
 			// data
 			foreach (var row in table.Rows)
