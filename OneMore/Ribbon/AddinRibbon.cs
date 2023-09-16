@@ -468,6 +468,23 @@ namespace River.OneMoreAddIn
 			return favorites.ToString(SaveOptions.DisableFormatting);
 		}
 
+        /// <summary>
+        /// Populates the Favorites dynamic menu
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
+        public string GetPluginsContent(IRibbonControl control)
+        {
+            //logger.WriteLine($"GetFavoritesContent({control.Id}) culture:{AddIn.Culture.Name}");
+
+            // TODO: this doesn't seem to work!
+            System.Threading.Thread.CurrentThread.CurrentCulture = AddIn.Culture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = AddIn.Culture;
+
+            var favorites = new PluginsProvider(ribbon).MakePluginsMenu(ns);
+
+            return favorites.ToString(SaveOptions.DisableFormatting);
+        }
 
 		public string GetMyPluginsContent(IRibbonControl control)
 		{
