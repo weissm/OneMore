@@ -145,6 +145,35 @@ namespace River.OneMoreAddIn.Commands
 
 				ImportAsMarkdown();
 			}
+			else if (address.Contains("gitlab") && File.Exists(path))
+			{
+				var target = Path.Combine(Path.GetTempPath(), $"{name}");
+
+				// add html link to argument list
+				using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+				using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
+
+
+
+
+
+				{
+					var json = await reader.ReadToEndAsync();
+
+					var serializer = new JavaScriptSerializer();
+					var plugin = serializer.Deserialize<Plugin>(json);
+
+					plugin.Name = target;
+					plugin.Arguments +=  $" -i \"{address}\"";
+
+					var provider = new PluginsProvider();
+					await provider.Save(plugin);
+				}
+
+				await factory.Run<RunPluginCommand>(target + ".js");
+
+				ImportAsMarkdown();
+			}
 			else
 			{
 				ImportAsContent();
