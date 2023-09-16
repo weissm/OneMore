@@ -157,7 +157,8 @@ namespace River.OneMoreAddIn.Models
 		public bool SelectionSpecial { get; private set; }
 
 
-		// TODO: this is inconsistent! It gets the plain text but allows setting complex CDATA
+
+
 		public string Title
 		{
 			get
