@@ -109,11 +109,7 @@ namespace River.OneMoreAddIn.Commands
                 using var reader = new StreamReader(stream);
 
                 var clippy = new ClipboardProvider();
-				var success = await clippy.SetText(reader.ReadToEnd(), true);
-				if (!success)
-				{
-					UIHelper.ShowInfo(Resx.Clipboard_locked);
-				}
+                await clippy.SetText(reader.ReadToEnd());
             }
         }
 
@@ -126,9 +122,6 @@ namespace River.OneMoreAddIn.Commands
         {
 #if !LOG
             path = Path.GetDirectoryName(filename);
-			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
-			attachmentPath = Path.Combine(path, attachmentFolder);
-
             using (writer = File.CreateText(filename))
 #endif
             {
@@ -340,7 +333,6 @@ namespace River.OneMoreAddIn.Commands
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
-
 		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
@@ -397,8 +389,8 @@ namespace River.OneMoreAddIn.Commands
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-				// .Replace("<br>", "  ") // usually followed by NL so leave it there
-				// .Replace("[", "\\[")   // escape to prevent confusion with md links
+//				.Replace("<br>", "  ") // usually followed by NL so leave it there
+//				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
