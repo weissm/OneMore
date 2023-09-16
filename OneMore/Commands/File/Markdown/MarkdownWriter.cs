@@ -12,6 +12,7 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
     using System.Collections.Generic;
+    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
@@ -145,6 +146,9 @@ namespace River.OneMoreAddIn.Commands
         {
 #if !LOG
             path = Path.GetDirectoryName(filename);
+			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
+			attachmentPath = Path.Combine(path, attachmentFolder);
+
             using (writer = File.CreateText(filename))
 #endif
             {
@@ -159,12 +163,12 @@ namespace River.OneMoreAddIn.Commands
                     .Elements()
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
-                // page level Images outside of any Outline
-                page.Root.Elements(ns + "Image")
-                    .ForEach(e => {
-                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
-                        writer.WriteLine();
-                    });
+				// page level Images outside of any Outline
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+						Write(e);
+						writer.WriteLine();
+					});
 
                 writer.WriteLine();
             }
@@ -403,7 +407,9 @@ namespace River.OneMoreAddIn.Commands
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
+			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
+
 
 		private string WriteTag(XElement element, bool contained)
 		{
@@ -456,12 +462,14 @@ namespace River.OneMoreAddIn.Commands
 
 
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
+		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-//				.Replace("<br>", "  ") // usually followed by NL so leave it there
-//				.Replace("[", @"\[")   // escape to prevent confusion with md links
+				\\ .Replace("<br>", "  ") // usually followed by NL so leave it there
+				\\ .Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
