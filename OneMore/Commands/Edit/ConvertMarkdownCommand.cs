@@ -27,6 +27,11 @@ namespace River.OneMoreAddIn.Commands
 			using var one = new OneNote(out var page, out var ns);
 			page.GetTextCursor();
 
+			if (page.SelectionScope != SelectionScope.Region)
+			{
+				ShowError("Select markdown text to convert to OneNote format");
+				return;
+			}
 			var editor = new PageEditor(page)
 			{
 				AllContent = (page.SelectionScope != SelectionScope.Region)
@@ -72,20 +77,14 @@ namespace River.OneMoreAddIn.Commands
 				var text = reader.ReadTextFrom(paragraphs, page.SelectionScope != SelectionScope.Region);
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 
-				editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
-					new XElement(ns + "Data",
-						new XCData($"<html><body>{body}</body></html>")
-						)
-					));
-			}
+			editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
+				new XElement(ns + "Data",
+					new XCData($"<html><body>{body}</body></html>")
+					)
+				));
 
-			// temporarily collect all outline IDs
-			var outlineIDs = page.Root.Elements(ns + "Outline")
-				.Select(e => e.Attribute("objectID").Value)
-				// must ToList or Count comparison won't work!
-				.ToList();
+			MarkdownConverter.RewriteHeadings(page);
 
-			// update will remove unmodified omHash outlines
 			await one.Update(page);
 
 			// identify only remaining untouched outlines by exclusion
