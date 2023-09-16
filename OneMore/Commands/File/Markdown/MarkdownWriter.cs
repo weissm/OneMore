@@ -475,7 +475,6 @@ namespace River.OneMoreAddIn.Commands
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
 					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
-					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
@@ -509,14 +508,6 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
-			if (raw.Trim().IsNullOrEmpty())
-			{
-				return;
-			}
-			if (contained)
-            {
-				raw = raw.Replace("\n", "<br>");
-            }
 			if (raw.Trim().IsNullOrEmpty())
 			{
 				return;
@@ -639,6 +630,8 @@ namespace River.OneMoreAddIn.Commands
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
 						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
+
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
