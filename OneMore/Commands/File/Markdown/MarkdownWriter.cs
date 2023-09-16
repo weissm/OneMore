@@ -202,7 +202,7 @@ namespace River.OneMoreAddIn.Commands
                     }
 					else
                     {
-						writer.WriteLine("  ");
+						writer.WriteLine("");
 					}
 					prefix.indent = $"{Indent}{prefix.indent}";
 					break;
@@ -213,7 +213,7 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Tag":
-					WriteTag(element, contained);
+					prefix.tags += WriteTag(element, contained);
 					break;
 
 				case "T":
@@ -222,7 +222,7 @@ namespace River.OneMoreAddIn.Commands
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					if (startpara) Stylize(prefix);
+					Stylize(prefix);
 					prefix.tags = ""; 
 					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
@@ -280,9 +280,9 @@ namespace River.OneMoreAddIn.Commands
 
 				// if not in a table cell
 				// or in a cell and this OE is followed by another OE
-				if (!contained || (element.NextNode != null))
+				if (!contained && (element.NextNode != null))
 				{
-					writer.WriteLine("  ");
+					writer.WriteLine("");
 				} else if (contained)
                 {
 					writer.Write("<br>");
@@ -350,6 +350,7 @@ namespace River.OneMoreAddIn.Commands
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
 			var retValue = "";
+			var retValue = "";
 
 			switch (symbol)
 			{
@@ -363,7 +364,7 @@ namespace River.OneMoreAddIn.Commands
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
 					retValue = contained
 					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
-					  : ($"- [{check}] ");
+					  : ($"[{check}] ");
 
 					break;
 
@@ -545,22 +546,7 @@ namespace River.OneMoreAddIn.Commands
 
 			// table needs a blank line before it
 			writer.WriteLine();
-
-			// header
-			writer.Write(indents + "|");
-			for (int i = 0; i < table.ColumnCount; i++)
-			{
-				writer.Write($" {TableCell.IndexToLetters(i + 1)} |");
-			}
-			writer.WriteLine();
-
-			// separator
-			writer.Write("|");
-			for (int i = 0; i < table.ColumnCount; i++)
-			{
-				writer.Write(" :--- |");
-			}
-			writer.WriteLine();
+			bool first_row = true;
 
 			// data
 			foreach (var row in table.Rows)
