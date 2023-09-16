@@ -12,7 +12,6 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
     using System.Collections.Generic;
-    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
@@ -408,7 +407,6 @@ namespace River.OneMoreAddIn.Commands
 				case "code": styleprefix = ("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
-			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
