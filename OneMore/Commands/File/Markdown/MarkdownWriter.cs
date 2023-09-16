@@ -12,6 +12,7 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
     using System.Collections.Generic;
+    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
@@ -135,13 +136,18 @@ namespace River.OneMoreAddIn.Commands
         /// <param name="filename"></param>
         public void Save(string filename)
         {
+        /// <summary>
+        /// Save the page as markdown to the specified file.
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Save(string filename)
+        {
 #if !LOG
             path = Path.GetDirectoryName(filename);
-			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
-			attachmentPath = Path.Combine(path, attachmentFolder);
-
             using (writer = File.CreateText(filename))
 #endif
+            {
+                writer.WriteLine($"# {page.Title}");
             {
                 writer.WriteLine($"# {page.Title}");
 
@@ -149,14 +155,21 @@ namespace River.OneMoreAddIn.Commands
                     .Elements(ns + "OEChildren")
                     .Elements()
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+                page.Root.Elements(ns + "Outline")
+                    .Elements(ns + "OEChildren")
+                    .Elements()
+                    .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
-				// page level Images outside of any Outline
+                // page level Images outside of any Outline
                 page.Root.Elements(ns + "Image")
                     .ForEach(e => {
                         PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
                         writer.WriteLine();
                     });
 
+                writer.WriteLine();
+            }
+        }
                 writer.WriteLine();
             }
         }
@@ -194,15 +207,49 @@ namespace River.OneMoreAddIn.Commands
 			}
 			return retString;
 		}
+        /// <summary>
+        /// Save the page as markdown to a string
+        /// </summary>
+		public string Save()
+		{
+			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			MemoryStream mem = new MemoryStream();
+			StreamWriter sw = new StreamWriter(mem);
+			string retString = "";
+
+			using (writer = sw)
+			{
+				writer.WriteLine($"# {page.Title}");
+
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+
+				// page level Images outside of any Outline
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); writer.WriteLine();
+					});
+
+				writer.WriteLine();
+				sw.Flush();
+				mem.Position = 0;
+				StreamReader sr = new StreamReader(mem);
+				retString = sr.ReadToEnd();
+			}
+			return retString;
+		}
 		private void Write(XElement element,
+			ref PrefixClass prefix,
 			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
 		{
+
 			bool pushed = false;
 			bool dive = true;
 			var keepindents = prefix.indent;
-
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
@@ -250,8 +297,12 @@ namespace River.OneMoreAddIn.Commands
                     {
 						break;
                     }
+					if (element.GetCData().Value.Trim().IsNullOrEmpty())
+                    {
+						break;
+                    }
 					pushed = DetectQuickStyle(element);
-					Stylize(prefix);
+					Stylize(prefix); 
 					prefix.tags = ""; 
 					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
@@ -336,7 +387,7 @@ namespace River.OneMoreAddIn.Commands
 					var name = quick.Name.ToLower();
 
 					// cite becomes italic
-					if (quick.Name == "cite") context.Enclosure = "*";
+					if (quick.Name == "cite") context.Enclosure = "_";
 					else if (quick.Name == "code") context.Enclosure = "`";
 				}
 
@@ -367,11 +418,13 @@ namespace River.OneMoreAddIn.Commands
 				// cite and code are both block-scope style, on the OE
 				case "cite": styleprefix = ("*"); break;
 				case "code": styleprefix = ("`"); break;
+				case "cite": styleprefix = ("*"); break;
+				case "code": styleprefix = ("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
+			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
-
 
 		private string WriteTag(XElement element, bool contained)
 		{
@@ -380,20 +433,21 @@ namespace River.OneMoreAddIn.Commands
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
 			var retValue = "";
+			var retValue = "";
 
 			switch (symbol)
 			{
 				case 3:     // to do
 				case 8:     // client request
-				case 12:    // schedule/callback
-				case 28:    // todo prio 1
+				case 12:	// schedule/callback
+				case 28:	// todo prio 1
 				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
 					retValue = contained
 					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
-					  : ($"[{check}] ");
+					  : ($"- [{check}] ");
 
 					break;
 
@@ -417,8 +471,9 @@ namespace River.OneMoreAddIn.Commands
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
 				case 132: retValue = (":book: "); break;           // book to read
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
-				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
+				default: break;									   // retValue = (":o: "); break;
 			}
+			return retValue;
 			return retValue;
 		}
 
@@ -426,10 +481,11 @@ namespace River.OneMoreAddIn.Commands
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-				// .Replace("<br>", "  ") // usually followed by NL so leave it there
-				// .Replace("[", "\\[")   // escape to prevent confusion with md links
+//				.Replace("<br>", "  ") // usually followed by NL so leave it there
+//				.Replace("[", @"\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
@@ -443,11 +499,13 @@ namespace River.OneMoreAddIn.Commands
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
 					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
+					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
 			}
 
+            foreach (var anchor in wrapper.Elements("a").ToList())
             foreach (var anchor in wrapper.Elements("a").ToList())
 			{
 				var href = anchor.Attribute("href")?.Value;
@@ -455,9 +513,17 @@ namespace River.OneMoreAddIn.Commands
 				{
                     // Link working with latest markdown releases
                     /*
+                    // Link working with latest markdown releases
+                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
+						// anchor.ReplaceWith(anchor.Value);
+                    }
+                    else
+					*/
+                    {
+                        anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
 						// anchor.ReplaceWith(anchor.Value);
                     }
                     else
@@ -473,6 +539,14 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
+			if (raw.Trim().IsNullOrEmpty())
+			{
+				return;
+			}
+			if (contained)
+            {
+				raw = raw.Replace("\n", "<br>");
+            }
 			if (raw.Trim().IsNullOrEmpty())
 			{
 				return;
@@ -583,7 +657,22 @@ namespace River.OneMoreAddIn.Commands
 
 			// table needs a blank line before it
 			writer.WriteLine();
-			bool first_row = true;
+
+			// header
+			writer.Write(indents + "|");
+			for (int i = 0; i < table.ColumnCount; i++)
+			{
+				writer.Write($" {TableCell.IndexToLetters(i + 1)} |");
+			}
+			writer.WriteLine();
+
+			// separator
+			writer.Write("|");
+			for (int i = 0; i < table.ColumnCount; i++)
+			{
+				writer.Write(" :--- |");
+			}
+			writer.WriteLine();
 
 			// data
 			foreach (var row in table.Rows)
