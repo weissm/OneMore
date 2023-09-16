@@ -14,8 +14,8 @@ namespace River.OneMoreAddIn.Commands
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
+	using System.Threading.Tasks;
+	using System.Xml.Linq;
 	using Resx = Properties.Resources;
 
 
@@ -107,14 +107,10 @@ namespace River.OneMoreAddIn.Commands
                 stream.Position = 0;
                 using var reader = new StreamReader(stream);
 
-				var clippy = new ClipboardProvider();
-				var success = await clippy.SetText(reader.ReadToEnd(), true);
-				if (!success)
-				{
-					UIHelper.ShowInfo(Resx.Clipboard_locked);
-				}
-			}
-		}
+                var clippy = new ClipboardProvider();
+                await clippy.SetText(reader.ReadToEnd());
+            }
+        }
 
 
         /// <summary>
