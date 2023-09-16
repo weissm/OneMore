@@ -25,22 +25,35 @@ namespace River.OneMoreAddIn.Commands
 		public override async Task Execute(params object[] args)
 		{
 			using var one = new OneNote(out var page, out var ns);
-			var range = new SelectionRange(page);
-			var selectedRuns = range.GetSelections(true);
+			page.GetTextCursor();
 
-			var allContent =
-				range.Scope == SelectionScope.TextCursor ||
-				range.Scope == SelectionScope.SpecialCursor;
+			if (page.SelectionScope != SelectionScope.Region)
+			{
+				ShowError("Select markdown text to convert to OneNote format");
+				return;
+			}
+			var editor = new PageEditor(page)
+			{
+				AllContent = (page.SelectionScope != SelectionScope.Region)
+			};
 
-			var editor = new PageEditor(page) { AllContent = allContent };
-
-			var outlines = allContent
-				? page.Root.Elements(ns + "Outline")
-				: selectedRuns.Select(e => e.FirstAncestor(ns + "Outline")).Distinct();
-
-			// cache all OE objectIDs, compare against later, to only space out new OEs
-			var paragraphIDs = outlines.Descendants(ns + "OE")
-				.Select(e => e.Attribute("objectID").Value).ToList();
+			IEnumerable<XElement> outlines;
+			if (page.SelectionScope != SelectionScope.Region)
+			{
+				// process all outlines
+				outlines = page.Root.Elements(ns + "Outline");
+			}
+			else
+			{
+				// process only the selected outline
+				outlines = new List<XElement>
+				{
+					page.Root.Elements(ns + "Outline")
+						.Descendants(ns + "T")
+						.First(e => e.Attributes().Any(a => a.Name == "selected" && a.Value == "all"))
+						.FirstAncestor(ns + "Outline")
+				};
+			}
 
             // process each outline in sequence. By scoping to an outline, PageReader/Editor
             // can maintain positional context and scope updates to the outline
@@ -70,14 +83,14 @@ namespace River.OneMoreAddIn.Commands
 
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 
-                editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
-                    new XElement(ns + "Data",
-                        new XCData($"<html><body>{body}</body></html>")
-                        )
-                    ));
-            }
+			editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
+				new XElement(ns + "Data",
+					new XCData($"<html><body>{body}</body></html>")
+					)
+				));
 
-			// update will remove unmodified omHash outlines from the in-memory Page
+			MarkdownConverter.RewriteHeadings(page);
+
 			await one.Update(page);
 
 			// Pass 2, cleanup...
