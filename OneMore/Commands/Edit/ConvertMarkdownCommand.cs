@@ -26,6 +26,11 @@ namespace River.OneMoreAddIn.Commands
 			using var one = new OneNote(out var page, out var ns);
 			page.GetTextCursor();
 
+			if (page.SelectionScope != SelectionScope.Region)
+			{
+				ShowError("Select markdown text to convert to OneNote format");
+				return;
+			}
 			var editor = new PageEditor(page)
 			{
 				AllContent = (page.SelectionScope != SelectionScope.Region)
@@ -50,6 +55,8 @@ namespace River.OneMoreAddIn.Commands
 					new XCData($"<html><body>{body}</body></html>")
 					)
 				));
+
+			MarkdownConverter.RewriteHeadings(page);
 
 			await one.Update(page);
 
