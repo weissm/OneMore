@@ -42,6 +42,8 @@ namespace River.OneMoreAddIn.Commands
 		// indentations (OEChildren) with the blockquote directive instead
 //		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
 		private const string Indent = "  "; //&nbsp;&nbsp;&nbsp;&nbsp;";
+//		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+		private const string Indent = "  "; //&nbsp;&nbsp;&nbsp;&nbsp;";
 
 		private readonly Page page;
 		private readonly XNamespace ns;
@@ -49,7 +51,7 @@ namespace River.OneMoreAddIn.Commands
 		private readonly Stack<Context> contexts;
 		private bool saveAttachments;
 		private int imageCounter;
-        private bool copyMode;
+ 		private bool copyMode;
 #if LOG
 		private readonly ILogger writer = Logger.Current;
 #else
@@ -100,18 +102,18 @@ namespace River.OneMoreAddIn.Commands
 			{
 				await writer.WriteLineAsync($"# {page.Title}");
 
-                if (content.Name.LocalName == "Page")
-                {
-                    content.Elements(ns + "Outline")
-                        .Elements(ns + "OEChildren")
-                        .Elements()
+				if (content.Name.LocalName == "Page")
+				{
+					content.Elements(ns + "Outline")
+						.Elements(ns + "OEChildren")
+						.Elements()
                         .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
-                }
-                else
-                {
-                    content.Elements()
+				}
+				else
+				{
+					content.Elements()
                         .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
-                }
+				}
 
 				await writer.WriteLineAsync();
 				await writer.FlushAsync();
@@ -158,7 +160,8 @@ namespace River.OneMoreAddIn.Commands
 
 				// page level Images outside of any Outline
                 page.Root.Elements(ns + "Image")
-                    .ForEach(e => {
+					.ForEach(e =>
+					{
                         PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
                         writer.WriteLine();
                     });
@@ -299,7 +302,6 @@ namespace River.OneMoreAddIn.Commands
 					if (!copyMode)
 					{
 					WriteImage(element);
-					WriteImage(element);
 					}
 					dive = false;
 					break;
@@ -308,13 +310,11 @@ namespace River.OneMoreAddIn.Commands
 					if (!copyMode)
 					{
 					WriteFile(element);
-					WriteFile(element);
 					}
 					dive = false;
 					break;
 
 				case "Table":
-					WriteTable(element, prefix.indent);
 					WriteTable(element, prefix.indent);
 					dive = false;
 					break;
@@ -324,7 +324,6 @@ namespace River.OneMoreAddIn.Commands
 			{
 				foreach (var child in element.Elements())
 				{
-					Write(child, ref prefix, startpara, contained);
 					Write(child, ref prefix, startpara, contained);
 					startpara = false;
 				}
@@ -425,7 +424,6 @@ namespace River.OneMoreAddIn.Commands
 					retValue = contained
 					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
 					  : ($"[{check}] ");
-
 					break;
 
 				case 6: retValue = (":question: "); break;         // question
@@ -450,7 +448,6 @@ namespace River.OneMoreAddIn.Commands
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
 				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
 			}
-			return retValue;
 			return retValue;
 		}
 
@@ -487,18 +484,15 @@ namespace River.OneMoreAddIn.Commands
 				{
                     // Link working with latest markdown releases
                     /*
-                    // Link working with latest markdown releases
-                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
-						// anchor.ReplaceWith(anchor.Value);
+						anchor.ReplaceWith(anchor.Value);
                     }
                     else
 					*/
                     {
                         anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
-						// anchor.ReplaceWith(anchor.Value);
                     }
 				}
 			}
@@ -630,6 +624,7 @@ namespace River.OneMoreAddIn.Commands
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
 						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
+						
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
