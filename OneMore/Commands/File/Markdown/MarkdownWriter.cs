@@ -126,9 +126,6 @@ namespace River.OneMoreAddIn.Commands
         {
 #if !LOG
             path = Path.GetDirectoryName(filename);
-			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
-			attachmentPath = Path.Combine(path, attachmentFolder);
-
             using (writer = File.CreateText(filename))
 #endif
             {
@@ -188,11 +185,11 @@ namespace River.OneMoreAddIn.Commands
 			bool startpara = false,
 			bool contained = false)
 		{
+
 			bool pushed = false;
 			bool dive = true;
-            var keepindents = prefix.indent;
-
-            switch (element.Name.LocalName)
+			var keepindents = prefix.indent;
+			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
 					pushed = DetectQuickStyle(element);
@@ -305,7 +302,7 @@ namespace River.OneMoreAddIn.Commands
 				if (quick != null)
 				{
 					// cite becomes italic
-					if (quick.Name == "cite") context.Enclosure = "*";
+					if (quick.Name == "cite") context.Enclosure = "_";
 					else if (quick.Name == "code") context.Enclosure = "`";
 				}
 				contexts.Push(context);
@@ -342,6 +339,7 @@ namespace River.OneMoreAddIn.Commands
 
 
 		private string WriteTag(XElement element, bool contained)
+		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
 				.Where(e => e.Attribute("index").Value == element.Attribute("index").Value)
@@ -353,8 +351,8 @@ namespace River.OneMoreAddIn.Commands
 			{
 				case 3:     // to do
 				case 8:     // client request
-				case 12:    // schedule/callback
-				case 28:    // todo prio 1
+				case 12:	// schedule/callback
+				case 28:	// todo prio 1
 				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
