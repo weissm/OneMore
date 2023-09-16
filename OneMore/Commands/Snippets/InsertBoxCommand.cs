@@ -116,17 +116,7 @@ namespace River.OneMoreAddIn.Commands
 				cell.SetContent(MakeDefaultContent(addTitle));
 
 				var editor = new PageEditor(page);
-				await editor.ExtractSelectedContent();
-
-				var box = new XElement(ns + "OE", table.Root);
-				if (editor.Anchor.Name.LocalName.In("OE", "HTMLBlock"))
-				{
-					editor.Anchor.AddAfterSelf(box);
-				}
-				else // if (localName.In("OEChildren", "Outline"))
-				{
-					editor.Anchor.AddFirst(box);
-				}
+				editor.AddNextParagraph(table.Root);
 			}
 			else
 			{
