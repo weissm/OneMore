@@ -21,6 +21,7 @@ namespace River.OneMoreAddIn.Commands
 	using Hap = HtmlAgilityPack;
 	using System.Text;
 	using System.Web.Script.Serialization;
+	using Win = System.Windows;
 	using Newtonsoft.Json.Linq;
 	using static River.OneMoreAddIn.Models.Page;
 	using Resx = Properties.Resources;
