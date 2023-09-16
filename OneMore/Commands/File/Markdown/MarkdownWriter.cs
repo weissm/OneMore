@@ -11,6 +11,7 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
     using System.Collections.Generic;
+    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
@@ -109,7 +110,11 @@ namespace River.OneMoreAddIn.Commands
                 using var reader = new StreamReader(stream);
 
                 var clippy = new ClipboardProvider();
-                await clippy.SetText(reader.ReadToEnd());
+				var success = await clippy.SetText(reader.ReadToEnd(), true);
+				if (!success)
+				{
+					UIHelper.ShowInfo(Resx.Clipboard_locked);
+				}
             }
         }
 
@@ -136,11 +141,19 @@ namespace River.OneMoreAddIn.Commands
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
 				// page level Images outside of any Outline
+<<<<<<< HEAD
                 page.Root.Elements(ns + "Image")
                     .ForEach(e => {
                         PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
                         writer.WriteLine();
                     });
+=======
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+						Write(e);
+						writer.WriteLine();
+					});
+>>>>>>> 807543b1 (Update MarkdownWriter.cs)
 
                 writer.WriteLine();
             }
@@ -336,7 +349,9 @@ namespace River.OneMoreAddIn.Commands
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
+			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
+
 
 		private string WriteTag(XElement element, bool contained)
 		{
@@ -389,12 +404,14 @@ namespace River.OneMoreAddIn.Commands
 
 
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
+		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-//				.Replace("<br>", "  ") // usually followed by NL so leave it there
-//				.Replace("[", @"\[")   // escape to prevent confusion with md links
+				\\ .Replace("<br>", "  ") // usually followed by NL so leave it there
+				\\ .Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
