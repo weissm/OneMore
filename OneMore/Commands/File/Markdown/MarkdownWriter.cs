@@ -384,7 +384,6 @@ namespace River.OneMoreAddIn.Commands
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
-			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
 
