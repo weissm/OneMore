@@ -2874,11 +2874,11 @@ ISO-code then comma then language name</comment>
     <comment>Ribbon OneMore menu item, Formula...</comment>
   </data>
   <data name="ribHighlightLastButton_Label" xml:space="preserve">
-    <value>חזור על צבע סימון מסתובב</value>
+    <value>הדגש טקסט עם ההדגשה העדכנית ביותר</value>
     <comment>ribbon edit</comment>
   </data>
   <data name="ribHighlightNoneButton_Label" xml:space="preserve">
-    <value>הסר את ההדגשה</value>
+    <value>הסר סימון</value>
     <comment>ribbon edit</comment>
   </data>
   <data name="ribImagesMenu_Label" xml:space="preserve">
