@@ -52,25 +52,12 @@ namespace River.OneMoreAddIn.Commands
 				}
 
 				var span = (XElement)s;
-				span.GetAttributeValue("style", out var css, string.Empty);
+				span.GetAttributeValue("style", out var style, string.Empty);
 
-				if (string.IsNullOrEmpty(css))
-				{
-					span.SetAttributeValue("style", $"background:{color}");
-				}
+				if (!string.IsNullOrEmpty(style))
+					span.SetAttributeValue("style", $"{style};background:{color}");
 				else
-				{
-					// need to parse so we filter out mso-highlight attribute
-					// setDefaults to false so it doesn't default font family and size
-					var style = new Style(css, setDefaults: false)
-					{
-						// enable ApplyColors so it emits background attribute
-						ApplyColors = true,
-						Highlight = color
-					};
-
-					span.SetAttributeValue("style", style.ToCss(false));
-				}
+					span.SetAttributeValue("style", $"background:{color}");
 
 				return span;
 			});
