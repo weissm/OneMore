@@ -48,7 +48,7 @@ namespace River.OneMoreAddIn
 		/// </summary>
 		public AddIn()
 		{
-			//System.Diagnostics.Debugger.Launch();
+			System.Diagnostics.Debugger.Launch();
 
 			logger = Logger.Current;
 			trash = new List<IDisposable>();
@@ -164,9 +164,10 @@ namespace River.OneMoreAddIn
 			// battery capacity and other factors, whereas MaxClockSpeed is a constant
 			var speed = Query<uint>("CurrentClockSpeed", "Win32_Processor");
 			if (speed == 0) speed = ReasonableClockSpeed;
+            System.Diagnostics.Debugger.Launch();
 
-			// returns total RAM across all physical slots; as KB so convert to bytes
-			var memory = Query<ulong>("MaxCapacityEx", "Win32_PhysicalMemoryArray") * 1024;
+            // returns total RAM across all physical slots; as KB so convert to bytes
+            var memory = Query<ulong>("MaxCapacityEx", "Win32_PhysicalMemoryArray");
 
 			return (speed, memory);
 		}
