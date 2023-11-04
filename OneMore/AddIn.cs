@@ -48,7 +48,7 @@ namespace River.OneMoreAddIn
 		/// </summary>
 		public AddIn()
 		{
-			//System.Diagnostics.Debugger.Launch();
+			System.Diagnostics.Debugger.Launch();
 
 			logger = Logger.Current;
 			trash = new List<IDisposable>();
@@ -166,7 +166,7 @@ namespace River.OneMoreAddIn
 			if (speed == 0) speed = ReasonableClockSpeed;
 
 			// returns total RAM across all physical slots
-			var memory = Query<ulong>("MaxCapacityEx", "Win32_PhysicalMemoryArray");
+			var memory = Query<ulong>("MaxCapacityEx", "Win32_PhysicalMemoryArray") * 1024;
 
 			return (speed, memory);
 		}
