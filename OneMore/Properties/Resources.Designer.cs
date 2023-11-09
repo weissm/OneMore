@@ -2278,6 +2278,33 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Current Page.
+        /// </summary>
+        internal static string FavoritesDialog_addButton_Text {
+            get {
+                return ResourceManager.GetString("FavoritesDialog_addButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check Favorites.
+        /// </summary>
+        internal static string FavoritesDialog_checkButton_Text {
+            get {
+                return ResourceManager.GetString("FavoritesDialog_checkButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Favorites.
+        /// </summary>
+        internal static string FavoritesDialog_manageButton_Text {
+            get {
+                return ResourceManager.GetString("FavoritesDialog_manageButton.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorites.xml.
         /// </summary>
         internal static string FavoritesFilename {
@@ -11417,6 +11444,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string word_Scope {
             get {
                 return ResourceManager.GetString("word_Scope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string word_Search {
+            get {
+                return ResourceManager.GetString("word_Search", resourceCulture);
             }
         }
         
