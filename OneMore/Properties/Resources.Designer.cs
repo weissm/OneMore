@@ -2829,6 +2829,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PlantUML Server Address (leave blank to use default).
+        /// </summary>
+        internal static string ImageSheet_plantUriLabel_Text {
+            get {
+                return ResourceManager.GetString("ImageSheet_plantUriLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Viewer.
         /// </summary>
         internal static string ImagesSheet_imageBrowser {
