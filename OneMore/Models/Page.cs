@@ -70,10 +70,14 @@ namespace River.OneMoreAddIn.Models
 					child.Name.LocalName != "QuickStyleDef" &&
 					child.Name.LocalName != "Meta")
 				{
-					child.Add(new XAttribute(
-						HashAttributeName,
-						algo.GetHashString(child.ToString(SaveOptions.DisableFormatting))
-						));
+					var att = child.Attribute(HashAttributeName);
+					if (att == null)
+					{
+						child.Add(new XAttribute(
+							HashAttributeName,
+							algo.GetHashString(child.ToString(SaveOptions.DisableFormatting))
+							));
+					}
 				}
 			}
 		}
@@ -1715,7 +1719,7 @@ namespace River.OneMoreAddIn.Models
 			if (block == null)
 			{
 				var style = GetQuickStyle(StandardStyles.PageTitle);
-				block = new XElement(ns  + "Title",
+				block = new XElement(ns + "Title",
 					new Paragraph(title).SetQuickStyle(style.Index));
 
 				var outline = Root.Elements(ns + "Outline")
