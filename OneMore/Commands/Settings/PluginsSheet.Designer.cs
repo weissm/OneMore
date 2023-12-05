@@ -47,8 +47,8 @@
 			this.gridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
 			this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameColumn,
-            this.cmdColumn});
+			this.nameColumn,
+			this.cmdColumn});
 			this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridView.Location = new System.Drawing.Point(10, 93);
 			this.gridView.MultiSelect = false;
