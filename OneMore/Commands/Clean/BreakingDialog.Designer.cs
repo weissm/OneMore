@@ -34,12 +34,14 @@ namespace River.OneMoreAddIn.Commands
 			this.twoButton = new River.OneMoreAddIn.UI.MoreRadioButton();
 			this.okButton = new River.OneMoreAddIn.UI.MoreButton();
 			this.cancelButton = new River.OneMoreAddIn.UI.MoreButton();
+			this.groupBox = new River.OneMoreAddIn.UI.MoreGroupBox();
+			this.groupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// oneButton
 			// 
+			this.oneButton.AutoSize = true;
 			this.oneButton.Checked = true;
-			this.oneButton.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.oneButton.Location = new System.Drawing.Point(28, 28);
 			this.oneButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
 			this.oneButton.Name = "oneButton";
@@ -51,7 +53,7 @@ namespace River.OneMoreAddIn.Commands
 			// 
 			// twoButton
 			// 
-			this.twoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.twoButton.AutoSize = true;
 			this.twoButton.Location = new System.Drawing.Point(28, 71);
 			this.twoButton.Name = "twoButton";
 			this.twoButton.Size = new System.Drawing.Size(269, 25);
@@ -89,9 +91,24 @@ namespace River.OneMoreAddIn.Commands
 			this.cancelButton.Size = new System.Drawing.Size(100, 38);
 			this.cancelButton.TabIndex = 1;
 			this.cancelButton.Text = "Cancel";
+			this.cancelButton.UseVisualStyleBackColor = false;
 			this.cancelButton.ThemedBack = null;
 			this.cancelButton.ThemedFore = null;
-			this.cancelButton.UseVisualStyleBackColor = false;
+			// 
+			// groupBox
+			// 
+			this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox.Controls.Add(this.oneButton);
+			this.groupBox.Controls.Add(this.twoButton);
+			this.groupBox.Location = new System.Drawing.Point(23, 23);
+			this.groupBox.Name = "groupBox";
+			this.groupBox.Padding = new System.Windows.Forms.Padding(10, 10, 3, 3);
+			this.groupBox.Size = new System.Drawing.Size(429, 134);
+			this.groupBox.TabIndex = 8;
+			this.groupBox.TabStop = false;
+			this.groupBox.Text = "Spacing";
 			// 
 			// BreakingDialog
 			// 
@@ -124,5 +141,6 @@ namespace River.OneMoreAddIn.Commands
 		private UI.MoreRadioButton twoButton;
 		private UI.MoreButton okButton;
 		private UI.MoreButton cancelButton;
+		private UI.MoreGroupBox groupBox;
 	}
 }
