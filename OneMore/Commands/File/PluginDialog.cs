@@ -82,6 +82,7 @@ namespace River.OneMoreAddIn.Commands
 				PageName = plugin.PageName,
 				AsChildPage = plugin.AsChildPage,
 				SkipLocked = plugin.SkipLocked,
+				GetoptsStyle = plugin.GetoptsStyle,
 				Timeout = plugin.Timeout
 			};
 
@@ -113,6 +114,7 @@ namespace River.OneMoreAddIn.Commands
 			PageName = pageNameBox.Text,
 			Timeout = (int)timeoutBox.Value,
 			SkipLocked = skipLockRadio.Checked,
+			GetoptsStyle = getoptsStyle.Checked,
 			// set path for replay functionality
 			Path = plugin.Path
 		};
@@ -193,6 +195,7 @@ namespace River.OneMoreAddIn.Commands
 
 				pageNameBox.Text = plugin.PageName;
 				childBox.Checked = plugin.AsChildPage;
+				getoptsStyle.Checked = plugin.GetoptsStyle;
 				skipLockRadio.Checked = true;
 			}
 			else
@@ -270,6 +273,8 @@ namespace River.OneMoreAddIn.Commands
 				plugin.Arguments = argsBox.Text.Trim();
 			else if (sender == pageNameBox)
 				plugin.PageName = pageNameBox.Text.Trim();
+			if (plugin.Arguments == null)
+				plugin.Arguments = "";
 
 			saveButton.Enabled =
 				valid &&
@@ -389,6 +394,11 @@ namespace River.OneMoreAddIn.Commands
 		private void ChangeAsChild(object sender, EventArgs e)
 		{
 			plugin.AsChildPage = childBox.Checked;
+		}
+
+	   private void checkGetoptsStyle_CheckedChanged(object sender, EventArgs e)
+		{
+			plugin.GetoptsStyle = getoptsStyle.Checked;
 		}
 
 
