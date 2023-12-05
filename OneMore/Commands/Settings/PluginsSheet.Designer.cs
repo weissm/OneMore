@@ -28,9 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.gridView = new River.OneMoreAddIn.UI.MoreDataGridView();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+				this.gridView = new UI.MoreDataGridView();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.introBox = new River.OneMoreAddIn.UI.MoreMultilineLabel();
@@ -69,8 +69,8 @@
             // 
             this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nameColumn.DataPropertyName = "Name";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.nameColumn.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+			this.nameColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.nameColumn.HeaderText = "Name";
             this.nameColumn.MinimumWidth = 100;
             this.nameColumn.Name = "nameColumn";
@@ -80,8 +80,8 @@
             // 
             this.cmdColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.cmdColumn.DataPropertyName = "FullCommand";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.cmdColumn.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+			this.cmdColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.cmdColumn.HeaderText = "Command";
             this.cmdColumn.MinimumWidth = 8;
             this.cmdColumn.Name = "cmdColumn";
