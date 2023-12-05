@@ -39,9 +39,9 @@ namespace River.OneMoreAddIn.Settings
 			{
 				Localize(new string[]
 				{
-					"introBox",
-					"renameButton=word_Rename",
-					"deleteButton=word_Delete"
+					"introLabel",
+					"refreshButton=word_Run",
+					"deleteLabel=word_Delete"
 				});
 
 				nameColumn.HeaderText = Resx.word_Name;
@@ -225,6 +225,40 @@ namespace River.OneMoreAddIn.Settings
 		}
 
 
+		private async void RunItem(object sender, EventArgs e)
+		{
+			if (gridView.SelectedCells.Count == 0)
+				return;
+
+			int rowIndex = gridView.SelectedCells[0].RowIndex;
+			if (rowIndex >= plugins.Count)
+				return;
+
+			var plugin = plugins[rowIndex];
+		
+			var runPluginCommand = new RunPluginCommand();
+			runPluginCommand.SetLogger(Logger.Current);
+			await runPluginCommand.Execute(plugin.Path);
+		}
+
+
+		private async void RunItem(object sender, EventArgs e)
+		{
+			if (gridView.SelectedCells.Count == 0)
+				return;
+
+			int rowIndex = gridView.SelectedCells[0].RowIndex;
+			if (rowIndex >= plugins.Count)
+				return;
+
+			var plugin = plugins[rowIndex];
+		
+			var runPluginCommand = new RunPluginCommand();
+			runPluginCommand.SetLogger(Logger.Current);
+			await runPluginCommand.Execute(plugin.Path);
+		}
+
+
 		public override bool CollectSettings()
 		{
 			if (updated)
@@ -233,6 +267,20 @@ namespace River.OneMoreAddIn.Settings
 			}
 
 			return false;
+		}
+
+		private void deleteLabel_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
+
+		private void runLabel_Click(object sender, EventArgs e)
+		{
 		}
 	}
 }
