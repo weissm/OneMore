@@ -53,10 +53,11 @@
 			this.timeoutLabel = new System.Windows.Forms.Label();
 			this.targetBox = new System.Windows.Forms.ComboBox();
 			this.targetLabel = new System.Windows.Forms.Label();
-			this.skipLockRadio = new River.OneMoreAddIn.UI.MoreRadioButton();
-			this.failLockRadio = new River.OneMoreAddIn.UI.MoreRadioButton();
-			this.pageGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
-			this.sectionGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
+			this.skipLockRadio = new System.Windows.Forms.RadioButton();
+			this.failLockRadio = new System.Windows.Forms.RadioButton();
+			this.pageGroup = new System.Windows.Forms.GroupBox();
+			this.sectionGroup = new System.Windows.Forms.GroupBox();
+			this.getoptsStyle = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.errorBox)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.timeoutBox)).BeginInit();
 			this.pageGroup.SuspendLayout();
@@ -392,13 +393,26 @@
 			this.sectionGroup.TabStop = false;
 			this.sectionGroup.Visible = false;
 			// 
+			// getoptsStyle
+			// 
+			this.getoptsStyle.AutoSize = true;
+			this.getoptsStyle.Location = new System.Drawing.Point(237, 172);
+			this.getoptsStyle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.getoptsStyle.Name = "getoptsStyle";
+			this.getoptsStyle.Size = new System.Drawing.Size(181, 20);
+			this.getoptsStyle.TabIndex = 10;
+			this.getoptsStyle.Text = "Enable getopts style args";
+			this.getoptsStyle.UseVisualStyleBackColor = true;
+			this.getoptsStyle.CheckedChanged += new System.EventHandler(this.checkGetoptsStyle_CheckedChanged);
+			// 
 			// PluginDialog
 			// 
 			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(778, 559);
+			this.ClientSize = new System.Drawing.Size(778, 529);
+			this.Controls.Add(this.getoptsStyle);
 			this.Controls.Add(this.sectionGroup);
 			this.Controls.Add(this.pageGroup);
 			this.Controls.Add(this.targetLabel);
@@ -464,9 +478,10 @@
 		private System.Windows.Forms.Label timeoutLabel;
 		private System.Windows.Forms.ComboBox targetBox;
 		private System.Windows.Forms.Label targetLabel;
-		private UI.MoreRadioButton skipLockRadio;
-		private UI.MoreRadioButton failLockRadio;
-		private UI.MoreGroupBox pageGroup;
-		private UI.MoreGroupBox sectionGroup;
+		private System.Windows.Forms.RadioButton skipLockRadio;
+		private System.Windows.Forms.RadioButton failLockRadio;
+		private System.Windows.Forms.GroupBox pageGroup;
+		private System.Windows.Forms.GroupBox sectionGroup;
+		private System.Windows.Forms.CheckBox getoptsStyle;
 	}
 }

@@ -36,6 +36,8 @@
 			this.toolStrip = new River.OneMoreAddIn.UI.ScaledToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.runLabel = new System.Windows.Forms.ToolStripLabel();
+			this.runButton = new System.Windows.Forms.ToolStripButton();
 			this.deleteLabel = new System.Windows.Forms.ToolStripLabel();
 			this.deleteButton = new System.Windows.Forms.ToolStripButton();
 			this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,8 +53,8 @@
 			this.gridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
 			this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameColumn,
-            this.cmdColumn});
+			this.nameColumn,
+			this.cmdColumn});
 			this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridView.Location = new System.Drawing.Point(10, 98);
 			this.gridView.MultiSelect = false;
@@ -61,32 +63,60 @@
 			this.gridView.RowTemplate.Height = 28;
 			this.gridView.Size = new System.Drawing.Size(780, 393);
 			this.gridView.TabIndex = 2;
+this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
 			this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EditOnDoubleClick);
 			this.gridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EditOnDoubleClickRow);
 			// 
-			// introBox
+			// nameColumn
 			// 
-			this.introBox.AutoSize = true;
-			this.introBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.introBox.Location = new System.Drawing.Point(10, 9);
-			this.introBox.Name = "introBox";
-			this.introBox.Padding = new System.Windows.Forms.Padding(0, 0, 0, 36);
-			this.introBox.ThemedBack = "ControlLightLight";
-			this.introBox.ThemedFore = null;
-			this.introBox.Size = new System.Drawing.Size(780, 56);
-			this.introBox.TabIndex = 0;
-			this.introBox.Text = "Click the edit button to modify a plugin or double-click its name to rename it. C" +
-    "hanges are saved immediately";
+			this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.nameColumn.DataPropertyName = "Name";
+			this.nameColumn.HeaderText = "Name";
+			this.nameColumn.MinimumWidth = 100;
+			this.nameColumn.Name = "nameColumn";
+			this.nameColumn.ReadOnly = true;
+			// 
+			// cmdColumn
+			// 
+			this.cmdColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.cmdColumn.DataPropertyName = "FullCommand";
+			this.cmdColumn.HeaderText = "Command";
+			this.cmdColumn.MinimumWidth = 8;
+			this.cmdColumn.Name = "cmdColumn";
+			this.cmdColumn.ReadOnly = true;
+			// 
+			// introPanel
+			// 
+			this.introPanel.Controls.Add(this.introLabel);
+			this.introPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.introPanel.Location = new System.Drawing.Point(7, 6);
+			this.introPanel.Margin = new System.Windows.Forms.Padding(2);
+			this.introPanel.Name = "introPanel";
+			this.introPanel.Size = new System.Drawing.Size(519, 36);
+			this.introPanel.TabIndex = 3;
+			// 
+			// introLabel
+			// 
+			this.introLabel.AutoSize = true;
+			this.introLabel.Location = new System.Drawing.Point(2, 3);
+			this.introLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.introLabel.Name = "introLabel";
+			this.introLabel.Size = new System.Drawing.Size(513, 13);
+			this.introLabel.TabIndex = 0;
+			this.introLabel.Text = "Click the edit button to modify a plugin or double-click its name to rename it. C" +
+	"hanges are saved immediately";
 			// 
 			// toolStrip
 			// 
 			this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripSeparator1,
-            this.deleteLabel,
-            this.deleteButton});
-			this.toolStrip.Location = new System.Drawing.Point(10, 65);
+			this.toolStripButton1,
+			this.toolStripSeparator1,
+			this.runLabel,
+			this.runButton,
+			this.deleteLabel,
+			this.deleteButton});
+			this.toolStrip.Location = new System.Drawing.Point(7, 42);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.toolStrip.Size = new System.Drawing.Size(780, 33);
@@ -107,7 +137,24 @@
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+// 
+			// runLabel
+			// 
+			this.runLabel.Name = "runLabel";
+			this.runLabel.Size = new System.Drawing.Size(37, 28);
+			this.runLabel.Text = "Run:";
+			this.runLabel.Click += new System.EventHandler(this.runLabel_Click);
+			// 
+			// runButton
+			// 
+			this.runButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+			this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.runButton.Name = "runButton";
+			this.runButton.Size = new System.Drawing.Size(29, 28);
+			this.runButton.Text = "Run";
+			this.runButton.Click += new System.EventHandler(this.RunItem);
 			// 
 			// deleteLabel
 			// 
@@ -115,6 +162,7 @@
 			this.deleteLabel.Name = "deleteLabel";
 			this.deleteLabel.Size = new System.Drawing.Size(66, 28);
 			this.deleteLabel.Text = "Delete:";
+			this.deleteLabel.Click += new System.EventHandler(this.deleteLabel_Click);
 			// 
 			// deleteButton
 			// 
@@ -174,6 +222,8 @@
 
 		private System.Windows.Forms.DataGridView gridView;
 		private UI.ScaledToolStrip toolStrip;
+		private System.Windows.Forms.ToolStripButton runButton;
+		private System.Windows.Forms.ToolStripLabel runLabel;
 		private System.Windows.Forms.ToolStripButton deleteButton;
 		private System.Windows.Forms.ToolStripLabel deleteLabel;
 		private UI.MoreMultilineLabel introBox;
