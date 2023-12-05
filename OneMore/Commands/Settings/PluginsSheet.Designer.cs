@@ -37,6 +37,8 @@
 			this.toolStrip = new River.OneMoreAddIn.UI.ScaledToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.runLabel = new System.Windows.Forms.ToolStripLabel();
+			this.runButton = new System.Windows.Forms.ToolStripButton();
 			this.deleteLabel = new System.Windows.Forms.ToolStripLabel();
 			this.deleteButton = new System.Windows.Forms.ToolStripButton();
 			((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
@@ -51,8 +53,8 @@
 			this.gridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
 			this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameColumn,
-            this.cmdColumn});
+			this.nameColumn,
+			this.cmdColumn});
 			this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridView.Location = new System.Drawing.Point(7, 73);
 			this.gridView.Margin = new System.Windows.Forms.Padding(2);
@@ -62,6 +64,7 @@
 			this.gridView.RowTemplate.Height = 28;
 			this.gridView.Size = new System.Drawing.Size(519, 246);
 			this.gridView.TabIndex = 2;
+this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
 			this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EditOnDoubleClick);
 			this.gridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EditOnDoubleClickRow);
 			// 
@@ -102,16 +105,18 @@
 			this.introLabel.Size = new System.Drawing.Size(513, 13);
 			this.introLabel.TabIndex = 0;
 			this.introLabel.Text = "Click the edit button to modify a plugin or double-click its name to rename it. C" +
-    "hanges are saved immediately";
+	"hanges are saved immediately";
 			// 
 			// toolStrip
 			// 
 			this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripSeparator1,
-            this.deleteLabel,
-            this.deleteButton});
+			this.toolStripButton1,
+			this.toolStripSeparator1,
+			this.runLabel,
+			this.runButton,
+			this.deleteLabel,
+			this.deleteButton});
 			this.toolStrip.Location = new System.Drawing.Point(7, 42);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
@@ -134,12 +139,30 @@
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+// 
+			// runLabel
+			// 
+			this.runLabel.Name = "runLabel";
+			this.runLabel.Size = new System.Drawing.Size(37, 28);
+			this.runLabel.Text = "Run:";
+			this.runLabel.Click += new System.EventHandler(this.runLabel_Click);
+			// 
+			// runButton
+			// 
+			this.runButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+			this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.runButton.Name = "runButton";
+			this.runButton.Size = new System.Drawing.Size(29, 28);
+			this.runButton.Text = "Run";
+			this.runButton.Click += new System.EventHandler(this.RunItem);
 			// 
 			// deleteLabel
 			// 
 			this.deleteLabel.Name = "deleteLabel";
 			this.deleteLabel.Size = new System.Drawing.Size(43, 28);
 			this.deleteLabel.Text = "Delete:";
+			this.deleteLabel.Click += new System.EventHandler(this.deleteLabel_Click);
 			// 
 			// deleteButton
 			// 
@@ -177,6 +200,8 @@
 		private System.Windows.Forms.DataGridView gridView;
 		private System.Windows.Forms.Panel introPanel;
 		private UI.ScaledToolStrip toolStrip;
+		private System.Windows.Forms.ToolStripButton runButton;
+		private System.Windows.Forms.ToolStripLabel runLabel;
 		private System.Windows.Forms.ToolStripButton deleteButton;
 		private System.Windows.Forms.ToolStripLabel deleteLabel;
 		private System.Windows.Forms.Label introLabel;
