@@ -42,6 +42,7 @@ namespace River.OneMoreAddIn.Settings
 					"introBox",
 					"renameButton=word_Rename",
 					"refreshButton=word_Run",
+					"refreshButton=word_Run",
 					"deleteButton=word_Delete"
 				});
 
@@ -225,6 +226,23 @@ namespace River.OneMoreAddIn.Settings
 			}
 		}
 
+
+		private async void RunItem(object sender, EventArgs e)
+		{
+			if (gridView.SelectedCells.Count == 0)
+				return;
+
+			int rowIndex = gridView.SelectedCells[0].RowIndex;
+			if (rowIndex >= plugins.Count)
+				return;
+
+			var plugin = plugins[rowIndex];
+		
+			var runPluginCommand = new RunPluginCommand();
+			runPluginCommand.SetLogger(Logger.Current);
+			await runPluginCommand.Execute(plugin.Path);
+		}
+
 		public override bool CollectSettings()
 		{
 			if (updated)
@@ -245,21 +263,8 @@ namespace River.OneMoreAddIn.Settings
 
 		}
 
-		private async void runLabel_Click(object sender, EventArgs e)
-        {
-            if (gridView.SelectedCells.Count == 0)
-                return;
-
-            int rowIndex = gridView.SelectedCells[0].RowIndex;
-            if (rowIndex >= plugins.Count)
-                return;
-
-            var plugin = plugins[rowIndex];
-
-            var runPluginCommand = new RunPluginCommand();
-            runPluginCommand.SetLogger(Logger.Current);
-            await runPluginCommand.Execute(plugin.Path);
-        }
-
-    }
+		private void runLabel_Click(object sender, EventArgs e)
+		{
+		}
+	}
 }
