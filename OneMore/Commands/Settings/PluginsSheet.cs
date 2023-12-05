@@ -42,7 +42,6 @@ namespace River.OneMoreAddIn.Settings
 					"introBox",
 					"renameButton=word_Rename",
 					"refreshButton=word_Run",
-					"refreshButton=word_Run",
 					"deleteButton=word_Delete"
 				});
 
