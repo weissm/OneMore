@@ -3734,14 +3734,6 @@ After last group</value>
     <value>Plugins</value>
     <comment>ribbon top menu</comment>
   </data>
-  <data name="ribPreviousUnreadPageButton_Label" xml:space="preserve">
-    <value>Previous Unread Page</value>
-    <comment>ribbon search</comment>
-  </data>
-  <data name="ribPreviousUnreadPageButton_Screentip" xml:space="preserve">
-    <value>Move to the previous unread page</value>
-    <comment>ribbon search</comment>
-  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Insert Pronunciation</value>
     <comment>ribbon edit</comment>
