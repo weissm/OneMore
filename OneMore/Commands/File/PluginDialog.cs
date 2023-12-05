@@ -83,7 +83,23 @@ namespace River.OneMoreAddIn.Commands
 		{
 			initializing = true;
 
-			SetPlugin(plugin);
+			this.plugin = new Plugin
+			{
+				Version = plugin.Version,
+				Path = plugin.Path,
+				Name = plugin.Name,
+				OriginalName = plugin.OriginalName,
+				Command = plugin.Command,
+				Arguments = plugin.Arguments,
+				UserArguments = plugin.UserArguments,
+				Target = plugin.Target,
+				CreateNewPage = plugin.CreateNewPage,
+				PageName = plugin.PageName,
+				AsChildPage = plugin.AsChildPage,
+				SkipLocked = plugin.SkipLocked,
+				GetoptsStyle = plugin.GetoptsStyle,
+				Timeout = plugin.Timeout
+			};
 
 			single = true;
 
@@ -116,6 +132,7 @@ namespace River.OneMoreAddIn.Commands
 			PageName = pageNameBox.Text,
 			Timeout = (int)timeoutBox.Value,
 			SkipLocked = skipLockRadio.Checked,
+			GetoptsStyle = getoptsRadio.Checked,
 			// set path for replay functionality
 			Path = plugin.Path
 		};
@@ -270,6 +287,7 @@ namespace River.OneMoreAddIn.Commands
 					childBox.Enabled = false;
 				}
 
+				getoptsRadio.Checked = plugin.GetoptsStyle;
 				skipLockRadio.Checked = true;
 			}
 			else
@@ -362,11 +380,20 @@ namespace River.OneMoreAddIn.Commands
 			else if (sender == pageNameBox)
 			{
 				plugin.PageName = pageNameBox.Text.Trim();
-			}
-			else if (sender == userArgsBox)
-			{
-				plugin.UserArguments = userArgsBox.Text.Trim();
-			}
+			if (plugin.Arguments == null)
+				plugin.Arguments = "";
+
+			saveButton.Enabled =
+				valid &&
+				!string.IsNullOrWhiteSpace(plugin.Name) &&
+				!string.IsNullOrWhiteSpace(plugin.Command);
+
+			okButton.Enabled = valid &&
+				saveButton.Enabled &&
+				(
+					updateRadio.Checked ||
+					(createRadio.Checked && !string.IsNullOrWhiteSpace(plugin.PageName))
+				);
 		}
 
 
@@ -487,6 +514,11 @@ namespace River.OneMoreAddIn.Commands
 		private void ChangeAsChild(object sender, EventArgs e)
 		{
 			plugin.AsChildPage = childBox.Checked;
+		}
+
+	   private void checkGetoptsRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			plugin.GetoptsStyle = getoptsRadio.Checked;
 		}
 
 
