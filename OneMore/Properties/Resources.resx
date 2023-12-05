@@ -3587,14 +3587,6 @@ After last group</value>
     <value>Plugins</value>
     <comment>ribbon top menu</comment>
   </data>
-  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
-    <value>Plugins</value>
-    <comment>ribbon top menu</comment>
-  </data>
-  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
-    <value>Plugins</value>
-    <comment>ribbon top menu</comment>
-  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Insert Pronunciation</value>
     <comment>ribbon edit</comment>
