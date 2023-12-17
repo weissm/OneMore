@@ -33,9 +33,9 @@ namespace River.OneMoreAddIn.Commands
 			versionLabel.Text = string.Format(Resx.AboutDialog_versionLabel_Text,
 				AssemblyInfo.Version, GetOneNoteVersion());
 
-			copyLabel.Text = string.Format(Resx.AboutDialog_copyLabel_Text, DateTime.Now.Year);
+			copyLabel.Text = string.Format(Resx.AboutDialog_copyLabel_Text, DateTime.Now.Year) + ", M.Weiss  @ " + DateTime.Now.ToString("s");
 
-			var logpath = Logger.Current.LogPath;
+            var logpath = Logger.Current.LogPath;
 			logLabel.Text = logpath;
 
 			clearLogLabel.Visible = File.Exists(logpath);
