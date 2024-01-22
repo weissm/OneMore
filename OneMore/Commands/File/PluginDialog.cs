@@ -228,7 +228,6 @@ namespace River.OneMoreAddIn.Commands
 
 			ChangeTarget(null, EventArgs.Empty);
 
-<<<<<<< HEAD
 			//var read = pluginsBox.SelectedIndex > 0;
 			//nameBox.ReadOnly = read;
 			//cmdBox.ReadOnly = read;
@@ -239,19 +238,6 @@ namespace River.OneMoreAddIn.Commands
 			//pageNameBox.ReadOnly = read;
 			//childBox.Enabled = !read;
 			//saveButton.Enabled = !read;
-=======
-			var read = pluginsBox.SelectedIndex > 0;
-			nameBox.ReadOnly = read;
-			cmdBox.ReadOnly = read;
-			argsBox.ReadOnly = read;
-			timeoutBox.ReadOnly = read;
-			createRadio.Enabled = !read;
-			updateRadio.Enabled = !read;
-			pageNameBox.ReadOnly = read;
-			childBox.Enabled = !read;
-			getoptsStyle.Enabled = !read;
-			saveButton.Enabled = !read;
->>>>>>> b59f33c4 (Added GetoptsStyle to have direct access to PlugIn Menu)
 		}
 
 
