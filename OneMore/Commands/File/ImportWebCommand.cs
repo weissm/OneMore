@@ -471,7 +471,7 @@ namespace River.OneMoreAddIn.Commands
 			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 			using (var one = new River.OneMoreAddIn.OneNote())
 			{
-				var page = one.GetPage();
+				var page = await one.GetPage();
 				var ns = page.Namespace;
 
 				if (markdown.IsNullOrEmpty())
@@ -529,7 +529,7 @@ namespace River.OneMoreAddIn.Commands
 
 					await one.Update(page);
 					page = await CreatePage(one,
-						target == ImportWebTarget.ChildPage ? one.GetPage() : null,
+						target == ImportWebTarget.ChildPage ? await one.GetPage() : null,
 						title: "New Page"
 						);
 				}
@@ -609,7 +609,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			using (var one = new River.OneMoreAddIn.OneNote())
 			{
-				var page = one.GetPage();
+				var page = await one.GetPage();
 				var ns = page.Namespace;
 				page.checkDefs();
 
