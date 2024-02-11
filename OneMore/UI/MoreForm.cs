@@ -11,7 +11,7 @@ namespace River.OneMoreAddIn.UI
 	using System.Windows.Forms;
 
 
-	internal class MoreForm : Form, IOneMoreWindow
+	public class MoreForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 

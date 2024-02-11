@@ -13,28 +13,28 @@ namespace River.OneMoreAddIn.UI
 	using Resx = Properties.Resources;
 
 
-	/// <summary>
-	/// Displays a dialog with a progress bar and, optionally, a cancel button.
-	/// </summary>
-	/// <remarks>
-	/// Can run in one of three modes. For simple cases, call the default constructor and the
-	/// progress bar is shown with a message area; the consumer is responsible for setting the
-	/// maximum increment value, incrementing it during its own processing, and then closing the
-	/// dialog when it's work is complete.
-	/// 
-	/// It can also run with a timer; call the constructor with a max seconds timeout value, set
-	/// the initial message, and call ShowTimedDialog along with a callback. A cancel button is
-	/// displayed. The dialog closes when the callback completes and returns DialogResult.Cancel.
-	/// It also closes when the cancel button is pressed and returns DialogResult.Cancel. If the
-	/// timer reaches Maximum seconds then the dialog is closed and returns DialogResult.Abort.
-	/// 
-	/// The third mode accepts an execution action that is run in the background by the dialog.
-	/// The consumer is responsible for increment the progress and updating the status message.
-	/// A cancel button is displayed that, when pressed, sets the cancelltion token and returns
-	/// DialogResult.Cancel. If the execute action completes without cancellation OK is returned.
-	/// </remarks>
-	partial class ProgressDialog : LocalizableForm
-	{
+    /// <summary>
+    /// Displays a dialog with a progress bar and, optionally, a cancel button.
+    /// </summary>
+    /// <remarks>
+    /// Can run in one of three modes. For simple cases, call the default constructor and the
+    /// progress bar is shown with a message area; the consumer is responsible for setting the
+    /// maximum increment value, incrementing it during its own processing, and then closing the
+    /// dialog when it's work is complete.
+    /// 
+    /// It can also run with a timer; call the constructor with a max seconds timeout value, set
+    /// the initial message, and call ShowTimedDialog along with a callback. A cancel button is
+    /// displayed. The dialog closes when the callback completes and returns DialogResult.Cancel.
+    /// It also closes when the cancel button is pressed and returns DialogResult.Cancel. If the
+    /// timer reaches Maximum seconds then the dialog is closed and returns DialogResult.Abort.
+    /// 
+    /// The third mode accepts an execution action that is run in the background by the dialog.
+    /// The consumer is responsible for increment the progress and updating the status message.
+    /// A cancel button is displayed that, when pressed, sets the cancelltion token and returns
+    /// DialogResult.Cancel. If the execute action completes without cancellation OK is returned.
+    /// </remarks>
+    public partial class ProgressDialog : MoreForm
+    {
 		private const int SimpleHeight = 112;
 		private const int CancelHeight = 144;
 
