@@ -41,7 +41,7 @@ namespace River.OneMoreAddIn.Commands
 						_ => Resx.SearchQF_DescriptionIndex
 					};
 
-					await using var one = new OneNote();
+					using var one = new OneNote();
 					one.SelectLocation(Resx.SearchQF_Title, msg, OneNote.Scope.Sections, Callback);
 				}
 			},

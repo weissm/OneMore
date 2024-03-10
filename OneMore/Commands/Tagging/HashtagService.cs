@@ -5,9 +5,9 @@
 namespace River.OneMoreAddIn.Commands
 {
 	using River.OneMoreAddIn.Settings;
-	using System;
-	using System.Diagnostics;
-	using System.Threading;
+    using System;
+    using System.Diagnostics;
+    using System.Threading;
 	using System.Threading.Tasks;
 
 
@@ -92,7 +92,8 @@ namespace River.OneMoreAddIn.Commands
 
 			thread.SetApartmentState(ApartmentState.STA);
 			thread.IsBackground = true;
-			thread.Priority = forcedRebuild ? ThreadPriority.Normal : ThreadPriority.Lowest;
+			var forcedRebuild = false;
+            thread.Priority = forcedRebuild ? ThreadPriority.Normal : ThreadPriority.Lowest;
 			thread.Start();
 		}
 
