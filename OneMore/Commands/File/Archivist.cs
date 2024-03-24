@@ -379,7 +379,7 @@ namespace River.OneMoreAddIn.Commands
         public async Task<string> ExportOnenote2Markdown(string title)
 		{
             string targetDir = "c:\\tmp\\";
-            using (var one = new River.OneMoreAddIn.OneNote())
+            await using (var one = new River.OneMoreAddIn.OneNote())
             {
                 Page page;
                 page = await one.GetPage();
