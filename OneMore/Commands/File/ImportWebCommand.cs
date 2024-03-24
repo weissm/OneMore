@@ -500,7 +500,7 @@ namespace River.OneMoreAddIn.Commands
 			var escapeID = "[OM-";
 
 			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-			using (var one = new River.OneMoreAddIn.OneNote())
+			await using (var one = new River.OneMoreAddIn.OneNote())
 			{
 				var page = await one.GetPage();
 				var ns = page.Namespace;
@@ -638,7 +638,7 @@ namespace River.OneMoreAddIn.Commands
 
         public async Task ImportMarkdownPostprocessing(string escapeID)
 		{
-			using (var one = new River.OneMoreAddIn.OneNote())
+			await using (var one = new River.OneMoreAddIn.OneNote())
 			{
 				var page = await one.GetPage();
 				var ns = page.Namespace;
