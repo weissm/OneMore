@@ -135,15 +135,19 @@ namespace River.OneMoreAddIn.Commands
 				page.AddNextParagraph(outer.Root);
 				//page.InsertParagraph(outer.Root, true);
 			}
-			else if (anchor.HasElements)
-			{
-				// selected text was a subset of runs under an OE
-				anchor.AddAfterSelf(new XElement(ns + "OE", outer.Root));
-			}
 			else
 			{
-				// selected text was all of an OE
-				anchor.Add(outer.Root);
+				var localName = anchor.Name.LocalName;
+				var box = new XElement(ns + "OE", outer.Root);
+
+				if (localName.In("OE", "HTMLBlock"))
+				{
+					anchor.AddAfterSelf(box);
+				}
+				else // if (localName.In("OEChildren", "Outline"))
+				{
+					anchor.AddFirst(box);
+				}
 			}
 
 			await one.Update(page);
