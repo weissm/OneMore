@@ -19,10 +19,6 @@ namespace River.OneMoreAddIn.Commands
 	using System.Runtime.InteropServices;
 	using Exception = System.Exception;
 	using Resx = River.OneMoreAddIn.Properties.Resources;
-	using System.Diagnostics;
-	using System.Runtime.InteropServices;
-	using Exception = System.Exception;
-	using Resx = River.OneMoreAddIn.Properties.Resources;
 
 
 	public class Archivist : Loggable
