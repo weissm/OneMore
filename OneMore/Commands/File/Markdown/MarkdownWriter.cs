@@ -470,8 +470,8 @@ namespace River.OneMoreAddIn.Commands
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
-				\\ .Replace("<br>", "  ") // usually followed by NL so leave it there
-				\\ .Replace("[", "\\[")   // escape to prevent confusion with md links
+				// .Replace("<br>", "  ") // usually followed by NL so leave it there
+				// .Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
