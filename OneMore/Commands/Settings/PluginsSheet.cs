@@ -226,6 +226,7 @@ namespace River.OneMoreAddIn.Settings
 			}
 		}
 
+
 		public override bool CollectSettings()
 		{
 			if (updated)

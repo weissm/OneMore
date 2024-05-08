@@ -40,8 +40,8 @@ namespace River.OneMoreAddIn.Commands
 			// 
 			// oneButton
 			// 
-			this.oneButton.AutoSize = true;
 			this.oneButton.Checked = true;
+			this.oneButton.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.oneButton.Location = new System.Drawing.Point(28, 28);
 			this.oneButton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
 			this.oneButton.Name = "oneButton";
@@ -53,7 +53,7 @@ namespace River.OneMoreAddIn.Commands
 			// 
 			// twoButton
 			// 
-			this.twoButton.AutoSize = true;
+			this.twoButton.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.twoButton.Location = new System.Drawing.Point(28, 71);
 			this.twoButton.Name = "twoButton";
 			this.twoButton.Size = new System.Drawing.Size(269, 25);
@@ -91,9 +91,9 @@ namespace River.OneMoreAddIn.Commands
 			this.cancelButton.Size = new System.Drawing.Size(100, 38);
 			this.cancelButton.TabIndex = 1;
 			this.cancelButton.Text = "Cancel";
-			this.cancelButton.UseVisualStyleBackColor = false;
 			this.cancelButton.ThemedBack = null;
 			this.cancelButton.ThemedFore = null;
+			this.cancelButton.UseVisualStyleBackColor = false;
 			// 
 			// groupBox
 			// 
@@ -109,6 +109,9 @@ namespace River.OneMoreAddIn.Commands
 			this.groupBox.TabIndex = 8;
 			this.groupBox.TabStop = false;
 			this.groupBox.Text = "Spacing";
+			this.groupBox.ThemedBack = null;
+			this.groupBox.ThemedFore = null;
+			this.groupBox.UseVisualStyleBackColor = false;
 			// 
 			// groupBox
 			// 
