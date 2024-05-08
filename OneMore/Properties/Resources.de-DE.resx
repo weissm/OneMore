@@ -1773,6 +1773,10 @@ Benutzerdefinierte Überschrift 3</value>
     <value>Deaktivieren Sie den Navigationsdienst. Dadurch wird das Navigator-Fenster funktionsunfähig.</value>
     <comment>checkbox</comment>
   </data>
+  <data name="NavigatorSheet_hidePinnedBox.Text" xml:space="preserve">
+    <value>Blenden Sie den Bereich „Meine Leseliste“ aus</value>
+    <comment>checkbox</comment>
+  </data>
   <data name="NavigatorSheet_intervalLabel.Text" xml:space="preserve">
     <value>Mindestlesezeit vor dem Hinzufügen zum Verlauf</value>
     <comment>label</comment>
@@ -2016,7 +2020,7 @@ In diesem Abschnitt</value>
     <comment>drop down</comment>
   </data>
   <data name="phrase_SelectAll" xml:space="preserve">
-    <value>Wählen Sie Alle</value>
+    <value>Alles auswählen</value>
   </data>
   <data name="phrase_SelectNone" xml:space="preserve">
     <value>Nichts ausgewählt</value>
