@@ -149,6 +149,12 @@ namespace River.OneMoreAddIn.Models
 				Anchor = start.PreviousNode is XElement prev
 					? prev
 					: start.Parent;
+
+				if (Anchor.Name.LocalName.In(OHeaders) &&
+					Anchor.Parent.Name.LocalName == "Outline")
+				{
+					Anchor = Anchor.Parent;
+				}
 			}
 
 			// if a descendent of a Cell then check if the entire table is selected and
@@ -351,9 +357,9 @@ namespace River.OneMoreAddIn.Models
 			}
 
 			// ensure we haven't lost our anchor
-			if (element.Name.LocalName == "Outline")
+			if (Anchor.Name.LocalName == "Outline")
 			{
-				if (element.Elements(ns + "OEChildren").FirstOrDefault() is XElement child)
+				if (Anchor.Elements(ns + "OEChildren").FirstOrDefault() is XElement child)
 				{
 					Anchor = child;
 				}
@@ -490,6 +496,34 @@ namespace River.OneMoreAddIn.Models
 
 				Anchor = page.EnsureContentContainer(false);
 			}
+		}
+
+
+		public async Task<bool> ReplaceSelectedContent(XElement replacement)
+		{
+			var content = await ExtractSelectedContent();
+
+			if (!content.HasElements)
+			{
+				// no selection region found
+				return false;
+			}
+
+			if (replacement.Name.LocalName != "OE")
+			{
+				replacement = new XElement(ns + "OE", replacement);
+			}
+
+			if (Anchor.Name.LocalName.In("OE", "HTMLBlock"))
+			{
+				Anchor.AddAfterSelf(replacement);
+			}
+			else
+			{
+				Anchor.AddFirst(replacement);
+			}
+
+			return true;
 		}
 	}
 }

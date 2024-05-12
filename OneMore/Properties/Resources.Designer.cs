@@ -4843,6 +4843,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no pages selected to move.
+        /// </summary>
+        internal static string MovePageCommand_noPages {
+            get {
+                return ResourceManager.GetString("MovePageCommand_noPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name exists. Choose a different name..
         /// </summary>
         internal static string NameStyleDialog_errorLabel_Text {
@@ -4902,6 +4911,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string NavigatorSheet_disabledBox_Text {
             get {
                 return ResourceManager.GetString("NavigatorSheet_disabledBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide the My Reading List panel.
+        /// </summary>
+        internal static string NavigatorSheet_hidePinnedBox_Text {
+            get {
+                return ResourceManager.GetString("NavigatorSheet_hidePinnedBox.Text", resourceCulture);
             }
         }
         
@@ -6483,6 +6501,15 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ReportRemindersDialog_introLabel_Text {
             get {
                 return ResourceManager.GetString("ReportRemindersDialog_introLabel.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include completed reminders.
+        /// </summary>
+        internal static string ReportRemindersDialog_showCompletedBox_Text {
+            get {
+                return ResourceManager.GetString("ReportRemindersDialog_showCompletedBox.Text", resourceCulture);
             }
         }
         
@@ -8475,6 +8502,42 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribMergeButton_Screentip {
             get {
                 return ResourceManager.GetString("ribMergeButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Bottom.
+        /// </summary>
+        internal static string ribMovePageBottomButton_Label {
+            get {
+                return ResourceManager.GetString("ribMovePageBottomButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move selected pages to bottom of list.
+        /// </summary>
+        internal static string ribMovePageBottomButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribMovePageBottomButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to Top.
+        /// </summary>
+        internal static string ribMovePageTopButton_Label {
+            get {
+                return ResourceManager.GetString("ribMovePageTopButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move selected pages to top of list.
+        /// </summary>
+        internal static string ribMovePageTopButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribMovePageTopButton_Screentip", resourceCulture);
             }
         }
         

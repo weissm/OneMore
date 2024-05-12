@@ -1743,6 +1743,10 @@
     <value>إنشاء خريطة الصفحة</value>
     <comment>dialog title</comment>
   </data>
+  <data name="MovePageCommand_noPages" xml:space="preserve">
+    <value>لا توجد صفحات محددة لنقلها</value>
+    <comment>error message</comment>
+  </data>
   <data name="NameStyleDialog_errorLabel.Text" xml:space="preserve">
     <value>الاسم موجود. اختر اسمًا مختلفًا.</value>
     <comment>label</comment>
@@ -1769,6 +1773,10 @@
   </data>
   <data name="NavigatorSheet_disabledBox.Text" xml:space="preserve">
     <value>قم بتعطيل خدمة الملاحة. سيؤدي هذا إلى جعل نافذة المستكشف غير قابلة للتشغيل.</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="NavigatorSheet_hidePinnedBox.Text" xml:space="preserve">
+    <value>إخفاء لوحة قائمة القراءة الخاصة بي</value>
     <comment>checkbox</comment>
   </data>
   <data name="NavigatorSheet_intervalLabel.Text" xml:space="preserve">
@@ -2443,6 +2451,10 @@ ISO-code then comma then language name</comment>
   <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
     <value>توليد تقرير للتذكير في هذا النطاق</value>
     <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_showCompletedBox.Text" xml:space="preserve">
+    <value>تضمين التذكيرات المكتملة</value>
+    <comment>checkbox</comment>
   </data>
   <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
     <value>إنشاء صفحة تقرير جديدة</value>
@@ -3305,6 +3317,22 @@ ISO-code then comma then language name</comment>
   </data>
   <data name="ribMergeButton_Screentip" xml:space="preserve">
     <value>دمج الصفحات المحددة</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Label" xml:space="preserve">
+    <value>الانتقال إلى الأسفل</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Screentip" xml:space="preserve">
+    <value>نقل الصفحات المحددة إلى أسفل القائمة</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Label" xml:space="preserve">
+    <value>الانتقال إلى الأعلى</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Screentip" xml:space="preserve">
+    <value>نقل الصفحات المحددة إلى أعلى القائمة</value>
     <comment>ribbon page</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">

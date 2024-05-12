@@ -1,5 +1,5 @@
 ﻿//************************************************************************************************
-// Copyright © 2016 Steven M Cohn.  All rights reserved.
+// Copyright © 2016 Steven M Cohn. All rights reserved.
 //************************************************************************************************
 
 #pragma warning disable S6605 // Collection-specific "Exists" method should be used
@@ -8,6 +8,7 @@ namespace River.OneMoreAddIn.Commands
 {
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
+	using River.OneMoreAddIn.UI;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -38,6 +39,7 @@ namespace River.OneMoreAddIn.Commands
 		private const string LongDash = "\u2015";
 		private const string RefreshCmd = "onemore://InsertTocCommand/refresh";
 		private const string RefreshStyle = "font-weigth:normal;font-style:italic;font-size:9.0pt;color:#808080";
+		private const int MinToCWidth = 360;
 		private const int MinProgress = 25;
 
 		private Style cite;
@@ -57,7 +59,51 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 
-			using var dialog = await MakeDialog();
+			Page page;
+			await using (var one = new OneNote())
+			{
+				// There is a wierd async issue here where the OneNote instance must be
+				// fully disposed before InsertTocDialog is instantiated and returned.
+				// I don't understand...
+
+				page = await one.GetPage(OneNote.PageDetail.Basic);
+			}
+
+			var dialog = new InsertTocDialog();
+
+			var ns = page.Namespace;
+			var meta = page.Root.Elements(ns + "Outline")
+				.Descendants(ns + "Meta")
+				.FirstOrDefault(e => e.Attribute("name") is XAttribute attr && attr.Value == TocMeta);
+
+			if (meta != null)
+			{
+				var cdata = meta.Parent.DescendantNodes().OfType<XCData>()
+					.FirstOrDefault(c => c.Value.Contains(RefreshCmd));
+
+				if (cdata != null)
+				{
+					var wrapper = cdata.GetWrapper();
+					var href = wrapper.Elements("a").Attributes("href").FirstOrDefault()?.Value;
+					if (href != null)
+					{
+						href = href.Substring(RefreshCmd.Length);
+						dialog.AddTopLinks = href.Contains("/links");
+						dialog.RightAlign = href.Contains("/align");
+						dialog.InsertHere = href.Contains("/here");
+
+						var match = Regex.Match(href, @"\/style(\d+)");
+						if (match.Success)
+						{
+							if (int.TryParse(match.Groups[1].Value, out var index))
+							{
+								dialog.TitleStyle = (TitleStyles)index;
+							}
+						}
+					}
+				}
+			}
+
 			if (dialog.ShowDialog(owner) == DialogResult.Cancel)
 			{
 				return;
@@ -132,55 +178,6 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private async Task<InsertTocDialog> MakeDialog()
-		{
-			Page page;
-			XNamespace ns;
-			await using (var one = new OneNote(out page, out ns, OneNote.PageDetail.Basic))
-			{
-				// There is a wierd async issue here where the OneNote instance must be
-				// fully disposed before InsertTocDialog is instantiated and returned.
-				// I don't understand...
-			}
-
-			var dialog = new InsertTocDialog();
-
-			var meta = page.Root.Elements(ns + "Outline")
-				.Descendants(ns + "Meta")
-				.FirstOrDefault(e => e.Attribute("name") is XAttribute attr && attr.Value == TocMeta);
-
-			if (meta != null)
-			{
-				var cdata = meta.Parent.DescendantNodes().OfType<XCData>()
-					.FirstOrDefault(c => c.Value.Contains(RefreshCmd));
-
-				if (cdata != null)
-				{
-					var wrapper = cdata.GetWrapper();
-					var href = wrapper.Elements("a").Attributes("href").FirstOrDefault()?.Value;
-					if (href != null)
-					{
-						href = href.Substring(RefreshCmd.Length);
-						dialog.AddTopLinks = href.Contains("/links");
-						dialog.RightAlign = href.Contains("/align");
-						dialog.InsertHere = href.Contains("/here");
-
-						var match = Regex.Match(href, @"\/style(\d+)");
-						if (match.Success)
-						{
-							if (int.TryParse(match.Groups[1].Value, out var index))
-							{
-								dialog.TitleStyle = (TitleStyles)index;
-							}
-						}
-					}
-				}
-			}
-
-			return dialog;
-		}
-
-
 		/// <summary>
 		/// Inserts a table of contents at the top of the current page,
 		/// of all headings on the page
@@ -218,9 +215,14 @@ namespace River.OneMoreAddIn.Commands
 			var watt = container.Ancestors(ns + "Outline")
 				.Elements(ns + "Size").Attributes("width").FirstOrDefault();
 
-			var colwid = watt != null && float.TryParse(watt.Value, out float width)
-				? Math.Max(width, 400) - 40
-				: 360;
+			var colwid = watt is not null && float.TryParse(watt.Value, out float width)
+				? (float)Math.Round(Math.Max(width, MinToCWidth + 40) - 40, 2)
+				: MinToCWidth;
+
+			if (colwid < MinToCWidth || colwid > Table.MaxColumnWidth)
+			{
+				colwid = MinToCWidth;
+			}
 
 			table.SetColumnWidth(0, colwid);
 
@@ -262,14 +264,14 @@ namespace River.OneMoreAddIn.Commands
 
 			if (top == null)
 			{
-				UIHelper.ShowError(Resx.InsertTocCommand_NoHeadings);
+				MoreMessageBox.ShowError(owner, Resx.InsertTocCommand_NoHeadings);
 				return false;
 			}
 
 			headings = page.GetHeadings(one);
 			if (!headings.Any())
 			{
-				UIHelper.ShowError(Resx.InsertTocCommand_NoHeadings);
+				MoreMessageBox.ShowError(owner, Resx.InsertTocCommand_NoHeadings);
 				return false;
 			}
 
@@ -282,7 +284,7 @@ namespace River.OneMoreAddIn.Commands
 
 			if (titleID == null)
 			{
-				UIHelper.ShowError(Resx.InsertTocCommand_NoHeadings);
+				MoreMessageBox.ShowError(owner, Resx.InsertTocCommand_NoHeadings);
 				return false;
 			}
 

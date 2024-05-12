@@ -1743,6 +1743,10 @@ Titre personnalisé 3</value>
     <value>Créer un plan de page</value>
     <comment>dialog title</comment>
   </data>
+  <data name="MovePageCommand_noPages" xml:space="preserve">
+    <value>Il n'y a aucune page sélectionnée à déplacer</value>
+    <comment>error message</comment>
+  </data>
   <data name="NameStyleDialog_errorLabel.Text" xml:space="preserve">
     <value>Le nom existe. Choisissez un nom différent.</value>
     <comment>label</comment>
@@ -1769,6 +1773,10 @@ Titre personnalisé 3</value>
   </data>
   <data name="NavigatorSheet_disabledBox.Text" xml:space="preserve">
     <value>Désactivez le service de navigation. Cela rendra la fenêtre du Navigateur inutilisable.</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="NavigatorSheet_hidePinnedBox.Text" xml:space="preserve">
+    <value>Masquer le panneau Ma liste de lecture</value>
     <comment>checkbox</comment>
   </data>
   <data name="NavigatorSheet_intervalLabel.Text" xml:space="preserve">
@@ -2442,6 +2450,10 @@ Sélectionnez Non pour conserver une ligne vide entre les paragraphes</value>
   <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
     <value>Générer un rapport pour les rappels dans cette portée</value>
     <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_showCompletedBox.Text" xml:space="preserve">
+    <value>Inclure les rappels terminés</value>
+    <comment>checkbox</comment>
   </data>
   <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
     <value>Créer une nouvelle page de rapport</value>
@@ -3303,6 +3315,22 @@ Après le dernier groupe</value>
   </data>
   <data name="ribMergeButton_Screentip" xml:space="preserve">
     <value>Fusionner les pages sélectionnées</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Label" xml:space="preserve">
+    <value>Déplacer vers le bas</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Screentip" xml:space="preserve">
+    <value>Déplacer les pages sélectionnées en bas de la liste</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Label" xml:space="preserve">
+    <value>Déplacer vers le haut</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Screentip" xml:space="preserve">
+    <value>Déplacer les pages sélectionnées en haut de la liste</value>
     <comment>ribbon page</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">

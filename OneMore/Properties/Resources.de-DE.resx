@@ -1741,6 +1741,10 @@ Benutzerdefinierte Überschrift 3</value>
     <value>Seitenzuordnung erstellen</value>
     <comment>dialog title</comment>
   </data>
+  <data name="MovePageCommand_noPages" xml:space="preserve">
+    <value>Es sind keine Seiten zum Verschieben ausgewählt</value>
+    <comment>error message</comment>
+  </data>
   <data name="NameStyleDialog_errorLabel.Text" xml:space="preserve">
     <value>Name existiert. Wähle einen anderen Namen.</value>
     <comment>label</comment>
@@ -1767,6 +1771,10 @@ Benutzerdefinierte Überschrift 3</value>
   </data>
   <data name="NavigatorSheet_disabledBox.Text" xml:space="preserve">
     <value>Deaktivieren Sie den Navigationsdienst. Dadurch wird das Navigator-Fenster funktionsunfähig.</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="NavigatorSheet_hidePinnedBox.Text" xml:space="preserve">
+    <value>Blenden Sie den Bereich „Meine Leseliste“ aus</value>
     <comment>checkbox</comment>
   </data>
   <data name="NavigatorSheet_intervalLabel.Text" xml:space="preserve">
@@ -2440,6 +2448,10 @@ Wähle Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
   <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
     <value>Erstelle Bericht für Erinnerungen in diesem Bereich</value>
     <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_showCompletedBox.Text" xml:space="preserve">
+    <value>Fügen Sie abgeschlossene Erinnerungen hinzu</value>
+    <comment>checkbox</comment>
   </data>
   <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
     <value>Erstelle eine neue Berichtsseite</value>
@@ -3304,6 +3316,22 @@ Nach der letzten Gruppe</value>
   </data>
   <data name="ribMergeButton_Screentip" xml:space="preserve">
     <value>Ausgewählte Seiten zusammenführen</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Label" xml:space="preserve">
+    <value>Nach unten bewegen</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Screentip" xml:space="preserve">
+    <value>Ausgewählte Seiten an das Ende der Liste verschieben</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Label" xml:space="preserve">
+    <value>Nach oben verschieben</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Screentip" xml:space="preserve">
+    <value>Ausgewählte Seiten an den Anfang der Liste verschieben</value>
     <comment>ribbon page</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">

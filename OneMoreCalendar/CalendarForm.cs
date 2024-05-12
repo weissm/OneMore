@@ -17,6 +17,8 @@ namespace OneMoreCalendar
 	/// </summary>
 	internal partial class CalendarForm : ThemedForm
 	{
+		private const int ManualDelta = 1000;
+
 		private DateTime date;
 		private CalendarPages pages;
 
@@ -102,11 +104,17 @@ namespace OneMoreCalendar
 
 		private async Task SetMonth(int delta)
 		{
-			if (delta < 1000)
+			if (delta < ManualDelta)
 			{
 				date = delta == 0
 					? DateTime.Now.StartOfMonth()
 					: date.AddMonths(delta);
+			}
+
+			if (date.StartOfMonth() > DateTime.Now.StartOfMonth())
+			{
+				date = DateTime.Now.StartOfMonth();
+				return;
 			}
 
 			var endDate = date.EndOfMonth();
@@ -154,8 +162,16 @@ namespace OneMoreCalendar
 		}
 
 
-		private void ClickDayView(object sender, CalendarDayEventArgs e)
+		private async void ClickDayView(object sender, CalendarDayEventArgs e)
 		{
+			if (e.DayDate.Month != date.Month)
+			{
+				SuspendLayout();
+				date = e.DayDate.StartOfMonth();
+				await SetMonth(ManualDelta);
+				ResumeLayout();
+			}
+
 			dayButton.Checked = true;
 		}
 

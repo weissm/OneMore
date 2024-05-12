@@ -1744,6 +1744,10 @@ Título personalizado 3</value>
     <value>Criar mapa de página</value>
     <comment>dialog title</comment>
   </data>
+  <data name="MovePageCommand_noPages" xml:space="preserve">
+    <value>Não há páginas selecionadas para mover</value>
+    <comment>error message</comment>
+  </data>
   <data name="NameStyleDialog_errorLabel.Text" xml:space="preserve">
     <value>Nome existe. Escolha um nome diferente.</value>
     <comment>label</comment>
@@ -1770,6 +1774,10 @@ Título personalizado 3</value>
   </data>
   <data name="NavigatorSheet_disabledBox.Text" xml:space="preserve">
     <value>Desabilite o serviço de navegação. Isso tornará a janela do Navegador inoperável.</value>
+    <comment>checkbox</comment>
+  </data>
+  <data name="NavigatorSheet_hidePinnedBox.Text" xml:space="preserve">
+    <value>Ocultar o painel Minha lista de leitura</value>
     <comment>checkbox</comment>
   </data>
   <data name="NavigatorSheet_intervalLabel.Text" xml:space="preserve">
@@ -2444,6 +2452,10 @@ Selecione Não para manter uma linha vazia entre os parágrafos</value>
   <data name="ReportRemindersDialog_introLabel.Text" xml:space="preserve">
     <value>Gerar relatório para lembretes neste escopo</value>
     <comment>label</comment>
+  </data>
+  <data name="ReportRemindersDialog_showCompletedBox.Text" xml:space="preserve">
+    <value>Incluir lembretes concluídos</value>
+    <comment>checkbox</comment>
   </data>
   <data name="ReportRemindersReuseDialog_newRadio.Text" xml:space="preserve">
     <value>Crie uma nova página de relatório</value>
@@ -3305,6 +3317,22 @@ Depois do último grupo</value>
   </data>
   <data name="ribMergeButton_Screentip" xml:space="preserve">
     <value>Mesclar páginas selecionadas</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Label" xml:space="preserve">
+    <value>Mover para baixo</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageBottomButton_Screentip" xml:space="preserve">
+    <value>Mover as páginas selecionadas para o final da lista</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Label" xml:space="preserve">
+    <value>Mover para o topo</value>
+    <comment>ribbon page</comment>
+  </data>
+  <data name="ribMovePageTopButton_Screentip" xml:space="preserve">
+    <value>Mover as páginas selecionadas para o topo da lista</value>
     <comment>ribbon page</comment>
   </data>
   <data name="ribNameUrlsButton_Label" xml:space="preserve">

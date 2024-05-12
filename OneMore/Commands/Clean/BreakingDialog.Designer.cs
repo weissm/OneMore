@@ -110,6 +110,24 @@ namespace River.OneMoreAddIn.Commands
 			this.groupBox.TabStop = false;
 			this.groupBox.Text = "Spacing";
 			// 
+			// groupBox
+			// 
+			this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox.Controls.Add(this.oneButton);
+			this.groupBox.Controls.Add(this.twoButton);
+			this.groupBox.Location = new System.Drawing.Point(23, 23);
+			this.groupBox.Name = "groupBox";
+			this.groupBox.Padding = new System.Windows.Forms.Padding(10, 10, 3, 3);
+			this.groupBox.Size = new System.Drawing.Size(429, 134);
+			this.groupBox.TabIndex = 8;
+			this.groupBox.TabStop = false;
+			this.groupBox.Text = "Spacing";
+			this.groupBox.ThemedBack = null;
+			this.groupBox.ThemedFore = null;
+			this.groupBox.UseVisualStyleBackColor = false;
+			// 
 			// BreakingDialog
 			// 
 			this.AcceptButton = this.okButton;
