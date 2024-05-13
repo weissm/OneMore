@@ -109,9 +109,6 @@ namespace River.OneMoreAddIn.Commands
 			this.groupBox.TabIndex = 8;
 			this.groupBox.TabStop = false;
 			this.groupBox.Text = "Spacing";
-			this.groupBox.ThemedBack = null;
-			this.groupBox.ThemedFore = null;
-			this.groupBox.UseVisualStyleBackColor = false;
 			// 
 			// groupBox
 			// 
