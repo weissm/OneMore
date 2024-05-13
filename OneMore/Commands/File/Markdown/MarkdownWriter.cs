@@ -141,11 +141,11 @@ namespace River.OneMoreAddIn.Commands
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
 				// page level Images outside of any Outline
-				page.Root.Elements(ns + "Image")
-					.ForEach(e => {
-						Write(e);
-						writer.WriteLine();
-					});
+                page.Root.Elements(ns + "Image")
+                    .ForEach(e => {
+                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
+                        writer.WriteLine();
+                    });
 
                 writer.WriteLine();
             }
