@@ -166,20 +166,11 @@ namespace River.OneMoreAddIn.Commands
                     .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
 				// page level Images outside of any Outline
-<<<<<<< HEAD
                 page.Root.Elements(ns + "Image")
                     .ForEach(e => {
                         PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
                         writer.WriteLine();
                     });
-=======
-				page.Root.Elements(ns + "Image")
-					.ForEach(e => {
-						Write(e);
-						writer.WriteLine();
-					});
->>>>>>> 807543b1 (Update MarkdownWriter.cs)
-
                 writer.WriteLine();
             }
         }
@@ -509,7 +500,6 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
