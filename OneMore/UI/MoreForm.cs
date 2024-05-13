@@ -7,6 +7,7 @@ namespace River.OneMoreAddIn.UI
 	using System;
 	using System.Diagnostics;
 	using System.Drawing;
+	using System.Threading.Tasks;
 	using System.Windows.Forms;
 
 
@@ -15,7 +16,7 @@ namespace River.OneMoreAddIn.UI
 	}
 
 
-	public class MoreForm : Form, IOneMoreWindow
+	internal class MoreForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 
@@ -88,17 +89,16 @@ namespace River.OneMoreAddIn.UI
 		/// <param name="topDelta">
 		/// Optionally percentage of the dialog height to subtract from the top coordinate, 0-100
 		/// </param>
-		public void RunModeless(EventHandler closedAction = null, int topDelta = 0)
+		public async Task RunModeless(EventHandler closedAction = null, int topDelta = 0)
 		{
 			StartPosition = FormStartPosition.Manual;
 			TopMost = true;
 			modeless = true;
 
 			var rect = new Native.Rectangle();
-			using (var one = new OneNote())
-			{
+
+			await using var one = new OneNote();
 			Native.GetWindowRect(one.WindowHandle, ref rect);
-			}
 
 			var yoffset = (int)(Height * topDelta / 100.0);
 
@@ -112,7 +112,10 @@ namespace River.OneMoreAddIn.UI
 				ModelessClosed += (sender, e) => { closedAction(sender, e); };
 			}
 
-			Application.Run(new ApplicationContext(this));
+			await Task.Factory.StartNew(() =>
+			{
+				Application.Run(this);
+			});
 		}
 
 
