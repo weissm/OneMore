@@ -210,7 +210,7 @@ namespace River.OneMoreAddIn.Commands
 			await SingleThreaded.Invoke(() =>
 			{
 				// WebView2 needs a message pump so host in its own invisible worker dialog
-				using var form = new WebViewWorkerDialog(
+				using var form = new WebViewDialog(
 					new WebViewWorker(async (webview) =>
 					{
 						webview.Source = new Uri(address);
@@ -809,7 +809,7 @@ namespace River.OneMoreAddIn.Commands
 			await SingleThreaded.Invoke(() =>
 			{
 				// WebView2 needs a message pump so host in its own invisible worker dialog
-				using var form = new WebViewWorkerDialog(
+				using var form = new WebViewDialog(
 					startup:
 					new WebViewWorker(async (webview) =>
 					{
