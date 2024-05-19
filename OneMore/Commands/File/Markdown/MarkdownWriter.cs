@@ -11,7 +11,6 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
     using System.Collections.Generic;
-    using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
@@ -238,10 +237,9 @@ namespace River.OneMoreAddIn.Commands
 			bool startpara = false,
 			bool contained = false)
 		{
-
 			bool pushed = false;
 			bool dive = true;
-			var keepindents = prefix.indent;
+
 			switch (element.Name.LocalName)
 			{
 				case "OEChildren":
@@ -252,7 +250,7 @@ namespace River.OneMoreAddIn.Commands
                     }
 					else
                     {
-						writer.WriteLine("");
+						writer.WriteLine("  ");
 					}
 					prefix.indent = $"{Indent}{prefix.indent}";
 					break;
@@ -263,7 +261,7 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Tag":
-					prefix.tags += WriteTag(element, contained);
+					WriteTag(element, contained);
 					break;
 
 				case "T":
@@ -276,7 +274,7 @@ namespace River.OneMoreAddIn.Commands
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					Stylize(prefix); 
+					if (startpara) Stylize(prefix);
 					prefix.tags = ""; 
 					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
@@ -334,9 +332,9 @@ namespace River.OneMoreAddIn.Commands
 
 				// if not in a table cell
 				// or in a cell and this OE is followed by another OE
-				if (!contained && (element.NextNode != null))
+				if (!contained || (element.NextNode != null))
 				{
-					writer.WriteLine("");
+					writer.WriteLine("  ");
 				} else if (contained)
                 {
 					writer.Write("<br>");
@@ -359,7 +357,7 @@ namespace River.OneMoreAddIn.Commands
 				if (quick != null)
 				{
 					// cite becomes italic
-					if (quick.Name == "cite") context.Enclosure = "_";
+					if (quick.Name == "cite") context.Enclosure = "*";
 					else if (quick.Name == "code") context.Enclosure = "`";
 				}
 				contexts.Push(context);
@@ -394,7 +392,6 @@ namespace River.OneMoreAddIn.Commands
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
-			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
 
@@ -411,8 +408,8 @@ namespace River.OneMoreAddIn.Commands
 			{
 				case 3:     // to do
 				case 8:     // client request
-				case 12:	// schedule/callback
-				case 28:	// todo prio 1
+				case 12:    // schedule/callback
+				case 28:    // todo prio 1
 				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
@@ -443,7 +440,7 @@ namespace River.OneMoreAddIn.Commands
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
 				case 132: retValue = (":book: "); break;           // book to read
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
-				default: break;									   // retValue = (":o: "); break;
+				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
 			}
 			return retValue;
 			return retValue;
@@ -452,7 +449,6 @@ namespace River.OneMoreAddIn.Commands
 
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
-			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
