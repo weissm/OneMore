@@ -252,8 +252,9 @@ namespace River.OneMoreAddIn.Commands
 		{
 			bool pushed = false;
 			bool dive = true;
+            var keepindents = prefix.indent;
 
-			switch (element.Name.LocalName)
+            switch (element.Name.LocalName)
 			{
 				case "OEChildren":
 					pushed = DetectQuickStyle(element);
