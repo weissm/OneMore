@@ -107,10 +107,11 @@
 			this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
 			this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
 			this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-			this.toolStrip.Location = new System.Drawing.Point(10, 65);
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.renameButton,
-			this.deleteButton});
+            this.deleteButton,
+            this.runButton});
+            this.toolStrip.Location = new System.Drawing.Point(9, 52);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.toolStrip.Size = new System.Drawing.Size(780, 28);
@@ -135,6 +136,15 @@
 			this.deleteButton.Size = new System.Drawing.Size(102, 38);
 			this.deleteButton.Text = "Delete";
 			this.deleteButton.Click += new System.EventHandler(this.DeleteItem);
+            // 
+            // runButton
+            // 
+            this.runButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Refresh;
+            this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(72, 28);
+            this.runButton.Text = "Run";
+            this.runButton.Click += new System.EventHandler(this.runLabel_Click);
 			// 
 			// PluginsSheet
 			// 
