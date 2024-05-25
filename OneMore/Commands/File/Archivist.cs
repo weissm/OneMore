@@ -15,9 +15,6 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading.Tasks;
 	using System.Web;
 	using System.Xml.Linq;
-	using System.Diagnostics;
-	using System.Runtime.InteropServices;
-	using Exception = System.Exception;
 	using Resx = Properties.Resources;
 	using System.Diagnostics;
 	using System.Runtime.InteropServices;
