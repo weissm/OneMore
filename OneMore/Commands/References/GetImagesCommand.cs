@@ -60,7 +60,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			if (!HttpClientFactory.IsNetworkAvailable())
 			{
-				UIHelper.ShowInfo(Resx.NetwordConnectionUnavailable);
+				ShowInfo(Resx.NetwordConnectionUnavailable);
 				return;
 			}
 

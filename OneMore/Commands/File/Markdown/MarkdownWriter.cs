@@ -8,8 +8,8 @@ namespace River.OneMoreAddIn.Commands
 {
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
+	using River.OneMoreAddIn.UI;
 	using System;
-    using System.Collections.Generic;
     using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
@@ -112,7 +112,7 @@ namespace River.OneMoreAddIn.Commands
 				var success = await clippy.SetText(reader.ReadToEnd(), true);
 				if (!success)
 				{
-					UIHelper.ShowInfo(Resx.Clipboard_locked);
+					MoreMessageBox.ShowError(null, Resx.Clipboard_locked);
 				}
             }
         }
@@ -202,7 +202,7 @@ namespace River.OneMoreAddIn.Commands
                     }
 					else
                     {
-						writer.WriteLine("");
+						writer.WriteLine("  ");
 					}
 					prefix.indent = $"{Indent}{prefix.indent}";
 					break;
@@ -282,7 +282,7 @@ namespace River.OneMoreAddIn.Commands
 				// or in a cell and this OE is followed by another OE
 				if (!contained && (element.NextNode != null))
 				{
-					writer.WriteLine("");
+					writer.WriteLine("  ");
 				} else if (contained)
                 {
 					writer.Write("<br>");
@@ -338,7 +338,6 @@ namespace River.OneMoreAddIn.Commands
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
-			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
 		}
 
 
@@ -386,7 +385,7 @@ namespace River.OneMoreAddIn.Commands
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
 				case 132: retValue = (":book: "); break;           // book to read
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
-				default: break;									   // retValue = (":o: "); break;
+				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
 			}
 			return retValue;
 		}
@@ -394,8 +393,6 @@ namespace River.OneMoreAddIn.Commands
 
 		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
-			// avoid overwriting input and creating side effects, e.g. when reusing page var
-			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
 				.Replace("<br>", "") // usually followed by NL so leave it there
 				// .Replace("<br>", "  ") // usually followed by NL so leave it there

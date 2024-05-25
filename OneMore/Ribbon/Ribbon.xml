@@ -295,6 +295,12 @@
 
             <menu id="ribEditMenu" getLabel="GetRibbonLabel" imageMso="EditComposePage" showImage="true">
               <button
+                id="ribConvertMarkdownButton"
+                imageMso="ReviewShowOrHideMarkup"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="ConvertMarkdownCmd"/>
+              <button
                 id="ribCopyAsMarkdownButton"
                 imageMso="WatermarkGallery"
                 getLabel="GetRibbonLabel"
@@ -331,12 +337,6 @@
                 getScreentip="GetRibbonScreentip"
                 onAction="IncreaseFontSizeCmd"/>
               <button
-                id="ribDuplicateLineButton"
-                imageMso="PasteDuplicate"
-                getLabel="GetRibbonLabel"
-                getScreentip="GetRibbonScreentip"
-                onAction="DuplicateLineCmd"/>
-              <button
                 id="ribInvertSelectionButton"
                 imageMso="BlackAndWhiteInverseGrayscale"
                 getLabel="GetRibbonLabel"
@@ -361,29 +361,23 @@
                 getScreentip="GetRibbonScreentip"
                 onAction="PasteRtfCmd"/>
               <button
+                id="ribPreviewMarkdownButton"
+                imageMso="ReviewShowMarkupMenu"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="PreviewMarkdownCmd"/>
+              <button
                 id="ribHighlightButton"
                 imageMso="AppointmentColorDialog"
                 getLabel="GetRibbonLabel"
                 getScreentip="GetRibbonScreentip"
                 onAction="HighlightCmd"/>
               <button
-                id="ribSelectImagesButton"
-                imageMso="AdpDiagramArrangeSelection"
-                getLabel="GetRibbonLabel"
-                getScreentip="GetRibbonScreentip"
-                onAction="SelectImagesCmd"/>
-              <button
                 id="ribSelectStyleButton"
                 imageMso="StylesStyleInspector"
                 getLabel="GetRibbonLabel"
                 getScreentip="GetRibbonScreentip"
                 onAction="SelectStyleCmd"/>
-              <button
-                id="ribSortListButton"
-                imageMso="Bullets"
-                getLabel="GetRibbonLabel"
-                getScreentip="GetRibbonScreentip"
-                onAction="SortListCmd"/>
               <button
                 id="ribLowercaseButton"
                 imageMso="ChangeCase"
@@ -486,6 +480,12 @@
                 getScreentip="GetRibbonScreentip"
                 onAction="AdjustImagesCmd"/>
               <button
+                id="ribSelectImagesButton"
+                imageMso="AdpDiagramArrangeSelection"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="SelectImagesCmd"/>
+              <button
                 id="ribStylizeImagesButton"
                 imageMso="GroupPictureStyles"
                 getLabel="GetRibbonLabel"
@@ -505,6 +505,12 @@
                 getLabel="GetRibbonLabel"
                 getScreentip="GetRibbonScreentip"
                 onAction="OutlineCmd"/>
+              <button
+                id="ribSortListButton"
+                imageMso="Bullets"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="SortListCmd"/>
               <button
                 id="ribNumberSectionsButton"
                 imageMso="LineNumbersMenu"
@@ -561,6 +567,12 @@
                 getLabel="GetRibbonLabel"
                 getScreentip="GetRibbonScreentip"
                 onAction="DuplicatePageCmd"/>
+              <button
+                id="ribDuplicateLineButton"
+                imageMso="PasteDuplicate"
+                getLabel="GetRibbonLabel"
+                getScreentip="GetRibbonScreentip"
+                onAction="DuplicateLineCmd"/>
               <button
                 id="ribExpandContentButton"
                 imageMso="OutlineExpandAll"
@@ -903,6 +915,12 @@
               getLabel="GetRibbonLabel"
               getScreentip="GetRibbonScreentip"
               onAction="CommandPaletteCmd"/>
+            <button
+              id="ribQuickPaletteButton"
+              imageMso="StylesDialogClassic"
+              getLabel="GetRibbonLabel"
+              getScreentip="GetRibbonScreentip"
+              onAction="QuickPaletteCmd"/>
             <button
               id="ribNavigatorButton"
               getImage="GetRibbonImageByID"

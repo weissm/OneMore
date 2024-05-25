@@ -688,10 +688,6 @@
     <value>{0} (Ctrl + Alt + Shift + {1})</value>
     <comment>Screentip for custom style gallery tiles</comment>
   </data>
-  <data name="CustomStylesFilename" xml:space="preserve">
-    <value>CustomStyles.xml</value>
-    <comment>FILENAME</comment>
-  </data>
   <data name="DeleteFormulaCommand_Deleted" xml:space="preserve">
     <value>الصيغ المحذوفة من {0} خلية (خلايا)</value>
     <comment>delete command message</comment>
@@ -2134,6 +2130,10 @@
     <value>إدارة المكونات الإضافية الخاصة بي</value>
     <comment>label</comment>
   </data>
+  <data name="PreviewMarkdownCommand_Title" xml:space="preserve">
+    <value>معاينة تخفيض السعر</value>
+    <comment>dialog title</comment>
+  </data>
   <data name="Pronunciate_EmptyWord" xml:space="preserve">
     <value>لا يمكن أن تكون الكلمة المحددة فارغة</value>
     <comment>error message box</comment>
@@ -2143,12 +2143,11 @@
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>تعذر جلب تعريف الكلمة {0}
-حاول مرة أخرى في وقت لاحق</value>
+    <value>تعذر جلب نطق {0} لـ "{1}". إما أن الكلمة غير موجودة أو أنه حدث فشل مؤقت في الشبكة.</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NoWord" xml:space="preserve">
-    <value>تعذر العثور على الكلمة {0}</value>
+    <value>تعذر جلب نطق {0} لـ "{1}"</value>
     <comment>error message box</comment>
   </data>
   <data name="PronunciateDialog.Text" xml:space="preserve">
@@ -2231,6 +2230,52 @@ ISO-code then comma then language name</comment>
   <data name="QuickNotesSheet_titleBox.Text" xml:space="preserve">
     <value>اضبط عنوان الصفحة على أول كلمات fiew في الملاحظة</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="QuickPaletteCommand_basic_category" xml:space="preserve">
+    <value>النص الأساسي</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_basics" xml:space="preserve">
+    <value>عريض
+مائل
+تسطير
+يتوسطه خط
+مخطوطة
+مرتفع</value>
+    <comment>basic style attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_color_category" xml:space="preserve">
+    <value>ألوان الخطوط</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_colors" xml:space="preserve">
+    <value>أزرق
+أخضر
+البرتقالي
+أرجواني
+أحمر
+أصفر</value>
+    <comment>font color attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlight_category" xml:space="preserve">
+    <value>تسليط الضوء على الألوان</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlights" xml:space="preserve">
+    <value>تسليط الضوء الأزرق
+تسليط الضوء على اللون الأخضر
+تسليط الضوء على البرتقال
+تسليط الضوء الأرجواني
+تسليط الضوء على اللون الأحمر
+تسليط الضوء الأصفر</value>
+  </data>
+  <data name="QuickPaletteCommand_Intro" xml:space="preserve">
+    <value>اختر سمة نمط لتطبيقها على النص المحدد</value>
+    <comment>label</comment>
+  </data>
+  <data name="QuickPaletteCommand_Title" xml:space="preserve">
+    <value>لوحة سريعة</value>
+    <comment>dialog title</comment>
   </data>
   <data name="RecalculateFormulaCommand_NoFormula" xml:space="preserve">
     <value>لم يتم العثور على صيغة في الجدول المحدد</value>
@@ -2746,6 +2791,14 @@ ISO-code then comma then language name</comment>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>ضغط الصور عن طريق تحويل PNG إلى JPG</value>
     <comment>ribbon images</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
+    <value>تحويل تخفيض السعر</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
+    <value>تحويل الصفحة أو تخفيض السعر المحدد إلى تنسيق OneNote</value>
+    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>نسخ عبر</value>
@@ -3458,6 +3511,10 @@ ISO-code then comma then language name</comment>
     <value>لصق والحفاظ على النص فقط (CTRL + SHIFT + V)</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPinPageButton_Label" xml:space="preserve">
+    <value>إضافة صفحة إلى قائمة القراءة الخاصة بي</value>
+    <comment>navigator</comment>
+  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>رسم النبات</value>
     <comment>ribbon images</comment>
@@ -3478,6 +3535,14 @@ ISO-code then comma then language name</comment>
     <value>تشغيل وإدارة المكونات الإضافية المخصصة</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
+    <value>معاينة تخفيض السعر</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
+    <value>معاينة الصفحة أو النص المحدد كتخفيض</value>
+    <comment>ribbon edit</comment>
+  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>أدخل النطق</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -3488,6 +3553,14 @@ ISO-code then comma then language name</comment>
   </data>
   <data name="ribProofingMenu_Label" xml:space="preserve">
     <value>لغة التدقيق</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Label" xml:space="preserve">
+    <value>لوحة سريعة</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Screentip" xml:space="preserve">
+    <value>افتح نافذة اللوحة السريعة</value>
     <comment>ribbon menu</comment>
   </data>
   <data name="ribRecalculateFormulaButton_Label" xml:space="preserve">
