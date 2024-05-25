@@ -99,43 +99,43 @@
             this.introBox.TabIndex = 0;
             this.introBox.Text = "Click the edit button to modify a plugin or double-click its name to rename it. C" +
     "hanges are saved immediately";
-            this.introBox.ThemedBack = "ControlLightLight";
-            this.introBox.ThemedFore = null;
-            // 
-            // toolStrip
-            // 
-            this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.renameButton,
+			this.introBox.ThemedBack = "ControlLightLight";
+			this.introBox.ThemedFore = null;
+			// 
+			// toolStrip
+			// 
+			this.toolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+			this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.toolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.renameButton,
             this.deleteButton,
             this.runButton});
             this.toolStrip.Location = new System.Drawing.Point(9, 52);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip.Size = new System.Drawing.Size(693, 28);
-            this.toolStrip.Stretch = true;
-            this.toolStrip.TabIndex = 4;
-            this.toolStrip.Text = "Tool Strip";
-            // 
-            // renameButton
-            // 
-            this.renameButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Rename;
-            this.renameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.renameButton.Name = "renameButton";
-            this.renameButton.Size = new System.Drawing.Size(101, 28);
-            this.renameButton.Text = "Rename";
-            this.renameButton.Click += new System.EventHandler(this.EditSelection);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Delete;
-            this.deleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(91, 28);
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.Click += new System.EventHandler(this.DeleteItem);
+			this.toolStrip.Name = "toolStrip";
+			this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+			this.toolStrip.Size = new System.Drawing.Size(780, 28);
+			this.toolStrip.Stretch = true;
+			this.toolStrip.TabIndex = 4;
+			this.toolStrip.Text = "Tool Strip";
+			// 
+			// renameButton
+			// 
+			this.renameButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Rename;
+			this.renameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.renameButton.Name = "renameButton";
+			this.renameButton.Size = new System.Drawing.Size(115, 38);
+			this.renameButton.Text = "Rename";
+			this.renameButton.Click += new System.EventHandler(this.EditSelection);
+			// 
+			// deleteButton
+			// 
+			this.deleteButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Delete;
+			this.deleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.deleteButton.Name = "deleteButton";
+			this.deleteButton.Size = new System.Drawing.Size(102, 38);
+			this.deleteButton.Text = "Delete";
+			this.deleteButton.Click += new System.EventHandler(this.DeleteItem);
             // 
             // runButton
             // 
@@ -145,26 +145,24 @@
             this.runButton.Size = new System.Drawing.Size(72, 28);
             this.runButton.Text = "Run";
             this.runButton.Click += new System.EventHandler(this.runLabel_Click);
-            // 
-            // PluginsSheet
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.Controls.Add(this.gridView);
-            this.Controls.Add(this.toolStrip);
-            this.Controls.Add(this.introBox);
-            this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(667, 320);
-            this.Name = "PluginsSheet";
-            this.Padding = new System.Windows.Forms.Padding(9, 7, 9, 7);
-            this.Size = new System.Drawing.Size(711, 400);
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+			// 
+			// PluginsSheet
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.Controls.Add(this.gridView);
+			this.Controls.Add(this.toolStrip);
+			this.Controls.Add(this.introBox);
+			this.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.MinimumSize = new System.Drawing.Size(750, 400);
+			this.Name = "PluginsSheet";
+			this.Padding = new System.Windows.Forms.Padding(10, 9, 10, 9);
+			this.Size = new System.Drawing.Size(800, 500);
+			((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
