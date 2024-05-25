@@ -125,7 +125,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			if (!Office.IsInstalled("Word"))
 			{
-				UIHelper.ShowMessage("Word is not installed");
+				ShowError("Word is not installed");
 			}
 
 			string[] files;
@@ -213,7 +213,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			if (!Office.IsInstalled("Powerpoint"))
 			{
-				UIHelper.ShowMessage("PowerPoint is not installed");
+				ShowError("PowerPoint is not installed");
 			}
 
 			string[] files;
@@ -458,7 +458,7 @@ namespace River.OneMoreAddIn.Commands
 					.GetCollection(nameof(FileImportSheet))
 					.Get("width", DefaultWidth)
 					*
-					UIHelper.GetScalingFactors().Item1)
+					Scaling.GetScalingFactors().Item1)
 			};
 
 			for (int i = 0; i < doc.PageCount; i++)
@@ -565,51 +565,36 @@ namespace River.OneMoreAddIn.Commands
 
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 
-				// copy/paste HTML...
+				// create new page...
 
 				if (!string.IsNullOrEmpty(body))
 				{
-					var html = ClipboardProvider.WrapWithHtmlPreamble(body);
+					await using var one = new OneNote();
+					one.CreatePage(one.CurrentSectionId, out var pageId);
 
-					if (token != default && token.IsCancellationRequested)
-					{
-						logger.WriteLine("import markdown cancelled");
-						return;
-					}
+					var page = await one.GetPage(pageId, OneNote.PageDetail.Basic);
+					var ns = page.Namespace;
 
-					var clippy = new ClipboardProvider();
-					await clippy.StashState();
-					await clippy.SetHtml(html);
+					page.Title = Path.GetFileNameWithoutExtension(filepath);
 
-					Page page;
-					string pageId;
+					var container = page.EnsureContentContainer();
 
-					IntPtr handle;
-					await using (var one = new OneNote())
-					{
-						handle = one.WindowHandle;
-						one.CreatePage(one.CurrentSectionId, out pageId);
+					container.Add(new XElement(ns + "HTMLBlock",
+						new XElement(ns + "Data",
+							new XCData($"<html><body>{body}</body></html>")
+							)
+						));
 
-						page = await one.GetPage(pageId, OneNote.PageDetail.Basic);
-						page.Title = Path.GetFileNameWithoutExtension(filepath);
+					MarkdownConverter.RewriteHeadings(page);
 
-						await one.Update(page);
-						await one.NavigateTo(pageId);
-					}
+					await one.Update(page);
 
-					// need to set focus from Progress window to OneNote window to give
-					// the paste operation the correct target
-					Native.SwitchToThisWindow(handle, false);
+					// find and convert headers based on styles
+					page = await one.GetPage(pageId, OneNote.PageDetail.Basic);
+					MarkdownConverter.RewriteHeadings(page);
+					await one.Update(page);
 
-					await clippy.Paste(true);
-					await clippy.RestoreState();
-
-					await using (var one = new OneNote())
-					{
-						page = await one.GetPage(pageId, OneNote.PageDetail.Basic);
-						MarkdownConverter.RewriteHeadings(page);
-						await one.Update(page);
-					}
+					await one.NavigateTo(pageId);
 				}
 			}
 			catch (Exception exc)

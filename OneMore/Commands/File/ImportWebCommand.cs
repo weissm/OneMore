@@ -62,14 +62,14 @@ namespace River.OneMoreAddIn.Commands
 		{
 			if (!HttpClientFactory.IsNetworkAvailable())
 			{
-				UIHelper.ShowInfo(Resx.NetwordConnectionUnavailable);
+				ShowInfo(Resx.NetwordConnectionUnavailable);
 				return;
 			}
 
 			var key = Registry.LocalMachine.OpenSubKey($"{ClientKey}\\{RuntimeId}");
 			if (key == null)
 			{
-				UIHelper.ShowError("Unable to use this command; Edge WebView2 is not installed");
+				ShowError("Unable to use this command; Edge WebView2 is not installed");
 				return;
 			}
 
@@ -127,7 +127,7 @@ namespace River.OneMoreAddIn.Commands
 			await SingleThreaded.Invoke(() =>
 			{
 				// WebView2 needs a message pump so host in its own invisible worker dialog
-				using var form = new WebViewWorkerDialog(
+				using var form = new WebViewDialog(
 					new WebViewWorker(async (webview) =>
 					{
 						webview.Source = new Uri(address);
@@ -396,7 +396,7 @@ namespace River.OneMoreAddIn.Commands
 
 		private void Giveup(string msg)
 		{
-			UIHelper.ShowInfo($"Cannot load web page.\n\n{msg}");
+			ShowInfo($"Cannot load web page.\n\n{msg}");
 		}
 
 
@@ -486,6 +486,8 @@ namespace River.OneMoreAddIn.Commands
 
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Bug",
+			"S2583:Conditionally executed code should be reachable", Justification = "<Pending>")]
 		private async Task<WebPageInfo> DownloadWebContent(Uri uri)
 		{
 			const string GetTitleJS = "document.getElementsByTagName('title')[0].innerText;";
@@ -498,7 +500,7 @@ namespace River.OneMoreAddIn.Commands
 			await SingleThreaded.Invoke(() =>
 			{
 				// WebView2 needs a message pump so host in its own invisible worker dialog
-				using var form = new WebViewWorkerDialog(
+				using var form = new WebViewDialog(
 					startup:
 					new WebViewWorker(async (webview) =>
 					{

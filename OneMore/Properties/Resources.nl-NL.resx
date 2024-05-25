@@ -689,10 +689,6 @@ Omkeren</value>
     <value>{0} (Ctrl + Alt + Shift + {1})</value>
     <comment>Screentip for custom style gallery tiles</comment>
   </data>
-  <data name="CustomStylesFilename" xml:space="preserve">
-    <value>CustomStyles.xml</value>
-    <comment>SKIP, filename</comment>
-  </data>
   <data name="DeleteFormulaCommand_Deleted" xml:space="preserve">
     <value>Formules verwijderd uit {0} cel (len)</value>
     <comment>delete command message</comment>
@@ -2135,6 +2131,10 @@ Huidig ​​notitieboek</value>
     <value>Beheer mijn plug -ins</value>
     <comment>label</comment>
   </data>
+  <data name="PreviewMarkdownCommand_Title" xml:space="preserve">
+    <value>Afwaarderingsvoorbeeld</value>
+    <comment>dialog title</comment>
+  </data>
   <data name="Pronunciate_EmptyWord" xml:space="preserve">
     <value>Het geselecteerde woord mag niet leeg zijn</value>
     <comment>error message box</comment>
@@ -2144,12 +2144,11 @@ Huidig ​​notitieboek</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>Kan definitie van woord {0} niet ophalen
-Probeer het later nog eens</value>
+    <value>Kan de uitspraak van {0} van "{1}" niet ophalen. Een van beide woorden bestaat niet of er is een tijdelijke netwerkfout opgetreden.</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NoWord" xml:space="preserve">
-    <value>Kan woord {0} niet vinden</value>
+    <value>Kan de uitspraak van {0} van "{1}" niet ophalen</value>
     <comment>error message box</comment>
   </data>
   <data name="PronunciateDialog.Text" xml:space="preserve">
@@ -2232,6 +2231,52 @@ Jaar (2023)
   <data name="QuickNotesSheet_titleBox.Text" xml:space="preserve">
     <value>Stel de paginatitel in op de eerste weergavewoorden van de notitie</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="QuickPaletteCommand_basic_category" xml:space="preserve">
+    <value>basis tekst</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_basics" xml:space="preserve">
+    <value>Vetgedrukt
+Cursief
+Onderstrepen
+Doorhalen
+Abonnement
+Superscript</value>
+    <comment>basic style attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_color_category" xml:space="preserve">
+    <value>lettertype kleuren</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_colors" xml:space="preserve">
+    <value>Blauw
+Groente
+Oranje
+Paars
+Rood
+Geel</value>
+    <comment>font color attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlight_category" xml:space="preserve">
+    <value>markeer kleuren</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlights" xml:space="preserve">
+    <value>Blauw hoogtepunt
+Groen hoogtepunt
+Oranje hoogtepunt
+Paars hoogtepunt
+Rood hoogtepunt
+Gele highlight</value>
+  </data>
+  <data name="QuickPaletteCommand_Intro" xml:space="preserve">
+    <value>Kies een stijlkenmerk dat u op de geselecteerde tekst wilt toepassen</value>
+    <comment>label</comment>
+  </data>
+  <data name="QuickPaletteCommand_Title" xml:space="preserve">
+    <value>Snel palet</value>
+    <comment>dialog title</comment>
   </data>
   <data name="RecalculateFormulaCommand_NoFormula" xml:space="preserve">
     <value>Geen formule gevonden in de geselecteerde tabel</value>
@@ -2747,6 +2792,14 @@ Na de laatste groep</value>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>Comprimeer afbeeldingen door PNG naar JPG te converteren</value>
     <comment>ribbon images</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
+    <value>Markdown converteren</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
+    <value>Converteer pagina of geselecteerde prijsverlaging naar OneNote-indeling</value>
+    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>Kopiëren over</value>
@@ -3458,6 +3511,10 @@ Na de laatste groep</value>
     <value>Plakken en blijf alleen tekst (Ctrl + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPinPageButton_Label" xml:space="preserve">
+    <value>Pagina toevoegen aan mijn leeslijst</value>
+    <comment>navigator</comment>
+  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>Teken PlantUML</value>
     <comment>ribbon images</comment>
@@ -3478,6 +3535,14 @@ Na de laatste groep</value>
     <value>Aangepaste plug-ins uitvoeren en beheren</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
+    <value>Bekijk een voorbeeld van de prijsverlaging</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
+    <value>Bekijk een voorbeeld van de pagina of geselecteerde tekst als markdown</value>
+    <comment>ribbon edit</comment>
+  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Uitspraak invoegen</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -3488,6 +3553,14 @@ Na de laatste groep</value>
   </data>
   <data name="ribProofingMenu_Label" xml:space="preserve">
     <value>Proeftaal</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Label" xml:space="preserve">
+    <value>Snel palet</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Screentip" xml:space="preserve">
+    <value>Open het snelle paletvenster</value>
     <comment>ribbon menu</comment>
   </data>
   <data name="ribRecalculateFormulaButton_Label" xml:space="preserve">

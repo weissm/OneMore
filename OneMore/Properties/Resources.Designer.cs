@@ -1388,15 +1388,6 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CustomStyles.xml.
-        /// </summary>
-        internal static string CustomStylesFilename {
-            get {
-                return ResourceManager.GetString("CustomStylesFilename", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap DarkCustomStyles {
@@ -1474,10 +1465,10 @@ namespace River.OneMoreAddIn.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Theme key=&quot;Orange&quot; name=&quot;Orange&quot; color=&quot;automatic&quot; setColor=&quot;False&quot; dark=&quot;False&quot;&gt;
+        ///&lt;Theme key=&quot;Orange&quot; name=&quot;Orange&quot; color=&quot;automatic&quot; setColor=&quot;False&quot; dark=&quot;False&quot; isPredefined=&quot;True&quot;&gt;
         ///  &lt;Style index=&quot;0&quot; name=&quot;Heading 1&quot; font=&quot;Calibri Light&quot; fontColor=&quot;Black&quot; fontSize=&quot;20.0&quot; spaceBefore=&quot;14.0&quot; spaceAfter=&quot;0.0&quot; applyColors=&quot;true&quot; styleType=&quot;Heading&quot; /&gt;
         ///  &lt;Style index=&quot;1&quot; name=&quot;Heading 2&quot; font=&quot;Calibri Light&quot; fontColor=&quot;#E67832&quot; fontSize=&quot;18.0&quot; spaceBefore=&quot;14.0&quot; spaceAfter=&quot;0.0&quot; applyColors=&quot;true&quot; styleType=&quot;Heading&quot; /&gt;
-        ///  &lt;Style index=&quot;2&quot; name=&quot;Heading 3&quot; font=&quot;Cali [rest of string was truncated]&quot;;.
+        ///  &lt;Style index=&quot;2&quot; name=&quot;H [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultStyles {
             get {
@@ -5821,6 +5812,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Markdown Preview.
+        /// </summary>
+        internal static string PreviewMarkdownCommand_Title {
+            get {
+                return ResourceManager.GetString("PreviewMarkdownCommand_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OneMore.
         /// </summary>
         internal static string ProgramName {
@@ -5848,8 +5848,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not fetch definition of word {0}
-        ///Try again later.
+        ///   Looks up a localized string similar to Could not fetch {0} pronunciation of &quot;{1}&quot;. Either word does not exist or there was a temporary network failure..
         /// </summary>
         internal static string Pronunciate_NetError {
             get {
@@ -5858,7 +5857,7 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find word {0}.
+        ///   Looks up a localized string similar to Could not fetch {0} pronunciation of &quot;{1}&quot;.
         /// </summary>
         internal static string Pronunciate_NoWord {
             get {
@@ -6023,6 +6022,93 @@ namespace River.OneMoreAddIn.Properties {
         internal static string QuickNotesSheet_titleBox_Text {
             get {
                 return ResourceManager.GetString("QuickNotesSheet_titleBox.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to basic text.
+        /// </summary>
+        internal static string QuickPaletteCommand_basic_category {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_basic_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bold
+        ///Italic
+        ///Underline
+        ///Strikethrough
+        ///Subscript
+        ///Superscript.
+        /// </summary>
+        internal static string QuickPaletteCommand_basics {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_basics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to font colors.
+        /// </summary>
+        internal static string QuickPaletteCommand_color_category {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_color_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue
+        ///Green
+        ///Orange
+        ///Purple
+        ///Red
+        ///Yellow.
+        /// </summary>
+        internal static string QuickPaletteCommand_colors {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_colors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to highlight colors.
+        /// </summary>
+        internal static string QuickPaletteCommand_highlight_category {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_highlight_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue Highlight
+        ///Green Highlight
+        ///Orange Highlight
+        ///Purple Highlight
+        ///Red Highlight
+        ///Yellow Highlight.
+        /// </summary>
+        internal static string QuickPaletteCommand_highlights {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_highlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a style attribute to apply to the selected text.
+        /// </summary>
+        internal static string QuickPaletteCommand_Intro {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Palette.
+        /// </summary>
+        internal static string QuickPaletteCommand_Title {
+            get {
+                return ResourceManager.GetString("QuickPaletteCommand_Title", resourceCulture);
             }
         }
         
@@ -7195,6 +7281,24 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribCompressImagesButton_Screentip {
             get {
                 return ResourceManager.GetString("ribCompressImagesButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert Markdown.
+        /// </summary>
+        internal static string ribConvertMarkdownButton_Label {
+            get {
+                return ResourceManager.GetString("ribConvertMarkdownButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert page or selected markdown to OneNote format.
+        /// </summary>
+        internal static string ribConvertMarkdownButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribConvertMarkdownButton_Screentip", resourceCulture);
             }
         }
         
@@ -8813,6 +8917,15 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Page To My Reading List.
+        /// </summary>
+        internal static string ribPinPageButton_Label {
+            get {
+                return ResourceManager.GetString("ribPinPageButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw PlantUML.
         /// </summary>
         internal static string ribPlantUmlButton_Label {
@@ -8858,6 +8971,24 @@ namespace River.OneMoreAddIn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Preview Markdown.
+        /// </summary>
+        internal static string ribPreviewMarkdownButton_Label {
+            get {
+                return ResourceManager.GetString("ribPreviewMarkdownButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview page or selected text as markdown.
+        /// </summary>
+        internal static string ribPreviewMarkdownButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribPreviewMarkdownButton_Screentip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Insert Pronunciation.
         /// </summary>
         internal static string ribPronunciateButton_Label {
@@ -8881,6 +9012,24 @@ namespace River.OneMoreAddIn.Properties {
         internal static string ribProofingMenu_Label {
             get {
                 return ResourceManager.GetString("ribProofingMenu_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Palette.
+        /// </summary>
+        internal static string ribQuickPaletteButton_Label {
+            get {
+                return ResourceManager.GetString("ribQuickPaletteButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the Quick Palette window.
+        /// </summary>
+        internal static string ribQuickPaletteButton_Screentip {
+            get {
+                return ResourceManager.GetString("ribQuickPaletteButton_Screentip", resourceCulture);
             }
         }
         

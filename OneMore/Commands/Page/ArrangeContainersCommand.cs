@@ -41,7 +41,7 @@ namespace River.OneMoreAddIn.Commands
 
 			if (!page.Root.Elements(ns + "Outline").Any())
 			{
-				UIHelper.ShowInfo(Resx.ArrangeContainersCommand_noContainers);
+				ShowInfo(Resx.ArrangeContainersCommand_noContainers);
 				return;
 			}
 
@@ -65,7 +65,7 @@ namespace River.OneMoreAddIn.Commands
 			}
 			else
 			{
-				UIHelper.ShowInfo(Resx.ArrangeContainersCommand_noContainers);
+				ShowInfo(Resx.ArrangeContainersCommand_noContainers);
 			}
 		}
 

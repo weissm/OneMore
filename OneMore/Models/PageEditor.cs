@@ -74,11 +74,56 @@ namespace River.OneMoreAddIn.Models
 
 
 		/// <summary>
+		/// Gets or sets and indication whether all page content should be chosen.
+		/// The default is to process only the selected content.
+		/// </summary>
+		public bool AllContent { get; set; }
+
+
+		/// <summary>
 		/// Gets the anchor point for reintroducing collated content.
 		/// If this is an OE or HTMLBlock then consumers may want to insert after that.
 		/// Otherwise, consumers may want to insert at end of anchor container.
 		/// </summary>
 		public XElement Anchor { get; private set; }
+
+
+		/// <summary>
+		/// Inserts the given content immediately after the anchor point. This might be after
+		/// the anchor element if the anchor is an OE or HTMLBlock or as its first element
+		/// if the anchor is an OEChildren or Outline.
+		/// </summary>
+		/// <param name="content">The content to insert.</param>
+		public void InsertAtAnchor(XElement content)
+		{
+			if (Anchor.Name.LocalName.In("OE", "HTMLBlock", "ChildOELayout"))
+			{
+				Anchor.AddAfterSelf(content.Name.LocalName.In("OE", "HTMLBlock")
+					? content
+					: new XElement(ns + "OE", content));
+			}
+			else if (Anchor.Name.LocalName == "OEChildren")
+			{
+				Anchor.AddFirst(content.Name.LocalName.In("OE", "HTMLBlock")
+					? content
+					: new XElement(ns + "OE", content));
+			}
+			else if (Anchor.Name.LocalName == "Outline")
+			{
+				if (content.Name.LocalName == "OEChildren")
+				{
+					Anchor.AddFirst(content);
+				}
+				else if (content.Name.LocalName == "OE")
+				{
+					Anchor.AddFirst(new XElement(ns + "OEChildren", content));
+				}
+				else
+				{
+					Anchor.AddFirst(new XElement(ns + "OEChildren", new XElement(ns + "OE", content)));
+				}
+			}
+		}
 
 
 		/// <summary>
@@ -105,7 +150,7 @@ namespace River.OneMoreAddIn.Models
 				.Where(e =>
 					// tables are handled via their cell contents
 					e.Name.LocalName != "Table" &&
-					e.Attributes().Any(a => a.Name == "selected" && a.Value == "all"))
+					(AllContent || e.Attributes().Any(a => a.Name == "selected" && a.Value == "all")))
 				.ToList();
 
 			// no selections found in body
@@ -178,8 +223,8 @@ namespace River.OneMoreAddIn.Models
 		private XElement WholeTableSelected(XElement cell)
 		{
 			var table = cell.FirstAncestor(ns + "Table");
-			if (table.Descendants(ns + "Cell")
-				.All(c => c.Attribute("selected")?.Value == "all"))
+			if (AllContent ||
+				table.Descendants(ns + "Cell").All(c => c.Attribute("selected")?.Value == "all"))
 			{
 				return table;
 			}

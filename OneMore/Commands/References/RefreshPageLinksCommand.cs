@@ -65,11 +65,11 @@ namespace River.OneMoreAddIn.Commands
 			{
 				if (updates > 0)
 				{
-					UIHelper.ShowInfo(string.Format(Resx.RefreshPageLinksCommand_updated, updates));
+					ShowInfo(string.Format(Resx.RefreshPageLinksCommand_updated, updates));
 				}
 				else
 				{
-					UIHelper.ShowInfo(Resx.RefreshPageLinksCommand_none);
+					ShowInfo(Resx.RefreshPageLinksCommand_none);
 				}
 			});
 		}

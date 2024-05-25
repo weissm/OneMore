@@ -8,6 +8,7 @@ namespace River.OneMoreAddIn.Commands
 {
 	using River.OneMoreAddIn.Models;
 	using River.OneMoreAddIn.Styles;
+	using River.OneMoreAddIn.UI;
 	using System;
 	using System.Collections.Generic;
 	using System.Drawing;
@@ -96,7 +97,7 @@ namespace River.OneMoreAddIn.Commands
 				var success = await clippy.SetText(reader.ReadToEnd(), true);
 				if (!success)
 				{
-					UIHelper.ShowInfo(Resx.Clipboard_locked);
+					MoreMessageBox.ShowError(null, Resx.Clipboard_locked);
 				}
 			}
 		}

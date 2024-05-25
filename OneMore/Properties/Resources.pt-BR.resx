@@ -689,10 +689,6 @@ Invertido</value>
     <value>{0} (Ctrl + Alt + Shift + {1})</value>
     <comment>Screentip for custom style gallery tiles</comment>
   </data>
-  <data name="CustomStylesFilename" xml:space="preserve">
-    <value>CustomStyles.xml</value>
-    <comment>SKIP, filename</comment>
-  </data>
   <data name="DeleteFormulaCommand_Deleted" xml:space="preserve">
     <value>Fórmulas excluídas de {0} célula (s)</value>
     <comment>delete command message</comment>
@@ -2135,6 +2131,10 @@ Caderno atual</value>
     <value>Gerencie meus plugins</value>
     <comment>label</comment>
   </data>
+  <data name="PreviewMarkdownCommand_Title" xml:space="preserve">
+    <value>Visualização de redução</value>
+    <comment>dialog title</comment>
+  </data>
   <data name="Pronunciate_EmptyWord" xml:space="preserve">
     <value>A palavra selecionada não pode estar vazia</value>
     <comment>error message box</comment>
@@ -2144,12 +2144,11 @@ Caderno atual</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>Não foi possível obter a definição da palavra {0}
-Tente mais tarde</value>
+    <value>Não foi possível obter {0} pronúncia de "{1}". A palavra não existe ou houve uma falha temporária na rede.</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NoWord" xml:space="preserve">
-    <value>Não foi possível encontrar a palavra {0}</value>
+    <value>Não foi possível obter {0} pronúncia de "{1}"</value>
     <comment>error message box</comment>
   </data>
   <data name="PronunciateDialog.Text" xml:space="preserve">
@@ -2232,6 +2231,52 @@ Ano (2023)
   <data name="QuickNotesSheet_titleBox.Text" xml:space="preserve">
     <value>Defina o título da página para as primeiras palavras da nota</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="QuickPaletteCommand_basic_category" xml:space="preserve">
+    <value>texto básico</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_basics" xml:space="preserve">
+    <value>Audacioso
+itálico
+Sublinhado
+Tachado
+Subscrito
+Sobrescrito</value>
+    <comment>basic style attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_color_category" xml:space="preserve">
+    <value>cores da fonte</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_colors" xml:space="preserve">
+    <value>Azul
+Verde
+Laranja
+Roxo
+Vermelho
+Amarelo</value>
+    <comment>font color attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlight_category" xml:space="preserve">
+    <value>destacar cores</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlights" xml:space="preserve">
+    <value>Destaque Azul
+Destaque Verde
+Destaque Laranja
+Destaque Roxo
+Destaque vermelho
+Destaque amarelo</value>
+  </data>
+  <data name="QuickPaletteCommand_Intro" xml:space="preserve">
+    <value>Escolha um atributo de estilo para aplicar ao texto selecionado</value>
+    <comment>label</comment>
+  </data>
+  <data name="QuickPaletteCommand_Title" xml:space="preserve">
+    <value>Paleta rápida</value>
+    <comment>dialog title</comment>
   </data>
   <data name="RecalculateFormulaCommand_NoFormula" xml:space="preserve">
     <value>Nenhuma fórmula encontrada na tabela selecionada</value>
@@ -2747,6 +2792,14 @@ Depois do último grupo</value>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>Compacte imagens convertendo PNG em JPG</value>
     <comment>ribbon images</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
+    <value>Converter redução</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
+    <value>Converter página ou marcação selecionada para o formato OneNote</value>
+    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>Copiar</value>
@@ -3458,6 +3511,10 @@ Depois do último grupo</value>
     <value>Cole e mantenha apenas o texto (Ctrl + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPinPageButton_Label" xml:space="preserve">
+    <value>Adicionar página à minha lista de leitura</value>
+    <comment>navigator</comment>
+  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>Desenhar PlantUML</value>
     <comment>ribbon images</comment>
@@ -3478,6 +3535,14 @@ Depois do último grupo</value>
     <value>Execute e gerencie plug-ins personalizados</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
+    <value>Pré-visualização da redução</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
+    <value>Visualizar página ou texto selecionado como marcação</value>
+    <comment>ribbon edit</comment>
+  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Inserir pronúncia</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -3488,6 +3553,14 @@ Depois do último grupo</value>
   </data>
   <data name="ribProofingMenu_Label" xml:space="preserve">
     <value>Linguagem de Prova</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Label" xml:space="preserve">
+    <value>Paleta rápida</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Screentip" xml:space="preserve">
+    <value>Abra a janela rápida da paleta</value>
     <comment>ribbon menu</comment>
   </data>
   <data name="ribRecalculateFormulaButton_Label" xml:space="preserve">

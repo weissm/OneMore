@@ -697,10 +697,6 @@
     <value>{0} (Ctrl+Alt+Shift + {1})</value>
     <comment>Screentip for custom style gallery tiles</comment>
   </data>
-  <data name="CustomStylesFilename" xml:space="preserve">
-    <value>CustomStyles.xml</value>
-    <comment>SKIP, filename</comment>
-  </data>
   <data name="DeleteFormulaCommand_Deleted" xml:space="preserve">
     <value>נוסחאות שנמחקו מ-{0} תאים</value>
     <comment>delete command message</comment>
@@ -2143,6 +2139,10 @@ Total Row Font
     <value>נהל את התוספים שלי</value>
     <comment>label</comment>
   </data>
+  <data name="PreviewMarkdownCommand_Title" xml:space="preserve">
+    <value>Markdown תצוגה מקדימה</value>
+    <comment>dialog title</comment>
+  </data>
   <data name="ProgramName" xml:space="preserve">
     <value>OneMore</value>
     <comment>SKIP</comment>
@@ -2156,12 +2156,11 @@ Total Row Font
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>לא ניתן היה להביא את ההגדרה של המילה {0}
-נסה שוב מאוחר יותר</value>
+    <value>לא ניתן היה להביא את ההגייה של {0} של "{1}". אחת המילה לא קיימת או שהייתה כשל זמני ברשת.</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NoWord" xml:space="preserve">
-    <value>לא ניתן למצוא את המילה {0}</value>
+    <value>לא ניתן היה להביא הגייה של {0} של "{1}"</value>
     <comment>error message box</comment>
   </data>
   <data name="PronunciateDialog.Text" xml:space="preserve">
@@ -2244,6 +2243,52 @@ ISO-code then comma then language name</comment>
   <data name="QuickNotesSheet_titleBox.Text" xml:space="preserve">
     <value>הגדר את כותרת העמוד למילים הראשונות של ההערה</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="QuickPaletteCommand_basic_category" xml:space="preserve">
+    <value>טקסט בסיסי</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_basics" xml:space="preserve">
+    <value>נוֹעָז
+נטוי
+לָשִׂים דָגֵשׁ
+חוצה
+מנוי
+כתב-על</value>
+    <comment>basic style attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_color_category" xml:space="preserve">
+    <value>צבעי גופן</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_colors" xml:space="preserve">
+    <value>כְּחוֹל
+ירוק
+תפוז
+סָגוֹל
+אָדוֹם
+צהוב</value>
+    <comment>font color attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlight_category" xml:space="preserve">
+    <value>להדגיש צבעים</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlights" xml:space="preserve">
+    <value>הדגשה כחולה
+הדגשה ירוקה
+הדגשה כתומה
+הדגשה סגולה
+סימון אדום
+הדגשה צהובה</value>
+  </data>
+  <data name="QuickPaletteCommand_Intro" xml:space="preserve">
+    <value>בחר תכונת סגנון להחלה על הטקסט שנבחר</value>
+    <comment>label</comment>
+  </data>
+  <data name="QuickPaletteCommand_Title" xml:space="preserve">
+    <value>פלטה מהירה</value>
+    <comment>dialog title</comment>
   </data>
   <data name="RecalculateFormulaCommand_NoFormula" xml:space="preserve">
     <value>לא נמצאה נוסחה בטבלה שנבחרה</value>
@@ -2765,6 +2810,14 @@ ISO-code then comma then language name</comment>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>דחוס תמונות על ידי המרת PNG ל-JPG</value>
     <comment>ribbon images</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
+    <value>המר Markdown</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
+    <value>המר את העמוד או הסימון שנבחר לפורמט OneNote</value>
+    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>העתק</value>
@@ -3469,6 +3522,10 @@ ISO-code then comma then language name</comment>
     <value>הדבק ושמור טקסט בלבד (Ctrl + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPinPageButton_Label" xml:space="preserve">
+    <value>הוסף עמוד לרשימת הקריאה שלי</value>
+    <comment>navigator</comment>
+  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>צייר PlantUML</value>
     <comment>ribbon images</comment>
@@ -3489,6 +3546,14 @@ ISO-code then comma then language name</comment>
     <value>הפעל ונהל תוספים מותאמים אישית</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
+    <value>תצוגה מקדימה של Markdown</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
+    <value>תצוגה מקדימה של דף או טקסט שנבחר כסימון</value>
+    <comment>ribbon edit</comment>
+  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>הכנס הגייה</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -3499,6 +3564,14 @@ ISO-code then comma then language name</comment>
   </data>
   <data name="ribProofingMenu_Label" xml:space="preserve">
     <value>שפת הגהה</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Label" xml:space="preserve">
+    <value>פלטה מהירה</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Screentip" xml:space="preserve">
+    <value>פתח את חלון הצבעים המהיר</value>
     <comment>ribbon menu</comment>
   </data>
   <data name="ribRecalculateFormulaButton_Label" xml:space="preserve">

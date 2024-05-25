@@ -29,7 +29,7 @@ namespace River.OneMoreAddIn.Commands
 		{
 			if (!HttpClientFactory.IsNetworkAvailable())
 			{
-				UIHelper.ShowInfo(Properties.Resources.NetwordConnectionUnavailable);
+				ShowInfo(Properties.Resources.NetwordConnectionUnavailable);
 				return;
 			}
 

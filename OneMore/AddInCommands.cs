@@ -203,6 +203,11 @@ namespace River.OneMoreAddIn
 			=> await factory.Run<CopyAcrossCommand>();
 
 
+		[Command("ribConvertMarkdownButton_Label", Keys.Shift | Keys.Alt | Keys.M, "ribEditMenu")]
+		public async Task ConvertMarkdownCmd(IRibbonControl control)
+			=> await factory.Run<ConvertMarkdownCommand>();
+
+
 		[Command("ribCopyAsTextButton_Label", Keys.None, "ribEditMenu")]
 		public async Task CopyAsTextCmd(IRibbonControl control)
 			=> await factory.Run<CopyAsTextCommand>();
@@ -636,9 +641,26 @@ namespace River.OneMoreAddIn
 			=> await factory.Run<PasteTextCommand>();
 
 
+		[IgnorePalette]
+		[Command("ribPinPageButton_Label", Keys.Control | Keys.Shift | Keys.B)]
+		public async Task PinpageCmd(IRibbonControl control)
+			=> await factory.Run<PinPageCommand>();
+
+
+		[Command("ribPreviewMarkdownButton_Label", Keys.Control | Keys.Alt | Keys.Shift | Keys.M, "ribEditMenu")]
+		public async Task PreviewMarkdownCmd(IRibbonControl control)
+			=> await factory.Run<PreviewMarkdownCommand>();
+
+
 		[Command("ribPronunciateButton_Label", Keys.None, "ribEditMenu")]
 		public async Task PronunciateCmd(IRibbonControl control)
 			=> await factory.Run<PronunciateCommand>();
+
+
+		[IgnorePalette]
+		[Command("ribQuickPaletteButton_Label", Keys.Control | Keys.Oemcomma)]
+		public async Task QuickPaletteCmd(IRibbonControl control)
+			=> await factory.Run<QuickPaletteCommand>();
 
 
 		[Command("ribRecalculateFormulaButton_Label", Keys.Shift | Keys.F5, "ribTableMenu")]

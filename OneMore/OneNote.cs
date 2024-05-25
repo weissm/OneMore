@@ -35,7 +35,7 @@ namespace River.OneMoreAddIn
 	/// Wraps the OneNote interop API
 	/// </summary>
 	/// <see cref="https://docs.microsoft.com/en-us/office/client-developer/onenote/application-interface-onenote"/>
-	public class OneNote : IAsyncDisposable
+	public class OneNote : IAsyncDisposable, IDisposable
     {
 		public enum ExportFormat
 		{
@@ -294,6 +294,17 @@ namespace River.OneMoreAddIn
 
 						retries = int.MaxValue;
 					}
+					catch (InvalidComObjectException exc)
+					{
+						retries++;
+						var ms = 250 * retries;
+						logger.WriteLine(
+							$"invalid COM object error, (HResult {exc.HResult:X}), " +
+							$"retrying in {ms}ms with new Application object", exc);
+
+						onenote = ApplicationFactory.CreateApplication();
+						await Task.Delay(ms);
+					}
 					catch (COMException exc)
 					{
 						retries++;
@@ -310,7 +321,9 @@ namespace River.OneMoreAddIn
 						{
 							// this will include hrCOMBusy and hrObjectMissing
 							var desc = $"{exc.ErrorCode:X} {ErrorCodes.GetDescription(exc.ErrorCode)}";
-							logger.WriteLine($"error {desc} (HResult {exc.HResult:X}), retyring in {ms}ms");
+							logger.WriteLine(
+								$"error {desc} (HResult {exc.HResult:X}), " +
+								$"retyring in {ms}ms with new Application object");
 						}
 
 						onenote = ApplicationFactory.CreateApplication();
@@ -984,7 +997,7 @@ namespace River.OneMoreAddIn
 		{
 			if (page.HasActiveMedia())
 			{
-				UIHelper.ShowInfo(Resx.HasActiveMedia);
+				UI.MoreMessageBox.Show(Window, Resx.HasActiveMedia);
 				return;
 			}
 

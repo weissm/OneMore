@@ -687,10 +687,6 @@
     <value>{0} (Ctrl+Alt+Shift + {1})</value>
     <comment>Screentip for custom style gallery tiles</comment>
   </data>
-  <data name="CustomStylesFilename" xml:space="preserve">
-    <value>CustomStyles.xml</value>
-    <comment>FILENAME</comment>
-  </data>
   <data name="DeleteFormulaCommand_Deleted" xml:space="preserve">
     <value>已从{0}个单元格中删除了公式</value>
     <comment>delete command message</comment>
@@ -2133,6 +2129,10 @@ OneNote 文件 (*.one)</value>
     <value>管理我的插件</value>
     <comment>label</comment>
   </data>
+  <data name="PreviewMarkdownCommand_Title" xml:space="preserve">
+    <value>降价预览</value>
+    <comment>dialog title</comment>
+  </data>
   <data name="Pronunciate_EmptyWord" xml:space="preserve">
     <value>所选单词不能为空</value>
     <comment>error message box</comment>
@@ -2142,12 +2142,11 @@ OneNote 文件 (*.one)</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NetError" xml:space="preserve">
-    <value>无法获取单词{0}的定义
-稍后再试</value>
+    <value>无法获取“{1}”的 {0} 发音。要么单词不存在，要么出现临时网络故障。</value>
     <comment>error message box</comment>
   </data>
   <data name="Pronunciate_NoWord" xml:space="preserve">
-    <value>找不到单词{0}</value>
+    <value>无法获取“{1}”的 {0} 发音</value>
     <comment>error message box</comment>
   </data>
   <data name="PronunciateDialog.Text" xml:space="preserve">
@@ -2230,6 +2229,52 @@ ISO-code then comma then language name</comment>
   <data name="QuickNotesSheet_titleBox.Text" xml:space="preserve">
     <value>将页面标题设置为笔记的第一个单词</value>
     <comment>checkbox</comment>
+  </data>
+  <data name="QuickPaletteCommand_basic_category" xml:space="preserve">
+    <value>基本文本</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_basics" xml:space="preserve">
+    <value>大胆的
+斜体
+强调
+删除线
+下标
+上标</value>
+    <comment>basic style attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_color_category" xml:space="preserve">
+    <value>字体颜色</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_colors" xml:space="preserve">
+    <value>蓝色的
+绿色的
+橙子
+紫色的
+红色的
+黄色的</value>
+    <comment>font color attributes</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlight_category" xml:space="preserve">
+    <value>突出显示颜色</value>
+    <comment>category</comment>
+  </data>
+  <data name="QuickPaletteCommand_highlights" xml:space="preserve">
+    <value>蓝色高光
+绿色亮点
+橙色亮点
+紫色高光
+红色高光
+黄色高光</value>
+  </data>
+  <data name="QuickPaletteCommand_Intro" xml:space="preserve">
+    <value>选择要应用于所选文本的样式属性</value>
+    <comment>label</comment>
+  </data>
+  <data name="QuickPaletteCommand_Title" xml:space="preserve">
+    <value>快速调色板</value>
+    <comment>dialog title</comment>
   </data>
   <data name="RecalculateFormulaCommand_NoFormula" xml:space="preserve">
     <value>在所选表格中找不到公式</value>
@@ -2747,6 +2792,14 @@ ISO-code then comma then language name</comment>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>通过将 PNG 转换为 JPG 来压缩图像</value>
     <comment>ribbon images</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
+    <value>转换 Markdown</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
+    <value>将页面或选定的 Markdown 转换为 OneNote 格式</value>
+    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>向右复制</value>
@@ -3451,6 +3504,10 @@ ISO-code then comma then language name</comment>
     <value>粘贴并只保留文本（Ctrl + Shift + V）</value>
     <comment>ribbon item</comment>
   </data>
+  <data name="ribPinPageButton_Label" xml:space="preserve">
+    <value>将页面添加到我的阅读列表</value>
+    <comment>navigator</comment>
+  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>画PlantUML</value>
     <comment>ribbon images</comment>
@@ -3471,6 +3528,14 @@ ISO-code then comma then language name</comment>
     <value>运行和管理自定义插件</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
+    <value>预览 Markdown</value>
+    <comment>ribbon edit</comment>
+  </data>
+  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
+    <value>以 Markdown 形式预览页面或所选文本</value>
+    <comment>ribbon edit</comment>
+  </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>插入发音</value>
     <comment>Ribbon OneMore menu item</comment>
@@ -3481,6 +3546,14 @@ ISO-code then comma then language name</comment>
   </data>
   <data name="ribProofingMenu_Label" xml:space="preserve">
     <value>校对语言</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Label" xml:space="preserve">
+    <value>快速调色板</value>
+    <comment>ribbon menu</comment>
+  </data>
+  <data name="ribQuickPaletteButton_Screentip" xml:space="preserve">
+    <value>打开快速调色板窗口</value>
     <comment>ribbon menu</comment>
   </data>
   <data name="ribRecalculateFormulaButton_Label" xml:space="preserve">
