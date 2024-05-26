@@ -222,7 +222,7 @@ namespace River.OneMoreAddIn.Commands
 						break;
                     }
 					pushed = DetectQuickStyle(element);
-					Stylize(prefix);
+					if (startpara) Stylize(prefix);
 					prefix.tags = ""; 
 					prefix.bullets = "";
 					WriteText(element.GetCData(), startpara, contained);
@@ -361,7 +361,7 @@ namespace River.OneMoreAddIn.Commands
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
 					retValue = contained
 					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
-					  : ($"[{check}] ");
+					  : ($"- [{check}] ");
 
 					break;
 
