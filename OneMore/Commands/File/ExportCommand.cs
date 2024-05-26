@@ -121,10 +121,10 @@ namespace River.OneMoreAddIn.Commands
 
 						if (useUnderscores)
 						{
-							title = title.Replace(' ', '_');
-						}
+                            title = title.Replace(' ', '_');
+                        }
 
-						filename = PathHelper
+                        filename = PathHelper
 							.GetUniqueQualifiedFilename(Path.Combine(path, title + ext));
 					}
 
