@@ -367,8 +367,6 @@ namespace River.OneMoreAddIn.Commands
 				// cite and code are both block-scope style, on the OE
 				case "cite": styleprefix = ("*"); break;
 				case "code": styleprefix = ("`"); break;
-				case "cite": styleprefix = ("*"); break;
-				case "code": styleprefix = ("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
 			}
 			writer.Write(prefix.indent + prefix.bullets + styleprefix + prefix.tags);
