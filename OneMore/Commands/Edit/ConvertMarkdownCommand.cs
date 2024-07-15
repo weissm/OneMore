@@ -84,17 +84,31 @@ namespace River.OneMoreAddIn.Commands
 
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 
-			editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
-				new XElement(ns + "Data",
-					new XCData($"<html><body>{body}</body></html>")
-					)
-				));
+                editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
+                    new XElement(ns + "Data",
+                        new XCData($"<html><body>{body}</body></html>")
+                        )
+                    ));
+            }
 
-			MarkdownConverter.RewriteHeadings(page);
+            // temporarily collect all outline IDs
+            var outlineIDs = page.Root.Elements(ns + "Outline")
+                .Select(e => e.Attribute("objectID").Value)
+                // must ToList or Count comparison won't work!
+                .ToList();
 
-			await one.Update(page);
+            // update will remove unmodified omHash outlines
+            await one.Update(page);
 
-			// Pass 2, cleanup...
+            // identify only remaining untouched outlines by exclusion
+            var untouchedIDs = outlineIDs.Except(
+				page.Root.Elements(ns + "Outline").Select(e => e.Attribute("objectID").Value))
+				// must ToList or Count comparison won't work!
+				.ToList();
+
+			if (untouchedIDs.Count < outlineIDs.Count)
+			{
+				// Pass 2, cleanup...
 
 			// find and convert headers based on styles
 			page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
