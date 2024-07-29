@@ -534,6 +534,9 @@
 		private UI.MoreRadioButton failLockRadio;
 		private UI.MoreGroupBox pageGroup;
 		private UI.MoreGroupBox sectionGroup;
-		private UI.MoreRadioButton getoptsRadio;
-	}
+        private UI.MoreCheckBox trialBox;
+        private System.Windows.Forms.Label userArgsLabel;
+        private UI.MoreTextBox userArgsBox;
+        private UI.MoreRadioButton getoptsRadio;
+    }
 }
