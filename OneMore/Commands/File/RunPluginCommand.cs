@@ -14,7 +14,8 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading.Tasks;
 	using System.Windows.Forms;
 	using System.Xml.Linq;
-	using Resx = Properties.Resources;
+    using System.Drawing;
+    using Resx = Properties.Resources;
 
 
 	internal class RunPluginCommand : Command
@@ -271,6 +272,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 				var abscmd = Environment.ExpandEnvironmentVariables(plugin.Command);
 				var absargs = Environment.ExpandEnvironmentVariables(plugin.Arguments);
+                var userargs = Environment.ExpandEnvironmentVariables(plugin.UserArguments);
                 var absgetoptStyle = plugin.GetoptsStyle ? "-w" : "";
 
                 logger.WriteLine($"running {abscmd} {absargs} {absgetoptStyle} \"{path}\"");
