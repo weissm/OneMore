@@ -377,27 +377,18 @@ namespace River.OneMoreAddIn.Commands
 			{
 				plugin.Arguments = argsBox.Text.Trim();
 			}
-			else if (sender == pageNameBox)
-			{
-				plugin.PageName = pageNameBox.Text.Trim();
-			if (plugin.Arguments == null)
-				plugin.Arguments = "";
-
-			saveButton.Enabled =
-				valid &&
-				!string.IsNullOrWhiteSpace(plugin.Name) &&
-				!string.IsNullOrWhiteSpace(plugin.Command);
-
-			okButton.Enabled = valid &&
-				saveButton.Enabled &&
-				(
-					updateRadio.Checked ||
-					(createRadio.Checked && !string.IsNullOrWhiteSpace(plugin.PageName))
-				);
-		}
+            else if (sender == pageNameBox)
+            {
+                plugin.PageName = pageNameBox.Text.Trim();
+            }
+            else if (sender == userArgsBox)
+            {
+                plugin.UserArguments = userArgsBox.Text.Trim();
+            }
+        }
 
 
-		private char[] invalidChars;
+        private char[] invalidChars;
 		private bool ValidateName(string name)
 		{
 			if (pluginsBox.SelectedIndex > 0)
