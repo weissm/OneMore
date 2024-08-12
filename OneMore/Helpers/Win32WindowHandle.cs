@@ -8,7 +8,7 @@ namespace River.OneMoreAddIn
 	using System.Windows.Forms;
 
 
-	internal class Win32WindowHandle : IWin32Window
+	public class Win32WindowHandle : IWin32Window
 	{
 		public Win32WindowHandle(IntPtr windowHandle)
 		{
