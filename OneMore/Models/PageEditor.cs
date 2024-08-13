@@ -104,11 +104,11 @@ namespace River.OneMoreAddIn.Models
         public XElement Anchor { get; private set; }
 
 
-        /// <summary>
-        /// Gets or sets a Boolean indicating whether to maintain the selected state of
-        /// extracted content. Default is to remove selected state.
-        /// </summary>
-        public bool KeepSelected { get; set; }
+		/// <summary>
+		/// Gets or sets a Boolean indicating whether to maintain the selected state of
+		/// extracted content. Default is to remove selected state.
+		/// </summary>
+		public bool KeepSelected { get; set; }
 
 
         /// <summary>
@@ -140,59 +140,6 @@ namespace River.OneMoreAddIn.Models
 				InsertParagraph(content[i], false);
 			}
 		}
-
-        /// <summary>
-        /// Removes the selected attribute from the page
-        /// </summary>
-        public void Deselect(XElement root = null)
-        {
-            // clean up selected attributes; keep only select snippets
-
-            (root ?? page.Root).Descendants().Attributes()
-                .Where(a => a.Name == "selected")
-                .Remove();
-        }
-
-        public void FollowWithCurosr(XElement root)
-        {
-            var last = root.Descendants()
-                .Attributes("selected")
-                .Where(a => a.Value == "all")
-                .Select(a => a.Parent)
-                .LastOrDefault();
-
-            if (last is not null)
-            {
-                Deselect(root);
-
-                // Within an OE, you're allowed one image, one table, inserted file,
-                // or a mix of Ink and Text pieces...
-
-                if (last.Name.LocalName.In("T", "InkWord"))
-                {
-                    if (last.GetCData().Value == string.Empty)
-                    {
-                        last.SetAttributeValue("selected", "all");
-                    }
-                    else
-                    {
-                        last.AddAfterSelf(new XElement(ns + "T",
-                            new XAttribute("selected", "all"),
-                            new XCData(string.Empty))
-                            );
-                    }
-                }
-                else
-                {
-                    last.AddAfterSelf(new XElement(ns + "OE",
-                        new XElement(ns + "T",
-                            new XAttribute("selected", "all"),
-                            new XCData(string.Empty))
-                        ));
-                }
-            }
-        }
-
 
 
         /// <summary>
