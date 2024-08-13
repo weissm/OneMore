@@ -25,43 +25,33 @@ namespace River.OneMoreAddIn.Commands
 		public override async Task Execute(params object[] args)
 		{
 			using var one = new OneNote(out var page, out var ns);
-			page.GetTextCursor();
+			var range = new SelectionRange(page);
+			var selectedRuns = range.GetSelections(true);
 
-			if (page.SelectionScope != SelectionScope.Region)
-			{
-				ShowError("Select markdown text to convert to OneNote format");
-				return;
-			}
-			var editor = new PageEditor(page)
-			{
-				AllContent = (page.SelectionScope != SelectionScope.Region)
-			};
+			var allContent =
+				range.Scope == SelectionScope.TextCursor ||
+				range.Scope == SelectionScope.SpecialCursor;
 
-			IEnumerable<XElement> outlines;
-			if (page.SelectionScope != SelectionScope.Region)
-			{
-				// process all outlines
-				outlines = page.Root.Elements(ns + "Outline");
-			}
-			else
-			{
-				// process only the selected outline
-				outlines = new List<XElement>
-				{
-					page.Root.Elements(ns + "Outline")
-						.Descendants(ns + "T")
-						.First(e => e.Attributes().Any(a => a.Name == "selected" && a.Value == "all"))
-						.FirstAncestor(ns + "Outline")
-				};
-			}
+			var editor = new PageEditor(page) { AllContent = allContent };
+
+			var outlines = allContent
+				? page.Root.Elements(ns + "Outline")
+				: selectedRuns.Select(e => e.FirstAncestor(ns + "Outline")).Distinct();
+
+			// cache all OE objectIDs, compare against later, to only space out new OEs
+			var paragraphIDs = outlines.Descendants(ns + "OE")
+				.Select(e => e.Attribute("objectID").Value).ToList();
 
             // process each outline in sequence. By scoping to an outline, PageReader/Editor
             // can maintain positional context and scope updates to the outline
 
-            foreach (var outline in outlines.ToList())
-            {
-                var content = await editor.ExtractSelectedContent(outline);
-                var paragraphs = content.Elements(ns + "OE").ToList();
+			foreach (var outline in outlines.ToList())
+			{
+				range = new SelectionRange(outline);
+				range.Deselect();
+
+				var content = await editor.ExtractSelectedContent(outline);
+				var paragraphs = content.Elements(ns + "OE").ToList();
 
                 var reader = new PageReader(page)
                 {
@@ -87,24 +77,10 @@ namespace River.OneMoreAddIn.Commands
                     ));
             }
 
-            // temporarily collect all outline IDs
-            var outlineIDs = page.Root.Elements(ns + "Outline")
-                .Select(e => e.Attribute("objectID").Value)
-                // must ToList or Count comparison won't work!
-                .ToList();
+			// update will remove unmodified omHash outlines from the in-memory Page
+			await one.Update(page);
 
-            // update will remove unmodified omHash outlines
-            await one.Update(page);
-
-            // identify only remaining untouched outlines by exclusion
-            var untouchedIDs = outlineIDs.Except(
-				page.Root.Elements(ns + "Outline").Select(e => e.Attribute("objectID").Value))
-				// must ToList or Count comparison won't work!
-				.ToList();
-
-			if (untouchedIDs.Count < outlineIDs.Count)
-			{
-				// Pass 2, cleanup...
+			// Pass 2, cleanup...
 
             // find and convert headers based on styles
             page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
