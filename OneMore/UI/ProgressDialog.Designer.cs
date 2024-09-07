@@ -1,6 +1,6 @@
 ﻿namespace River.OneMoreAddIn.UI
 {
-	partial class ProgressDialog
+	public partial class ProgressDialog
 	{
 		/// <summary>
 		/// Required designer variable.
