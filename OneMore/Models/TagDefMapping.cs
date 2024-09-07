@@ -11,7 +11,7 @@ namespace River.OneMoreAddIn.Models
 	/// Used to copy and merge TagDefs from one page to another, tracking index changes
 	/// from page to page so they can be applied to content when pages are merges
 	/// </summary>
-	internal class TagDefMapping
+	public class TagDefMapping
 	{
 		/// <summary>
 		/// Gets or sets the TagDef element. The setter is used to deep-clone the
