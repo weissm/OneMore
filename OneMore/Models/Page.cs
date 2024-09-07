@@ -22,7 +22,7 @@ namespace River.OneMoreAddIn.Models
 	/// <summary>
 	/// Wraps a page with helper methods
 	/// </summary>
-	internal partial class Page
+	public partial class Page
 	{
 		public int TopOutlinePosition = 86;
 
@@ -138,8 +138,7 @@ namespace River.OneMoreAddIn.Models
 		/// <summary>
 		/// Gets the root element of the page
 		/// </summary>
-		public XElement Root { get; private set; }
-
+		public XElement Root { get; set; }
 
 		// TODO: this is inconsistent! It gets the plain text but allows setting complex CDATA
 		public string Title
