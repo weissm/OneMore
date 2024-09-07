@@ -137,12 +137,6 @@ namespace River.OneMoreAddIn.Commands
         /// <param name="filename"></param>
         public void Save(string filename)
         {
-        /// <summary>
-        /// Save the page as markdown to the specified file.
-        /// </summary>
-        /// <param name="filename"></param>
-        public void Save(string filename)
-        {
 #if !LOG
             path = Path.GetDirectoryName(filename);
 			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
@@ -214,38 +208,7 @@ namespace River.OneMoreAddIn.Commands
         /// <summary>
         /// Save the page as markdown to a string
         /// </summary>
-		public string Save()
-		{
-			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
-			MemoryStream mem = new MemoryStream();
-			StreamWriter sw = new StreamWriter(mem);
-			string retString = "";
-
-			using (writer = sw)
-			{
-				writer.WriteLine($"# {page.Title}");
-
-				page.Root.Elements(ns + "Outline")
-					.Elements(ns + "OEChildren")
-					.Elements()
-					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
-
-				// page level Images outside of any Outline
-				page.Root.Elements(ns + "Image")
-					.ForEach(e => {
-                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); writer.WriteLine();
-					});
-
-				writer.WriteLine();
-				sw.Flush();
-				mem.Position = 0;
-				StreamReader sr = new StreamReader(mem);
-				retString = sr.ReadToEnd();
-			}
-			return retString;
-		}
 		private void Write(XElement element,
-			ref PrefixClass prefix,
 			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
@@ -524,7 +487,6 @@ namespace River.OneMoreAddIn.Commands
 			}
 
             foreach (var anchor in wrapper.Elements("a").ToList())
-            foreach (var anchor in wrapper.Elements("a").ToList())
 			{
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
@@ -544,11 +506,6 @@ namespace River.OneMoreAddIn.Commands
                         anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
 						// anchor.ReplaceWith(anchor.Value);
                     }
-                    else
-					*/
-                    {
-                        anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
-					}
 				}
 			}
 
