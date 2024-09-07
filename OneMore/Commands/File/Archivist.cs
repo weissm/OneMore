@@ -18,7 +18,7 @@ namespace River.OneMoreAddIn.Commands
 	using Resx = Properties.Resources;
 
 
-	internal class Archivist : Loggable
+	public class Archivist : Loggable
 	{
 		private readonly OneNote one;
 		private readonly string home;
