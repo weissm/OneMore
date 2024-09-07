@@ -144,8 +144,6 @@ namespace River.OneMoreAddIn.Commands
 #endif
             {
                 writer.WriteLine($"# {page.Title}");
-            {
-                writer.WriteLine($"# {page.Title}");
 
                 page.Root.Elements(ns + "Outline")
                     .Elements(ns + "OEChildren")
@@ -163,9 +161,6 @@ namespace River.OneMoreAddIn.Commands
                         writer.WriteLine();
                     });
 
-                writer.WriteLine();
-            }
-        }
                 writer.WriteLine();
             }
         }
