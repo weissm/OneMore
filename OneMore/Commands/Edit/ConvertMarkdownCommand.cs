@@ -59,7 +59,6 @@ namespace River.OneMoreAddIn.Commands
 			// can maintain positional context and scope updates to the outline
 
 			foreach (var outline in outlines.ToList())
-			foreach (var outline in outlines.ToList())
 			{
 				range = new SelectionRange(outline);
 				range.Deselect();
