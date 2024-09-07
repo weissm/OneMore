@@ -8,7 +8,8 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
 	using System.Diagnostics;
-	using System.IO;
+    using System.Drawing;
+    using System.IO;
 	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
