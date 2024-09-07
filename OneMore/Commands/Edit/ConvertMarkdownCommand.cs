@@ -12,75 +12,55 @@ namespace River.OneMoreAddIn.Commands
 	using System.Xml.Linq;
 
 
-	/// <summary>
-	/// Convert the selected markdown text to OneNote native content.
-	/// </summary>
-	internal class ConvertMarkdownCommand : Command
-	{
-		public ConvertMarkdownCommand()
-		{
-		}
+    /// <summary>
+    /// Convert the selected markdown text to OneNote native content.
+    /// </summary>
+    internal class ConvertMarkdownCommand : Command
+    {
+        public ConvertMarkdownCommand()
+        {
+        }
 
 
-		public override async Task Execute(params object[] args)
-		{
-			using var one = new OneNote(out var page, out var ns);
-			page.GetTextCursor();
+        public override async Task Execute(params object[] args)
+        {
+            using var one = new OneNote(out var page, out var ns);
+            var range = new SelectionRange(page);
+            var selectedRuns = range.GetSelections(true);
 
-			if (page.SelectionScope != SelectionScope.Region)
-			{
-				ShowError("Select markdown text to convert to OneNote format");
-				return;
-			}
-			var editor = new PageEditor(page)
-			{
-				AllContent = (page.SelectionScope != SelectionScope.Region)
-			};
+            var allContent =
+                range.Scope == SelectionScope.TextCursor ||
+                range.Scope == SelectionScope.SpecialCursor;
 
-			IEnumerable<XElement> outlines;
-			if (page.SelectionScope != SelectionScope.Region)
-			{
-				// process all outlines
-				outlines = page.Root.Elements(ns + "Outline");
-			}
-			else
-			{
-				// process only the selected outline
-				outlines = new List<XElement>
-				{
-					page.Root.Elements(ns + "Outline")
-						.Descendants(ns + "T")
-						.First(e => e.Attributes().Any(a => a.Name == "selected" && a.Value == "all"))
-						.FirstAncestor(ns + "Outline")
-				};
-			}
+            var editor = new PageEditor(page) { AllContent = allContent };
 
-			// process each outline in sequence. By scoping to an outline, PageReader/Editor
-			// can maintain positional context and scope updates to the outline
+            var outlines = allContent
+                ? page.Root.Elements(ns + "Outline")
+                : selectedRuns.Select(e => e.FirstAncestor(ns + "Outline")).Distinct();
 
-			foreach (var outline in outlines.ToList())
-			{
-				range = new SelectionRange(outline);
-				range.Deselect();
+            // cache all OE objectIDs, compare against later, to only space out new OEs
+            var paragraphIDs = outlines.Descendants(ns + "OE")
+                .Select(e => e.Attribute("objectID").Value).ToList();
 
-				var content = await editor.ExtractSelectedContent(outline);
-				logger.Debug("outline - - - - - - - - - - - - - - - - - - - - - -");
-				logger.Debug(content);
-				logger.Debug("/outline");
+            // process each outline in sequence. By scoping to an outline, PageReader/Editor
+            // can maintain positional context and scope updates to the outline
 
-				var paragraphs = content.Elements(ns + "OE").ToList();
+            foreach (var outline in outlines.ToList())
+            {
+                var content = await editor.ExtractSelectedContent(outline);
+                var paragraphs = content.Elements(ns + "OE").ToList();
 
-				var reader = new PageReader(page)
-				{
-					// configure to read for markdown
-					IndentationPrefix = "\n",
-					Indentation = ">",
-					ColumnDivider = "|",
-					ParagraphDivider = "<br>",
-					TableSides = "|"
-				};
+                var reader = new PageReader(page)
+                {
+                    // configure to read for markdown
+                    IndentationPrefix = "\n",
+                    Indentation = ">",
+                    ColumnDivider = "|",
+                    ParagraphDivider = "<br>",
+                    TableSides = "|"
+                };
 
-				var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
 				var text = reader.ReadTextFrom(paragraphs, allContent);
 				text = Regex.Replace(text, @"<br>([\n\r]+)", "$1");
@@ -94,44 +74,27 @@ namespace River.OneMoreAddIn.Commands
                     ));
             }
 
-            // temporarily collect all outline IDs
-            var outlineIDs = page.Root.Elements(ns + "Outline")
-                .Select(e => e.Attribute("objectID").Value)
-                // must ToList or Count comparison won't work!
-                .ToList();
-
-            // update will remove unmodified omHash outlines
+            // update will remove unmodified omHash outlines from the in-memory Page
             await one.Update(page);
 
-            // identify only remaining untouched outlines by exclusion
-            var untouchedIDs = outlineIDs.Except(
-				page.Root.Elements(ns + "Outline").Select(e => e.Attribute("objectID").Value))
-				// must ToList or Count comparison won't work!
-				.ToList();
+            // Pass 2, cleanup...
 
-			if (untouchedIDs.Count < outlineIDs.Count)
-			{
-				// Pass 2, cleanup...
+            // find and convert headers based on styles
+            page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
 
-			// find and convert headers based on styles
-			page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
+            // re-reference paragraphs by ID from newly loaded Page instance
+            var touched = page.Root.Descendants(ns + "OE")
+                .Where(e => !paragraphIDs.Contains(e.Attribute("objectID").Value))
+                .ToList();
 
-			// re-reference paragraphs by ID from newly loaded Page instance
-			var touched = page.Root.Descendants(ns + "OE")
-				.Where(e => !paragraphIDs.Contains(e.Attribute("objectID").Value))
-				.ToList();
+            if (touched.Any())
+            {
+                var converter = new MarkdownConverter(page);
+                converter.RewriteHeadings(touched);
+                converter.SpaceOutParagraphs(touched, 12);
 
-			if (touched.Any())
-			{
-				var converter = new MarkdownConverter(page);
-
-				converter
-					.RewriteHeadings(touched)
-					.RewriteTodo(touched)
-					.SpaceOutParagraphs(touched, 12);
-
-				await one.Update(page);
-			}
-		}
-	}
+                await one.Update(page);
+            }
+        }
+    }
 }
