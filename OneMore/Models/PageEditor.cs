@@ -141,14 +141,26 @@ namespace River.OneMoreAddIn.Models
 			}
 		}
 
+        /// <summary>
+        /// Removes the selected attribute from the page
+        /// </summary>
+        public void Deselect(XElement root = null)
+        {
+            // clean up selected attributes; keep only select snippets
 
-		/// <summary>
-		/// Gets the currently selected text. If the text cursor is positioned over a word but
-		/// with zero selection length then that word is returned; othewise, text from the selected
-		/// region is returned.
-		/// </summary>
-		/// <returns>A string of the selected text</returns>
-		public string GetSelectedText()
+            (root ?? page.Root).Descendants().Attributes()
+                .Where(a => a.Name == "selected")
+                .Remove();
+        }
+
+
+        /// <summary>
+        /// Gets the currently selected text. If the text cursor is positioned over a word but
+        /// with zero selection length then that word is returned; othewise, text from the selected
+        /// region is returned.
+        /// </summary>
+        /// <returns>A string of the selected text</returns>
+        public string GetSelectedText()
 		{
 			var builder = new StringBuilder();
 
