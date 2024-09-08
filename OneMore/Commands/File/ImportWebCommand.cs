@@ -109,9 +109,6 @@ namespace River.OneMoreAddIn.Commands
 			var name = "ReadGitLab";
 			var path = "C:\\Users\\mweiss\\AppData\\Roaming\\OneMore\\Plugins\\" + name + ".js";
 
-			var name = "ReadGitLab";
-			var path = "C:\\Users\\mweiss\\AppData\\Roaming\\OneMore\\Plugins\\" + name + ".js";
-
 			if (importImages)
 			{
 				ImportAsImages();
