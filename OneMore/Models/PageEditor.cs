@@ -153,6 +153,47 @@ namespace River.OneMoreAddIn.Models
                 .Remove();
         }
 
+        public void FollowWithCurosr(XElement root)
+        {
+            var last = root.Descendants()
+                .Attributes("selected")
+                .Where(a => a.Value == "all")
+                .Select(a => a.Parent)
+                .LastOrDefault();
+
+            if (last is not null)
+            {
+                Deselect(root);
+
+                // Within an OE, you're allowed one image, one table, inserted file,
+                // or a mix of Ink and Text pieces...
+
+                if (last.Name.LocalName.In("T", "InkWord"))
+                {
+                    if (last.GetCData().Value == string.Empty)
+                    {
+                        last.SetAttributeValue("selected", "all");
+                    }
+                    else
+                    {
+                        last.AddAfterSelf(new XElement(ns + "T",
+                            new XAttribute("selected", "all"),
+                            new XCData(string.Empty))
+                            );
+                    }
+                }
+                else
+                {
+                    last.AddAfterSelf(new XElement(ns + "OE",
+                        new XElement(ns + "T",
+                            new XAttribute("selected", "all"),
+                            new XCData(string.Empty))
+                        ));
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Gets the currently selected text. If the text cursor is positioned over a word but
