@@ -102,13 +102,12 @@ namespace River.OneMoreAddIn.Models
         /// Otherwise, consumers may want to insert at end of anchor container.
         /// </summary>
         public XElement Anchor { get; private set; }
-
-
-		/// <summary>
-		/// Gets or sets a Boolean indicating whether to maintain the selected state of
-		/// extracted content. Default is to remove selected state.
-		/// </summary>
-		public bool KeepSelected { get; set; }
+        /// <summary>
+        /// Gets the anchor point for reintroducing collated content.
+        /// If this is an OE or HTMLBlock then consumers may want to insert after that.
+        /// Otherwise, consumers may want to insert at end of anchor container.
+        /// </summary>
+        public XElement Anchor { get; private set; }
 
 
         /// <summary>
