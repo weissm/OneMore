@@ -152,18 +152,6 @@ namespace River.OneMoreAddIn.Models
                 .Remove();
         }
 
-        /// <summary>
-        /// Removes the selected attribute from the page
-        /// </summary>
-        public void Deselect(XElement root = null)
-        {
-            // clean up selected attributes; keep only select snippets
-
-            (root ?? page.Root).Descendants().Attributes()
-                .Where(a => a.Name == "selected")
-                .Remove();
-        }
-
 
         /// <summary>
         /// Gets the currently selected text. If the text cursor is positioned over a word but
