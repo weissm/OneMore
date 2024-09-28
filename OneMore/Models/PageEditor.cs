@@ -105,6 +105,13 @@ namespace River.OneMoreAddIn.Models
 
 
         /// <summary>
+        /// Gets or sets a Boolean indicating whether to maintain the selected state of
+        /// extracted content. Default is to remove selected state.
+        /// </summary>
+        public bool KeepSelected { get; set; }
+
+
+        /// <summary>
         /// Signals EditSelected(), EditNode() and, by dependency, GetSelectedText() methods
         /// that editor scanning should be done in reverse doc-order. This must be set prior
         /// to calling one of those method to take effect.
