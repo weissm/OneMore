@@ -15,10 +15,8 @@ namespace River.OneMoreAddIn.Commands
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
+	using System.Threading.Tasks;
+	using System.Xml.Linq;
 	using Resx = Properties.Resources;
 
 
@@ -443,7 +441,6 @@ namespace River.OneMoreAddIn.Commands
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
 					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
-					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
@@ -454,8 +451,6 @@ namespace River.OneMoreAddIn.Commands
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
 				{
-                    // Link working with latest markdown releases
-                    /*
                     // Link working with latest markdown releases
                     /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
@@ -489,10 +484,6 @@ namespace River.OneMoreAddIn.Commands
 			{
 				return;
 			}
-			if (contained)
-            {
-				raw = raw.Replace("\n", "<br>");
-            }
 			if (startParagraph && raw.Length > 0 && raw.StartsWith("#"))
 			{
 				writer.Write("\\");
@@ -599,7 +590,6 @@ namespace River.OneMoreAddIn.Commands
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
 						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
-
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
