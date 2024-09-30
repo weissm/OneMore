@@ -23,7 +23,6 @@ namespace River.OneMoreAddIn.Commands
 
 
     internal class MarkdownWriter
-    internal class MarkdownWriter
 	{
 		private sealed class Context
 		{
@@ -600,8 +599,6 @@ namespace River.OneMoreAddIn.Commands
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
 						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
-						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
-
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
