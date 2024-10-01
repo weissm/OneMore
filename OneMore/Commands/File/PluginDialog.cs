@@ -67,7 +67,7 @@ namespace River.OneMoreAddIn.Commands
 					"failLockRadio",
 					"trialBox",
 					"saveButton",
-					"okButton", // Run
+					"runButton", // Run
 					"cancelButton=word_Cancel"
 				});
 			}
@@ -123,6 +123,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public bool TrialRun => trialBox.Checked;
 
+		public bool OptionType => optionTypeBox.Checked;
 
 		public string PageName { set; private get; }
 

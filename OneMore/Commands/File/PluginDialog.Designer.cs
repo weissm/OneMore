@@ -57,6 +57,7 @@
 			this.failLockRadio = new River.OneMoreAddIn.UI.MoreRadioButton();
 			this.pageGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
 			this.sectionGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
+			this.optionTypeBox = new River.OneMoreAddIn.UI.MoreCheckBox();
 			this.trialBox = new River.OneMoreAddIn.UI.MoreCheckBox();
 			this.userArgsLabel = new System.Windows.Forms.Label();
 			this.userArgsBox = new River.OneMoreAddIn.UI.MoreTextBox();
@@ -73,10 +74,11 @@
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.cancelButton.ImageOver = null;
-			this.cancelButton.Location = new System.Drawing.Point(654, 569);
+			this.cancelButton.Location = new System.Drawing.Point(634, 455);
+			this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.ShowBorder = true;
-			this.cancelButton.Size = new System.Drawing.Size(120, 35);
+			this.cancelButton.Size = new System.Drawing.Size(107, 28);
 			this.cancelButton.StylizeImage = false;
 			this.cancelButton.TabIndex = 12;
 			this.cancelButton.Text = "Cancel";
@@ -84,7 +86,7 @@
 			this.cancelButton.ThemedFore = null;
 			this.cancelButton.UseVisualStyleBackColor = true;
 			// 
-			// okButton
+			// runButton
 			// 
 			this.runButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.runButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
@@ -92,10 +94,11 @@
 			this.runButton.Enabled = false;
 			this.runButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.runButton.ImageOver = null;
-			this.runButton.Location = new System.Drawing.Point(528, 569);
-			this.runButton.Name = "okButton";
+			this.runButton.Location = new System.Drawing.Point(522, 455);
+			this.runButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.runButton.Name = "runButton";
 			this.runButton.ShowBorder = true;
-			this.runButton.Size = new System.Drawing.Size(120, 35);
+			this.runButton.Size = new System.Drawing.Size(107, 28);
 			this.runButton.StylizeImage = false;
 			this.runButton.TabIndex = 11;
 			this.runButton.Text = "Run";
@@ -108,19 +111,20 @@
 			// 
 			this.cmdLabel.AutoSize = true;
 			this.cmdLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.cmdLabel.Location = new System.Drawing.Point(18, 127);
+			this.cmdLabel.Location = new System.Drawing.Point(16, 102);
 			this.cmdLabel.Name = "cmdLabel";
-			this.cmdLabel.Size = new System.Drawing.Size(82, 20);
+			this.cmdLabel.Size = new System.Drawing.Size(69, 16);
 			this.cmdLabel.TabIndex = 2;
 			this.cmdLabel.Text = "Command";
 			// 
 			// cmdBox
 			// 
 			this.cmdBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.cmdBox.Location = new System.Drawing.Point(149, 122);
+			this.cmdBox.Location = new System.Drawing.Point(143, 98);
+			this.cmdBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.cmdBox.Name = "cmdBox";
 			this.cmdBox.ProcessEnterKey = false;
-			this.cmdBox.Size = new System.Drawing.Size(578, 26);
+			this.cmdBox.Size = new System.Drawing.Size(514, 22);
 			this.cmdBox.TabIndex = 2;
 			this.cmdBox.ThemedBack = null;
 			this.cmdBox.ThemedFore = null;
@@ -131,10 +135,11 @@
 			this.browseButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
 			this.browseButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.browseButton.ImageOver = null;
-			this.browseButton.Location = new System.Drawing.Point(733, 122);
+			this.browseButton.Location = new System.Drawing.Point(663, 98);
+			this.browseButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.browseButton.Name = "browseButton";
 			this.browseButton.ShowBorder = true;
-			this.browseButton.Size = new System.Drawing.Size(36, 31);
+			this.browseButton.Size = new System.Drawing.Size(32, 25);
 			this.browseButton.StylizeImage = false;
 			this.browseButton.TabIndex = 3;
 			this.browseButton.Text = "...";
@@ -147,9 +152,10 @@
 			// 
 			this.updateRadio.Checked = true;
 			this.updateRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.updateRadio.Location = new System.Drawing.Point(6, 25);
+			this.updateRadio.Location = new System.Drawing.Point(5, 20);
+			this.updateRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.updateRadio.Name = "updateRadio";
-			this.updateRadio.Size = new System.Drawing.Size(185, 25);
+			this.updateRadio.Size = new System.Drawing.Size(164, 20);
 			this.updateRadio.TabIndex = 0;
 			this.updateRadio.TabStop = true;
 			this.updateRadio.Text = "Update current page";
@@ -159,9 +165,10 @@
 			// createRadio
 			// 
 			this.createRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.createRadio.Location = new System.Drawing.Point(6, 55);
+			this.createRadio.Location = new System.Drawing.Point(5, 44);
+			this.createRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.createRadio.Name = "createRadio";
-			this.createRadio.Size = new System.Drawing.Size(229, 25);
+			this.createRadio.Size = new System.Drawing.Size(204, 20);
 			this.createRadio.TabIndex = 1;
 			this.createRadio.Text = "Create a new page named";
 			this.createRadio.UseVisualStyleBackColor = true;
@@ -170,10 +177,11 @@
 			// 
 			this.pageNameBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pageNameBox.Enabled = false;
-			this.pageNameBox.Location = new System.Drawing.Point(31, 85);
+			this.pageNameBox.Location = new System.Drawing.Point(28, 68);
+			this.pageNameBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.pageNameBox.Name = "pageNameBox";
 			this.pageNameBox.ProcessEnterKey = false;
-			this.pageNameBox.Size = new System.Drawing.Size(469, 26);
+			this.pageNameBox.Size = new System.Drawing.Size(417, 22);
 			this.pageNameBox.TabIndex = 2;
 			this.pageNameBox.ThemedBack = null;
 			this.pageNameBox.ThemedFore = null;
@@ -185,9 +193,10 @@
 			this.childBox.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.childBox.Enabled = false;
 			this.childBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.childBox.Location = new System.Drawing.Point(31, 117);
+			this.childBox.Location = new System.Drawing.Point(28, 94);
+			this.childBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.childBox.Name = "childBox";
-			this.childBox.Size = new System.Drawing.Size(206, 25);
+			this.childBox.Size = new System.Drawing.Size(183, 20);
 			this.childBox.StylizeImage = false;
 			this.childBox.TabIndex = 3;
 			this.childBox.Text = "as child of current page";
@@ -199,10 +208,11 @@
 			// argsBox
 			// 
 			this.argsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.argsBox.Location = new System.Drawing.Point(149, 156);
+			this.argsBox.Location = new System.Drawing.Point(143, 125);
+			this.argsBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.argsBox.Name = "argsBox";
 			this.argsBox.ProcessEnterKey = false;
-			this.argsBox.Size = new System.Drawing.Size(578, 26);
+			this.argsBox.Size = new System.Drawing.Size(514, 22);
 			this.argsBox.TabIndex = 4;
 			this.argsBox.ThemedBack = null;
 			this.argsBox.ThemedFore = null;
@@ -212,9 +222,9 @@
 			// 
 			this.argsLabel.AutoSize = true;
 			this.argsLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.argsLabel.Location = new System.Drawing.Point(18, 162);
+			this.argsLabel.Location = new System.Drawing.Point(16, 130);
 			this.argsLabel.Name = "argsLabel";
-			this.argsLabel.Size = new System.Drawing.Size(87, 20);
+			this.argsLabel.Size = new System.Drawing.Size(71, 16);
 			this.argsLabel.TabIndex = 11;
 			this.argsLabel.Text = "Arguments";
 			// 
@@ -223,10 +233,11 @@
 			this.browseArgsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
 			this.browseArgsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.browseArgsButton.ImageOver = null;
-			this.browseArgsButton.Location = new System.Drawing.Point(733, 153);
+			this.browseArgsButton.Location = new System.Drawing.Point(663, 122);
+			this.browseArgsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.browseArgsButton.Name = "browseArgsButton";
 			this.browseArgsButton.ShowBorder = true;
-			this.browseArgsButton.Size = new System.Drawing.Size(36, 31);
+			this.browseArgsButton.Size = new System.Drawing.Size(32, 25);
 			this.browseArgsButton.StylizeImage = false;
 			this.browseArgsButton.TabIndex = 5;
 			this.browseArgsButton.Text = "...";
@@ -242,10 +253,11 @@
 			this.saveButton.Enabled = false;
 			this.saveButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.saveButton.ImageOver = null;
-			this.saveButton.Location = new System.Drawing.Point(402, 569);
+			this.saveButton.Location = new System.Drawing.Point(410, 455);
+			this.saveButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.saveButton.Name = "saveButton";
 			this.saveButton.ShowBorder = true;
-			this.saveButton.Size = new System.Drawing.Size(120, 35);
+			this.saveButton.Size = new System.Drawing.Size(107, 28);
 			this.saveButton.StylizeImage = false;
 			this.saveButton.TabIndex = 10;
 			this.saveButton.Text = "Save";
@@ -258,9 +270,9 @@
 			// 
 			this.pluginsLabel.AutoSize = true;
 			this.pluginsLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.pluginsLabel.Location = new System.Drawing.Point(18, 35);
+			this.pluginsLabel.Location = new System.Drawing.Point(16, 28);
 			this.pluginsLabel.Name = "pluginsLabel";
-			this.pluginsLabel.Size = new System.Drawing.Size(60, 20);
+			this.pluginsLabel.Size = new System.Drawing.Size(51, 16);
 			this.pluginsLabel.TabIndex = 15;
 			this.pluginsLabel.Text = "Plugins";
 			// 
@@ -268,10 +280,10 @@
 			// 
 			this.pluginsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.pluginsBox.FormattingEnabled = true;
-			this.pluginsBox.Location = new System.Drawing.Point(149, 28);
-			this.pluginsBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.pluginsBox.Location = new System.Drawing.Point(143, 22);
+			this.pluginsBox.Margin = new System.Windows.Forms.Padding(4);
 			this.pluginsBox.Name = "pluginsBox";
-			this.pluginsBox.Size = new System.Drawing.Size(578, 28);
+			this.pluginsBox.Size = new System.Drawing.Size(514, 24);
 			this.pluginsBox.TabIndex = 0;
 			this.pluginsBox.SelectedIndexChanged += new System.EventHandler(this.ViewPredefined);
 			// 
@@ -279,20 +291,20 @@
 			// 
 			this.nameLabel.AutoSize = true;
 			this.nameLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.nameLabel.Location = new System.Drawing.Point(18, 83);
+			this.nameLabel.Location = new System.Drawing.Point(16, 66);
 			this.nameLabel.Name = "nameLabel";
-			this.nameLabel.Size = new System.Drawing.Size(51, 20);
+			this.nameLabel.Size = new System.Drawing.Size(44, 16);
 			this.nameLabel.TabIndex = 18;
 			this.nameLabel.Text = "Name";
 			// 
 			// nameBox
 			// 
 			this.nameBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.nameBox.Location = new System.Drawing.Point(149, 75);
-			this.nameBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.nameBox.Location = new System.Drawing.Point(143, 60);
+			this.nameBox.Margin = new System.Windows.Forms.Padding(4);
 			this.nameBox.Name = "nameBox";
 			this.nameBox.ProcessEnterKey = false;
-			this.nameBox.Size = new System.Drawing.Size(578, 26);
+			this.nameBox.Size = new System.Drawing.Size(514, 22);
 			this.nameBox.TabIndex = 1;
 			this.nameBox.ThemedBack = null;
 			this.nameBox.ThemedFore = null;
@@ -301,24 +313,25 @@
 			// errorBox
 			// 
 			this.errorBox.Image = ((System.Drawing.Image)(resources.GetObject("errorBox.Image")));
-			this.errorBox.Location = new System.Drawing.Point(733, 75);
-			this.errorBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.errorBox.Location = new System.Drawing.Point(663, 60);
+			this.errorBox.Margin = new System.Windows.Forms.Padding(4);
 			this.errorBox.Name = "errorBox";
-			this.errorBox.Size = new System.Drawing.Size(26, 35);
+			this.errorBox.Size = new System.Drawing.Size(23, 28);
 			this.errorBox.TabIndex = 19;
 			this.errorBox.TabStop = false;
 			this.errorBox.Visible = false;
 			// 
 			// timeoutBox
 			// 
-			this.timeoutBox.Location = new System.Drawing.Point(149, 250);
+			this.timeoutBox.Location = new System.Drawing.Point(143, 200);
+			this.timeoutBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.timeoutBox.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
 			this.timeoutBox.Name = "timeoutBox";
-			this.timeoutBox.Size = new System.Drawing.Size(120, 26);
+			this.timeoutBox.Size = new System.Drawing.Size(107, 22);
 			this.timeoutBox.TabIndex = 7;
 			this.timeoutBox.Value = new decimal(new int[] {
             15,
@@ -331,9 +344,9 @@
 			// 
 			this.timeoutLabel.AutoSize = true;
 			this.timeoutLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.timeoutLabel.Location = new System.Drawing.Point(18, 252);
+			this.timeoutLabel.Location = new System.Drawing.Point(16, 202);
 			this.timeoutLabel.Name = "timeoutLabel";
-			this.timeoutLabel.Size = new System.Drawing.Size(66, 20);
+			this.timeoutLabel.Size = new System.Drawing.Size(56, 16);
 			this.timeoutLabel.TabIndex = 21;
 			this.timeoutLabel.Text = "Timeout";
 			// 
@@ -347,9 +360,10 @@
             "Current notebook and its sections",
             "Current notebook and its pages",
             "All notebooks and their pages"});
-			this.targetBox.Location = new System.Drawing.Point(149, 293);
+			this.targetBox.Location = new System.Drawing.Point(143, 234);
+			this.targetBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.targetBox.Name = "targetBox";
-			this.targetBox.Size = new System.Drawing.Size(314, 28);
+			this.targetBox.Size = new System.Drawing.Size(280, 24);
 			this.targetBox.TabIndex = 8;
 			this.targetBox.SelectedIndexChanged += new System.EventHandler(this.ChangeTarget);
 			// 
@@ -357,9 +371,9 @@
 			// 
 			this.targetLabel.AutoSize = true;
 			this.targetLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.targetLabel.Location = new System.Drawing.Point(18, 296);
+			this.targetLabel.Location = new System.Drawing.Point(16, 237);
 			this.targetLabel.Name = "targetLabel";
-			this.targetLabel.Size = new System.Drawing.Size(55, 20);
+			this.targetLabel.Size = new System.Drawing.Size(47, 16);
 			this.targetLabel.TabIndex = 23;
 			this.targetLabel.Text = "Target";
 			// 
@@ -367,9 +381,10 @@
 			// 
 			this.skipLockRadio.Checked = true;
 			this.skipLockRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.skipLockRadio.Location = new System.Drawing.Point(9, 28);
+			this.skipLockRadio.Location = new System.Drawing.Point(8, 22);
+			this.skipLockRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.skipLockRadio.Name = "skipLockRadio";
-			this.skipLockRadio.Size = new System.Drawing.Size(185, 25);
+			this.skipLockRadio.Size = new System.Drawing.Size(164, 20);
 			this.skipLockRadio.TabIndex = 0;
 			this.skipLockRadio.TabStop = true;
 			this.skipLockRadio.Text = "Skip locked sections";
@@ -378,9 +393,10 @@
 			// failLockRadio
 			// 
 			this.failLockRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.failLockRadio.Location = new System.Drawing.Point(9, 58);
+			this.failLockRadio.Location = new System.Drawing.Point(8, 46);
+			this.failLockRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.failLockRadio.Name = "failLockRadio";
-			this.failLockRadio.Size = new System.Drawing.Size(231, 25);
+			this.failLockRadio.Size = new System.Drawing.Size(205, 20);
 			this.failLockRadio.TabIndex = 1;
 			this.failLockRadio.Text = "Fail if any section is locked";
 			this.failLockRadio.UseVisualStyleBackColor = true;
@@ -392,9 +408,11 @@
 			this.pageGroup.Controls.Add(this.pageNameBox);
 			this.pageGroup.Controls.Add(this.childBox);
 			this.pageGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.pageGroup.Location = new System.Drawing.Point(149, 339);
+			this.pageGroup.Location = new System.Drawing.Point(143, 271);
+			this.pageGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.pageGroup.Name = "pageGroup";
-			this.pageGroup.Size = new System.Drawing.Size(620, 159);
+			this.pageGroup.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.pageGroup.Size = new System.Drawing.Size(551, 127);
 			this.pageGroup.TabIndex = 26;
 			this.pageGroup.TabStop = false;
 			this.pageGroup.ThemedBorder = null;
@@ -405,14 +423,30 @@
 			this.sectionGroup.Controls.Add(this.skipLockRadio);
 			this.sectionGroup.Controls.Add(this.failLockRadio);
 			this.sectionGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.sectionGroup.Location = new System.Drawing.Point(505, 238);
+			this.sectionGroup.Location = new System.Drawing.Point(460, 190);
+			this.sectionGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.sectionGroup.Name = "sectionGroup";
-			this.sectionGroup.Size = new System.Drawing.Size(264, 98);
+			this.sectionGroup.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.sectionGroup.Size = new System.Drawing.Size(235, 78);
 			this.sectionGroup.TabIndex = 27;
 			this.sectionGroup.TabStop = false;
 			this.sectionGroup.ThemedBorder = null;
 			this.sectionGroup.ThemedFore = null;
 			this.sectionGroup.Visible = false;
+			// 
+			// optionTypeBox
+			// 
+			this.optionTypeBox.AutoSize = true;
+			this.optionTypeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+			this.optionTypeBox.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.optionTypeBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.optionTypeBox.Location = new System.Drawing.Point(550, 415);
+			this.optionTypeBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.optionTypeBox.Name = "optionTypeBox";
+			this.optionTypeBox.Size = new System.Drawing.Size(180, 20);
+			this.optionTypeBox.TabIndex = 10;
+			this.optionTypeBox.Text = "Enable getopts style args";
+			this.optionTypeBox.UseVisualStyleBackColor = true;
 			// 
 			// trialBox
 			// 
@@ -420,9 +454,10 @@
 			this.trialBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
 			this.trialBox.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.trialBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.trialBox.Location = new System.Drawing.Point(155, 520);
+			this.trialBox.Location = new System.Drawing.Point(146, 416);
+			this.trialBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trialBox.Name = "trialBox";
-			this.trialBox.Size = new System.Drawing.Size(427, 25);
+			this.trialBox.Size = new System.Drawing.Size(380, 20);
 			this.trialBox.StylizeImage = false;
 			this.trialBox.TabIndex = 9;
 			this.trialBox.Text = "Trial run - keep cache file and do not update OneNote";
@@ -434,19 +469,20 @@
 			// 
 			this.userArgsLabel.AutoSize = true;
 			this.userArgsLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.userArgsLabel.Location = new System.Drawing.Point(18, 208);
+			this.userArgsLabel.Location = new System.Drawing.Point(16, 166);
 			this.userArgsLabel.Name = "userArgsLabel";
-			this.userArgsLabel.Size = new System.Drawing.Size(125, 20);
+			this.userArgsLabel.Size = new System.Drawing.Size(103, 16);
 			this.userArgsLabel.TabIndex = 30;
 			this.userArgsLabel.Text = "User Arguments";
 			// 
 			// userArgsBox
 			// 
 			this.userArgsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.userArgsBox.Location = new System.Drawing.Point(149, 205);
+			this.userArgsBox.Location = new System.Drawing.Point(143, 164);
+			this.userArgsBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.userArgsBox.Name = "userArgsBox";
 			this.userArgsBox.ProcessEnterKey = false;
-			this.userArgsBox.Size = new System.Drawing.Size(578, 26);
+			this.userArgsBox.Size = new System.Drawing.Size(514, 22);
 			this.userArgsBox.TabIndex = 6;
 			this.userArgsBox.ThemedBack = null;
 			this.userArgsBox.ThemedFore = null;
@@ -455,11 +491,12 @@
 			// PluginDialog
 			// 
 			this.AcceptButton = this.runButton;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLight;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(792, 625);
+			this.ClientSize = new System.Drawing.Size(746, 500);
+			this.Controls.Add(this.optionTypeBox);
 			this.Controls.Add(this.userArgsLabel);
 			this.Controls.Add(this.userArgsBox);
 			this.Controls.Add(this.trialBox);
@@ -486,10 +523,11 @@
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PluginDialog";
-			this.Padding = new System.Windows.Forms.Padding(15);
+			this.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Run Plugin";
@@ -535,5 +573,6 @@
 		private UI.MoreCheckBox trialBox;
 		private System.Windows.Forms.Label userArgsLabel;
 		private UI.MoreTextBox userArgsBox;
+		private UI.MoreCheckBox optionTypeBox;
 	}
 }
