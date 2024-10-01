@@ -5245,6 +5245,9 @@ Umkehren</value>
   <data name="word_Delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="word_Run" xml:space="preserve">
+    <value>Start</value>
+  </data>
   <data name="word_Distance" xml:space="preserve">
     <value>Distanz</value>
   </data>
