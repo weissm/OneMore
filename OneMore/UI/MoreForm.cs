@@ -102,7 +102,7 @@ namespace River.OneMoreAddIn.UI
 			var rect = new Native.Rectangle();
 			using (var one = new OneNote())
 			{
-			Native.GetWindowRect(one.WindowHandle, ref rect);
+				Native.GetWindowRect(one.WindowHandle, ref rect);
 			}
 
 			var yoffset = (int)(Height * topDelta / 100.0);
