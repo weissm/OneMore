@@ -66,8 +66,9 @@ namespace River.OneMoreAddIn.Commands
 					"skipLockRadio",
 					"failLockRadio",
 					"trialBox",
+					"optionTypeBox",
 					"saveButton",
-					"okButton", // Run
+					"runButton", // Run
 					"cancelButton=word_Cancel"
 				});
 			}
@@ -116,13 +117,13 @@ namespace River.OneMoreAddIn.Commands
 			PageName = pageNameBox.Text,
 			Timeout = (int)timeoutBox.Value,
 			SkipLocked = skipLockRadio.Checked,
+			OptionType = optionTypeBox.Checked,
 			// set path for replay functionality
 			Path = plugin.Path
 		};
 
 
 		public bool TrialRun => trialBox.Checked;
-
 
 		public string PageName { set; private get; }
 
@@ -538,6 +539,11 @@ namespace River.OneMoreAddIn.Commands
 		private void OK(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
+		}
+
+		private void optionTypeBox_CheckedChanged(object sender, EventArgs e)
+		{
+			plugin.OptionType = optionTypeBox.Checked;
 		}
 	}
 }
