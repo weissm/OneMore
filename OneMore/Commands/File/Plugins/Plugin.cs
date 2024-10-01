@@ -38,6 +38,7 @@ namespace River.OneMoreAddIn.Commands
 		private string pageName;
 		private bool skipLocked;
 		private int timeout;
+		private bool optionType;
 
 
 		public Plugin()
@@ -66,6 +67,7 @@ namespace River.OneMoreAddIn.Commands
 			PageName = source.PageName;
 			SkipLocked = source.SkipLocked;
 			Timeout = source.Timeout;
+			OptionType = source.OptionType;
 		}
 
 
@@ -171,7 +173,6 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-
 		/// <summary>
 		/// Gets or sets the name of the new page to create, if CreateNewPage is true.
 		/// </summary>
@@ -193,6 +194,15 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
+
+		/// <summary>
+		/// Gets or sets a value indicating whether to skip or fail locked sections.
+		/// </summary>
+		public bool OptionType
+		{
+			get => optionType;
+			set => SetField(ref optionType, value, nameof(OptionType));
+		}
 
 		/// <summary>
 		/// Gets or sets the timeout of the plugin.
@@ -244,8 +254,9 @@ namespace River.OneMoreAddIn.Commands
 				if (PageName != source.PageName) return false;
 				if (SkipLocked != source.SkipLocked) return false;
 				if (Timeout != source.Timeout) return false;
+				if (OptionType != source.OptionType) return false;
 
-				return true;
+					return true;
 			}
 
 			return false;
