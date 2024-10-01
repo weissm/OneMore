@@ -57,6 +57,7 @@
 			this.failLockRadio = new River.OneMoreAddIn.UI.MoreRadioButton();
 			this.pageGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
 			this.sectionGroup = new River.OneMoreAddIn.UI.MoreGroupBox();
+            this.getoptsRadio = new River.OneMoreAddIn.UI.MoreRadioButton();
 			this.trialBox = new River.OneMoreAddIn.UI.MoreCheckBox();
 			this.userArgsLabel = new System.Windows.Forms.Label();
 			this.userArgsBox = new River.OneMoreAddIn.UI.MoreTextBox();
@@ -451,6 +452,19 @@
 			this.userArgsBox.ThemedBack = null;
 			this.userArgsBox.ThemedFore = null;
 			this.userArgsBox.TextChanged += new System.EventHandler(this.ChangeText);
+			this.userArgsBox.TextChanged += new System.EventHandler(this.ChangeText);
+            // getoptsRadio
+            // 
+            this.getoptsRadio.AutoSize = true;
+            this.getoptsRadio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.getoptsRadio.Location = new System.Drawing.Point(237, 170);
+            this.getoptsRadio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.getoptsRadio.Name = "getoptsRadio";
+            this.getoptsRadio.Size = new System.Drawing.Size(180, 20);
+            this.getoptsRadio.TabIndex = 0;
+            this.getoptsRadio.Text = "Enable getopts style args";
+            this.getoptsRadio.UseVisualStyleBackColor = true;
+            this.getoptsRadio.CheckedChanged += new System.EventHandler(this.checkGetoptsRadio_CheckedChanged);
 			// 
 			// PluginDialog
 			// 
@@ -460,6 +474,7 @@
 			this.BackColor = System.Drawing.SystemColors.ControlLight;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(792, 625);
+            this.Controls.Add(this.getoptsRadio);
 			this.Controls.Add(this.userArgsLabel);
 			this.Controls.Add(this.userArgsBox);
 			this.Controls.Add(this.trialBox);
@@ -535,5 +550,6 @@
 		private UI.MoreCheckBox trialBox;
 		private System.Windows.Forms.Label userArgsLabel;
 		private UI.MoreTextBox userArgsBox;
+        private UI.MoreRadioButton getoptsRadio;
 	}
 }
