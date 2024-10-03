@@ -492,7 +492,7 @@ namespace River.OneMoreAddIn
 			}).Result;
 		}
 
-/// <summary>
+		/// <summary>
 		/// Populates the Favorites dynamic menu
 		/// </summary>
 		/// <param name="control"></param>
