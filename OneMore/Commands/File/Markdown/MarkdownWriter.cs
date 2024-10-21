@@ -150,6 +150,7 @@ namespace River.OneMoreAddIn.Commands
             }
         }
 
+
         /// <summary>
 		/// 
         /// </summary>
@@ -181,10 +182,14 @@ namespace River.OneMoreAddIn.Commands
 
 					case "OE":
 						{
+//							if (!contained || (element.NextNode == null)) // not in table cell
 							if (!contained) // not in table cell
 							{
 								writer.WriteLine("  ");
-							}
+							} else if (contained)
+            			    {
+								writer.Write("<br>  ");
+                			}
 
 							var context = DetectQuickStyle(element);
 							Write(element, prefix, depth, contained);
@@ -240,7 +245,7 @@ namespace River.OneMoreAddIn.Commands
 								startOfLine = false;
 							}
 
-							WriteText(element.GetCData(), startOfLine);
+							WriteText(element.GetCData(), startOfLine, contained);
 
 							if (context is not null)
 							{
@@ -285,8 +290,11 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Table":
-				        var indent = new String(Quote[0], depth);
-						WriteTable(element, indent);
+						if (depth > 0)
+						{
+							writer.Write(new String(Quote[0], depth));
+						}
+						WriteTable(element);
 						break;
 				}
 			}
@@ -405,11 +413,11 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteText(XCData cdata, bool startOfLine)
+		private void WriteText(XCData cdata, bool startOfLine, bool contained)
 		{
 			cdata.Value = cdata.Value
-				.Replace("<br>", "") // usually followed by NL so leave it there
-				// .Replace("[", "\\[")   // escape to prevent confusion with md links
+				.Replace("<br>", "  ") // usually followed by NL so leave it there
+				.Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
@@ -428,20 +436,17 @@ namespace River.OneMoreAddIn.Commands
 				span.ReplaceWith(new XText(text));
 			}
 
-            foreach (var anchor in wrapper.Elements("a").ToList())
+            foreach (var anchor in wrapper.Elements("a"))
 			{
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
 				{
-                    // Link working with latest markdown releases
-                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
 						anchor.ReplaceWith(anchor.Value);
                     }
                     else
-					*/
                     {
                         anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
                     }
@@ -453,6 +458,14 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
+			if (raw.Trim().IsNullOrEmpty())
+			{
+				return;
+			}
+			if (contained)
+            {
+				raw = raw.Replace("\n", "<br>  ");
+            }
 			if (startOfLine && raw.Length > 0 && raw.StartsWith("#"))
 			{
 				writer.Write("\\");
@@ -548,12 +561,12 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteTable(XElement element, string indents)
+		private void WriteTable(XElement element)
 		{
 			#region WriteRow(TableRow row)
 			void WriteRow(TableRow row)
 			{
-				writer.Write(indents + "| ");
+				writer.Write("| ");
 				foreach (var cell in row.Cells)
 				{
 					cell.Root
@@ -570,6 +583,7 @@ namespace River.OneMoreAddIn.Commands
 			var table = new Table(element);
 
 			// table needs a blank line before it
+			writer.WriteLine();
 			writer.WriteLine();
 
 			var rows = table.Rows;
@@ -597,11 +611,11 @@ namespace River.OneMoreAddIn.Commands
 			// separator - - - - - - - - - - - - - - - - -
 
 			writer.Write("|");
-                    for (int i = 0; i < table.ColumnCount; i++)
-                    {
-                        writer.Write(" :--- |");
-                    }
-                    writer.WriteLine();
+            for (int i = 0; i < table.ColumnCount; i++)
+            {
+                writer.Write(" :--- |");
+            }
+            writer.WriteLine();
 
 			// data - - - - - - - - - - - - - - - - - - - -
 
