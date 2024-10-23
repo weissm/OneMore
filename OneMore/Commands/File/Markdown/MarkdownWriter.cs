@@ -399,7 +399,6 @@ namespace River.OneMoreAddIn.Commands
 				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
 			}
 			return retValue;
-			return retValue;
 		}
 
 
