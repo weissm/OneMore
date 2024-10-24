@@ -2,7 +2,8 @@
 // Copyright © 2021 Steven M Cohn. All rights reserved.
 //************************************************************************************************
 
-#define LOGx
+// mask this definition to debug raw markdown processing to ILogger instead of a file/folder
+#define WriteToDisk
 
 namespace River.OneMoreAddIn.Commands
 {
@@ -20,7 +21,7 @@ namespace River.OneMoreAddIn.Commands
 	using Resx = Properties.Resources;
 
 
-	internal class MarkdownWriter
+	internal class MarkdownWriter : Loggable
 	{
 		private sealed class Context
 		{
@@ -40,15 +41,15 @@ namespace River.OneMoreAddIn.Commands
 		private readonly bool withAttachments;
 		private readonly List<Style> quickStyles;
 		private readonly Stack<Context> contexts;
+		private bool saveAttachments;
 		private int imageCounter;
-		private bool copyMode;
-#if LOG
-		private readonly ILogger writer = Logger.Current;
-#else
+#if WriteToDisk
 		private StreamWriter writer;
 		private string path;
 		private string attachmentPath;
 		private string attachmentFolder;
+#else
+		private readonly ILogger writer = Logger.Current;
 #endif
 		// helper class to pass parameter
 		public class PrefixClass
@@ -66,13 +67,15 @@ namespace River.OneMoreAddIn.Commands
 
 		}
 
-		public MarkdownWriter(Page page, bool withAttachments)
+		public MarkdownWriter(Page page, bool saveAttachments)
 		{
 			this.page = page;
 			ns = page.Namespace;
+
 			quickStyles = page.GetQuickStyles();
 			contexts = new Stack<Context>();
-			this.withAttachments = withAttachments;
+
+			this.saveAttachments = saveAttachments;
 		}
 
 
@@ -83,7 +86,6 @@ namespace River.OneMoreAddIn.Commands
 		/// <param name="content"></param>
 		public async Task Copy(XElement content)
 		{
-			copyMode = true;
 			using var stream = new MemoryStream();
 			using (writer = new StreamWriter(stream))
 			{
@@ -107,13 +109,20 @@ namespace River.OneMoreAddIn.Commands
 
 				stream.Position = 0;
 				using var reader = new StreamReader(stream);
+				var text = await reader.ReadToEndAsync();
+
+				logger.Debug("markdown - - - - - - - -");
+				logger.Debug(text);
+				logger.Debug("end markdown - - - - - -");
 
 				var clippy = new ClipboardProvider();
-				var success = await clippy.SetText(await reader.ReadToEndAsync(), true);
+				var success = await clippy.SetText(text, true);
 				if (!success)
 				{
 					MoreMessageBox.ShowError(null, Resx.Clipboard_locked);
 				}
+
+				logger.Debug("copied");
 			}
 		}
 
@@ -124,20 +133,18 @@ namespace River.OneMoreAddIn.Commands
 		/// <param name="filename"></param>
 		public void Save(string filename)
 		{
-#if !LOG
-			path = Path.GetDirectoryName(filename);
+#if WriteToDisk
+			var path = Path.GetDirectoryName(filename);
 			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
 			attachmentPath = Path.Combine(path, attachmentFolder);
 
 			using (writer = File.CreateText(filename))
 #endif
 			{
+				saveAttachments = true;
+
 				writer.WriteLine($"# {page.Title}");
 
-				page.Root.Elements(ns + "Outline")
-					.Elements(ns + "OEChildren")
-					.Elements()
-					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 				page.Root.Elements(ns + "Outline")
 					.Elements(ns + "OEChildren")
 					.Elements()
@@ -251,18 +258,17 @@ namespace River.OneMoreAddIn.Commands
 					break;
 
 				case "Image":
-					if (!copyMode)
+					if (dive)
 					{
 						WriteImage(element);
 					}
 					dive = false;
 					break;
 
+				case "InkDrawing":
 				case "InsertedFile":
-					if (!copyMode)
-					{
+				case "MediaFile":
 						WriteFile(element);
-					}
 					dive = false;
 					break;
 
@@ -294,13 +300,14 @@ namespace River.OneMoreAddIn.Commands
 				if (!contained && (element.NextNode != null))
 				{
 					writer.WriteLine("");
-				}
-				else if (contained)
+				} else if (contained)
 				{
 					writer.Write("<br>");
 				}
 				prefix.indent = keepindents;
 			}
+
+			logger.Debug("out");
 		}
 
 
@@ -484,16 +491,17 @@ namespace River.OneMoreAddIn.Commands
 
 		private void WriteImage(XElement element)
 		{
+			if (saveAttachments)
+		{
 			var data = element.Element(ns + "Data");
 			var binhex = Convert.FromBase64String(data.Value);
 
 			using var stream = new MemoryStream(binhex, 0, binhex.Length);
 			using var image = Image.FromStream(stream);
 
-			var prefix = PathHelper.CleanFileName(page.Title).Replace(" ", string.Empty);
-			var name = $"{prefix}_{++imageCounter}.png";
+				var name = $"{attachmentFolder}_{++imageCounter}.png";
 			var filename = Path.Combine(attachmentPath, name);
-#if !LOG
+#if WriteToDisk
 			if (!Directory.Exists(attachmentPath))
 			{
 				Directory.CreateDirectory(attachmentPath);
@@ -503,6 +511,11 @@ namespace River.OneMoreAddIn.Commands
 #endif
 			var imgPath = Path.Combine(attachmentFolder, name);
 			writer.Write($"![Image-{imageCounter}]({imgPath})");
+			}
+			else
+			{
+				writer.Write($"(*Image:{++imageCounter}.png*)");
+			}
 		}
 
 
@@ -528,13 +541,13 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 
-			if (withAttachments)
+			if (saveAttachments)
 			{
 				var target = Path.Combine(attachmentPath, name);
 
 				try
 				{
-#if !LOG
+#if WriteToDisk
 					if (!Directory.Exists(attachmentPath))
 					{
 						Directory.CreateDirectory(attachmentPath);
