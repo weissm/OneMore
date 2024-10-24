@@ -167,10 +167,10 @@ namespace River.OneMoreAddIn.Commands
         }
 
 
-        /// <summary>
-        /// Save the page as markdown to a string
-        /// </summary>
-		private void Write(XElement element,
+		/// <summary>
+		/// Save the page as markdown to a string
+		/// </summary>
+		private void Write(XElement container,
 			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
@@ -183,118 +183,121 @@ namespace River.OneMoreAddIn.Commands
 			// Tag, List, and T, so startOfLine can be handled locally rather than recursively.
 			var startOfLine = true;
 
-			logger.Debug($"Write({container.Name.LocalName}, prefix:[{prefix}], depth:{depth}, contained:{contained})");
+			logger.Debug($"Write({container.Name.LocalName}, prefix:[{prefix}], depth:{dive}, contained:{contained})");
 
 			foreach (var element in container.Elements())
 			{
 				var n = element.Name.LocalName;
-				var m = $"- [prefix:[{prefix}] depth:{depth} start:{startOfLine} contained:{contained} element {n}";
+				var m = $"- [prefix:[{prefix}] depth:{dive} start:{startOfLine} contained:{contained} element {n}";
 				logger.Debug(n == "T" ? $"{m} [{element.Value}]" : m);
 
-			switch (element.Name.LocalName)
-			{
-				case "OEChildren":
-					pushed = DetectQuickStyle(element);
-					if (contained)
-                    {
-						writer.Write("<br>");
-                    }
-					else
-                    {
-						writer.WriteLine("");
-					}
-					prefix.indent = $"{Indent}{prefix.indent}";
-					break;
+
+				switch (element.Name.LocalName)
+				{
+					case "OEChildren":
+						pushed = DetectQuickStyle(element);
+						if (contained)
+						{
+							writer.Write("<br>");
+						}
+						else
+						{
+							writer.WriteLine("");
+						}
+						prefix.indent = $"{Indent}{prefix.indent}";
+						break;
 
 					case "OE":
-					pushed = DetectQuickStyle(element);
-					startpara = true;
+						pushed = DetectQuickStyle(element);
+						startpara = true;
 						break;
 
-				case "Tag":
-					prefix.tags += WriteTag(element, contained);
-					break;
-
-				case "T":
-					if (element.GetCData().Value.Trim().IsNullOrEmpty())
-                    {
+					case "Tag":
+						prefix.tags += WriteTag(element, contained);
 						break;
-							}
-					if (element.GetCData().Value.Trim().IsNullOrEmpty())
-                    {
+
+					case "T":
+						if (element.GetCData().Value.Trim().IsNullOrEmpty())
+						{
+							break;
+						}
+						if (element.GetCData().Value.Trim().IsNullOrEmpty())
+						{
+							break;
+						}
+						pushed = DetectQuickStyle(element);
+						Stylize(prefix);
+						prefix.tags = "";
+						prefix.bullets = "";
+						WriteText(element.GetCData(), startpara, contained);
 						break;
-                    }
-					pushed = DetectQuickStyle(element);
-					Stylize(prefix);
-					prefix.tags = ""; 
-					prefix.bullets = "";
-					WriteText(element.GetCData(), startpara, contained);
-					break;
 
-				case "Bullet":
-					// in md dash needs to be first in line
-					prefix.bullets = "- " + prefix.bullets;
-					break;
+					case "Bullet":
+						// in md dash needs to be first in line
+						prefix.bullets = "- " + prefix.bullets;
+						break;
 
-				case "Number":
-					// in md number needs to be first in line
-					prefix.bullets = "1. " + prefix.bullets;
+					case "Number":
+						// in md number needs to be first in line
+						prefix.bullets = "1. " + prefix.bullets;
 
-					break;
+						break;
 
-				case "Image":
-					if (depth > 0)
+					case "Image":
+						if (dive)
+						{
+							writer.Write(new String(Quote[0], 1));
+						}
+						WriteImage(element);
+						dive = false;
+
+						break;
+
+					case "InkDrawing":
+					case "InsertedFile":
+					case "MediaFile":
+						WriteFile(element);
+						dive = false;
+						break;
+
+					case "Table":
+						WriteTable(element, prefix.indent);
+						dive = false;
+						break;
+				}
+
+				if (dive && element.HasElements)
+				{
+					foreach (var child in element.Elements())
 					{
-							writer.Write(new String(Quote[0], depth));
+						Write(child, ref prefix, startpara, contained);
+						startpara = false;
 					}
-					WriteImage(element);
-					dive = false;
-
-					break;
-
-				case "InkDrawing":
-				case "InsertedFile":
-				case "MediaFile":
-					WriteFile(element);
-					dive = false;
-					break;
-
-				case "Table":
-					WriteTable(element, prefix.indent);
-					dive = false;
-						break;
-							}
-
-			if (dive && element.HasElements)
-			{
-				foreach (var child in element.Elements())
-				{
-					Write(child, ref prefix, startpara, contained);
-					startpara = false;
-				}
-			}
-
-			var context = pushed ? contexts.Pop() : null;
-			if (element.Name.LocalName == "OE")
-			{
-				if (context != null && !string.IsNullOrEmpty(context.Enclosure))
-				{
-					writer.Write(context.Enclosure);
 				}
 
-				// if not in a table cell
-				// or in a cell and this OE is followed by another OE
-				if (!contained && (element.NextNode != null))
+				var context = pushed ? contexts.Pop() : null;
+				if (element.Name.LocalName == "OE")
 				{
-					writer.WriteLine("");
-				} else if (contained)
-                {
-					writer.Write("<br>");
-                }
-				prefix.indent = keepindents;
-			}
+					if (context != null && !string.IsNullOrEmpty(context.Enclosure))
+					{
+						writer.Write(context.Enclosure);
+					}
 
-			logger.Debug("out");
+					// if not in a table cell
+					// or in a cell and this OE is followed by another OE
+					if (!contained && (element.NextNode != null))
+					{
+						writer.WriteLine("");
+					}
+					else if (contained)
+					{
+						writer.Write("<br>");
+					}
+					prefix.indent = keepindents;
+				}
+
+				logger.Debug("out");
+			}
 		}
 
 
