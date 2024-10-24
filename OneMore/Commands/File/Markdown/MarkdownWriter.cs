@@ -2,8 +2,7 @@
 // Copyright © 2021 Steven M Cohn. All rights reserved.
 //************************************************************************************************
 
-// mask this definition to debug raw markdown processing to ILogger instead of a file/folder
-#define WriteToDisk
+#define LOGx
 
 namespace River.OneMoreAddIn.Commands
 {
@@ -11,50 +10,45 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.Styles;
 	using River.OneMoreAddIn.UI;
 	using System;
-    using System.Collections.Generic;
+	using System.Collections.Generic;
 	using System.Drawing;
 	using System.Drawing.Imaging;
 	using System.IO;
 	using System.Linq;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
+	using System.Threading.Tasks;
+	using System.Xml.Linq;
 	using Resx = Properties.Resources;
 
 
-	internal class MarkdownWriter : Loggable
+	internal class MarkdownWriter
 	{
 		private sealed class Context
 		{
-			//// the container element
-			//public string Container;
-			//// true if at start of line
-			//public bool StartOfLine;
-			// index of quick style from container
+			public string Owner;
 			public int QuickStyleIndex;
-			// accent enclosure char, asterisk* or backquote`
-			public string Accent;
 			public string Enclosure;
 		}
 
-		// Note that if pasting md text directly into OneNote, there's no good way to indent text
-		// and prevent OneNote from auto-formatting. Closest alt is to use a string of nbsp's
-		// but that conflicts with other directives like headings and list numbering. One way is
-		// to substitute indentations (e.g., OEChildren) with the blockquote directive instead.
-		private const string Indent = "  "; //">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
-		private const string Quote = ">";
+		// no good way to indent text; closest alternative is to use a string of nbsp but that
+		// conflicts with other directives like headings and list numbering. so substitute
+		// indentations (OEChildren) with the blockquote directive instead
+		//		private const string Indent = ">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+		private const string Indent = "  "; //&nbsp;&nbsp;&nbsp;&nbsp;";
 
 		private readonly Page page;
 		private readonly XNamespace ns;
+		private readonly bool withAttachments;
 		private readonly List<Style> quickStyles;
 		private readonly Stack<Context> contexts;
-		private bool saveAttachments;
 		private int imageCounter;
-#if WriteToDisk
-        private StreamWriter writer;
+		private bool copyMode;
+#if LOG
+		private readonly ILogger writer = Logger.Current;
+#else
+		private StreamWriter writer;
+		private string path;
 		private string attachmentPath;
 		private string attachmentFolder;
-#else
-		private readonly ILogger writer = Logger.Current;
 #endif
 		// helper class to pass parameter
 		public class PrefixClass
@@ -72,15 +66,13 @@ namespace River.OneMoreAddIn.Commands
 
 		}
 
-		public MarkdownWriter(Page page, bool saveAttachments)
+		public MarkdownWriter(Page page, bool withAttachments)
 		{
 			this.page = page;
 			ns = page.Namespace;
-
 			quickStyles = page.GetQuickStyles();
 			contexts = new Stack<Context>();
-
-			this.saveAttachments = saveAttachments;
+			this.withAttachments = withAttachments;
 		}
 
 
@@ -91,6 +83,7 @@ namespace River.OneMoreAddIn.Commands
 		/// <param name="content"></param>
 		public async Task Copy(XElement content)
 		{
+			copyMode = true;
 			using var stream = new MemoryStream();
 			using (writer = new StreamWriter(stream))
 			{
@@ -100,77 +93,104 @@ namespace River.OneMoreAddIn.Commands
 				{
 					content.Elements(ns + "Outline")
 						.Elements(ns + "OEChildren")
-                        .Elements()
-                        .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+						.Elements()
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 				}
 				else
 				{
-                    content.Elements()
-                        .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+					content.Elements()
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 				}
 
 				await writer.WriteLineAsync();
 				await writer.FlushAsync();
 
-                stream.Position = 0;
-                using var reader = new StreamReader(stream);
-								var text = await reader.ReadToEndAsync();
-
-				logger.Debug("markdown - - - - - - - -");
-				logger.Debug(text);
-				logger.Debug("end markdown - - - - - -");
+				stream.Position = 0;
+				using var reader = new StreamReader(stream);
 
 				var clippy = new ClipboardProvider();
-				var success = await clippy.SetText(text, true);
+				var success = await clippy.SetText(await reader.ReadToEndAsync(), true);
 				if (!success)
 				{
 					MoreMessageBox.ShowError(null, Resx.Clipboard_locked);
 				}
-
-				logger.Debug("copied");
 			}
 		}
 
 
-        /// <summary>
-        /// Save the page as markdown to the specified file.
-        /// </summary>
-        /// <param name="filename"></param>
-        public void Save(string filename)
-        {
-#if WriteToDisk
-			var path = Path.GetDirectoryName(filename);
+		/// <summary>
+		/// Save the page as markdown to the specified file.
+		/// </summary>
+		/// <param name="filename"></param>
+		public void Save(string filename)
+		{
+#if !LOG
+			path = Path.GetDirectoryName(filename);
 			attachmentFolder = Path.GetFileNameWithoutExtension(filename);
 			attachmentPath = Path.Combine(path, attachmentFolder);
 
 			using (writer = File.CreateText(filename))
 #endif
 			{
-				saveAttachments = true;
+				writer.WriteLine($"# {page.Title}");
 
-                writer.WriteLine($"# {page.Title}");
-
-                page.Root.Elements(ns + "Outline")
-                    .Elements(ns + "OEChildren")
-                    .Elements()
-                    .ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
 
 				// page level Images outside of any Outline
-                page.Root.Elements(ns + "Image")
-                    .ForEach(e => {
-                        PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
-                        writer.WriteLine();
-                    });
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+						PrefixClass prefix = new PrefixClass(); Write(e, ref prefix);
+						writer.WriteLine();
+					});
 
-                writer.WriteLine();
-            }
-        }
-
+				writer.WriteLine();
+			}
+		}
 
 		/// <summary>
 		/// Save the page as markdown to a string
 		/// </summary>
-		private void Write(XElement container,
+		public string Save()
+		{
+			// see here: https://www.codeproject.com/Questions/1275226/How-to-get-special-characters-in-Csharp-using-memo
+			MemoryStream mem = new MemoryStream();
+			StreamWriter sw = new StreamWriter(mem);
+			string retString = "";
+
+			using (writer = sw)
+			{
+				writer.WriteLine($"# {page.Title}");
+
+				page.Root.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Elements()
+					.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+
+				// page level Images outside of any Outline
+				page.Root.Elements(ns + "Image")
+					.ForEach(e => {
+						PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); writer.WriteLine();
+					});
+
+				writer.WriteLine();
+				sw.Flush();
+				mem.Position = 0;
+				StreamReader sr = new StreamReader(mem);
+				retString = sr.ReadToEnd();
+			}
+			return retString;
+		}
+		/// <summary>
+		/// Save the page as markdown to a string
+		/// </summary>
+		private void Write(XElement element,
 			ref PrefixClass prefix,
 			bool startpara = false,
 			bool contained = false)
@@ -179,148 +199,127 @@ namespace River.OneMoreAddIn.Commands
 			bool dive = true;
 			var keepindents = prefix.indent;
 
-			// Lines start at the beginning of each paragraph/OE which contains a flat list of
-			// Tag, List, and T, so startOfLine can be handled locally rather than recursively.
-			var startOfLine = true;
-
-			logger.Debug($"Write({container.Name.LocalName}, prefix:[{prefix}], depth:{dive}, contained:{contained})");
-
-			foreach (var element in container.Elements())
+			switch (element.Name.LocalName)
 			{
-				var n = element.Name.LocalName;
-				var m = $"- [prefix:[{prefix}] depth:{dive} start:{startOfLine} contained:{contained} element {n}";
-				logger.Debug(n == "T" ? $"{m} [{element.Value}]" : m);
-
-
-				switch (element.Name.LocalName)
-				{
-					case "OEChildren":
-						pushed = DetectQuickStyle(element);
-						if (contained)
-						{
-							writer.Write("<br>");
-						}
-						else
-						{
-							writer.WriteLine("");
-						}
-						prefix.indent = $"{Indent}{prefix.indent}";
-						break;
-
-					case "OE":
-						pushed = DetectQuickStyle(element);
-						startpara = true;
-						break;
-
-					case "Tag":
-						prefix.tags += WriteTag(element, contained);
-						break;
-
-					case "T":
-						if (element.GetCData().Value.Trim().IsNullOrEmpty())
-						{
-							break;
-						}
-						if (element.GetCData().Value.Trim().IsNullOrEmpty())
-						{
-							break;
-						}
-						pushed = DetectQuickStyle(element);
-						Stylize(prefix);
-						prefix.tags = "";
-						prefix.bullets = "";
-						WriteText(element.GetCData(), startpara, contained);
-						break;
-
-					case "Bullet":
-						// in md dash needs to be first in line
-						prefix.bullets = "- " + prefix.bullets;
-						break;
-
-					case "Number":
-						// in md number needs to be first in line
-						prefix.bullets = "1. " + prefix.bullets;
-
-						break;
-
-					case "Image":
-						if (dive)
-						{
-							writer.Write(new String(Quote[0], 1));
-						}
-						WriteImage(element);
-						dive = false;
-
-						break;
-
-					case "InkDrawing":
-					case "InsertedFile":
-					case "MediaFile":
-						WriteFile(element);
-						dive = false;
-						break;
-
-					case "Table":
-						WriteTable(element, prefix.indent);
-						dive = false;
-						break;
-				}
-
-				if (dive && element.HasElements)
-				{
-					foreach (var child in element.Elements())
-					{
-						Write(child, ref prefix, startpara, contained);
-						startpara = false;
-					}
-				}
-
-				var context = pushed ? contexts.Pop() : null;
-				if (element.Name.LocalName == "OE")
-				{
-					if (context != null && !string.IsNullOrEmpty(context.Enclosure))
-					{
-						writer.Write(context.Enclosure);
-					}
-
-					// if not in a table cell
-					// or in a cell and this OE is followed by another OE
-					if (!contained && (element.NextNode != null))
-					{
-						writer.WriteLine("");
-					}
-					else if (contained)
+				case "OEChildren":
+					pushed = DetectQuickStyle(element);
+					if (contained)
 					{
 						writer.Write("<br>");
 					}
-					prefix.indent = keepindents;
+					else
+					{
+						writer.WriteLine("");
+					}
+					prefix.indent = $"{Indent}{prefix.indent}";
+					break;
+
+				case "OE":
+					pushed = DetectQuickStyle(element);
+					startpara = true;
+					break;
+
+				case "Tag":
+					prefix.tags += WriteTag(element, contained);
+					break;
+
+				case "T":
+					if (element.GetCData().Value.Trim().IsNullOrEmpty())
+					{
+						break;
+					}
+					if (element.GetCData().Value.Trim().IsNullOrEmpty())
+					{
+						break;
+					}
+					pushed = DetectQuickStyle(element);
+					Stylize(prefix);
+					prefix.tags = "";
+					prefix.bullets = "";
+					WriteText(element.GetCData(), startpara, contained);
+					break;
+
+				case "Bullet":
+					// in md dash needs to be first in line
+					prefix.bullets = "- " + prefix.bullets;
+					break;
+
+				case "Number":
+					// in md number needs to be first in line
+					prefix.bullets = "1. " + prefix.bullets;
+
+					break;
+
+				case "Image":
+					if (!copyMode)
+					{
+						WriteImage(element);
+					}
+					dive = false;
+					break;
+
+				case "InsertedFile":
+					if (!copyMode)
+					{
+						WriteFile(element);
+					}
+					dive = false;
+					break;
+
+				case "Table":
+					WriteTable(element, prefix.indent);
+					dive = false;
+					break;
+			}
+
+			if (dive && element.HasElements)
+			{
+				foreach (var child in element.Elements())
+				{
+					Write(child, ref prefix, startpara, contained);
+					startpara = false;
+				}
+			}
+
+			var context = pushed ? contexts.Pop() : null;
+			if (element.Name.LocalName == "OE")
+			{
+				if (context != null && !string.IsNullOrEmpty(context.Enclosure))
+				{
+					writer.Write(context.Enclosure);
 				}
 
-				logger.Debug("out");
+				// if not in a table cell
+				// or in a cell and this OE is followed by another OE
+				if (!contained && (element.NextNode != null))
+				{
+					writer.WriteLine("");
+				}
+				else if (contained)
+				{
+					writer.Write("<br>");
+				}
+				prefix.indent = keepindents;
 			}
 		}
 
 
 		private bool DetectQuickStyle(XElement element)
-			{
+		{
 			if (element.GetAttributeValue("quickStyleIndex", out int index))
 			{
 				var context = new Context
 				{
+					Owner = element.Name.LocalName,
 					QuickStyleIndex = index
 				};
-
 				var quick = quickStyles.First(q => q.Index == index);
 				if (quick != null)
 				{
-					var name = quick.Name.ToLower();
-
 					// cite becomes italic
-					if (name.In("cite", "citation")) context.Accent = "*";
-					else if (name.Contains("code")) context.Accent = "`";
-
+					if (quick.Name == "cite") context.Enclosure = "*";
+					else if (quick.Name == "code") context.Enclosure = "`";
 				}
-
 				contexts.Push(context);
 				return true;
 			}
@@ -337,7 +336,7 @@ namespace River.OneMoreAddIn.Commands
 			var quick = quickStyles.First(q => q.Index == context.QuickStyleIndex);
 			switch (quick.Name)
 			{
-				case "PageTitle": 
+				case "PageTitle":
 				case "h1": styleprefix = ("# "); break;
 				case "h2": styleprefix = ("## "); break;
 				case "h3": styleprefix = ("### "); break;
@@ -394,22 +393,23 @@ namespace River.OneMoreAddIn.Commands
 				case 117: retValue = (":notebook: "); break;            // notebook																	
 				case 118: retValue = (":mailbox: "); break;        // contact
 				case 121: retValue = (":musical_note: "); break;   // music to listen to
-				case 131: retValue = (":secret: "); break;			// password
+				case 131: retValue = (":secret: "); break;          // password
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
 				case 132: retValue = (":book: "); break;           // book to read
 				case 140: retValue = (":zap: "); break;            // lightning bolt																	
-				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
+				default: retValue = (":o: "); break;                                       // retValue = (":o: "); break;
 			}
-			return retValue;
 			return retValue;
 		}
 
 
-		private void WriteText(XCData cdata, bool startOfLine, bool contained)
+		private void WriteText(XCData cdata, bool startParagraph, bool contained)
 		{
+			// avoid overwriting input and creating side effects, e.g. when reusing page var
 			cdata.Value = cdata.Value
-				.Replace("<br>", "   ") // usually followed by NL so leave it there
-				.Replace("[", "\\[")   // escape to prevent confusion with md links
+				.Replace("<br>", "") // usually followed by NL so leave it there
+									 // .Replace("<br>", "  ") // usually followed by NL so leave it there
+									 // .Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
 			var wrapper = cdata.GetWrapper();
@@ -423,25 +423,32 @@ namespace River.OneMoreAddIn.Commands
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
 					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
+					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
 			}
 
-            foreach (var anchor in wrapper.Elements("a"))
+			foreach (var anchor in wrapper.Elements("a").ToList())
 			{
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
 				{
+					// Link working with latest markdown releases
+					/*
+                    // Link working with latest markdown releases
+                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
-						anchor.ReplaceWith(anchor.Value);
+						// anchor.ReplaceWith(anchor.Value);
                     }
                     else
-                    {
-                        anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
-                    }
+					*/
+					{
+						anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
+						// anchor.ReplaceWith(anchor.Value);
+					}
 				}
 			}
 
@@ -455,54 +462,47 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 			if (contained)
-            {
+			{
 				raw = raw.Replace("\n", "<br>");
-            }
+			}
 			if (raw.Trim().IsNullOrEmpty())
 			{
 				return;
 			}
 			if (contained)
-            {
+			{
 				raw = raw.Replace("\n", "<br>");
-            }
-			if (startOfLine && raw.Length > 0 && raw.StartsWith("#"))
+			}
+			if (startParagraph && raw.Length > 0 && raw.StartsWith("#"))
 			{
 				writer.Write("\\");
 			}
 
-			logger.Debug($"text [{raw}]");
 			writer.Write(raw);
 		}
 
 
 		private void WriteImage(XElement element)
 		{
-			if (saveAttachments)
-			{
-				var data = element.Element(ns + "Data");
-				var binhex = Convert.FromBase64String(data.Value);
+			var data = element.Element(ns + "Data");
+			var binhex = Convert.FromBase64String(data.Value);
 
-				using var stream = new MemoryStream(binhex, 0, binhex.Length);
-				using var image = Image.FromStream(stream);
+			using var stream = new MemoryStream(binhex, 0, binhex.Length);
+			using var image = Image.FromStream(stream);
 
-				var name = $"{attachmentFolder}_{++imageCounter}.png";
+			var prefix = PathHelper.CleanFileName(page.Title).Replace(" ", string.Empty);
+			var name = $"{prefix}_{++imageCounter}.png";
 			var filename = Path.Combine(attachmentPath, name);
-#if WriteToDisk
+#if !LOG
 			if (!Directory.Exists(attachmentPath))
 			{
 				Directory.CreateDirectory(attachmentPath);
 			}
 
-				image.Save(filename, ImageFormat.Png);
+			image.Save(filename, ImageFormat.Png);
 #endif
-				var imgPath = Path.Combine(attachmentFolder, name);
-				writer.Write($"![Image-{imageCounter}]({imgPath})");
-			}
-			else
-			{
-				writer.Write($"(*Image:{++imageCounter}.png*)");
-			}
+			var imgPath = Path.Combine(attachmentFolder, name);
+			writer.Write($"![Image-{imageCounter}]({imgPath})");
 		}
 
 
@@ -528,13 +528,13 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 
-			if (saveAttachments)
+			if (withAttachments)
 			{
 				var target = Path.Combine(attachmentPath, name);
 
 				try
 				{
-#if WriteToDisk
+#if !LOG
 					if (!Directory.Exists(attachmentPath))
 					{
 						Directory.CreateDirectory(attachmentPath);
@@ -578,24 +578,24 @@ namespace River.OneMoreAddIn.Commands
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent:indents);  Write(e, ref prefix, contained: true); });
-						
+						.ForEach(e => { PrefixClass prefix = new PrefixClass(set_indent: indents); Write(e, ref prefix, contained: true); });
+
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
 				if (first_row)
 				{
 					first_row = false;
-                    // separator
-                    writer.Write(indents + "|");
-            for (int i = 0; i < table.ColumnCount; i++)
-            {
-                writer.Write(" :--- |");
-            }
-            writer.WriteLine();
-                }
+					// separator
+					writer.Write(indents + "|");
+					for (int i = 0; i < table.ColumnCount; i++)
+					{
+						writer.Write(" :--- |");
+					}
+					writer.WriteLine();
+				}
 
-            }
-        }
+			}
+		}
 	}
 }
