@@ -105,7 +105,8 @@ namespace River.OneMoreAddIn.Commands
 				}
 				else
 				{
-					Write(content);
+					PrefixClass prefix = new PrefixClass();                 
+					Write(content, ref prefix);
 				}
 
 				await writer.WriteLineAsync();
