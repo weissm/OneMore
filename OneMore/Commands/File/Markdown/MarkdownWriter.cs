@@ -105,8 +105,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 				else
 				{
-					content.Elements()
-						.ForEach(e => { PrefixClass prefix = new PrefixClass(); Write(e, ref prefix); });
+					Write(content);
 				}
 
 				await writer.WriteLineAsync();
@@ -392,7 +391,7 @@ namespace River.OneMoreAddIn.Commands
 		private void WriteText(XCData cdata, bool startOfLine, bool contained)
 		{
 			cdata.Value = cdata.Value
-				.Replace("<br>", "   ") // usually followed by NL so leave it there
+				.Replace("<br>", "  ") // usually followed by NL so leave it there
 				.Replace("[", "\\[")   // escape to prevent confusion with md links
 				.TrimEnd();
 
@@ -407,7 +406,6 @@ namespace River.OneMoreAddIn.Commands
 					var style = new Style(span.Attribute("style").Value);
 					if (style.IsStrikethrough) text = $"~~{text}~~";
 					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
-					if (style.IsItalic) text = $"_{text.TrimEnd()}_{"".PadRight(text.Length - text.TrimEnd().Length, ' ')}";
 					if (style.IsBold) text = $"**{text}**";
 				}
 				span.ReplaceWith(new XText(text));
@@ -418,17 +416,12 @@ namespace River.OneMoreAddIn.Commands
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
 				{
-					// Link working with latest markdown releases
-					/*
-                    // Link working with latest markdown releases
-                    /*
 					if (href.StartsWith("onenote:") || href.StartsWith("onemore:"))
 					{
 						// removes the hyperlink but preserves the text
-						// anchor.ReplaceWith(anchor.Value);
+						anchor.ReplaceWith(anchor.Value);
                     }
                     else
-					*/
 					{
 						anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
 						// anchor.ReplaceWith(anchor.Value);
@@ -441,14 +434,6 @@ namespace River.OneMoreAddIn.Commands
 				.Replace("&lt;", "\\<")
 				.Replace("|", "\\|");
 
-			if (raw.Trim().IsNullOrEmpty())
-			{
-				return;
-			}
-			if (contained)
-			{
-				raw = raw.Replace("\n", "<br>");
-			}
 			if (raw.Trim().IsNullOrEmpty())
 			{
 				return;
