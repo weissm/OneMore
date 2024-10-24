@@ -8,7 +8,8 @@ namespace River.OneMoreAddIn.Commands
 	using River.OneMoreAddIn.UI;
 	using System;
 	using System.Diagnostics;
-	using System.IO;
+    using System.Drawing;
+    using System.IO;
 	using System.Linq;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -365,7 +366,25 @@ namespace River.OneMoreAddIn.Commands
 					return null;
 				}
 
-				if (plugin.Target == PluginTarget.Page)
+                if (plugin.Timeout == 0)
+                {
+                    //                   UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
+                    using (var box = new MoreMessageBox())
+                    {
+                        box.SetIcon(MessageBoxIcon.Information);
+                        box.SetButtons(MessageBoxButtons.YesNo);
+                        box.AppendMessage("Plugin " + plugin.Name + " successfully executed.", Color.Black);
+                        box.AppendMessage("\n\nDo you want to start debugging?", Color.Black);
+                        box.ShowLogLink();
+                        if (box.ShowDialog(owner) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(plugin.Command);
+                        }
+                    }
+                    return null;
+                }
+
+                if (plugin.TargetPage)
 				{
 					var candidate = new Page(root);
 					// must optimize before we can validate schema...
