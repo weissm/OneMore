@@ -39,7 +39,7 @@ namespace River.OneMoreAddIn.Commands
 		// and prevent OneNote from auto-formatting. Closest alt is to use a string of nbsp's
 		// but that conflicts with other directives like headings and list numbering. One way is
 		// to substitute indentations (e.g., OEChildren) with the blockquote directive instead.
-		private const string Indent = "    "; //">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
+		private const string Indent = "  "; //">"; //&nbsp;&nbsp;&nbsp;&nbsp;";
 		private const string Quote = ">";
 
 		private readonly Page page;
@@ -55,7 +55,21 @@ namespace River.OneMoreAddIn.Commands
 #else
 		private readonly ILogger writer = Logger.Current;
 #endif
+		// helper class to pass parameter
+		public class PrefixClass
+		{
+			public string indents = "";
+			public string tags = "";
+			public string bullets = "";
 
+			public PrefixClass(string set_indents = "", string set_tags = "", string set_bullets = "")
+			{
+				indents = set_indents;
+				tags = set_tags;
+				bullets = set_bullets;
+			}
+
+		}
 
 		public MarkdownWriter(Page page, bool saveAttachments)
 		{
@@ -150,15 +164,25 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+		/// <summary>
+		/// prepare for recursive processing
+		/// </summary>
+		/// <param name="container">typically an OEChildren with elements and OEChildren</param>
+		private void Write(XElement container)
+		{
+			var prefix = new PrefixClass();
+			Write(container, ref prefix);
+		}
+
 
 		/// <summary>
-		/// 
+		/// Save the page as markdown to a string
 		/// </summary>
 		/// <param name="container">typically an OEChildren with elements and OEChildren</param>
 		/// <param name="prefix">prefix used to indent markdown lines</param>
 		/// <param name="contained"></param>
 		private void Write(XElement container,
-			string prefix = "",
+			ref PrefixClass prefix,
 			int depth = 0,
 			bool contained = false)
 		{
@@ -166,133 +190,98 @@ namespace River.OneMoreAddIn.Commands
 			// Tag, List, and T, so startOfLine can be handled locally rather than recursively.
 			var startOfLine = true;
 
-			logger.Debug($"Write({container.Name.LocalName}, prefix:[{prefix}], depth:{depth}, contained:{contained})");
+			logger.Debug($"Write({container.Name.LocalName}, prefix:[{prefix.indents}], depth:{depth}, contained:{contained})");
 
 			foreach (var element in container.Elements())
 			{
 				var n = element.Name.LocalName;
-				var m = $"- [prefix:[{prefix}] depth:{depth} start:{startOfLine} contained:{contained} element {n}";
+				var m = $"- [prefix:[{prefix.indents}] depth:{depth} start:{startOfLine} contained:{contained} element {n}";
 				logger.Debug(n == "T" ? $"{m} [{element.Value}]" : m);
 
-				switch (element.Name.LocalName)
-				{
-					case "OEChildren":
-						Write(element, $"{Indent}{prefix}", depth + 1, contained);
-						break;
+			switch (element.Name.LocalName)
+			{
+				case "OEChildren":
+						{
+							var prefixnew = new PrefixClass($"{Indent}{prefix.indents}");
+							Write(element, ref prefixnew, depth + 1, contained);
+							break;
+						}
 
 					case "OE":
 						{
+							var context = DetectQuickStyle(element);
+							Write(element, ref prefix, depth, contained);
+
+							if (context is not null)
+							{
+								if (!string.IsNullOrEmpty(context.Accent))
+								{
+									// close the accent
+									writer.Write(context.Accent);
+								}
+
+								contexts.Pop();
+							}
+						}
+						break;
+
+				case "Tag":
+					prefix.tags += WriteTag(element, contained);
+					break;
+
+				case "T":
+						{
+							Stylize(prefix, contained);
+							WriteText(element.GetCData(), startOfLine, contained);
+
+							prefix.tags = "";
+							prefix.bullets = "";
+							startOfLine = false;
 							if (!contained) // not in table cell
 							{
 								writer.WriteLine("  ");
 							}
-
-							var context = DetectQuickStyle(element);
-							Write(element, prefix, depth, contained);
-
-							if (context is not null)
-							{
-								if (!string.IsNullOrEmpty(context.Accent))
-								{
-									// close the accent
-									writer.Write(context.Accent);
-								}
-
-								contexts.Pop();
-							}
-						}
-						break;
-
-					case "Tag":
-						{
-							// should always be startOfLine
-							var context = DetectQuickStyle(element);
-							if (context is not null)
-							{
-								Stylize(depth > 0
-									? prefix /*new String(Quote[0], depth)*/
-									: string.Empty);
-							}
 							else
 							{
-								writer.Write(prefix);
+								writer.Write("<br>");
 							}
 
-							WriteTag(element);
-
-							if (context is not null)
-							{
-								contexts.Pop();
-							}
-
-							startOfLine = false;
 						}
 						break;
+				
+				case "List":
+					Write(element, ref prefix, depth, contained);
+					startOfLine = false;
+					break;
 
-					case "T":
-						{
-							var context = DetectQuickStyle(element);
-							if (context is not null)
-							{
-								Stylize(depth > 0 && startOfLine
-									? prefix /*new String(Quote[0], depth)*/
-									: string.Empty);
+				case "Bullet":
+					// in md dash needs to be first in line
+					prefix.bullets = "- " + prefix.bullets;
+					break;
 
-								startOfLine = false;
-							}
+				case "Number":
+					// in md number needs to be first in line
+					prefix.bullets = "1. " + prefix.bullets;
+					break;
 
-							WriteText(element.GetCData(), startOfLine);
-
-							if (context is not null)
-							{
-								if (!string.IsNullOrEmpty(context.Accent))
-								{
-									// close the accent
-									writer.Write(context.Accent);
-								}
-
-								contexts.Pop();
-							}
-
-							startOfLine = false;
-						}
-						break;
-
-					case "List":
-						Write(element, prefix, depth, contained);
-						startOfLine = false;
-						break;
-
-					case "Bullet":
-						writer.Write($"{prefix}- ");
-						break;
-
-					case "Number":
-						writer.Write($"{prefix}1. ");
-						break;
-
-					case "Image":
-						if (depth > 0)
-						{
+				case "Image":
+					if (depth > 0)
+					{
 							writer.Write(new String(Quote[0], depth));
-						}
-						WriteImage(element);
-						break;
+					}
+					WriteImage(element);
+					break;
 
-					case "InkDrawing":
-					case "InsertedFile":
-					case "MediaFile":
-						WriteFile(element);
-						break;
+				case "InkDrawing":
+				case "InsertedFile":
+				case "MediaFile":
+					WriteFile(element);
+					break;
 
-					case "Table":
-						if (depth > 0)
-						{
-							writer.Write(new String(Quote[0], depth));
-						}
-						WriteTable(element);
-						break;
-				}
+				case "Table":
+					WriteTable(element, prefix);
+					break;
+			}
 			}
 
 			logger.Debug("out");
@@ -301,17 +290,7 @@ namespace River.OneMoreAddIn.Commands
 
 		private Context DetectQuickStyle(XElement element)
 		{
-			// quickStyleIndex could be on T, OE, or OEChildren, Outline, Page
-			// so ascend until we find one...
-
-			int index = -1;
-			while (element is not null &&
-				!element.GetAttributeValue("quickStyleIndex", out index, -1))
-			{
-				element = element.Parent;
-			}
-
-			if (index >= 0)
+			if (element.GetAttributeValue("quickStyleIndex", out int index))
 			{
 				var context = new Context
 				{
@@ -337,75 +316,87 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void Stylize(string prefix)
+		private void Stylize(PrefixClass prefix, bool contained = false)
 		{
-			writer.Write(prefix);
+			var styleprefix = "";
 			if (contexts.Count == 0) return;
 			var context = contexts.Peek();
 			var quick = quickStyles.First(q => q.Index == context.QuickStyleIndex);
 			switch (quick.Name)
 			{
 				case "PageTitle":
-				case "h1":
-					writer.Write("# ");
-					break;
-
-				case "h2": writer.Write("## "); break;
-				case "h3": writer.Write("### "); break;
-				case "h4": writer.Write("#### "); break;
-				case "h5": writer.Write("##### "); break;
-				case "h6": writer.Write("###### "); break;
-				case "blockquote": writer.Write("> "); break;
+				case "h1": styleprefix = ("# "); break;
+				case "h2": styleprefix = ("## "); break;
+				case "h3": styleprefix = ("### "); break;
+				case "h4": styleprefix = ("#### "); break;
+				case "h5": styleprefix = ("##### "); break;
+				case "h6": styleprefix = ("###### "); break;
+				case "blockquote": styleprefix = ("> "); break;
 				// cite and code are both block-scope style, on the OE
-				case "cite": writer.Write("*"); break;
-				case "code": writer.Write("`"); break;
+				case "cite": styleprefix = ("*"); break;
+				case "code": styleprefix = ("`"); break;
 					//case "p": logger.Write(Environment.NewLine); break;
+			}
+			if (contained)
+			{
+				writer.Write(prefix.bullets + prefix.tags);
+			} else {
+				writer.Write(prefix.indents + prefix.bullets + styleprefix + prefix.tags);
 			}
 		}
 
 
-		private void WriteTag(XElement element)
+		private string WriteTag(XElement element, bool contained)
 		{
 			var symbol = page.Root.Elements(ns + "TagDef")
 				.Where(e => e.Attribute("index").Value == element.Attribute("index").Value)
 				.Select(e => int.Parse(e.Attribute("symbol").Value))
 				.FirstOrDefault();
+			var retValue = "";
 
 			switch (symbol)
 			{
 				case 3:     // to do
 				case 8:     // client request
 				case 12:    // schedule/callback
-				case 28:    // to do prio 1
-				case 71:    // to do prio 2
+				case 28:    // todo prio 1
+				case 71:    // todo prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
-					writer.Write($"[{check}] ");
+					retValue = contained
+					  ? @"<input type=""checkbox"" disabled " + (check == "x" ? "checked" : "unchecked") + @" />"
+					  : ($"[{check}] ");
+
 					break;
 
-				case 6: writer.Write(":question: "); break;         // question
-				case 13: writer.Write(":star: "); break;            // important
-				case 17: writer.Write(":exclamation: "); break;     // critical
-				case 18: writer.Write(":phone: "); break;           // phone
-				case 21: writer.Write(":bulb: "); break;            // idea
-				case 23: writer.Write(":house: "); break;           // address
-				case 33: writer.Write(":three: "); break;           // three
-				case 39: writer.Write(":zero: "); break;            // zero
-				case 51: writer.Write(":two: "); break;             // two
-				case 70: writer.Write(":one: "); break;             // one
-				case 118: writer.Write(":mailbox: "); break;        // contact
-				case 121: writer.Write(":musical_note: "); break;   // music to listen to
-				case 131: writer.Write(":secret: "); break;         // password
-				case 133: writer.Write(":movie_camera: "); break;   // movie to see
-				case 132: writer.Write(":book: "); break;           // book to read
-				case 140: writer.Write(":zap: "); break;            // lightning bolt
-				default: writer.Write(":o: "); break;               // big red circle
+				case 6: retValue = (":question: "); break;         // question
+				case 13: retValue = (":star: "); break;            // important
+				case 17: retValue = (":exclamation: "); break;     // critical
+				case 18: retValue = (":phone: "); break;           // phone
+				case 21: retValue = (":bulb: "); break;            // idea
+				case 23: retValue = (":house: "); break;           // address
+				case 33: retValue = (":three: "); break;           // three
+				case 39: retValue = (":zero: "); break;            // zero
+				case 51: retValue = (":two: "); break;              // two
+				case 59: retValue = (":arrow_right: "); break;                // agenda
+				case 64: retValue = (":star: "); break;             // custom 1
+				case 70: retValue = (":one: "); break;              // one
+				case 116: retValue = (":busts_in_silhouette: "); break;            // busts_in_silhouette																	
+				case 117: retValue = (":notebook: "); break;            // notebook																	
+				case 118: retValue = (":mailbox: "); break;        // contact
+				case 121: retValue = (":musical_note: "); break;   // music to listen to
+				case 131: retValue = (":secret: "); break;			// password
+				case 133: retValue = (":movie_camera: "); break;   // movie to see
+				case 132: retValue = (":book: "); break;           // book to read
+				case 140: retValue = (":zap: "); break;            // lightning bolt																	
+				default: retValue = (":o: "); break;									   // retValue = (":o: "); break;
 			}
+			return retValue;
 		}
 
 
-		private void WriteText(XCData cdata, bool startOfLine)
+		private void WriteText(XCData cdata, bool startOfLine, bool contained)
 		{
 			cdata.Value = cdata.Value
 				.Replace("<br>", "  ") // usually followed by NL so leave it there
@@ -428,7 +419,15 @@ namespace River.OneMoreAddIn.Commands
 				span.ReplaceWith(new XText(text));
 			}
 
-			foreach (var anchor in wrapper.Elements("a"))
+			// escape directives
+			var raw = wrapper.GetInnerXml()
+				.Replace("&lt;", "\\<")
+				.Replace("|", "\\|")
+				.Replace("à", "&rarr; ")					// right arrow
+				.Replace("\n", contained ? "<br>" : "\n");	// newlines in tables
+
+			// replace links with <> to allow special characters and hence place if after escape directives
+			foreach (var anchor in wrapper.Elements("a").ToList())
 			{
 				var href = anchor.Attribute("href")?.Value;
 				if (!string.IsNullOrEmpty(href))
@@ -437,18 +436,13 @@ namespace River.OneMoreAddIn.Commands
 					{
 						// removes the hyperlink but preserves the text
 						anchor.ReplaceWith(anchor.Value);
-					}
-					else
+                    }
+                    else
 					{
-						anchor.ReplaceWith(new XText($"[{anchor.Value}]({href})"));
+						anchor.ReplaceWith(new XText($"[{anchor.Value}](<{href}>)"));
 					}
 				}
 			}
-
-			// escape directives
-			var raw = wrapper.GetInnerXml()
-				.Replace("&lt;", "\\<")
-				.Replace("|", "\\|");
 
 			if (startOfLine && raw.Length > 0 && raw.StartsWith("#"))
 			{
@@ -463,25 +457,25 @@ namespace River.OneMoreAddIn.Commands
 		private void WriteImage(XElement element)
 		{
 			if (saveAttachments)
-			{
-				var data = element.Element(ns + "Data");
-				var binhex = Convert.FromBase64String(data.Value);
+		{
+			var data = element.Element(ns + "Data");
+			var binhex = Convert.FromBase64String(data.Value);
 
-				using var stream = new MemoryStream(binhex, 0, binhex.Length);
-				using var image = Image.FromStream(stream);
+			using var stream = new MemoryStream(binhex, 0, binhex.Length);
+			using var image = Image.FromStream(stream);
 
 				var name = $"{attachmentFolder}_{++imageCounter}.png";
-				var filename = Path.Combine(attachmentPath, name);
+			var filename = Path.Combine(attachmentPath, name);
 #if WriteToDisk
-				if (!Directory.Exists(attachmentPath))
-				{
-					Directory.CreateDirectory(attachmentPath);
-				}
+			if (!Directory.Exists(attachmentPath))
+			{
+				Directory.CreateDirectory(attachmentPath);
+			}
 
-				image.Save(filename, ImageFormat.Png);
+			image.Save(filename, ImageFormat.Png);
 #endif
-				var imgPath = Path.Combine(attachmentFolder, name);
-				writer.Write($"![Image-{imageCounter}]({imgPath})");
+			var imgPath = Path.Combine(attachmentFolder, name);
+			writer.Write($"![Image-{imageCounter}](<{imgPath}>)");
 			}
 			else
 			{
@@ -545,18 +539,18 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
-		private void WriteTable(XElement element)
+		private void WriteTable(XElement element, PrefixClass prefix)
 		{
 			#region WriteRow(TableRow row)
 			void WriteRow(TableRow row)
 			{
-				writer.Write("| ");
+				writer.Write(prefix.indents + "| ");
 				foreach (var cell in row.Cells)
 				{
 					cell.Root
 						.Element(ns + "OEChildren")
 						.Elements(ns + "OE")
-						.ForEach(e => Write(e, contained: true));
+						.ForEach(e => Write(e, ref prefix, contained: true));
 
 					writer.Write(" | ");
 				}
@@ -574,7 +568,7 @@ namespace River.OneMoreAddIn.Commands
 			// header - - - - - - - - - - - - - - - - - - -
 
 			if (table.HasHeaderRow && rows.Any())
-			{
+				{
 				// use first row data as header
 				WriteRow(rows.First());
 				// skip the header row, leaving data rows
@@ -593,12 +587,12 @@ namespace River.OneMoreAddIn.Commands
 
 			// separator - - - - - - - - - - - - - - - - -
 
-			writer.Write("|");
-			for (int i = 0; i < table.ColumnCount; i++)
-			{
-				writer.Write(" :--- |");
-			}
-			writer.WriteLine();
+				writer.Write(prefix.indents + "| ");
+					for (int i = 0; i < table.ColumnCount; i++)
+					{
+						writer.Write(" :--- |");
+					}
+					writer.WriteLine();
 
 			// data - - - - - - - - - - - - - - - - - - - -
 
