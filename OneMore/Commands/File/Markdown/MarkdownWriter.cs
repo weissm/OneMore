@@ -218,9 +218,10 @@ namespace River.OneMoreAddIn.Commands
 							Write(element, ref prefix, depth + 1, contained);
 							prefix.indents = currentindents;
 
-							if (contained && prefix.liststarted == PrefixClass.Listtype.Bullet)
+							if (contained && prefix.liststarted == PrefixClass.Listtype.Numbered)
 							{
 								writer.Write("</ol>");
+								prefix.liststarted = PrefixClass.Listtype.None;
 							}
 							break;
 						}
@@ -265,8 +266,8 @@ namespace River.OneMoreAddIn.Commands
 									{
 										prefix.bullets = "<li>";
 									}
-								}
-								if (!prefix.containedstart)
+								} 
+								if (!prefix.containedstart && prefix.liststarted == PrefixClass.Listtype.None)
 								{
 									writer.Write("<br>");
 								}
