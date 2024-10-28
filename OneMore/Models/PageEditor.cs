@@ -4,7 +4,6 @@
 
 namespace River.OneMoreAddIn.Models
 {
-	using NStandard;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -97,27 +96,27 @@ namespace River.OneMoreAddIn.Models
 		public bool AllContent { get; set; }
 
 
-		/// <summary>
-		/// Gets the anchor point for reintroducing collated content.
-		/// If this is an OE or HTMLBlock then consumers may want to insert after that.
-		/// Otherwise, consumers may want to insert at end of anchor container.
-		/// </summary>
-		public XElement Anchor { get; private set; }
+        /// <summary>
+        /// Gets the anchor point for reintroducing collated content.
+        /// If this is an OE or HTMLBlock then consumers may want to insert after that.
+        /// Otherwise, consumers may want to insert at end of anchor container.
+        /// </summary>
+        public XElement Anchor { get; private set; }
 
 
-		/// <summary>
-		/// Gets or sets a Boolean indicating whether to maintain the selected state of
-		/// extracted content. Default is to remove selected state.
-		/// </summary>
-		public bool KeepSelected { get; set; }
+        /// <summary>
+        /// Gets or sets a Boolean indicating whether to maintain the selected state of
+        /// extracted content. Default is to remove selected state.
+        /// </summary>
+        public bool KeepSelected { get; set; }
 
 
-		/// <summary>
-		/// Signals EditSelected(), EditNode() and, by dependency, GetSelectedText() methods
-		/// that editor scanning should be done in reverse doc-order. This must be set prior
-		/// to calling one of those method to take effect.
-		/// </summary>
-		public bool ReverseScanning { get; set; }
+        /// <summary>
+        /// Signals EditSelected(), EditNode() and, by dependency, GetSelectedText() methods
+        /// that editor scanning should be done in reverse doc-order. This must be set prior
+        /// to calling one of those method to take effect.
+        /// </summary>
+        public bool ReverseScanning { get; set; }
 
 
 		/// <summary>
@@ -142,74 +141,66 @@ namespace River.OneMoreAddIn.Models
 			}
 		}
 
+        public void FollowWithCurosr(XElement root)
+        {
+            var last = root.Descendants()
+                .Attributes("selected")
+                .Where(a => a.Value == "all")
+                .Select(a => a.Parent)
+                .LastOrDefault();
 
-		/// <summary>
-		/// Removes the selected attribute from the page
-		/// </summary>
-		public void Deselect(XElement root = null)
-		{
-			// clean up selected attributes; keep only select snippets
+            if (last is not null)
+            {
+                Deselect(root);
 
-			(root ?? page.Root).Descendants().Attributes()
-				.Where(a => a.Name == "selected")
-				.Remove();
-		}
+                // Within an OE, you're allowed one image, one table, inserted file,
+                // or a mix of Ink and Text pieces...
 
+                if (last.Name.LocalName.In("T", "InkWord"))
+                {
+                    if (last.GetCData().Value == string.Empty)
+                    {
+                        last.SetAttributeValue("selected", "all");
+                    }
+                    else
+                    {
+                        last.AddAfterSelf(new XElement(ns + "T",
+                            new XAttribute("selected", "all"),
+                            new XCData(string.Empty))
+                            );
+                    }
+                }
+                else
+                {
+                    last.AddAfterSelf(new XElement(ns + "OE",
+                        new XElement(ns + "T",
+                            new XAttribute("selected", "all"),
+                            new XCData(string.Empty))
+                        ));
+                }
+            }
+        }
 
-		public void FollowWithCurosr(XElement root)
-		{
-			var last = root.Descendants()
-				.Attributes("selected")
-				.Where(a => a.Value == "all")
-				.Select(a => a.Parent)
-				.LastOrDefault();
+        /// <summary>
+        /// Removes the selected attribute from the page
+        /// </summary>
+        public void Deselect(XElement root = null)
+        {
+            // clean up selected attributes; keep only select snippets
 
-			if (last is not null)
-			{
-				Deselect(root);
-
-				// Within an OE, you're allowed one image, one table, inserted file,
-				// or a mix of Ink and Text pieces...
-
-				if (last.Name.LocalName.In("T", "InkWord"))
-				{
-					if (last.GetCData().Value == string.Empty)
-					{
-						last.SetAttributeValue("selected", "all");
-					}
-					else
-					{
-						last.AddAfterSelf(new XElement(ns + "T",
-							new XAttribute("selected", "all"),
-							new XCData(string.Empty))
-							);
-					}
-				}
-				else
-				{
-					// selected item might be Image, so move up to Parent
-					if (last.Parent.Name.LocalName == "OE")
-					{
-						last = last.Parent;
-					}
-
-					last.AddAfterSelf(new XElement(ns + "OE",
-						new XElement(ns + "T",
-							new XAttribute("selected", "all"),
-							new XCData(string.Empty))
-						));
-				}
-			}
-		}
+            (root ?? page.Root).Descendants().Attributes()
+                .Where(a => a.Name == "selected")
+                .Remove();
+        }
 
 
-		/// <summary>
-		/// Gets the currently selected text. If the text cursor is positioned over a word but
-		/// with zero selection length then that word is returned; othewise, text from the selected
-		/// region is returned.
-		/// </summary>
-		/// <returns>A string of the selected text</returns>
-		public string GetSelectedText()
+        /// <summary>
+        /// Gets the currently selected text. If the text cursor is positioned over a word but
+        /// with zero selection length then that word is returned; othewise, text from the selected
+        /// region is returned.
+        /// </summary>
+        /// <returns>A string of the selected text</returns>
+        public string GetSelectedText()
 		{
 			var builder = new StringBuilder();
 
