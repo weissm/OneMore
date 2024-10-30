@@ -485,10 +485,6 @@ Umkehren</value>
     <value>Undefinierte Variable „{0}“</value>
     <comment>error</comment>
   </data>
-  <data name="CleanRemindersCommand_count" xml:space="preserve">
-    <value>{0} verwaiste Erinnerungen wurden bereinigt</value>
-    <comment>message box</comment>
-  </data>
   <data name="ClearLog_Message" xml:space="preserve">
     <value>Protokolldatei jetzt löschen?</value>
     <comment>message box message</comment>
@@ -539,30 +535,6 @@ Umkehren</value>
   </data>
   <data name="ColorizerSheet_Title" xml:space="preserve">
     <value>Colorizer</value>
-  </data>
-  <data name="ColorsSheet_clickLabel.Text" xml:space="preserve">
-    <value>(Klicken Sie, um zu ändern)</value>
-    <comment>settings sheet</comment>
-  </data>
-  <data name="ColorsSheet_introBox.Text" xml:space="preserve">
-    <value>Passen Sie den Standardstil für horizontale Linienausschnitte und Aufgaben an, die mit dem Befehl „Durchgestrichene Tags für erledigte Aufgaben“ markiert sind</value>
-    <comment>settings sheet</comment>
-  </data>
-  <data name="ColorsSheet_linesGroupBox.Text" xml:space="preserve">
-    <value>Horizontale Linien</value>
-    <comment>settings sheet group box</comment>
-  </data>
-  <data name="ColorsSheet_strikeBox.Text" xml:space="preserve">
-    <value>Wenden Sie diese Farbe an, wenn Sie den Befehl „Tags für erledigte Aufgaben durchstreichen“ verwenden</value>
-    <comment>settings sheet checkbox</comment>
-  </data>
-  <data name="ColorsSheet_strikeGroupBox.Text" xml:space="preserve">
-    <value>Durchgestrichene To-do-Tags</value>
-    <comment>settings sheet group box</comment>
-  </data>
-  <data name="ColorsSheet_Title" xml:space="preserve">
-    <value>Farben</value>
-    <comment>settings sheet</comment>
   </data>
   <data name="Command_Error" xml:space="preserve">
     <value>Fehler beim Ausführen des Befehls {0}</value>
@@ -1305,10 +1277,6 @@ Die Suche nach Hashtags ist erst möglich, wenn dies abgeschlossen ist.</value>
     <value>Alle überprüfen</value>
     <comment>link label</comment>
   </data>
-  <data name="HashtagDialog_hideOfflineMenuItem" xml:space="preserve">
-    <value>Offline-Notizbücher ausblenden</value>
-    <comment>context menu item</comment>
-  </data>
   <data name="HashtagDialog_introLabel.Text" xml:space="preserve">
     <value>Geben Sie einen beliebigen Teil eines oder mehrerer Hashtags ein. Platzhalter sind impliziert, es sei denn, ein Tag endet mit einem Punkt. Klammern und logische Operatoren sind zulässig.</value>
     <comment>label</comment>
@@ -1338,63 +1306,15 @@ Die Suche nach Hashtags ist erst möglich, wenn dies abgeschlossen ist.</value>
     <comment>menu item</comment>
   </data>
   <data name="HashtagDialog_scopeBox.Text" xml:space="preserve">
-    <value>Alle Notizbücher
+    <value>Alle
 Dieses Notizbuch
 Dieser Abschnitt
 Diese Seite</value>
     <comment>combobox</comment>
   </data>
-  <data name="HashtagDialog_sensitiveTip" xml:space="preserve">
-    <value>Groß- und Kleinschreibung beachtende Suche</value>
-    <comment>tooltip</comment>
-  </data>
-  <data name="HashtagDialog_showOfflineMenuItem" xml:space="preserve">
-    <value>Offline-Notizbücher anzeigen</value>
-    <comment>context menu item</comment>
-  </data>
   <data name="HashtagDialog_uncheckAllLink.Text" xml:space="preserve">
     <value>Alle deaktivieren</value>
     <comment>link label</comment>
-  </data>
-  <data name="HashtaggerDialog.Text" xml:space="preserve">
-    <value>Hashtags</value>
-    <comment>dialog title</comment>
-  </data>
-  <data name="HashtaggerDialog_bankBox.Text" xml:space="preserve">
-    <value>Zur Tag-Datenbank oben auf der Seite hinzufügen</value>
-    <comment>checkbox</comment>
-  </data>
-  <data name="HashtaggerDialog_cloudGroup.Text" xml:space="preserve">
-    <value>Alle Hashtags</value>
-    <comment>groupbox</comment>
-  </data>
-  <data name="HashtaggerDialog_commonGroup.Text" xml:space="preserve">
-    <value>Häufige Wörter auf dieser Seite</value>
-    <comment>groupbox</comment>
-  </data>
-  <data name="HashtaggerDialog_hideCommonMenuItem" xml:space="preserve">
-    <value>Verstecke gebräuchliche Wörter</value>
-    <comment>context menu item text</comment>
-  </data>
-  <data name="HashtaggerDialog_hideRecentMenuItem" xml:space="preserve">
-    <value>Zuletzt verwendetes Symbol ausblenden</value>
-    <comment>context menu item text</comment>
-  </data>
-  <data name="HashtaggerDialog_recentGroup.Text" xml:space="preserve">
-    <value>Zuletzt verwendete Tags</value>
-    <comment>groupbox</comment>
-  </data>
-  <data name="HashtaggerDialog_showCommonMenuItem" xml:space="preserve">
-    <value>Zeigen Sie gebräuchliche Wörter an</value>
-    <comment>context menu item text</comment>
-  </data>
-  <data name="HashtaggerDialog_showRecentMenuItem" xml:space="preserve">
-    <value>Kürzlich genutzt anzeigen</value>
-    <comment>context menu item text</comment>
-  </data>
-  <data name="HashtaggerDialog_tagsLabel.Text" xml:space="preserve">
-    <value>Stichworte</value>
-    <comment>label</comment>
   </data>
   <data name="HashtagSheet_disabledBox.Text" xml:space="preserve">
     <value>Deaktivieren Sie den Hashtag-Dienst. Dadurch wird auch die Hashtag-Suche deaktiviert.</value>
@@ -1414,10 +1334,6 @@ Diese Seite</value>
   </data>
   <data name="HashtagSheet_prescheduled" xml:space="preserve">
     <value>Für {0} ist ein Scan geplant. Verwenden Sie die folgenden Optionen, um dies zu ändern, oder klicken Sie auf „Abbrechen“, um den aktuellen Zeitplan beizubehalten.</value>
-  </data>
-  <data name="HashtagSheet_resetTooltip" xml:space="preserve">
-    <value>Erweitert: Setzen Sie das Upgrade-Flag zurück</value>
-    <comment>tooltip</comment>
   </data>
   <data name="HashtagSheet_scanNotebooks" xml:space="preserve">
     <value>Planen Sie einen inkrementellen Scan Ihrer neu hinzugefügten Notizbücher</value>
@@ -2151,10 +2067,6 @@ In diesem Abschnitt</value>
     <value>Leere Auswahl. Wählen Sie einen gültigen Block von PlantUML-Text aus.</value>
     <comment>error message</comment>
   </data>
-  <data name="PlantUmlCommand_PlantUrl" xml:space="preserve">
-    <value>http://www.plantuml.com/plantuml/png/</value>
-    <comment>PlantUML Remote servier SKIP</comment>
-  </data>
   <data name="Plugin_InvalidSchema" xml:space="preserve">
     <value>Ungültiges XML erkannt. </value>
     <comment>error message</comment>
@@ -2796,14 +2708,6 @@ Wähle Nein, um eine leere Zeile zwischen den Absätzen zu halten</value>
     <value>Formelbefehle</value>
     <comment>checkbox</comment>
   </data>
-  <data name="RibbonBarSheet_hashtagsIconBox.Text" xml:space="preserve">
-    <value>Nur Symbole für Hashtag-Befehle anzeigen</value>
-    <comment>settings dialog, ribbon bar options</comment>
-  </data>
-  <data name="RibbonBarSheet_hashtagsRibbonBox.Text" xml:space="preserve">
-    <value>Hashtag-Befehle</value>
-    <comment>checkbox</comment>
-  </data>
   <data name="RibbonBarSheet_introBox.Text" xml:space="preserve">
     <value>Wähle aus, welche Befehle in die Multifunktionsleiste aufgenommen werden sollen und ob Symbole oder Symbole und Etiketten angezeigt werden sollen.</value>
     <comment>settings dialog, ribbon bar options</comment>
@@ -2948,14 +2852,6 @@ Nach der letzten Gruppe</value>
   <data name="ribCompressImagesButton_Screentip" xml:space="preserve">
     <value>Komprimieren Sie Bilder, indem Sie PNG in JPG konvertieren</value>
     <comment>ribbon images</comment>
-  </data>
-  <data name="ribConvertMarkdownButton_Label" xml:space="preserve">
-    <value>Markdown konvertieren</value>
-    <comment>ribbon edit</comment>
-  </data>
-  <data name="ribConvertMarkdownButton_Screentip" xml:space="preserve">
-    <value>Konvertieren Sie die Seite oder den ausgewählten Markdown in das OneNote-Format</value>
-    <comment>ribbon edit</comment>
   </data>
   <data name="ribCopyAcrossButton_Label" xml:space="preserve">
     <value>Kopieren</value>
@@ -3692,10 +3588,6 @@ Nach der letzten Gruppe</value>
     <value>Einfügen und den Text nur einfügen (Strg + Shift + V)</value>
     <comment>ribbon item</comment>
   </data>
-  <data name="ribPinPageButton_Label" xml:space="preserve">
-    <value>Seite zu meiner Leseliste hinzufügen</value>
-    <comment>navigator</comment>
-  </data>
   <data name="ribPlantUmlButton_Label" xml:space="preserve">
     <value>Zeichne PlantUML</value>
     <comment>ribbon images</comment>
@@ -3708,6 +3600,10 @@ Nach der letzten Gruppe</value>
     <value>Plugin ausführen</value>
     <comment>Ribbon OneMore menu item</comment>
   </data>
+  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
+    <value>Plugins</value>
+    <comment>Benutzerdefinierte Top Menu</comment>
+  </data>
   <data name="ribPluginsMenu_Label" xml:space="preserve">
     <value>Plugins</value>
     <comment>favorites menu</comment>
@@ -3715,22 +3611,6 @@ Nach der letzten Gruppe</value>
   <data name="ribPluginsMenu_Screentip" xml:space="preserve">
     <value>Benutzerdefinierte Plugins ausführen und verwalten</value>
     <comment>ribbon file</comment>
-  </data>
-  <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
-    <value>Vorschau des Markdowns</value>
-    <comment>ribbon edit</comment>
-  </data>
-  <data name="ribPreviewMarkdownButton_Screentip" xml:space="preserve">
-    <value>Vorschau der Seite oder des ausgewählten Texts als Markdown</value>
-    <comment>ribbon edit</comment>
-  </data>
-  <data name="ribPreviousUnreadPageButton_Label" xml:space="preserve">
-    <value>Vorherige ungelesene Seite</value>
-    <comment>ribbon search</comment>
-  </data>
-  <data name="ribPreviousUnreadPageButton_Screentip" xml:space="preserve">
-    <value>Zur vorherigen ungelesenen Seite wechseln</value>
-    <comment>ribbon search</comment>
   </data>
   <data name="ribPronunciateButton_Label" xml:space="preserve">
     <value>Aussprache einfügen</value>
@@ -4971,9 +4851,6 @@ Umkehren</value>
   <data name="word_Caption" xml:space="preserve">
     <value>Untertitel</value>
   </data>
-  <data name="word_Clear" xml:space="preserve">
-    <value>Klar</value>
-  </data>
   <data name="word_Close" xml:space="preserve">
     <value>Nah dran</value>
   </data>
@@ -5015,9 +4892,6 @@ Umkehren</value>
   </data>
   <data name="word_Element" xml:space="preserve">
     <value>Element</value>
-  </data>
-  <data name="word_Empty" xml:space="preserve">
-    <value>Leer</value>
   </data>
   <data name="word_Extract" xml:space="preserve">
     <value>Extrakt</value>
