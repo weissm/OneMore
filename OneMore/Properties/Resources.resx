@@ -3749,6 +3749,10 @@ After last group</value>
     <value>Run and manage custom plugins</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
+    <value>Plugins</value>
+    <comment>ribbon top menu</comment>
+  </data>
   <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
     <value>Preview Markdown</value>
     <comment>ribbon edit</comment>
