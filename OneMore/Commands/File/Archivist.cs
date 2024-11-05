@@ -16,6 +16,9 @@ namespace River.OneMoreAddIn.Commands
 	using System.Web;
 	using System.Xml.Linq;
 	using Resx = Properties.Resources;
+	using System.Diagnostics;
+	using System.Runtime.InteropServices;
+	using Exception = System.Exception;
 
 
 	internal class Archivist : Loggable
