@@ -34,6 +34,22 @@ namespace River.OneMoreAddIn.Commands
 			// accent enclosure char, asterisk* or backquote`
 			public string Accent;
 		}
+		// helper class to pass parameter
+		private sealed class PrefixClass
+		{
+			public string indents = string.Empty;
+			public string tags = string.Empty;
+			public string bullets = string.Empty;
+			public string tablelistid = string.Empty;
+
+			public PrefixClass(string indents="", string tags = "", string bullets = "", string tablelistid = "")
+			{
+				this.indents = indents;
+				this.tags = tags;
+				this.bullets = bullets;
+				this.tablelistid = tablelistid;
+			}
+		}
 
 		// Note that if pasting md text directly into OneNote, there's no good way to indent text
 		// and prevent OneNote from auto-formatting. Closest alt is to use a string of nbsp's
@@ -56,23 +72,6 @@ namespace River.OneMoreAddIn.Commands
 #else
 		private readonly ILogger writer = Logger.Current;
 #endif
-		// helper class to pass parameter
-		public class PrefixClass
-		{
-			public string indents = "";
-			public string tags = "";
-			public string bullets = "";
-			public string tablelistid = "";
-
-			public PrefixClass(string set_indents = "", string set_tags = "", string set_bullets = "", string tablelistid = "")
-			{
-				this.indents = set_indents;
-				this.tags = set_tags;
-				this.bullets = set_bullets;
-				this.tablelistid = tablelistid;
-			}
-
-		}
 
 		public MarkdownWriter(Page page, bool saveAttachments)
 		{
@@ -175,7 +174,7 @@ namespace River.OneMoreAddIn.Commands
 		private void Write(XElement container)
 		{
 			var prefix = new PrefixClass();
-			Write(container, ref prefix);
+			Write(container, prefix);
 		}
 
 
@@ -186,7 +185,7 @@ namespace River.OneMoreAddIn.Commands
 		/// <param name="prefix">prefix used to indent markdown lines</param>
 		/// <param name="contained"></param>
 		private void Write(XElement container,
-			ref PrefixClass prefix,
+			PrefixClass prefix,
 			int depth = 0,
 			bool contained = false)
 		{
@@ -208,7 +207,7 @@ namespace River.OneMoreAddIn.Commands
 						{
 							var currentindents = prefix.indents;
 							prefix.indents = $"{Indent}{prefix.indents}";
-							Write(element, ref prefix, depth + 1, contained);
+							Write(element, prefix, depth + 1, contained);
 							prefix.indents = currentindents;
 
 							// write closing id for listed items in tables
@@ -223,7 +222,7 @@ namespace River.OneMoreAddIn.Commands
 					case "OE":
 						{
 							var context = DetectQuickStyle(element);
-							Write(element, ref prefix, depth, contained);
+							Write(element, prefix, depth, contained);
 
 							if (context is not null)
 							{
@@ -244,6 +243,7 @@ namespace River.OneMoreAddIn.Commands
 
 					case "T":
 						{
+							var context = DetectQuickStyle(element);
 							if (contained) // not in table cell
 							{
 								if (prefix.bullets.Contains("1."))
@@ -276,15 +276,25 @@ namespace River.OneMoreAddIn.Commands
 							{
 								writer.Write("</li>");
 							}
+							if (context is not null)
+							{
+								if (!string.IsNullOrEmpty(context.Accent))
+								{
+									// close the accent
+									writer.Write(context.Accent);
+								}
 
-							prefix.bullets = "";
-							prefix.tags = "";
+								contexts.Pop();
+							}
+
+							prefix.bullets = string.Empty;
+							prefix.tags = string.Empty;
 							startOfLine = false;
 						}
 						break;
 
 					case "List":
-						Write(element, ref prefix, depth, contained);
+						Write(element, prefix, depth, contained);
 						startOfLine = false;
 						break;
 
@@ -326,9 +336,9 @@ namespace River.OneMoreAddIn.Commands
 							{
 								var nestedtable = nestedtables.First();
 								writer.WriteLine(prefix.indents + "<details id=\"nested-table" + nestedtable.index + "\" open>");
-								writer.WriteLine(prefix.indents + "<summary>");
+								writer.WriteLine(prefix.indents + "<summary>" + "Nested Table " + nestedtable.index + "</summary>");
 								WriteTable(nestedtable.container, prefix);
-								writer.WriteLine(prefix.indents + "</summary>");
+								writer.WriteLine(prefix.indents + "</details>");
 								nestedtables.RemoveAt(0);
 							}
 						}
@@ -406,8 +416,8 @@ namespace River.OneMoreAddIn.Commands
 				case 3:     // to do
 				case 8:     // client request
 				case 12:    // schedule/callback
-				case 28:    // todo prio 1
-				case 71:    // todo prio 2
+				case 28:    // to do prio 1
+				case 71:    // to do prio 2
 				case 94:    // discuss person a/b
 				case 95:    // discuss manager
 					var check = element.Attribute("completed").Value == "true" ? "x" : " ";
@@ -430,8 +440,8 @@ namespace River.OneMoreAddIn.Commands
 				case 64: retValue = (":star: "); break;             // custom 1
 				case 70: retValue = (":one: "); break;              // one
 				case 116: retValue = (":busts_in_silhouette: "); break;            // busts_in_silhouette																	
-				case 117: retValue = (":notebook: "); break;            // notebook																	
-				case 118: retValue = (":mailbox: "); break;        // contact
+				case 117: retValue = (":bell: "); break;            // bell																	
+				case 118: retValue = (":letter: "); break;        // letter
 				case 121: retValue = (":musical_note: "); break;   // music to listen to
 				case 131: retValue = (":secret: "); break;          // password
 				case 133: retValue = (":movie_camera: "); break;   // movie to see
@@ -600,7 +610,7 @@ namespace River.OneMoreAddIn.Commands
 				foreach (var cell in row.Cells)
 				{
 					PrefixClass nestedprefix = new PrefixClass();
-					Write(cell.Root, ref nestedprefix, contained: true);
+					Write(cell.Root,  nestedprefix, contained: true);
 					writer.Write(" | ");
 				}
 				writer.WriteLine();
