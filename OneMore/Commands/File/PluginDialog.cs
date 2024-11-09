@@ -116,6 +116,7 @@ namespace River.OneMoreAddIn.Commands
 			PageName = pageNameBox.Text,
 			Timeout = (int)timeoutBox.Value,
 			SkipLocked = skipLockRadio.Checked,
+			GetoptsStyle = getoptsRadio.Checked,
 			// set path for replay functionality
 			Path = plugin.Path
 		};
@@ -270,6 +271,7 @@ namespace River.OneMoreAddIn.Commands
 					childBox.Enabled = false;
 				}
 
+				getoptsRadio.Checked = plugin.GetoptsStyle;
 				skipLockRadio.Checked = true;
 			}
 			else
@@ -487,6 +489,11 @@ namespace River.OneMoreAddIn.Commands
 		private void ChangeAsChild(object sender, EventArgs e)
 		{
 			plugin.AsChildPage = childBox.Checked;
+		}
+
+	   private void checkGetoptsRadio_CheckedChanged(object sender, EventArgs e)
+		{
+			plugin.GetoptsStyle = getoptsRadio.Checked;
 		}
 
 
