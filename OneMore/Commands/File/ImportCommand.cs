@@ -11,6 +11,7 @@ namespace River.OneMoreAddIn.Commands
 	using System;
 	using System.Drawing;
 	using System.IO;
+	using System.Text.RegularExpressions;
 	using System.Threading;
 	using System.Threading.Tasks;
 	using System.Windows.Forms;
@@ -509,12 +510,6 @@ namespace River.OneMoreAddIn.Commands
 
 		private async Task ImportMarkdown(string filepath)
 		{
-			if (filepath.IndexOf(' ') >= 0)
-			{
-				ShowInfo(string.Format(Resx.ImportCommand_noSpaces, filepath));
-				return;
-			}
-
 			logger.StartClock();
 
 			if (!PathHelper.HasWildFileName(filepath))
@@ -524,7 +519,7 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 
-			var files = Directory.GetFiles(Path.GetDirectoryName(filepath), Path.GetFileName(filepath));
+			var files = Directory.GetFiles(Path.GetDirectoryName(@filepath), Path.GetFileName(@filepath));
 			var timeout = 10 + (files.Length * 3);
 
 			var completed = RunWithProgress(timeout, filepath, async (token) =>
@@ -560,7 +555,7 @@ namespace River.OneMoreAddIn.Commands
 				progress?.SetMessage($"Importing {filepath}...");
 
 				logger.WriteLine($"importing markdown {filepath}");
-				var text = File.ReadAllText(filepath);
+				var text = File.ReadAllText(@filepath);
 
 				if (token != default && token.IsCancellationRequested)
 				{
@@ -586,6 +581,9 @@ namespace River.OneMoreAddIn.Commands
 
 					var container = page.EnsureContentContainer();
 
+					body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
+					body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
+
 					container.Add(new XElement(ns + "HTMLBlock",
 						new XElement(ns + "Data",
 							new XCData($"<html><body>{body}</body></html>")
@@ -607,6 +605,7 @@ namespace River.OneMoreAddIn.Commands
 
 					converter = new MarkdownConverter(page);
 					converter.RewriteHeadings();
+					converter.RewriteTodo();
 
 					logger.WriteLine($"updating...");
 					logger.WriteLine(page.Root);
