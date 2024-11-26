@@ -341,7 +341,7 @@ namespace River.OneMoreAddIn.Commands
 							if (bordersVisible.Equals("true"))
 							{
 								writer.WriteLine();
-								writer.Write(prefix.indents + "<div> <style> td, th { border: 1px solid black; } </style>");
+								writer.Write(prefix.indents + "<style> td, th { border: 1px solid black; } </style>");
 							}
 						}
 						if (contained)
@@ -365,7 +365,7 @@ namespace River.OneMoreAddIn.Commands
 						}
 						if (bordersVisible.Equals("true"))
 						{
-							writer.Write(prefix.indents + "<div> <style> td, th { border: none; } </style>");
+							writer.Write(prefix.indents + "<style> td, th { border: none; } </style>");
 						}
 						// Write extra line
 						writer.WriteLine();
