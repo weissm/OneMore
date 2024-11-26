@@ -169,22 +169,6 @@ namespace River.OneMoreAddIn.Models
 
 
 		// TODO: this is inconsistent! It gets the plain text but allows setting complex CDATA
-		/// <summary>
-		/// Gets the most recently known selection state where none means unknown, all
-		/// means there is an obvious selection region, and partial means the selection
-		/// region is zero.
-		/// </summary>
-		public SelectionScope SelectionScope { get; private set; }
-
-
-		/// <summary>
-		/// Gets an indication that the text cursor is positioned over either a hyperlink
-		/// or a MathML equation, both of which return zero-length selection ranges.
-		/// </summary>
-		public bool SelectionSpecial { get; private set; }
-
-
-		// TODO: this is inconsistent! It gets the plain text but allows setting complex CDATA
 		public string Title
 		{
 			get
