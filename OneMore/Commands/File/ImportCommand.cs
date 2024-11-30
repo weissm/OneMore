@@ -596,7 +596,6 @@ namespace River.OneMoreAddIn.Commands
 					converter.RewriteHeadings();
 
 					logger.WriteLine($"saving...");
-					logger.WriteLine(page.Root);
 
 					await one.Update(page);
 
