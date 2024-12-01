@@ -584,7 +584,6 @@ namespace River.OneMoreAddIn.Commands
 							new XCData($"<html><body>{body}</body></html>")
 							)
 						));
-
 					var converter = new MarkdownConverter(page);
 					converter.RewriteHeadings();
 
@@ -601,8 +600,7 @@ namespace River.OneMoreAddIn.Commands
 					converter.RewriteHeadings();
 
 					logger.WriteLine($"updating...");
-					logger.WriteLine(page.Root);
-
+	
 					await one.Update(page);
 
 					await one.NavigateTo(pageId);
