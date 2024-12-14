@@ -2008,7 +2008,8 @@ Möchten Sie die bestehende Seite aktualisieren?</value>
     <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="OneMoreTab_Label" xml:space="preserve">
-    <value>Einer noch</value>
+    <value>Onemore</value>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="oneNamespace" xml:space="preserve">
     <value>http://schemas.microsoft.com/office/onenote/2013/onenote</value>
@@ -3393,11 +3394,11 @@ Registerkarte „Hilfe“.</value>
     <comment>ribbon snippets</comment>
   </data>
   <data name="ribInsertBreadcrumbButton_Label" xml:space="preserve">
-    <value>Brotkrümel</value>
+    <value>Brotkrumen</value>
     <comment>ribbon snippets menu</comment>
-  </data>
+   </data>
   <data name="ribInsertBreadcrumbButton_Screentip" xml:space="preserve">
-    <value>Breadcrumb der Seitenposition oben auf der Seite einfügen</value>
+    <value>Brotkrumen der Seitenposition oben auf der Seite einfügen</value>
     <comment>ribbon snippets</comment>
   </data>
   <data name="ribInsertCalendarButton_Label" xml:space="preserve">
@@ -3453,7 +3454,7 @@ Registerkarte „Hilfe“.</value>
     <comment>ribbon snippets</comment>
   </data>
   <data name="ribInsertExpandButton_Label" xml:space="preserve">
-    <value>Expandieren kollabieren</value>
+    <value>Ein- und Ausklappen</value>
     <comment>Ribbon OneMore menu item, Snippets...</comment>
   </data>
   <data name="ribInsertExpandButton_Screentip" xml:space="preserve">
@@ -3725,7 +3726,7 @@ Registerkarte „Hilfe“.</value>
     <comment>ribbon</comment>
   </data>
   <data name="ribOneMoreGroup_Label" xml:space="preserve">
-    <value>Einer noch</value>
+    <value>Onemore</value>
     <comment>Ribbon Group</comment>
   </data>
   <data name="ribOneMoreMenu_Label" xml:space="preserve">
@@ -5297,10 +5298,10 @@ Umkehren</value>
     <value>Untertitel</value>
   </data>
   <data name="word_Clear" xml:space="preserve">
-    <value>Klar</value>
+    <value>Bereinigen</value>
   </data>
   <data name="word_Close" xml:space="preserve">
-    <value>Nah dran</value>
+    <value>Schliessen</value>
   </data>
   <data name="word_Code" xml:space="preserve">
     <value>Code</value>
@@ -5378,7 +5379,7 @@ Umkehren</value>
     <value>Allgemein</value>
   </data>
   <data name="word_Go" xml:space="preserve">
-    <value>gehen</value>
+    <value>Starte</value>
   </data>
   <data name="word_Grayscale" xml:space="preserve">
     <value>Graustufen</value>
@@ -5417,7 +5418,7 @@ Umkehren</value>
     <value>Protokoll</value>
   </data>
   <data name="word_Move" xml:space="preserve">
-    <value>Umzug</value>
+    <value>Bewege</value>
   </data>
   <data name="word_Name" xml:space="preserve">
     <value>Name</value>
@@ -5456,7 +5457,7 @@ Umkehren</value>
     <value>Optionen</value>
   </data>
   <data name="word_Page" xml:space="preserve">
-    <value>Buchseite</value>
+    <value>Seite</value>
   </data>
   <data name="word_PercentSymbol" xml:space="preserve">
     <value>%</value>
@@ -5498,7 +5499,7 @@ Umkehren</value>
     <value>Zeitplan</value>
   </data>
   <data name="word_Scope" xml:space="preserve">
-    <value>Zielfernrohr</value>
+    <value>Bereich</value>
   </data>
   <data name="word_Search" xml:space="preserve">
     <value>Suchen</value>
@@ -5528,7 +5529,7 @@ Umkehren</value>
     <value>Status</value>
   </data>
   <data name="word_Storage" xml:space="preserve">
-    <value>Lager</value>
+    <value>Platz</value>
   </data>
   <data name="word_Style" xml:space="preserve">
     <value>Stil</value>
