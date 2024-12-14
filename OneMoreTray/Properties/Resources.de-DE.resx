@@ -177,13 +177,13 @@ Den geplanten Zeitpunkt stornieren und den Scan jetzt ausführen?</value>
   </data>
   <data name="ScheduleTimeFormat" xml:space="preserve">
     <value>ddd, MMMM d, yyyy h:mm tt</value>
-    <comment>SKIP</comment>
+    <comment>Überspringen</comment>
   </data>
   <data name="word_Cancel" xml:space="preserve">
-    <value>Stornieren</value>
+    <value>Abbruch</value>
   </data>
   <data name="word_Exit" xml:space="preserve">
-    <value>Ausfahrt</value>
+    <value>Beenden</value>
   </data>
   <data name="word_OK" xml:space="preserve">
     <value>OK</value>
