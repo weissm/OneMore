@@ -5002,10 +5002,10 @@ Umkehren</value>
     <value>Untertitel</value>
   </data>
   <data name="word_Clear" xml:space="preserve">
-    <value>Klar</value>
+    <value>Bereinigen</value>
   </data>
   <data name="word_Close" xml:space="preserve">
-    <value>Nah dran</value>
+    <value>Schliessen</value>
   </data>
   <data name="word_Code" xml:space="preserve">
     <value>Code</value>
@@ -5071,7 +5071,7 @@ Umkehren</value>
     <value>Allgemein</value>
   </data>
   <data name="word_Go" xml:space="preserve">
-    <value>gehen</value>
+    <value>Starte</value>
   </data>
   <data name="word_Grayscale" xml:space="preserve">
     <value>Graustufen</value>
@@ -5110,7 +5110,7 @@ Umkehren</value>
     <value>Protokoll</value>
   </data>
   <data name="word_Move" xml:space="preserve">
-    <value>Umzug</value>
+    <value>Bewege</value>
   </data>
   <data name="word_Name" xml:space="preserve">
     <value>Name</value>
@@ -5149,7 +5149,7 @@ Umkehren</value>
     <value>Optionen</value>
   </data>
   <data name="word_Page" xml:space="preserve">
-    <value>Buchseite</value>
+    <value>Seite</value>
   </data>
   <data name="word_PercentSymbol" xml:space="preserve">
     <value>%</value>
@@ -5188,7 +5188,7 @@ Umkehren</value>
     <value>Zeitplan</value>
   </data>
   <data name="word_Scope" xml:space="preserve">
-    <value>Zielfernrohr</value>
+    <value>Bereich</value>
   </data>
   <data name="word_Search" xml:space="preserve">
     <value>Suchen</value>
@@ -5215,7 +5215,7 @@ Umkehren</value>
     <value>Status</value>
   </data>
   <data name="word_Storage" xml:space="preserve">
-    <value>Lager</value>
+    <value>Platz</value>
   </data>
   <data name="word_Style" xml:space="preserve">
     <value>Stil</value>
