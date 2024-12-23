@@ -35,7 +35,7 @@ namespace River.OneMoreAddIn
 	/// Wraps the OneNote interop API
 	/// </summary>
 	/// <see cref="https://docs.microsoft.com/en-us/office/client-developer/onenote/application-interface-onenote"/>
-	internal class OneNote : IAsyncDisposable, IDisposable
+	public class OneNote : IAsyncDisposable, IDisposable
 	{
 		public enum ExportFormat
 		{
