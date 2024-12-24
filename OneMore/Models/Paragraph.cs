@@ -7,7 +7,7 @@ namespace River.OneMoreAddIn.Models
 	using System.Xml.Linq;
 
 
-	internal class Paragraph : XElement
+	public class Paragraph : XElement
 	{
 		public Paragraph(string text)
 			: this(PageNamespace.Value, text)
