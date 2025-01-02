@@ -37,7 +37,9 @@
 			this.toolStrip = new River.OneMoreAddIn.UI.MoreToolStrip();
 			this.renameButton = new River.OneMoreAddIn.UI.MoreMenuItem();
 			this.deleteButton = new River.OneMoreAddIn.UI.MoreMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.runButton = new River.OneMoreAddIn.UI.MoreMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// gridView
@@ -58,6 +60,7 @@
 			this.gridView.Size = new System.Drawing.Size(780, 398);
 			this.gridView.TabIndex = 2;
 			this.gridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EditOnDoubleClick);
+            this.gridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EditOnDoubleClickRow);
 			this.gridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.EditOnDoubleClickRow);
 			// 
 			// nameColumn
@@ -104,7 +107,8 @@
 			this.toolStrip.Location = new System.Drawing.Point(10, 65);
 			this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.renameButton,
-			this.deleteButton});
+			this.deleteButton,
+			this.runButton});
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
 			this.toolStrip.Size = new System.Drawing.Size(780, 28);
@@ -129,6 +133,15 @@
 			this.deleteButton.Size = new System.Drawing.Size(102, 38);
 			this.deleteButton.Text = "Delete";
 			this.deleteButton.Click += new System.EventHandler(this.DeleteItem);
+			// 
+			// runButton
+			// 
+			this.runButton.Image = global::River.OneMoreAddIn.Properties.Resources.m_Refresh;
+			this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.runButton.Name = "runButton";
+			this.runButton.Size = new System.Drawing.Size(72, 28);
+			this.runButton.Text = "Run";
+			this.runButton.Click += new System.EventHandler(this.runLabel_Click);
 			// 
 			// PluginsSheet
 			// 
@@ -159,5 +172,6 @@
 		private UI.MoreMenuItem renameButton;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn cmdColumn;
+		private UI.MoreMenuItem runButton;
 	}
 }
