@@ -3368,8 +3368,7 @@ Registerkarte „Hilfe“.</value>
     <comment>ribbon snippets</comment>
   </data>
   <data name="ribInsertBreadcrumbButton_Label" xml:space="preserve">
-    <value>Brotkrümel</value>
-    <comment>ribbon snippets menu</comment>
+    <comment>DO NOT TRANSLATE</comment>
   </data>
   <data name="ribInsertBreadcrumbButton_Screentip" xml:space="preserve">
     <value>Breadcrumb der Seitenposition oben auf der Seite einfügen</value>
