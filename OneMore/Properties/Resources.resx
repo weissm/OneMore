@@ -3808,6 +3808,10 @@ Help Tab</value>
     <value>Run and manage custom plugins</value>
     <comment>ribbon file</comment>
   </data>
+  <data name="ribPluginsTopMenu_Label" xml:space="preserve">
+    <value>Plugins</value>
+    <comment>ribbon top menu</comment>
+  </data>
   <data name="ribPreviewMarkdownButton_Label" xml:space="preserve">
     <value>Preview Markdown</value>
     <comment>ribbon edit</comment>
@@ -5179,6 +5183,9 @@ Invert</value>
   </data>
   <data name="word_Delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="word_Run" xml:space="preserve">
+    <value>Run</value>
   </data>
   <data name="word_Distance" xml:space="preserve">
     <value>Distance</value>
