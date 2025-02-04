@@ -103,7 +103,7 @@ namespace River.OneMoreAddIn.Models
 		}
 
 
-		public void FollowWithCurosr(XElement root)
+		public void FollowWithCursor(XElement root)
 		{
 			var last = root.Descendants()
 				.Attributes("selected")
