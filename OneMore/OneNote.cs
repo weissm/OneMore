@@ -24,11 +24,68 @@ namespace River.OneMoreAddIn
 	using System.Xml;
 	using System.Xml.Linq;
 	using System.Xml.Schema;
+	using Windows.Graphics.Display.Core;
+	using static River.OneMoreAddIn.OneNote;
 	using Forms = System.Windows.Forms;
 	using Resx = Properties.Resources;
+
 #if VerboseDispose
 	using System.Diagnostics;
 #endif
+
+	using River.OneMoreAddIn.Commands;
+	using static System.Net.Mime.MediaTypeNames;
+	using System.Web.UI.WebControls;
+	using River.OneMoreAddIn.UI;
+
+	static public class OneNoteClass
+	{
+
+		static public Page page;
+		static public XNamespace ns;
+		static public OneNote one = new OneNote(out  page,  out ns);
+
+		static public void update() => Task.Run(async () => {  await one.Update(page); });
+		static public HierarchyInfo get_page_info(string pageId = null, bool sized = false) { return one.GetPageInfo(pageId, sized).Result; }
+		static public string get_page_xml(OneNote.PageDetail detail = OneNote.PageDetail.Basic) => one.GetPageXml(page.PageId, detail);
+		static public string get_page_content(string pageId, string callbackId) => one.GetPageContent(pageId, callbackId);
+		static public void update_hierarchy() => one.UpdateHierarchy(page.Root);
+		static public void delete_content(string pageId, string objectId) => one.DeleteContent(pageId, objectId);
+		static public void delete_hierarchy(string objectId) => one.DeleteHierarchy(objectId);
+		static public void sync(string id = null) => one.Sync(id).Wait();
+		static public string create_page(string sectionId) { one.CreatePage(sectionId, out var pageID); return pageID;}
+		static public void create_section(string name) => Task.Run(async () => { await one.CreateSection(name); });
+		static public void get_page(string pageId, OneNote.PageDetail detail = OneNote.PageDetail.All) => page = one.GetPage(pageId, detail).Result;
+		public static string convert_markdown_to_html(string filepath, string text) => OneMoreDig.ConvertMarkdownToHtml(filepath, text);
+		public static void import_as_markdown(string address, string markdown, string title) => ImportWebCommand.ImportAsMarkdown(address, markdown, title);
+
+		public static string markdown_writer(string pageXML)
+		{
+			var page = new Page(XElement.Parse(pageXML));
+			var writer = new MarkdownWriter(page, false);
+			var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+			writer.Save(filepath);
+			return File.ReadAllText(filepath); ;
+		}
+
+		static public void insert_or_replace(string text)
+		{
+			var container = page.EnsureContentContainer();
+			container.Add(new XElement(ns + "OE",
+				new XElement(ns + "T", new XCData(text))
+				));
+		}
+
+		public static void ConvertMarkdownCommand()
+		{
+			var command = new Commands.ConvertMarkdownCommand();
+			Task.Run(async () => await command.Execute());
+		}
+
+		static public void DisposeOne() => one.Dispose();
+
+	}
+
 
 
 	/// <summary>
