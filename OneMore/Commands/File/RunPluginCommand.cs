@@ -147,6 +147,7 @@ namespace River.OneMoreAddIn.Commands
 			{
 			    plugin.Arguments += $" -l \"\'{pageInfo.Result.Link}'\" -w ";
 			}
+			logger.WriteLine($"plugin arguments: {plugin.Arguments}");
 
 			try
 			{
