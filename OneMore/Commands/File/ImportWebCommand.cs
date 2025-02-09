@@ -72,7 +72,6 @@ namespace River.OneMoreAddIn.Commands
             ImportWeb.importImages = true;
             ImportWeb.title = title;
             ImportWeb.markdown = markdown;
-//            System.Diagnostics.Debugger.Launch();
             ProgressDialog progress = new ProgressDialog();
 			CancellationToken token = new CancellationToken();
 
@@ -106,74 +105,9 @@ namespace River.OneMoreAddIn.Commands
 				importImages = dialog.ImportImages;
 			}
 
-			var name = "ReadGitLab";
-			var path = "C:\\Users\\mweiss\\AppData\\Roaming\\OneMore\\Plugins\\" + name + ".js";
-
 			if (importImages)
 			{
 				ImportAsImages();
-			}
-			else if (address.Contains("gitlab") && File.Exists(path))
-			{
-				var target = Path.Combine(Path.GetTempPath(), $"{name}");
-
-				// add html link to argument list
-				using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-				using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
-
-
-
-
-
-				{
-					var json = await reader.ReadToEndAsync();
-
-					var serializer = new JavaScriptSerializer();
-					var plugin = serializer.Deserialize<Plugin>(json);
-
-					plugin.Name = target;
-					plugin.Arguments +=  $" -i \"{address}\"";
-
-					var provider = new PluginsProvider();
-					await provider.Save(plugin);
-				}
-
-				await factory.Run<RunPluginCommand>(target + ".js");
-
-				ImportAsMarkdown();
-			}
-			else if (address.Contains("gitlab") && File.Exists(path))
-			{
-				var target = Path.Combine(Path.GetTempPath(), $"{name}");
-
-				// add html link to argument list
-				using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
-				using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
-
-
-
-
-
-				{
-					var json = await reader.ReadToEndAsync();
-
-					var serializer = new JavaScriptSerializer();
-					var plugin = serializer.Deserialize<Plugin>(json);
-
-					plugin.Name = target;
-					plugin.Arguments +=  $" -i \"{address}\"";
-
-					var provider = new PluginsProvider();
-					await provider.Save(plugin);
-				}
-
-				await factory.Run<RunPluginCommand>(target + ".js");
-
-				ImportAsMarkdown();
-			}
-			else
-			{
-				ImportAsContent();
 			}
 
 			await Task.Yield();
