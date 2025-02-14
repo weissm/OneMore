@@ -288,148 +288,9 @@ namespace River.OneMoreAddIn.Commands
 		#endregion ImportAsImages
 
 
-		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-		private void ImportAsContent()
-		{
-			using (progress = new ProgressDialog(8))
-			{
-				progress.SetMessage($"Importing {address}...");
-				progress.ShowTimedDialog(ImportHtml);
-			}
-		}
-
-        // new function as wrapper only
-        private void ImportAsMarkdown()
-		{
-			using (progress = new ProgressDialog(8))
-			{
-
-				progress.SetMessage($"Importing {address}...");
-				progress.ShowTimedDialog(ImportMarkdown);
-			}
-		}
-
-		private async Task<bool> ImportHtml(ProgressDialog progress, CancellationToken token)
-		{
-			var baseUri = new Uri(address);
-
-			logger.WriteLine($"importing web page {baseUri.AbsoluteUri}");
-			logger.StartClock();
-
-			WebPageInfo info;
-
-			try
-			{
-				info = await DownloadWebContent(baseUri);
-			}
-			catch (Exception exc)
-			{
-				Giveup(exc.Messages());
-				return false;
-			}
-
-			if (string.IsNullOrEmpty(info.Content))
-			{
-				Giveup(Resx.ImportWebCommand_BadUrl);
-				logger.WriteLine("web page returned empty content");
-				return false;
-			}
-
-			var doc = ReplaceImagesWithAnchors(info.Content, baseUri, out var hasImages);
-			if (doc == null)
-			{
-				Giveup(Resx.ImportWebCommand_BadUrl);
-				progress.DialogResult = DialogResult.Abort;
-				progress.Close();
-				return false;
-			}
-
-			if (token.IsCancellationRequested)
-			{
-				progress.DialogResult = DialogResult.Cancel;
-				progress.Close();
-				return false;
-			}
-
-			var hasAnchors = EncodeLocalAnchors(doc, baseUri);
-			if (token.IsCancellationRequested)
-			{
-				progress.DialogResult = DialogResult.Cancel;
-				progress.Close();
-				return false;
-			}
-
-			// Attempted to inline the css using the PreMailer nuget
-			// but OneNote strips it all off anyway so, oh well
-			//content = PreMailer.MoveCssInline(baseUri, doc.DocumentNode.OuterHtml,
-			//	stripIdAndClassAttributes: true, removeComments: true).Html;
-
-			await using (var one = new OneNote())
-			{
-				Page page;
-
-				if (target == ImportWebTarget.Append)
-				{
-					page = await one.GetPage();
-
-					if (token.IsCancellationRequested)
-					{
-						progress.DialogResult = DialogResult.Cancel;
-						progress.Close();
-						return false;
-					}
-				}
-				else
-				{
-					if (string.IsNullOrEmpty(info.Title))
-					{
-						info.Title = doc.DocumentNode.SelectSingleNode("//title")?.InnerText;
-					}
-
-					var title = string.IsNullOrEmpty(info.Title)
-						? $"<a href=\"{address}\">{address}</a>"
-						: $"<a href=\"{address}\">{info.Title}</a>";
-
-					if (token.IsCancellationRequested)
-					{
-						progress.DialogResult = DialogResult.Cancel;
-						progress.Close();
-						return false;
-					}
-
-					page = await CreatePage(one,
-						target == ImportWebTarget.ChildPage ? await one.GetPage() : null,
-						title
-						);
-				}
-
-				// add html to page and let OneNote rehydrate as it sees fit
-				page.AddHtmlContent(doc.DocumentNode.OuterHtml);
-
-				await one.Update(page);
-				logger.WriteLine("pass 1 updated page with injected HTML");
-
-				if (hasImages || hasAnchors)
-				{
-					await PatchPage(page, one, hasImages, hasAnchors);
-				}
-			}
-
-			logger.WriteTime("import web completed");
-			return true;
-		}
-
 		// new function to implement markdown import
 		public async Task<bool> ImportMarkdown(ProgressDialog progress, CancellationToken token)
 		{
-			var baseUri = new Uri(address);
-			var targetProject = baseUri.AbsolutePath.Split(new string[] { @"/-/issues" }, StringSplitOptions.None)[0].Substring(1);
-			var targetID = int.Parse(baseUri.Segments[baseUri.Segments.Length - 1]);
-			var targetProjectURL = baseUri.AbsoluteUri.Split(new string[] { baseUri.LocalPath }, StringSplitOptions.None)[0];
-			var importWeb = new River.OneMoreAddIn.Commands.ImportWebCommand();
-			var escapeID = "[OM-";
-
 			//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 			await using (var one = new River.OneMoreAddIn.OneNote())
 			{
@@ -478,7 +339,14 @@ namespace River.OneMoreAddIn.Commands
                         });
                     elements.Remove();
                 }
-                var container = page.EnsureContentContainer();
+				var paragraphIDs = page.Root
+					.Elements(ns + "Outline")
+					.Elements(ns + "OEChildren")
+					.Descendants(ns + "OE")
+					.Select(e => e.Attribute("objectID").Value).ToList();
+
+
+				var container = page.EnsureContentContainer();
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 				if (target == ImportWebTarget.NewPage)
 				{
@@ -496,6 +364,26 @@ namespace River.OneMoreAddIn.Commands
 						);
 				}
 
+				var reader = new PageReader(page)
+				{
+					// configure to read for markdown
+					IndentationPrefix = "\n",
+					Indentation = ">",
+					ColumnDivider = "|",
+					ParagraphDivider = "<br>",
+					TableSides = "|"
+				};
+
+				var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+
+				var text = markdown;
+				text = Regex.Replace(text, @"<br>([\n\r]+)", "$1");
+				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
+				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
+
+				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
+
+
 				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 				// convert to markdown
 				var html1 = Markdig.Markdown.ToHtml(markdown);
@@ -504,12 +392,17 @@ namespace River.OneMoreAddIn.Commands
 				var builder = new StringBuilder();
 				builder.AppendLine("<html>");
 				builder.AppendLine("<body>");
-				builder.AppendLine("<!--StartFragment-->");
 				builder.AppendLine(html1);
-				builder.AppendLine("<!--EndFragment-->");
 				builder.AppendLine("</body>");
 				builder.AppendLine("</html>");
 				var html = builder.ToString();
+
+
+				var baseUri = new Uri(address);
+				var targetProject = baseUri.AbsolutePath.Split(new string[] { @"/-/issues" }, StringSplitOptions.None)[0].Substring(1);
+				var targetID = int.Parse(baseUri.Segments[baseUri.Segments.Length - 1]);
+				var targetProjectURL = baseUri.AbsoluteUri.Split(new string[] { baseUri.LocalPath }, StringSplitOptions.None)[0];
+
 				var replaceString = (@"<img src=""/uploads");
 				var newString = string.Format(@"<img src=""{0}/uploads", targetProject);
 				html = html.Replace(replaceString, newString);
@@ -540,21 +433,35 @@ namespace River.OneMoreAddIn.Commands
 					return false;
 				}
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-				foreach (var header in new string[] { "h1", "h2", "h3", "h4", "h5", "h6" })
-				{
-					foreach (var node in doc.DocumentNode.Descendants(header).ToList())
-					{
-						node.InnerHtml = escapeID + header + "] " + node.InnerHtml;
-						node.Name = "p";
-					}
-				}
 				var outerHtmlorg = doc.DocumentNode.OuterHtml;
 
-                page.AddHtmlContent(outerHtmlorg);
+				page.AddHtmlContent(outerHtmlorg);
 
-
+				// update will remove unmodified omHash outlines from the in-memory Page
 				await one.Update(page);
+
+				// Pass 2, cleanup...
+
+				// find and convert headers based on styles
+				page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
+
+				// re-reference paragraphs by ID from newly loaded Page instance
+				var touched = page.Root.Descendants(ns + "OE")
+					.Where(e => !paragraphIDs.Contains(e.Attribute("objectID").Value))
+					.ToList();
+
+				if (touched.Any())
+				{
+					var converter = new MarkdownConverter(page);
+
+					converter
+						.RewriteHeadings(touched)
+						.RewriteTodo(touched)
+						.SpaceOutParagraphs(touched, 12);
+
+					await one.Update(page);
+				}
+
 				logger.WriteLine("pass 1 updated page with injected HTML");
 
 				if (hasImages || hasAnchors)

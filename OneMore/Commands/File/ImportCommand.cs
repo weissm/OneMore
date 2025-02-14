@@ -83,6 +83,19 @@ namespace River.OneMoreAddIn.Commands
 			}
 		}
 
+		public async static void ImportAsMarkdown(string markdown)
+		{
+			var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+			File.WriteAllText(filepath, markdown);
+			ImportCommand importcommand = new ImportCommand();
+			await importcommand.ImportMarkdownLogger(filepath);
+		}
+		private async Task ImportMarkdownLogger(string filepath)
+		{
+			logger = Logger.Current;
+			await ImportMarkdown(filepath);
+		}
+
 
 		/// <summary>
 		/// Presents the ProgressDialog and invokes the given action. The work can be cancelled
@@ -579,6 +592,7 @@ namespace River.OneMoreAddIn.Commands
 					page.Title = Path.GetFileNameWithoutExtension(filepath);
 
 					var container = page.EnsureContentContainer();
+					body = Regex.Replace(body, @"<br>([\n\r]+)", "$1");
 					body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
 					body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
 

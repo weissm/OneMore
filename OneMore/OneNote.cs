@@ -58,6 +58,7 @@ namespace River.OneMoreAddIn
 		static public void get_page(string pageId, OneNote.PageDetail detail = OneNote.PageDetail.All) => page = one.GetPage(pageId, detail).Result;
 		public static string convert_markdown_to_html(string filepath, string text) => OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 		public static void import_as_markdown(string address, string markdown, string title) => ImportWebCommand.ImportAsMarkdown(address, markdown, title);
+		public static void import_markdown(string markdown) => ImportCommand.ImportAsMarkdown(markdown);
 
 		public static string markdown_writer(string pageXML)
 		{
