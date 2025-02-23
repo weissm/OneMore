@@ -24,7 +24,6 @@ namespace River.OneMoreAddIn
 	using System.Xml;
 	using System.Xml.Linq;
 	using System.Xml.Schema;
-	using Windows.Graphics.Display.Core;
 	using static River.OneMoreAddIn.OneNote;
 	using Forms = System.Windows.Forms;
 	using Resx = Properties.Resources;
