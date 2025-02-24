@@ -43,8 +43,9 @@ namespace River.OneMoreAddIn
 		static public Page page;
 		static public XNamespace ns;
 		static public OneNote one = new OneNote(out  page,  out ns);
+		static private ILogger logger = Logger.Current;
 
-		static public void update() => Task.Run(async () => {  await one.Update(page); });
+        static public void update() => Task.Run(async () => {  await one.Update(page); });
 		static public HierarchyInfo get_page_info(string pageId = null, bool sized = false) { return one.GetPageInfo(pageId, sized).Result; }
 		static public string get_page_xml(OneNote.PageDetail detail = OneNote.PageDetail.Basic) => one.GetPageXml(page.PageId, detail);
 		static public string get_page_content(string pageId, string callbackId) => one.GetPageContent(pageId, callbackId);

@@ -49,18 +49,29 @@ if args.pythonParser:
         elementTitle.appendChild(xmlDoc.createTextNode(issue.title))
 
     for line in issue.description.splitlines():
+        # Erstelle das "one:T"-Element mit CDATA
         elementT = xmlDoc.createElementNS(ns, "one:T")
-        elementT.appendChild(xmlDoc.createCDATASection(line))
+        cdataSection = xmlDoc.createCDATASection(line)
+        elementT.appendChild(cdataSection)
+    
+        # Erstelle das "one:OE"-Element und h�nge das "one:T"-Element daran
         elementOE = xmlDoc.createElementNS(ns, "one:OE")
         elementOE.appendChild(elementT)
-        elementName = xmlDoc.getElementsByTagNameNS(ns, "OE")
-        elementLen = len(elementName) - 1
-        elementName[elementLen].parentNode.insertBefore(elementOE, elementName[elementLen])
+    
+        # Finde das letzte "OE"-Element
+        oeElements = xmlDoc.getElementsByTagNameNS(ns, "OE")
+        lastOEElement = oeElements[-1] if oeElements else None
+    
+        # F�ge das neue "OE"-Element vor dem letzten "OE"-Element ein
+        if lastOEElement is not None:
+            lastOEElement.parentNode.insertBefore(elementOE, lastOEElement)
     #
     # write results
     #
-    with open(args.workFile, "w") as xml_file:
+    with open(args.workFile, "w", encoding='utf-8') as xml_file:
         xmlDoc.writexml(xml_file)
+    with open("c:\\tmp\\writegitlab\\tmp", "w", encoding='utf-8') as xml_file:
+        xml_file.write(xmlDoc.toprettyxml())
 
 else:
     # process doc

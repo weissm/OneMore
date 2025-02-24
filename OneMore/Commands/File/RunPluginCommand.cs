@@ -374,7 +374,7 @@ namespace River.OneMoreAddIn.Commands
 					InformNoChange();
 					return null;
 				}
-
+				/*
                 if (plugin.Timeout == 0)
                 {
                     //                   UIHelper.ShowInfo("Plugin " + plugin.Name + " successfully executed.");
@@ -392,6 +392,7 @@ namespace River.OneMoreAddIn.Commands
                     }
                     return null;
                 }
+				*/
 
                 if (plugin.TargetPage)
 				{

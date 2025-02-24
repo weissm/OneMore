@@ -16,31 +16,31 @@ namespace River.OneMoreAddIn.Commands
 	using System.Threading.Tasks;
 	using System.Windows.Forms;
 	using System.Xml.Linq;
-	using Windows.Storage;
-	using Windows.Storage.Streams;
 	using Hap = HtmlAgilityPack;
 	using System.Text;
 	using System.Web.Script.Serialization;
 	using Newtonsoft.Json.Linq;
 	using static River.OneMoreAddIn.Models.Page;
 	using Resx = Properties.Resources;
+    using Windows.Storage;
+    using Windows.Storage.Streams;
 
 
-	/// <summary>
-	/// Imports the content of a Web page given its URL. The content can be added as a new page 
-	/// in the current section, as a new child page of the current page, or appended to the 
-	/// content of the current page. Can run in one of two modes. By default, the page is imported
-	/// as HTML and "optimized" by OneNote, meaning that styles are generally not preserved due
-	/// to the inherent limitations of OneNote.
-	/// 
-	/// The second mode is to import the Web page as a series of static images.This will preserve
-	/// most styling and layout of the page.It does this by internally printing the page to a PDF
-	/// and then importing each page of the PDF as an image. This can be a time consuming process,
-	/// taking up to 30 seconds, so give it time. The first time this mode is used, OneMore
-	/// downloads a local copy of the chromium browser so this will take some extra time.
-	/// Subsequent uses should be faster however.
-	/// </summary>
-	public class ImportWebCommand : Command
+    /// <summary>
+    /// Imports the content of a Web page given its URL. The content can be added as a new page 
+    /// in the current section, as a new child page of the current page, or appended to the 
+    /// content of the current page. Can run in one of two modes. By default, the page is imported
+    /// as HTML and "optimized" by OneNote, meaning that styles are generally not preserved due
+    /// to the inherent limitations of OneNote.
+    /// 
+    /// The second mode is to import the Web page as a series of static images.This will preserve
+    /// most styling and layout of the page.It does this by internally printing the page to a PDF
+    /// and then importing each page of the PDF as an image. This can be a time consuming process,
+    /// taking up to 30 seconds, so give it time. The first time this mode is used, OneMore
+    /// downloads a local copy of the chromium browser so this will take some extra time.
+    /// Subsequent uses should be faster however.
+    /// </summary>
+    public class ImportWebCommand : Command
 	{
 		private const string ClientKey = @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients";
 		private const string RuntimeId = "{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}";
@@ -93,7 +93,8 @@ namespace River.OneMoreAddIn.Commands
 				return;
 			}
 
-			using (var dialog = new ImportWebDialog())
+            System.Diagnostics.Debugger.Launch();
+            using (var dialog = new ImportWebDialog())
 			{
 				if (dialog.ShowDialog(owner) != DialogResult.OK)
 				{
@@ -105,7 +106,35 @@ namespace River.OneMoreAddIn.Commands
 				importImages = dialog.ImportImages;
 			}
 
-			if (importImages)
+
+            var name = "ReadGitLab";
+            var path = "C:\\Users\\MatthasWeiss\\AppData\\Roaming\\OneMore\\Plugins\\" + name + ".js";
+            if ((address.Contains("gitlab")  || address.Contains("-/issues")) && File.Exists(path))
+            {
+                var target = Path.Combine(Path.GetTempPath(), $"{name}");
+
+                // add html link to argument list
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                using (var reader = new StreamReader(stream, System.Text.Encoding.UTF8))
+                {
+                    var json = await reader.ReadToEndAsync();
+
+                    var serializer = new JavaScriptSerializer();
+                    var plugin = serializer.Deserialize<Plugin>(json);
+
+                    plugin.Name = target;
+                    plugin.Arguments += $" -i \"{address}\"";
+
+                    var provider = new PluginsProvider();
+                    await provider.Save(plugin);
+                }
+
+                await factory.Run<RunPluginCommand>(target + ".js");
+
+                ImportAsMarkdown(address,markdown, title);
+            }
+            else
+            if (importImages)
 			{
 				ImportAsImages();
 			}
@@ -192,7 +221,7 @@ namespace River.OneMoreAddIn.Commands
 				var container = page.EnsureContentContainer();
 
 				var file = await StorageFile.GetFileFromPathAsync(pdfFile);
-				var doc = await Windows.Data.Pdf.PdfDocument.LoadFromFileAsync(file);
+                var doc = await Windows.Data.Pdf.PdfDocument.LoadFromFileAsync(file);
 
 				await file.DeleteAsync();
 
@@ -360,33 +389,35 @@ namespace River.OneMoreAddIn.Commands
 					await one.Update(page);
 					page = await CreatePage(one,
 						target == ImportWebTarget.ChildPage ? await one.GetPage() : null,
-						title: "New Page"
+						title: title == null? "New Page" : title
 						);
-				}
-
-				var reader = new PageReader(page)
+				} else if (page.Title.IsNullOrEmpty())
 				{
-					// configure to read for markdown
-					IndentationPrefix = "\n",
-					Indentation = ">",
-					ColumnDivider = "|",
-					ParagraphDivider = "<br>",
-					TableSides = "|"
-				};
+					page.SetTitle(title);
+                }
 
-				var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+					var reader = new PageReader(page)
+					{
+						// configure to read for markdown
+						IndentationPrefix = "\n",
+						Indentation = ">",
+						ColumnDivider = "|",
+						ParagraphDivider = "<br>",
+						TableSides = "|"
+					};
 
-				var text = markdown;
-				text = Regex.Replace(text, @"<br>([\n\r]+)", "$1");
-				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
-				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
+                var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
+                var text = markdown;
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
+                body = Regex.Replace(body, @"<br>([\n\r]+)", "$1");
+                body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
+                body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
 
 
-				//,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-				// convert to markdown
-				var html1 = Markdig.Markdown.ToHtml(markdown);
+                //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+                // convert to markdown
+                var html1 = Markdig.Markdown.ToHtml(markdown);
 				// parse MD into html as interim format
 
 				var builder = new StringBuilder();
@@ -402,11 +433,17 @@ namespace River.OneMoreAddIn.Commands
 				var targetProject = baseUri.AbsolutePath.Split(new string[] { @"/-/issues" }, StringSplitOptions.None)[0].Substring(1);
 				var targetID = int.Parse(baseUri.Segments[baseUri.Segments.Length - 1]);
 				var targetProjectURL = baseUri.AbsoluteUri.Split(new string[] { baseUri.LocalPath }, StringSplitOptions.None)[0];
+                var replaceString = (@"<img src=""/uploads");
+                // http://localhost:84/-/project/1/uploads/3b5f3ad0403aac83d7b75c31cf5d6382/20220310-15.4assessment_3.png
+                targetProject = baseUri.AbsoluteUri.Replace(baseUri.AbsolutePath, "") + "/-/project/1";
 
-				var replaceString = (@"<img src=""/uploads");
-				var newString = string.Format(@"<img src=""{0}/uploads", targetProject);
+                var newString = string.Format(@"<img src=""{0}/uploads", targetProject);
 				html = html.Replace(replaceString, newString);
-				var doc = ReplaceImagesWithAnchors(html, new Uri(targetProjectURL), out var hasImages);
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp1.html"))
+                {
+                    writer.Write(html);
+                }
+                var doc = ReplaceImagesWithAnchors(html, new Uri(targetProjectURL), out var hasImages);
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 				if ((progress != null) && doc == null)
 				{
@@ -434,40 +471,51 @@ namespace River.OneMoreAddIn.Commands
 				}
 				//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 				var outerHtmlorg = doc.DocumentNode.OuterHtml;
-
-				page.AddHtmlContent(outerHtmlorg);
+                //Write to a file
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp.html"))
+                {
+                    writer.WriteLine(outerHtmlorg);
+                }
+                page.AddHtmlContent(outerHtmlorg);
 
 				// update will remove unmodified omHash outlines from the in-memory Page
 				await one.Update(page);
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp2.xml"))
+                {
+                    var xml = page.Root.ToString();
+                    writer.Write(xml);
+                }
+                hasAnchors = false;
+                if (hasImages || hasAnchors)
+                {
+                    await PatchPage(page, one, hasImages, hasAnchors);
+                }
 
-				// Pass 2, cleanup...
+                // Pass 2, cleanup...
 
-				// find and convert headers based on styles
-				page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
+                // find and convert headers based on styles
+                page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp3.xml"))
+                {
+                    var xml = page.Root.ToString();
+                    writer.Write(xml);
+                }
 
-				// re-reference paragraphs by ID from newly loaded Page instance
-				var touched = page.Root.Descendants(ns + "OE")
-					.Where(e => !paragraphIDs.Contains(e.Attribute("objectID").Value))
-					.ToList();
+                var converter = new MarkdownConverter(page);
+                converter.RewriteHeadings();
+                converter.RewriteTodo();
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp4.xml"))
+                {
+                    var xml = page.Root.ToString();
+                    writer.Write(xml);
+                }
 
-				if (touched.Any())
-				{
-					var converter = new MarkdownConverter(page);
+                logger.WriteLine($"updating...");
 
-					converter
-						.RewriteHeadings(touched)
-						.RewriteTodo(touched)
-						.SpaceOutParagraphs(touched, 12);
+                await one.Update(page);
 
-					await one.Update(page);
-				}
+                logger.WriteLine("pass 1 updated page with injected HTML");
 
-				logger.WriteLine("pass 1 updated page with injected HTML");
-
-				if (hasImages || hasAnchors)
-				{
-					await PatchPage(page, one, hasImages, hasAnchors);
-				}
 			}
 //			await ImportMarkdownPostprocessing(escapeID);
 			logger.WriteTime("import markdown completed");
@@ -753,8 +801,13 @@ namespace River.OneMoreAddIn.Commands
 
 				// fetch page again with temp links
 				page = await one.GetPage(page.PageId, OneNote.PageDetail.All);
+                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp3a.xml"))
+                {
+                    var xml = page.Root.ToString();
+                    writer.Write(xml);
+                }
 
-				var updated = false;
+                var updated = false;
 				if (hasImages)
 				{
 					updated |= await PatchImages(page);

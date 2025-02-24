@@ -67,13 +67,12 @@ namespace River.OneMoreAddIn.Commands
 				var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 
 				var text = reader.ReadTextFrom(paragraphs, allContent);
-				text = Regex.Replace(text, @"<br>([\n\r]+)", "$1");
-				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
-				text = Regex.Replace(text, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
-
 				var body = OneMoreDig.ConvertMarkdownToHtml(filepath, text);
+                body = Regex.Replace(body, @"<br>([\n\r]+)", "$1");
+                body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+unchecked\s+[a-zA-Z *]*\/\>", "[ ]");
+                body = Regex.Replace(body, @"\<*input\s+type*=*\""checkbox\""\s+checked\s+[a-zA-Z *]*\/\>", "[x]");
 
-				editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
+                editor.InsertAtAnchor(new XElement(ns + "HTMLBlock",
 					new XElement(ns + "Data",
 						new XCData($"<html><body>{body}</body></html>")
 						)
