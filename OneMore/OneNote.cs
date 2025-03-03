@@ -36,6 +36,8 @@ namespace River.OneMoreAddIn
 	using static System.Net.Mime.MediaTypeNames;
 	using System.Web.UI.WebControls;
 	using River.OneMoreAddIn.UI;
+    using System.Net;
+    using NStandard;
 
 	static public class OneNoteClass
 	{
@@ -45,7 +47,7 @@ namespace River.OneMoreAddIn
 		static public OneNote one = new OneNote(out  page,  out ns);
 		static private ILogger logger = Logger.Current;
 
-        static public void update() => Task.Run(async () => {  await one.Update(page); });
+        static public void update() => Task.WhenAll(one.Update(page));
 		static public HierarchyInfo get_page_info(string pageId = null, bool sized = false) { return one.GetPageInfo(pageId, sized).Result; }
 		static public string get_page_xml(OneNote.PageDetail detail = OneNote.PageDetail.Basic) => one.GetPageXml(page.PageId, detail);
 		static public string get_page_content(string pageId, string callbackId) => one.GetPageContent(pageId, callbackId);
@@ -58,18 +60,25 @@ namespace River.OneMoreAddIn
 		static public void get_page(string pageId, OneNote.PageDetail detail = OneNote.PageDetail.All) => page = one.GetPage(pageId, detail).Result;
 		public static string convert_markdown_to_html(string filepath, string text) => OneMoreDig.ConvertMarkdownToHtml(filepath, text);
 		public static void import_as_markdown(string address, string markdown, string title) => ImportWebCommand.ImportAsMarkdown(address, markdown, title);
-		public static void import_markdown(string markdown) => ImportCommand.ImportAsMarkdown(markdown);
-
-		public static string markdown_writer(string pageXML)
+        public static string markdown_to_html(string address, string markdown, string title) => ImportWebCommand.Markdown2HTML(address, markdown, title);
+        public static void import_markdown(string markdown) => ImportCommand.ImportAsMarkdown(markdown);
+        public static string markdown_writer(string pageXML)
 		{
 			var page = new Page(XElement.Parse(pageXML));
 			var writer = new MarkdownWriter(page, false);
 			var filepath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
 			writer.Save(filepath);
 			return File.ReadAllText(filepath); ;
-		}
+        }
+		public static void update_page(string workpath)
+		{
+            var root = XElement.Load(workpath);
+            var candidate = new Page(root);
+            candidate.OptimizeForSave(true);
 
-		static public void insert_or_replace(string text)
+            Task.WhenAll(one.Update(candidate));
+        }
+        static public void insert_or_replace(string text)
 		{
 			var container = page.EnsureContentContainer();
 			container.Add(new XElement(ns + "OE",
@@ -79,8 +88,8 @@ namespace River.OneMoreAddIn
 
 		public static void ConvertMarkdownCommand()
 		{
-			var command = new Commands.ConvertMarkdownCommand();
-			Task.Run(async () => await command.Execute());
+            var command = new Commands.ConvertMarkdownCommand();
+			Task.WhenAll(command.Execute());
 		}
 
 		static public void DisposeOne() => one.Dispose();
