@@ -24,6 +24,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public override async Task Execute(params object[] args)
 		{
+			logger = Logger.Current;
 			using var one = new OneNote(out var page, out var ns);
 			var range = new SelectionRange(page);
 			var selectedRuns = range.GetSelections(true);
