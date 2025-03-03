@@ -315,6 +315,25 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 		#endregion ImportAsImages
+        // new function to implement markdown import
+        static public string Markdown2HTML(string address, string markdown, string title)
+        {
+
+            //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+            // convert to markdown
+            var html1 = Markdig.Markdown.ToHtml(markdown);
+            // parse MD into html as interim format
+
+            var builder = new StringBuilder();
+            builder.AppendLine("<html>");
+            builder.AppendLine("<body>");
+            builder.AppendLine(html1);
+            builder.AppendLine("</body>");
+            builder.AppendLine("</html>");
+            var html = builder.ToString();
+
+            return html;
+        }
 
 
 		// new function to implement markdown import
@@ -480,11 +499,6 @@ namespace River.OneMoreAddIn.Commands
 
 				// update will remove unmodified omHash outlines from the in-memory Page
 				await one.Update(page);
-                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp2.xml"))
-                {
-                    var xml = page.Root.ToString();
-                    writer.Write(xml);
-                }
                 hasAnchors = false;
                 if (hasImages || hasAnchors)
                 {
@@ -495,20 +509,10 @@ namespace River.OneMoreAddIn.Commands
 
                 // find and convert headers based on styles
                 page = await one.GetPage(page.PageId, OneNote.PageDetail.Basic);
-                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp3.xml"))
-                {
-                    var xml = page.Root.ToString();
-                    writer.Write(xml);
-                }
 
                 var converter = new MarkdownConverter(page);
                 converter.RewriteHeadings();
                 converter.RewriteTodo();
-                using (StreamWriter writer = new StreamWriter(@"c:\tmp\writegitlab\outtmp4.xml"))
-                {
-                    var xml = page.Root.ToString();
-                    writer.Write(xml);
-                }
 
                 logger.WriteLine($"updating...");
 
