@@ -125,6 +125,7 @@ namespace River.OneMoreAddIn.Commands
 
 		public bool TrialRun => trialBox.Checked;
 
+
 		public string PageName { set; private get; }
 
 
