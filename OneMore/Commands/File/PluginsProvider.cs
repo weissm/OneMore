@@ -4,7 +4,6 @@
 
 namespace River.OneMoreAddIn.Commands
 {
-	using Microsoft.Office.Core;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
@@ -23,14 +22,7 @@ namespace River.OneMoreAddIn.Commands
 		private const string Extension = ".js";
 
 		private readonly string store;
-		private readonly IRibbonUI ribbon;
 
-
-		public PluginsProvider(IRibbonUI ribbon) : base()
-		{
-			store = Path.Combine(PathHelper.GetAppDataPath(), DirectoryName);
-			this.ribbon = ribbon;
-		}
 
 		public PluginsProvider() : base()
 		{
