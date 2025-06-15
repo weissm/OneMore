@@ -173,6 +173,7 @@ namespace River.OneMoreAddIn.Commands
 		}
 
 
+
 		/// <summary>
 		/// Gets or sets the name of the new page to create, if CreateNewPage is true.
 		/// </summary>
