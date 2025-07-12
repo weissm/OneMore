@@ -84,7 +84,7 @@ namespace River.OneMoreAddIn.Commands
 				anchor = editor.Anchor;
 
 				editor.Deselect();
-				editor.FollowWithCurosr(content);
+				editor.FollowWithCursor(content);
 			}
 
 			// inner table...
