@@ -147,7 +147,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 
 				editor.Deselect();
-				editor.FollowWithCurosr(content);
+				editor.FollowWithCursor(content);
 
 				cell.SetContent(content);
 
