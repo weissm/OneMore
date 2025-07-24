@@ -682,7 +682,7 @@ namespace River.OneMoreAddIn.Commands
 
 					logger.WriteLine($"updating...");
 					logger.WriteLine(page.Root);
-
+	
 					await one.Update(page);
 
 					await one.NavigateTo(pageId);
