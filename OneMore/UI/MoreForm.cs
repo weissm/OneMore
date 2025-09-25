@@ -16,7 +16,7 @@ namespace River.OneMoreAddIn.UI
 	}
 
 
-	internal class MoreForm : Form, IOneMoreWindow
+	public class MoreForm : Form, IOneMoreWindow
 	{
 		public event EventHandler ModelessClosed;
 
