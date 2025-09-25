@@ -385,9 +385,9 @@ namespace River.OneMoreAddIn.Commands
                     return null;
                 }
 
-                if (plugin.TargetPage)
-				{
-					var candidate = new Page(root);
+                if (plugin.Target == PluginTarget.Page)
+                {
+                    var candidate = new Page(root);
 					// must optimize before we can validate schema...
 					candidate.OptimizeForSave(true);
 
