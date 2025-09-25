@@ -140,6 +140,13 @@ namespace River.OneMoreAddIn.Commands
 
 			var content = page.Root.ToString(SaveOptions.DisableFormatting);
 
+			// add link ot onenote as argument for script
+			var pageInfo = one.GetPageInfo(page.PageId);
+			if (plugin.OptionType)
+			{
+			    plugin.Arguments += $" -l \"\'{pageInfo.Result.Link}'\" -w ";
+			}
+
 			try
 			{
 				// write the page XML to the working path
