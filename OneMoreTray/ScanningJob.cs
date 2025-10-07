@@ -141,6 +141,7 @@ namespace OneMoreTray
 
 			if (scheduler.Notebooks is not null && scheduler.Notebooks.Length > 0)
 			{
+				logger.WriteLine("Conduct Notbook setting @ scanning jobs, 135");
 				service.SetNotebookFilters(scheduler.Notebooks);
 			}
 
