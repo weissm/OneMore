@@ -140,7 +140,7 @@ namespace River.OneMoreAddIn.Commands
 				}
 
 				editor.Deselect();
-				editor.FollowWithCurosr(content);
+				editor.FollowWithCursor(content);
 
 				// copy the selected content to the clipboard where it can be transformed to HTML
 				await ClipboardProvider.Copy();
