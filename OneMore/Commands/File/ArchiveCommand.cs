@@ -278,7 +278,7 @@ namespace River.OneMoreAddIn.Commands
 				// ensure the page name is unique within the section
 				var n = element.Parent.Elements()
 					.Count(e => e.Attribute("name")?.Value ==
-						PathHelper.CleanFileName(page.Title).Trim());
+						PathHelper.CleanFileName(page.Title.Trim()).Trim());
 
 				if (n > 1)
 				{
